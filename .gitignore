@@ -1,0 +1,35 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# dependencies
+node_modules
+
+# production
+dist
+dist-ssr
+
+# misc
+.DS_Store
+
+# local env files
+.env.local
+.env.*.local
+ 
+# local files
+*.local
+
+# Vite cache
+.vite
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
