@@ -1,0 +1,3748 @@
+[
+  {
+    "id": "1",
+    "nameI": "Hidden Apartment",
+    "nameII": "Charming Villa",
+    "price": 187.41,
+    "reviews": 2.4,
+    "distance": 5.5,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Parking",
+      "Washer",
+      "Coffee machine",
+      "Air conditioning",
+      "Kitchen"
+    ],
+    "locationI": {
+      "lat": 39.485118,
+      "lng": -0.356758
+    },
+    "locationII": {
+      "lat": 36.736747,
+      "lng": -4.424949
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "2",
+    "nameI": "Cool Hostel",
+    "nameII": "Chill Hostel",
+    "price": 28.32,
+    "reviews": 3.5,
+    "distance": 4.3,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Lockers",
+      "Free Wi-Fi",
+      "Hostel entertainment",
+      "Shared kitchen",
+      "Common room",
+      "Luggage storage",
+      "Shared bathroom"
+    ],
+    "locationI": {
+      "lat": 39.471881,
+      "lng": -0.380494
+    },
+    "locationII": {
+      "lat": 36.725135,
+      "lng": -4.432317
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "3",
+    "nameI": "Budget Hotel",
+    "nameII": "Friendly Inn",
+    "price": 80.8,
+    "reviews": 2.8,
+    "distance": 2.8,
+    "type": "Budget Hotel",
+    "features": [
+      "Daily housekeeping",
+      "Air conditioning",
+      "TV in room",
+      "24h reception",
+      "Private bathroom",
+      "Breakfast available",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.476065,
+      "lng": -0.396046
+    },
+    "locationII": {
+      "lat": 36.736582,
+      "lng": -4.408668
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "4",
+    "nameI": "Charming Inn",
+    "nameII": "Charming Hostel",
+    "price": 53.26,
+    "reviews": 1.9,
+    "distance": 8.7,
+    "type": "Hostel (Private Room)",
+    "features": ["Hostel entertainment", "Lockers", "Shared kitchen"],
+    "locationI": {
+      "lat": 39.473429,
+      "lng": -0.383885
+    },
+    "locationII": {
+      "lat": 36.714086,
+      "lng": -4.416348
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "5",
+    "nameI": "Youth Hostel",
+    "nameII": "Youth Rooms",
+    "price": 60.8,
+    "reviews": 1.8,
+    "distance": 9.9,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Shared bathroom",
+      "24h reception",
+      "Lockers",
+      "Shared kitchen",
+      "Hostel entertainment"
+    ],
+    "locationI": {
+      "lat": 39.479349,
+      "lng": -0.359569
+    },
+    "locationII": {
+      "lat": 36.737608,
+      "lng": -4.412945
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "6",
+    "nameI": "Urban Stay",
+    "nameII": "Urban Inn",
+    "price": 21.88,
+    "reviews": 1.1,
+    "distance": 6.1,
+    "type": "Hostel (Dormitory Bed)",
+    "features": ["Shared bathroom", "Hostel entertainment", "Common room"],
+    "locationI": {
+      "lat": 39.453769,
+      "lng": -0.379251
+    },
+    "locationII": {
+      "lat": 36.706927,
+      "lng": -4.406978
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "7",
+    "nameI": "Classic Suites",
+    "nameII": "City Place",
+    "price": 116.09,
+    "reviews": 3.4,
+    "distance": 2.2,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Bar",
+      "Free Wi-Fi",
+      "24h reception",
+      "Private bathroom",
+      "Fitness center",
+      "Room service",
+      "Restaurant"
+    ],
+    "locationI": {
+      "lat": 39.47653,
+      "lng": -0.383739
+    },
+    "locationII": {
+      "lat": 36.713037,
+      "lng": -4.419218
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "8",
+    "nameI": "Majestic Hotel",
+    "nameII": "Royal Palace",
+    "price": 254.67,
+    "reviews": 2.6,
+    "distance": 5.9,
+    "type": "Luxury Hotel",
+    "features": [
+      "Valet parking",
+      "Luxury rooms",
+      "Restaurant",
+      "Concierge",
+      "Bar",
+      "Private beach",
+      "Pool"
+    ],
+    "locationI": {
+      "lat": 39.481984,
+      "lng": -0.389366
+    },
+    "locationII": {
+      "lat": 36.725859,
+      "lng": -4.425853
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "9",
+    "nameI": "Easy Hotel",
+    "nameII": "Budget Residence",
+    "price": 57.32,
+    "reviews": 1.1,
+    "distance": 2.8,
+    "type": "Budget Hotel",
+    "features": [
+      "TV in room",
+      "Air conditioning",
+      "Breakfast available",
+      "Private bathroom",
+      "Free Wi-Fi",
+      "24h reception",
+      "Daily housekeeping"
+    ],
+    "locationI": {
+      "lat": 39.485254,
+      "lng": -0.389891
+    },
+    "locationII": {
+      "lat": 36.719412,
+      "lng": -4.413336
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "10",
+    "nameI": "Modern Apartment",
+    "nameII": "Stylish Flat",
+    "price": 264.06,
+    "reviews": 3.0,
+    "distance": 3.1,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Washer",
+      "Balcony",
+      "Air conditioning",
+      "Coffee machine",
+      "Parking",
+      "Pet-friendly",
+      "Entire place"
+    ],
+    "locationI": {
+      "lat": 39.472604,
+      "lng": -0.383551
+    },
+    "locationII": {
+      "lat": 36.734222,
+      "lng": -4.401944
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "11",
+    "nameI": "Trendy Rooms",
+    "nameII": "Youth Rooms",
+    "price": 71.29,
+    "reviews": 2.0,
+    "distance": 1.6,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Free Wi-Fi",
+      "Hostel entertainment",
+      "Shared bathroom",
+      "Luggage storage",
+      "Lockers",
+      "Shared kitchen",
+      "Private room"
+    ],
+    "locationI": {
+      "lat": 39.477167,
+      "lng": -0.381755
+    },
+    "locationII": {
+      "lat": 36.722133,
+      "lng": -4.402426
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "12",
+    "nameI": "Exclusive Suites",
+    "nameII": "Exclusive Resort",
+    "price": 574.41,
+    "reviews": 2.5,
+    "distance": 5.5,
+    "type": "Luxury Hotel",
+    "features": [
+      "Luxury rooms",
+      "Spa",
+      "Pool",
+      "Sea view",
+      "Private beach",
+      "Airport shuttle"
+    ],
+    "locationI": {
+      "lat": 39.467622,
+      "lng": -0.381593
+    },
+    "locationII": {
+      "lat": 36.729577,
+      "lng": -4.417594
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "13",
+    "nameI": "Urban Stay",
+    "nameII": "Classic Stay",
+    "price": 89.0,
+    "reviews": 4.2,
+    "distance": 5.4,
+    "type": "Budget Hotel",
+    "features": [
+      "Free Wi-Fi",
+      "Private bathroom",
+      "Breakfast available",
+      "TV in room",
+      "24h reception",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.467735,
+      "lng": -0.35735
+    },
+    "locationII": {
+      "lat": 36.726135,
+      "lng": -4.421908
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "14",
+    "nameI": "Cool Inn",
+    "nameII": "Chill Inn",
+    "price": 32.16,
+    "reviews": 3.4,
+    "distance": 1.5,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Shared bathroom",
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Luggage storage",
+      "Common room",
+      "24h reception",
+      "Shared kitchen"
+    ],
+    "locationI": {
+      "lat": 39.459348,
+      "lng": -0.367691
+    },
+    "locationII": {
+      "lat": 36.703067,
+      "lng": -4.439404
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "15",
+    "nameI": "Exclusive Hotel",
+    "nameII": "Grand Resort",
+    "price": 291.82,
+    "reviews": 4.4,
+    "distance": 3.9,
+    "type": "Luxury Hotel",
+    "features": ["Private beach", "Sea view", "Bar", "Luxury rooms"],
+    "locationI": {
+      "lat": 39.450576,
+      "lng": -0.361232
+    },
+    "locationII": {
+      "lat": 36.739336,
+      "lng": -4.438755
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "16",
+    "nameI": "Elegant Suites",
+    "nameII": "Luxury Hotel",
+    "price": 343.34,
+    "reviews": 2.4,
+    "distance": 4.2,
+    "type": "Luxury Hotel",
+    "features": ["Restaurant", "Pool", "Bar", "Valet parking", "Concierge"],
+    "locationI": {
+      "lat": 39.486159,
+      "lng": -0.35933
+    },
+    "locationII": {
+      "lat": 36.715369,
+      "lng": -4.441129
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "17",
+    "nameI": "Urban Stay",
+    "nameII": "Cozy Stay",
+    "price": 23.6,
+    "reviews": 3.2,
+    "distance": 5.3,
+    "type": "Hostel (Dormitory Bed)",
+    "features": ["24h reception", "Shared bathroom", "Hostel entertainment"],
+    "locationI": {
+      "lat": 39.471745,
+      "lng": -0.375239
+    },
+    "locationII": {
+      "lat": 36.705497,
+      "lng": -4.423688
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "18",
+    "nameI": "Exclusive Villa",
+    "nameII": "Majestic Resort",
+    "price": 409.54,
+    "reviews": 1.4,
+    "distance": 8.6,
+    "type": "Luxury Hotel",
+    "features": [
+      "Airport shuttle",
+      "Pool",
+      "Private beach",
+      "Valet parking",
+      "Spa",
+      "Room service",
+      "Concierge"
+    ],
+    "locationI": {
+      "lat": 39.452855,
+      "lng": -0.375725
+    },
+    "locationII": {
+      "lat": 36.705196,
+      "lng": -4.417293
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "19",
+    "nameI": "Elegant Place",
+    "nameII": "Classic Suites",
+    "price": 112.53,
+    "reviews": 1.2,
+    "distance": 1.4,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Room service",
+      "Restaurant",
+      "Fitness center",
+      "24h reception"
+    ],
+    "locationI": {
+      "lat": 39.47879,
+      "lng": -0.364634
+    },
+    "locationII": {
+      "lat": 36.707981,
+      "lng": -4.432616
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "20",
+    "nameI": "City Place",
+    "nameII": "Classic Suites",
+    "price": 145.86,
+    "reviews": 3.8,
+    "distance": 2.2,
+    "type": "Mid-Range Hotel",
+    "features": ["Room service", "Air conditioning", "Free Wi-Fi"],
+    "locationI": {
+      "lat": 39.458864,
+      "lng": -0.381623
+    },
+    "locationII": {
+      "lat": 36.709886,
+      "lng": -4.441236
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "21",
+    "nameI": "Cozy Place",
+    "nameII": "Cozy Place",
+    "price": 56.86,
+    "reviews": 1.8,
+    "distance": 5.5,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Lockers",
+      "Luggage storage",
+      "24h reception",
+      "Shared bathroom",
+      "Shared kitchen",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.477397,
+      "lng": -0.375217
+    },
+    "locationII": {
+      "lat": 36.709838,
+      "lng": -4.433682
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "22",
+    "nameI": "Family Cottage",
+    "nameII": "Peaceful Cottage",
+    "price": 115.93,
+    "reviews": 2.4,
+    "distance": 6.5,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Family-friendly",
+      "Private bathroom",
+      "Free Wi-Fi",
+      "Tea/coffee maker",
+      "Terrace",
+      "Garden",
+      "Non-smoking rooms"
+    ],
+    "locationI": {
+      "lat": 39.468661,
+      "lng": -0.390232
+    },
+    "locationII": {
+      "lat": 36.717623,
+      "lng": -4.402955
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "23",
+    "nameI": "Rustic B&B",
+    "nameII": "Family Cottage",
+    "price": 68.28,
+    "reviews": 4.6,
+    "distance": 3.5,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Non-smoking rooms",
+      "Tea/coffee maker",
+      "Free Wi-Fi",
+      "Garden"
+    ],
+    "locationI": {
+      "lat": 39.476552,
+      "lng": -0.378192
+    },
+    "locationII": {
+      "lat": 36.708075,
+      "lng": -4.415432
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "24",
+    "nameI": "Charming Inn",
+    "nameII": "Colorful Hostel",
+    "price": 58.08,
+    "reviews": 3.8,
+    "distance": 1.2,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Shared kitchen",
+      "Lockers",
+      "Private room",
+      "Free Wi-Fi",
+      "24h reception",
+      "Luggage storage"
+    ],
+    "locationI": {
+      "lat": 39.489547,
+      "lng": -0.359236
+    },
+    "locationII": {
+      "lat": 36.715966,
+      "lng": -4.408503
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "25",
+    "nameI": "Trendy Hotel",
+    "nameII": "Stylish Stay",
+    "price": 166.1,
+    "reviews": 2.2,
+    "distance": 5.7,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Rooftop terrace",
+      "Air conditioning",
+      "Pool",
+      "Free Wi-Fi",
+      "Restaurant",
+      "Gym"
+    ],
+    "locationI": {
+      "lat": 39.488123,
+      "lng": -0.394841
+    },
+    "locationII": {
+      "lat": 36.711883,
+      "lng": -4.428746
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "26",
+    "nameI": "Charming Apartment",
+    "nameII": "Cozy Loft",
+    "price": 208.03,
+    "reviews": 3.7,
+    "distance": 4.8,
+    "type": "Entire Apartment / House",
+    "features": ["Self check-in", "Kitchen", "Air conditioning"],
+    "locationI": {
+      "lat": 39.462537,
+      "lng": -0.376206
+    },
+    "locationII": {
+      "lat": 36.731098,
+      "lng": -4.424981
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "27",
+    "nameI": "Family Cottage",
+    "nameII": "Country B&B",
+    "price": 111.89,
+    "reviews": 2.1,
+    "distance": 5.0,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Garden",
+      "Free Wi-Fi",
+      "Private bathroom",
+      "Non-smoking rooms",
+      "Tea/coffee maker",
+      "Terrace",
+      "Breakfast included"
+    ],
+    "locationI": {
+      "lat": 39.458665,
+      "lng": -0.386783
+    },
+    "locationII": {
+      "lat": 36.705836,
+      "lng": -4.42288
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "28",
+    "nameI": "Luxury Palace",
+    "nameII": "Grand Palace",
+    "price": 414.76,
+    "reviews": 4.6,
+    "distance": 4.5,
+    "type": "Luxury Hotel",
+    "features": [
+      "Sea view",
+      "Private beach",
+      "Bar",
+      "Luxury rooms",
+      "Spa",
+      "Room service",
+      "Concierge"
+    ],
+    "locationI": {
+      "lat": 39.465607,
+      "lng": -0.392004
+    },
+    "locationII": {
+      "lat": 36.740484,
+      "lng": -4.425324
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "29",
+    "nameI": "Hidden House",
+    "nameII": "Modern Loft",
+    "price": 245.83,
+    "reviews": 3.9,
+    "distance": 1.9,
+    "type": "Entire Apartment / House",
+    "features": ["Entire place", "Coffee machine", "Self check-in", "Kitchen"],
+    "locationI": {
+      "lat": 39.462273,
+      "lng": -0.391759
+    },
+    "locationII": {
+      "lat": 36.704963,
+      "lng": -4.403764
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "30",
+    "nameI": "Elegant Stay",
+    "nameII": "Elegant Suites",
+    "price": 152.7,
+    "reviews": 2.1,
+    "distance": 4.5,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Rooftop terrace",
+      "Pool",
+      "Bar",
+      "Gym",
+      "Air conditioning",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.468156,
+      "lng": -0.370864
+    },
+    "locationII": {
+      "lat": 36.723682,
+      "lng": -4.41634
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "31",
+    "nameI": "City Place",
+    "nameII": "Elegant Hotel",
+    "price": 108.79,
+    "reviews": 3.6,
+    "distance": 4.9,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "24h reception",
+      "Air conditioning",
+      "Free Wi-Fi",
+      "Restaurant",
+      "Private bathroom",
+      "Room service"
+    ],
+    "locationI": {
+      "lat": 39.461843,
+      "lng": -0.369948
+    },
+    "locationII": {
+      "lat": 36.735106,
+      "lng": -4.431115
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "32",
+    "nameI": "Budget Suites",
+    "nameII": "Urban Hotel",
+    "price": 61.7,
+    "reviews": 2.2,
+    "distance": 4.6,
+    "type": "Budget Hotel",
+    "features": [
+      "TV in room",
+      "Daily housekeeping",
+      "Breakfast available",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.479447,
+      "lng": -0.376373
+    },
+    "locationII": {
+      "lat": 36.730633,
+      "lng": -4.401921
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "33",
+    "nameI": "Easy Inn",
+    "nameII": "Friendly Stay",
+    "price": 59.46,
+    "reviews": 2.4,
+    "distance": 5.8,
+    "type": "Budget Hotel",
+    "features": [
+      "Free Wi-Fi",
+      "Daily housekeeping",
+      "Breakfast available",
+      "24h reception",
+      "Private bathroom",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.48857,
+      "lng": -0.360193
+    },
+    "locationII": {
+      "lat": 36.720481,
+      "lng": -4.436334
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "34",
+    "nameI": "Cozy Loft",
+    "nameII": "Stylish Flat",
+    "price": 164.24,
+    "reviews": 1.1,
+    "distance": 9.6,
+    "type": "Entire Apartment / House",
+    "features": ["Washer", "Balcony", "Coffee machine"],
+    "locationI": {
+      "lat": 39.45529,
+      "lng": -0.358823
+    },
+    "locationII": {
+      "lat": 36.722388,
+      "lng": -4.433355
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "35",
+    "nameI": "Exclusive Suites",
+    "nameII": "Royal Villa",
+    "price": 361.9,
+    "reviews": 4.7,
+    "distance": 9.5,
+    "type": "Luxury Hotel",
+    "features": ["Concierge", "Restaurant", "Airport shuttle", "Sea view"],
+    "locationI": {
+      "lat": 39.475262,
+      "lng": -0.383428
+    },
+    "locationII": {
+      "lat": 36.726535,
+      "lng": -4.428489
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "36",
+    "nameI": "Classic Hotel",
+    "nameII": "City Place",
+    "price": 127.55,
+    "reviews": 1.4,
+    "distance": 4.5,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Room service",
+      "Restaurant",
+      "Bar",
+      "Free Wi-Fi",
+      "Fitness center",
+      "24h reception",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.459873,
+      "lng": -0.381945
+    },
+    "locationII": {
+      "lat": 36.731304,
+      "lng": -4.425057
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "37",
+    "nameI": "Trendy Hostel",
+    "nameII": "Charming Inn",
+    "price": 61.96,
+    "reviews": 3.7,
+    "distance": 1.2,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "24h reception",
+      "Shared bathroom",
+      "Shared kitchen",
+      "Luggage storage",
+      "Lockers",
+      "Free Wi-Fi",
+      "Private room"
+    ],
+    "locationI": {
+      "lat": 39.475086,
+      "lng": -0.373449
+    },
+    "locationII": {
+      "lat": 36.739052,
+      "lng": -4.421789
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "38",
+    "nameI": "Classic Inn",
+    "nameII": "Budget Inn",
+    "price": 80.72,
+    "reviews": 2.0,
+    "distance": 2.6,
+    "type": "Budget Hotel",
+    "features": [
+      "Private bathroom",
+      "Breakfast available",
+      "24h reception",
+      "TV in room",
+      "Air conditioning",
+      "Free Wi-Fi",
+      "Daily housekeeping"
+    ],
+    "locationI": {
+      "lat": 39.450915,
+      "lng": -0.390872
+    },
+    "locationII": {
+      "lat": 36.729709,
+      "lng": -4.433281
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "39",
+    "nameI": "Grand Villa",
+    "nameII": "Exclusive Palace",
+    "price": 369.42,
+    "reviews": 3.1,
+    "distance": 2.0,
+    "type": "Luxury Hotel",
+    "features": [
+      "Room service",
+      "Private beach",
+      "Spa",
+      "Valet parking",
+      "Fitness center",
+      "Bar"
+    ],
+    "locationI": {
+      "lat": 39.454494,
+      "lng": -0.371457
+    },
+    "locationII": {
+      "lat": 36.710359,
+      "lng": -4.41049
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "40",
+    "nameI": "Stylish Residence",
+    "nameII": "Grand Boutique",
+    "price": 199.93,
+    "reviews": 1.6,
+    "distance": 5.2,
+    "type": "Upper Mid-Range Hotel",
+    "features": ["Bar", "Restaurant", "Pool"],
+    "locationI": {
+      "lat": 39.474477,
+      "lng": -0.370644
+    },
+    "locationII": {
+      "lat": 36.723257,
+      "lng": -4.422029
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "41",
+    "nameI": "Boutique Hotel",
+    "nameII": "Elegant Hotel",
+    "price": 136.74,
+    "reviews": 3.8,
+    "distance": 6.7,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Rooftop terrace",
+      "Room service",
+      "Pool",
+      "Private bathroom",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.459278,
+      "lng": -0.38747
+    },
+    "locationII": {
+      "lat": 36.73813,
+      "lng": -4.429034
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "42",
+    "nameI": "Youth Hostel",
+    "nameII": "Trendy Rooms",
+    "price": 66.86,
+    "reviews": 4.8,
+    "distance": 5.7,
+    "type": "Hostel (Private Room)",
+    "features": ["24h reception", "Shared bathroom", "Private room"],
+    "locationI": {
+      "lat": 39.470293,
+      "lng": -0.360141
+    },
+    "locationII": {
+      "lat": 36.711097,
+      "lng": -4.411766
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "43",
+    "nameI": "Youth Place",
+    "nameII": "Charming Place",
+    "price": 53.81,
+    "reviews": 3.7,
+    "distance": 5.5,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Lockers",
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Shared bathroom",
+      "Luggage storage"
+    ],
+    "locationI": {
+      "lat": 39.463438,
+      "lng": -0.383428
+    },
+    "locationII": {
+      "lat": 36.731301,
+      "lng": -4.417919
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "44",
+    "nameI": "Charming Inn",
+    "nameII": "Charming House",
+    "price": 85.1,
+    "reviews": 3.3,
+    "distance": 3.8,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": ["Terrace", "Non-smoking rooms", "Private bathroom"],
+    "locationI": {
+      "lat": 39.466664,
+      "lng": -0.359741
+    },
+    "locationII": {
+      "lat": 36.704891,
+      "lng": -4.425696
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "45",
+    "nameI": "Trendy Hostel",
+    "nameII": "Urban Rooms",
+    "price": 76.0,
+    "reviews": 4.4,
+    "distance": 5.6,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Shared bathroom",
+      "Hostel entertainment",
+      "Private room",
+      "Free Wi-Fi",
+      "24h reception",
+      "Luggage storage"
+    ],
+    "locationI": {
+      "lat": 39.485445,
+      "lng": -0.37504
+    },
+    "locationII": {
+      "lat": 36.711138,
+      "lng": -4.434451
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "46",
+    "nameI": "Majestic Hotel",
+    "nameII": "Luxury Hotel",
+    "price": 444.37,
+    "reviews": 3.5,
+    "distance": 7.3,
+    "type": "Luxury Hotel",
+    "features": [
+      "Luxury rooms",
+      "Spa",
+      "Room service",
+      "Fitness center",
+      "Restaurant",
+      "Bar",
+      "Concierge"
+    ],
+    "locationI": {
+      "lat": 39.453532,
+      "lng": -0.373736
+    },
+    "locationII": {
+      "lat": 36.711801,
+      "lng": -4.437553
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "47",
+    "nameI": "Cozy House",
+    "nameII": "Hidden House",
+    "price": 94.97,
+    "reviews": 1.6,
+    "distance": 3.7,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Pet-friendly",
+      "Air conditioning",
+      "Kitchen",
+      "Self check-in",
+      "Entire place",
+      "Parking",
+      "Washer"
+    ],
+    "locationI": {
+      "lat": 39.478777,
+      "lng": -0.370175
+    },
+    "locationII": {
+      "lat": 36.702652,
+      "lng": -4.417233
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "48",
+    "nameI": "Stylish Place",
+    "nameII": "Central Suites",
+    "price": 126.01,
+    "reviews": 2.6,
+    "distance": 2.7,
+    "type": "Mid-Range Hotel",
+    "features": ["Room service", "Private bathroom", "Restaurant"],
+    "locationI": {
+      "lat": 39.452593,
+      "lng": -0.376058
+    },
+    "locationII": {
+      "lat": 36.717798,
+      "lng": -4.42558
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "49",
+    "nameI": "Colorful Rooms",
+    "nameII": "Cozy Hostel",
+    "price": 74.34,
+    "reviews": 3.6,
+    "distance": 8.1,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Luggage storage",
+      "Free Wi-Fi",
+      "Hostel entertainment",
+      "Shared bathroom",
+      "Private room",
+      "Shared kitchen",
+      "24h reception"
+    ],
+    "locationI": {
+      "lat": 39.450207,
+      "lng": -0.395488
+    },
+    "locationII": {
+      "lat": 36.719966,
+      "lng": -4.417745
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "50",
+    "nameI": "Classic Residence",
+    "nameII": "Classic Residence",
+    "price": 150.76,
+    "reviews": 4.0,
+    "distance": 6.4,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Private bathroom",
+      "Free Wi-Fi",
+      "Room service",
+      "Rooftop terrace",
+      "Air conditioning",
+      "Pool"
+    ],
+    "locationI": {
+      "lat": 39.4764,
+      "lng": -0.36882
+    },
+    "locationII": {
+      "lat": 36.714267,
+      "lng": -4.405164
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "51",
+    "nameI": "Urban Place",
+    "nameII": "Youth Stay",
+    "price": 23.35,
+    "reviews": 4.3,
+    "distance": 8.6,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "24h reception",
+      "Shared kitchen",
+      "Common room",
+      "Free Wi-Fi",
+      "Shared bathroom"
+    ],
+    "locationI": {
+      "lat": 39.456243,
+      "lng": -0.360505
+    },
+    "locationII": {
+      "lat": 36.720735,
+      "lng": -4.431769
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "52",
+    "nameI": "City Residence",
+    "nameII": "Classic Hotel",
+    "price": 118.56,
+    "reviews": 1.9,
+    "distance": 7.6,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Restaurant",
+      "Fitness center",
+      "Air conditioning",
+      "Private bathroom",
+      "Free Wi-Fi",
+      "Room service"
+    ],
+    "locationI": {
+      "lat": 39.487982,
+      "lng": -0.387545
+    },
+    "locationII": {
+      "lat": 36.705184,
+      "lng": -4.434156
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "53",
+    "nameI": "Urban Hostel",
+    "nameII": "Youth Rooms",
+    "price": 50.13,
+    "reviews": 3.8,
+    "distance": 2.3,
+    "type": "Hostel (Private Room)",
+    "features": ["Private room", "Hostel entertainment", "Lockers"],
+    "locationI": {
+      "lat": 39.47108,
+      "lng": -0.373201
+    },
+    "locationII": {
+      "lat": 36.719103,
+      "lng": -4.43386
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "54",
+    "nameI": "Modern Hotel",
+    "nameII": "Central Residence",
+    "price": 141.33,
+    "reviews": 1.8,
+    "distance": 3.2,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "24h reception",
+      "Air conditioning",
+      "Fitness center",
+      "Room service",
+      "Private bathroom",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.483064,
+      "lng": -0.38642
+    },
+    "locationII": {
+      "lat": 36.729161,
+      "lng": -4.427272
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "55",
+    "nameI": "Classic Residence",
+    "nameII": "Central Place",
+    "price": 142.0,
+    "reviews": 1.7,
+    "distance": 6.6,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Bar",
+      "Private bathroom",
+      "Fitness center",
+      "Restaurant",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.457382,
+      "lng": -0.391574
+    },
+    "locationII": {
+      "lat": 36.703313,
+      "lng": -4.422692
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "56",
+    "nameI": "Youth Rooms",
+    "nameII": "Happy Stay",
+    "price": 29.51,
+    "reviews": 1.3,
+    "distance": 4.3,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "24h reception",
+      "Luggage storage",
+      "Lockers",
+      "Shared bathroom",
+      "Hostel entertainment",
+      "Shared kitchen",
+      "Common room"
+    ],
+    "locationI": {
+      "lat": 39.457966,
+      "lng": -0.381194
+    },
+    "locationII": {
+      "lat": 36.712781,
+      "lng": -4.427537
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "57",
+    "nameI": "Central Hotel",
+    "nameII": "City Suites",
+    "price": 132.53,
+    "reviews": 2.3,
+    "distance": 7.9,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Private bathroom",
+      "Free Wi-Fi",
+      "Bar",
+      "Air conditioning",
+      "24h reception"
+    ],
+    "locationI": {
+      "lat": 39.480788,
+      "lng": -0.368651
+    },
+    "locationII": {
+      "lat": 36.73732,
+      "lng": -4.434218
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "58",
+    "nameI": "Peaceful Inn",
+    "nameII": "Family House",
+    "price": 84.52,
+    "reviews": 1.5,
+    "distance": 4.7,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Free Wi-Fi",
+      "Private bathroom",
+      "Breakfast included",
+      "Terrace"
+    ],
+    "locationI": {
+      "lat": 39.475811,
+      "lng": -0.380528
+    },
+    "locationII": {
+      "lat": 36.723814,
+      "lng": -4.4124
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "59",
+    "nameI": "Sunny Studio",
+    "nameII": "Sunny Loft",
+    "price": 201.5,
+    "reviews": 4.5,
+    "distance": 3.7,
+    "type": "Entire Apartment / House",
+    "features": ["Parking", "Entire place", "Washer", "Self check-in"],
+    "locationI": {
+      "lat": 39.454877,
+      "lng": -0.364776
+    },
+    "locationII": {
+      "lat": 36.70306,
+      "lng": -4.41392
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "60",
+    "nameI": "Comfy Guesthouse",
+    "nameII": "Comfy Cottage",
+    "price": 117.54,
+    "reviews": 1.8,
+    "distance": 5.0,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Private bathroom",
+      "Family-friendly",
+      "Terrace",
+      "Non-smoking rooms",
+      "Garden",
+      "Tea/coffee maker"
+    ],
+    "locationI": {
+      "lat": 39.455354,
+      "lng": -0.392054
+    },
+    "locationII": {
+      "lat": 36.70986,
+      "lng": -4.428546
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "61",
+    "nameI": "Classic Residence",
+    "nameII": "Trendy Suites",
+    "price": 191.38,
+    "reviews": 1.7,
+    "distance": 9.1,
+    "type": "Upper Mid-Range Hotel",
+    "features": ["Bar", "Room service", "Private bathroom"],
+    "locationI": {
+      "lat": 39.486032,
+      "lng": -0.382263
+    },
+    "locationII": {
+      "lat": 36.708739,
+      "lng": -4.431359
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "62",
+    "nameI": "Budget Hotel",
+    "nameII": "Urban Suites",
+    "price": 78.35,
+    "reviews": 4.7,
+    "distance": 9.3,
+    "type": "Budget Hotel",
+    "features": [
+      "Daily housekeeping",
+      "TV in room",
+      "Free Wi-Fi",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.470595,
+      "lng": -0.388156
+    },
+    "locationII": {
+      "lat": 36.723991,
+      "lng": -4.426998
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "63",
+    "nameI": "Trendy Rooms",
+    "nameII": "Youth Hostel",
+    "price": 18.78,
+    "reviews": 3.6,
+    "distance": 6.1,
+    "type": "Hostel (Dormitory Bed)",
+    "features": ["Free Wi-Fi", "Lockers", "Hostel entertainment"],
+    "locationI": {
+      "lat": 39.469354,
+      "lng": -0.362891
+    },
+    "locationII": {
+      "lat": 36.729161,
+      "lng": -4.427204
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "64",
+    "nameI": "Grand Hotel",
+    "nameII": "Majestic Hotel",
+    "price": 404.33,
+    "reviews": 2.3,
+    "distance": 8.5,
+    "type": "Luxury Hotel",
+    "features": ["Room service", "Restaurant", "Airport shuttle"],
+    "locationI": {
+      "lat": 39.474904,
+      "lng": -0.365923
+    },
+    "locationII": {
+      "lat": 36.709271,
+      "lng": -4.432078
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "65",
+    "nameI": "Classic Suites",
+    "nameII": "Budget Suites",
+    "price": 83.01,
+    "reviews": 4.8,
+    "distance": 5.9,
+    "type": "Budget Hotel",
+    "features": [
+      "Air conditioning",
+      "24h reception",
+      "Daily housekeeping",
+      "Free Wi-Fi",
+      "Private bathroom",
+      "TV in room"
+    ],
+    "locationI": {
+      "lat": 39.479584,
+      "lng": -0.35682
+    },
+    "locationII": {
+      "lat": 36.719763,
+      "lng": -4.407476
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "66",
+    "nameI": "Cozy Place",
+    "nameII": "Urban Rooms",
+    "price": 71.12,
+    "reviews": 2.6,
+    "distance": 7.4,
+    "type": "Hostel (Private Room)",
+    "features": ["Private room", "Lockers", "Shared kitchen", "Free Wi-Fi"],
+    "locationI": {
+      "lat": 39.489625,
+      "lng": -0.385836
+    },
+    "locationII": {
+      "lat": 36.727602,
+      "lng": -4.430686
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "67",
+    "nameI": "Chill Inn",
+    "nameII": "Urban Place",
+    "price": 20.79,
+    "reviews": 3.9,
+    "distance": 9.9,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Shared kitchen",
+      "24h reception",
+      "Luggage storage",
+      "Free Wi-Fi",
+      "Lockers",
+      "Shared bathroom"
+    ],
+    "locationI": {
+      "lat": 39.460515,
+      "lng": -0.376004
+    },
+    "locationII": {
+      "lat": 36.716448,
+      "lng": -4.428065
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "68",
+    "nameI": "Simple Inn",
+    "nameII": "Urban Inn",
+    "price": 79.52,
+    "reviews": 4.1,
+    "distance": 2.0,
+    "type": "Budget Hotel",
+    "features": [
+      "Daily housekeeping",
+      "Private bathroom",
+      "TV in room",
+      "Free Wi-Fi",
+      "Breakfast available"
+    ],
+    "locationI": {
+      "lat": 39.476738,
+      "lng": -0.387977
+    },
+    "locationII": {
+      "lat": 36.73287,
+      "lng": -4.405141
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "69",
+    "nameI": "Simple Inn",
+    "nameII": "Easy Suites",
+    "price": 89.22,
+    "reviews": 1.0,
+    "distance": 8.1,
+    "type": "Budget Hotel",
+    "features": [
+      "Breakfast available",
+      "24h reception",
+      "Air conditioning",
+      "Private bathroom",
+      "TV in room",
+      "Daily housekeeping"
+    ],
+    "locationI": {
+      "lat": 39.453984,
+      "lng": -0.361616
+    },
+    "locationII": {
+      "lat": 36.703055,
+      "lng": -4.410843
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "70",
+    "nameI": "Royal Villa",
+    "nameII": "Royal Hotel",
+    "price": 320.59,
+    "reviews": 2.3,
+    "distance": 2.2,
+    "type": "Luxury Hotel",
+    "features": ["Valet parking", "Restaurant", "Concierge", "Room service"],
+    "locationI": {
+      "lat": 39.481459,
+      "lng": -0.395652
+    },
+    "locationII": {
+      "lat": 36.737925,
+      "lng": -4.426182
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "71",
+    "nameI": "Luxury Palace",
+    "nameII": "Majestic Resort",
+    "price": 336.97,
+    "reviews": 2.9,
+    "distance": 1.7,
+    "type": "Luxury Hotel",
+    "features": ["Fitness center", "Valet parking", "Bar"],
+    "locationI": {
+      "lat": 39.488317,
+      "lng": -0.380023
+    },
+    "locationII": {
+      "lat": 36.703076,
+      "lng": -4.435286
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "72",
+    "nameI": "Trendy Place",
+    "nameII": "Youth Place",
+    "price": 74.7,
+    "reviews": 1.1,
+    "distance": 8.4,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Hostel entertainment",
+      "24h reception",
+      "Lockers",
+      "Shared bathroom"
+    ],
+    "locationI": {
+      "lat": 39.475906,
+      "lng": -0.379636
+    },
+    "locationII": {
+      "lat": 36.706962,
+      "lng": -4.40722
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "73",
+    "nameI": "Majestic Palace",
+    "nameII": "Elegant Suites",
+    "price": 570.39,
+    "reviews": 3.7,
+    "distance": 4.2,
+    "type": "Luxury Hotel",
+    "features": [
+      "Sea view",
+      "Fitness center",
+      "Concierge",
+      "Airport shuttle",
+      "Room service",
+      "Valet parking"
+    ],
+    "locationI": {
+      "lat": 39.463182,
+      "lng": -0.375791
+    },
+    "locationII": {
+      "lat": 36.70235,
+      "lng": -4.440744
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "74",
+    "nameI": "Colorful Rooms",
+    "nameII": "Youth Place",
+    "price": 58.76,
+    "reviews": 1.0,
+    "distance": 6.0,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Lockers",
+      "Luggage storage",
+      "Shared bathroom",
+      "Free Wi-Fi",
+      "Private room",
+      "Hostel entertainment"
+    ],
+    "locationI": {
+      "lat": 39.486361,
+      "lng": -0.383786
+    },
+    "locationII": {
+      "lat": 36.716753,
+      "lng": -4.438755
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "75",
+    "nameI": "Cozy Place",
+    "nameII": "Youth Hostel",
+    "price": 55.98,
+    "reviews": 4.9,
+    "distance": 9.2,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Shared bathroom",
+      "Lockers",
+      "Hostel entertainment",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.485452,
+      "lng": -0.389272
+    },
+    "locationII": {
+      "lat": 36.725743,
+      "lng": -4.418149
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "76",
+    "nameI": "Country Guesthouse",
+    "nameII": "Charming B&B",
+    "price": 70.59,
+    "reviews": 1.2,
+    "distance": 9.2,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Non-smoking rooms",
+      "Terrace",
+      "Tea/coffee maker",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.48573,
+      "lng": -0.38028
+    },
+    "locationII": {
+      "lat": 36.73535,
+      "lng": -4.408788
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "77",
+    "nameI": "Majestic Palace",
+    "nameII": "Grand Resort",
+    "price": 448.79,
+    "reviews": 4.2,
+    "distance": 7.0,
+    "type": "Luxury Hotel",
+    "features": [
+      "Room service",
+      "Valet parking",
+      "Spa",
+      "Bar",
+      "Fitness center",
+      "Airport shuttle",
+      "Sea view"
+    ],
+    "locationI": {
+      "lat": 39.464079,
+      "lng": -0.378887
+    },
+    "locationII": {
+      "lat": 36.70691,
+      "lng": -4.404692
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "78",
+    "nameI": "Cozy Hostel",
+    "nameII": "Cool Inn",
+    "price": 31.88,
+    "reviews": 1.9,
+    "distance": 6.4,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Luggage storage",
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Common room",
+      "Shared kitchen",
+      "Lockers"
+    ],
+    "locationI": {
+      "lat": 39.473567,
+      "lng": -0.382652
+    },
+    "locationII": {
+      "lat": 36.731815,
+      "lng": -4.408561
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "79",
+    "nameI": "Elegant Hotel",
+    "nameII": "Classic Suites",
+    "price": 190.22,
+    "reviews": 5.0,
+    "distance": 8.2,
+    "type": "Upper Mid-Range Hotel",
+    "features": ["Restaurant", "Free Wi-Fi", "Bar", "Gym"],
+    "locationI": {
+      "lat": 39.469091,
+      "lng": -0.385795
+    },
+    "locationII": {
+      "lat": 36.714953,
+      "lng": -4.412958
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "80",
+    "nameI": "Urban Rooms",
+    "nameII": "Cool Hostel",
+    "price": 34.13,
+    "reviews": 1.2,
+    "distance": 3.1,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Lockers",
+      "24h reception",
+      "Shared bathroom",
+      "Luggage storage",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.452565,
+      "lng": -0.360201
+    },
+    "locationII": {
+      "lat": 36.739074,
+      "lng": -4.433839
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "81",
+    "nameI": "Friendly Hotel",
+    "nameII": "Simple Hotel",
+    "price": 62.22,
+    "reviews": 3.1,
+    "distance": 7.6,
+    "type": "Budget Hotel",
+    "features": [
+      "TV in room",
+      "Air conditioning",
+      "Private bathroom",
+      "Free Wi-Fi",
+      "Daily housekeeping",
+      "24h reception"
+    ],
+    "locationI": {
+      "lat": 39.455538,
+      "lng": -0.386022
+    },
+    "locationII": {
+      "lat": 36.732422,
+      "lng": -4.411644
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "82",
+    "nameI": "Cozy Apartment",
+    "nameII": "Cozy Studio",
+    "price": 274.22,
+    "reviews": 3.1,
+    "distance": 8.4,
+    "type": "Entire Apartment / House",
+    "features": ["Coffee machine", "Free Wi-Fi", "Parking"],
+    "locationI": {
+      "lat": 39.451197,
+      "lng": -0.369731
+    },
+    "locationII": {
+      "lat": 36.714868,
+      "lng": -4.441181
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "83",
+    "nameI": "Rustic Cottage",
+    "nameII": "Comfy Guesthouse",
+    "price": 86.5,
+    "reviews": 5.0,
+    "distance": 2.8,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Family-friendly",
+      "Breakfast included",
+      "Tea/coffee maker",
+      "Terrace"
+    ],
+    "locationI": {
+      "lat": 39.46621,
+      "lng": -0.38066
+    },
+    "locationII": {
+      "lat": 36.721767,
+      "lng": -4.431731
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "84",
+    "nameI": "Trendy Boutique",
+    "nameII": "Classic Suites",
+    "price": 148.33,
+    "reviews": 2.3,
+    "distance": 7.8,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Free Wi-Fi",
+      "Restaurant",
+      "Air conditioning",
+      "Bar",
+      "Room service",
+      "Private bathroom",
+      "Pool"
+    ],
+    "locationI": {
+      "lat": 39.462356,
+      "lng": -0.381559
+    },
+    "locationII": {
+      "lat": 36.706871,
+      "lng": -4.431353
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "85",
+    "nameI": "Cozy Inn",
+    "nameII": "Urban Stay",
+    "price": 21.39,
+    "reviews": 1.4,
+    "distance": 3.0,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Shared kitchen",
+      "Common room",
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Lockers"
+    ],
+    "locationI": {
+      "lat": 39.461157,
+      "lng": -0.370271
+    },
+    "locationII": {
+      "lat": 36.709887,
+      "lng": -4.43831
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "86",
+    "nameI": "Elegant Suites",
+    "nameII": "Grand Resort",
+    "price": 302.42,
+    "reviews": 3.8,
+    "distance": 1.6,
+    "type": "Luxury Hotel",
+    "features": ["Bar", "Restaurant", "Private beach", "Luxury rooms"],
+    "locationI": {
+      "lat": 39.451852,
+      "lng": -0.38276
+    },
+    "locationII": {
+      "lat": 36.729089,
+      "lng": -4.415181
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "87",
+    "nameI": "Charming Guesthouse",
+    "nameII": "Peaceful Inn",
+    "price": 64.77,
+    "reviews": 3.9,
+    "distance": 2.0,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Free Wi-Fi",
+      "Garden",
+      "Private bathroom",
+      "Terrace",
+      "Family-friendly"
+    ],
+    "locationI": {
+      "lat": 39.480231,
+      "lng": -0.368975
+    },
+    "locationII": {
+      "lat": 36.723574,
+      "lng": -4.440943
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "88",
+    "nameI": "Classic Suites",
+    "nameII": "Stylish Suites",
+    "price": 157.98,
+    "reviews": 3.5,
+    "distance": 2.8,
+    "type": "Upper Mid-Range Hotel",
+    "features": ["Restaurant", "Gym", "Private bathroom", "Pool", "Bar"],
+    "locationI": {
+      "lat": 39.467622,
+      "lng": -0.369813
+    },
+    "locationII": {
+      "lat": 36.718559,
+      "lng": -4.429282
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "89",
+    "nameI": "Trendy Inn",
+    "nameII": "Cozy Hostel",
+    "price": 33.12,
+    "reviews": 4.0,
+    "distance": 5.6,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Shared bathroom",
+      "Lockers",
+      "Luggage storage"
+    ],
+    "locationI": {
+      "lat": 39.487228,
+      "lng": -0.361516
+    },
+    "locationII": {
+      "lat": 36.724665,
+      "lng": -4.429551
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "90",
+    "nameI": "Central Suites",
+    "nameII": "City Place",
+    "price": 136.86,
+    "reviews": 1.1,
+    "distance": 4.7,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Fitness center",
+      "Private bathroom",
+      "24h reception",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.463879,
+      "lng": -0.378804
+    },
+    "locationII": {
+      "lat": 36.737202,
+      "lng": -4.408127
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "91",
+    "nameI": "Urban Rooms",
+    "nameII": "Urban Place",
+    "price": 70.51,
+    "reviews": 4.5,
+    "distance": 9.2,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Private room",
+      "Shared kitchen"
+    ],
+    "locationI": {
+      "lat": 39.463264,
+      "lng": -0.382047
+    },
+    "locationII": {
+      "lat": 36.730107,
+      "lng": -4.419394
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "92",
+    "nameI": "Peaceful B&B",
+    "nameII": "Charming B&B",
+    "price": 72.39,
+    "reviews": 3.2,
+    "distance": 6.7,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Tea/coffee maker",
+      "Non-smoking rooms",
+      "Terrace",
+      "Private bathroom",
+      "Breakfast included",
+      "Free Wi-Fi",
+      "Family-friendly"
+    ],
+    "locationI": {
+      "lat": 39.477952,
+      "lng": -0.378579
+    },
+    "locationII": {
+      "lat": 36.709727,
+      "lng": -4.426244
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "93",
+    "nameI": "Stylish Apartment",
+    "nameII": "Cozy Flat",
+    "price": 196.54,
+    "reviews": 2.9,
+    "distance": 3.3,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Free Wi-Fi",
+      "Coffee machine",
+      "Self check-in",
+      "Washer",
+      "Kitchen",
+      "Parking",
+      "Balcony"
+    ],
+    "locationI": {
+      "lat": 39.455347,
+      "lng": -0.392608
+    },
+    "locationII": {
+      "lat": 36.724111,
+      "lng": -4.402518
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "94",
+    "nameI": "Elegant Suites",
+    "nameII": "Elegant Hotel",
+    "price": 103.73,
+    "reviews": 2.2,
+    "distance": 7.2,
+    "type": "Mid-Range Hotel",
+    "features": ["Restaurant", "24h reception", "Air conditioning", "Bar"],
+    "locationI": {
+      "lat": 39.473673,
+      "lng": -0.367274
+    },
+    "locationII": {
+      "lat": 36.735296,
+      "lng": -4.407339
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "95",
+    "nameI": "Peaceful Guesthouse",
+    "nameII": "Country Guesthouse",
+    "price": 95.94,
+    "reviews": 2.3,
+    "distance": 9.8,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Garden",
+      "Breakfast included",
+      "Family-friendly",
+      "Terrace",
+      "Tea/coffee maker",
+      "Private bathroom",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.454079,
+      "lng": -0.393666
+    },
+    "locationII": {
+      "lat": 36.721972,
+      "lng": -4.422134
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "96",
+    "nameI": "Stylish Suites",
+    "nameII": "Central Place",
+    "price": 105.29,
+    "reviews": 1.1,
+    "distance": 5.4,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Bar",
+      "Private bathroom",
+      "Room service",
+      "Free Wi-Fi",
+      "Restaurant",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.46783,
+      "lng": -0.368982
+    },
+    "locationII": {
+      "lat": 36.712664,
+      "lng": -4.439449
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "97",
+    "nameI": "Royal Villa",
+    "nameII": "Luxury Palace",
+    "price": 391.25,
+    "reviews": 3.0,
+    "distance": 4.8,
+    "type": "Luxury Hotel",
+    "features": [
+      "Valet parking",
+      "Restaurant",
+      "Luxury rooms",
+      "Pool",
+      "Private beach"
+    ],
+    "locationI": {
+      "lat": 39.475997,
+      "lng": -0.361704
+    },
+    "locationII": {
+      "lat": 36.736729,
+      "lng": -4.416445
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "98",
+    "nameI": "Youth Hostel",
+    "nameII": "Chill Place",
+    "price": 29.61,
+    "reviews": 4.7,
+    "distance": 10.0,
+    "type": "Hostel (Dormitory Bed)",
+    "features": ["Common room", "Shared kitchen", "Shared bathroom"],
+    "locationI": {
+      "lat": 39.487577,
+      "lng": -0.379211
+    },
+    "locationII": {
+      "lat": 36.712946,
+      "lng": -4.42516
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "99",
+    "nameI": "Trendy Inn",
+    "nameII": "Urban Stay",
+    "price": 77.48,
+    "reviews": 4.8,
+    "distance": 2.1,
+    "type": "Hostel (Private Room)",
+    "features": ["Hostel entertainment", "Luggage storage", "Private room"],
+    "locationI": {
+      "lat": 39.455289,
+      "lng": -0.359196
+    },
+    "locationII": {
+      "lat": 36.733501,
+      "lng": -4.418996
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "100",
+    "nameI": "Majestic Suites",
+    "nameII": "Majestic Suites",
+    "price": 300.45,
+    "reviews": 1.1,
+    "distance": 3.0,
+    "type": "Luxury Hotel",
+    "features": [
+      "Spa",
+      "Valet parking",
+      "Concierge",
+      "Sea view",
+      "Bar",
+      "Luxury rooms"
+    ],
+    "locationI": {
+      "lat": 39.453449,
+      "lng": -0.380333
+    },
+    "locationII": {
+      "lat": 36.709596,
+      "lng": -4.405172
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "101",
+    "nameI": "Royal Villa",
+    "nameII": "Luxury Palace",
+    "price": 264.67,
+    "reviews": 1.4,
+    "distance": 7.8,
+    "type": "Luxury Hotel",
+    "features": ["Valet parking", "Sea view", "Pool", "Airport shuttle"],
+    "locationI": {
+      "lat": 39.460381,
+      "lng": -0.385453
+    },
+    "locationII": {
+      "lat": 36.740281,
+      "lng": -4.40414
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "102",
+    "nameI": "Elegant Villa",
+    "nameII": "Majestic Villa",
+    "price": 507.18,
+    "reviews": 4.9,
+    "distance": 1.6,
+    "type": "Luxury Hotel",
+    "features": ["Sea view", "Valet parking", "Airport shuttle"],
+    "locationI": {
+      "lat": 39.466774,
+      "lng": -0.372016
+    },
+    "locationII": {
+      "lat": 36.720897,
+      "lng": -4.410744
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "103",
+    "nameI": "Simple Suites",
+    "nameII": "Simple Stay",
+    "price": 69.7,
+    "reviews": 2.4,
+    "distance": 1.5,
+    "type": "Budget Hotel",
+    "features": ["TV in room", "Private bathroom", "Daily housekeeping"],
+    "locationI": {
+      "lat": 39.462363,
+      "lng": -0.386823
+    },
+    "locationII": {
+      "lat": 36.725098,
+      "lng": -4.41418
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "104",
+    "nameI": "Family B&B",
+    "nameII": "Comfy B&B",
+    "price": 97.52,
+    "reviews": 2.9,
+    "distance": 6.4,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": ["Breakfast included", "Private bathroom", "Terrace"],
+    "locationI": {
+      "lat": 39.481766,
+      "lng": -0.390079
+    },
+    "locationII": {
+      "lat": 36.728535,
+      "lng": -4.401738
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "105",
+    "nameI": "Friendly Inn",
+    "nameII": "Urban Inn",
+    "price": 58.57,
+    "reviews": 4.8,
+    "distance": 7.0,
+    "type": "Budget Hotel",
+    "features": [
+      "TV in room",
+      "Breakfast available",
+      "Daily housekeeping",
+      "Private bathroom",
+      "Air conditioning",
+      "24h reception",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.45828,
+      "lng": -0.365787
+    },
+    "locationII": {
+      "lat": 36.728938,
+      "lng": -4.419252
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "106",
+    "nameI": "Youth Hostel",
+    "nameII": "Youth Rooms",
+    "price": 20.92,
+    "reviews": 2.2,
+    "distance": 2.5,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Shared bathroom",
+      "Free Wi-Fi",
+      "Shared kitchen",
+      "24h reception",
+      "Lockers"
+    ],
+    "locationI": {
+      "lat": 39.455884,
+      "lng": -0.380346
+    },
+    "locationII": {
+      "lat": 36.726598,
+      "lng": -4.424389
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "107",
+    "nameI": "City Suites",
+    "nameII": "Classic Place",
+    "price": 147.62,
+    "reviews": 3.5,
+    "distance": 9.3,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Room service",
+      "Bar",
+      "24h reception",
+      "Air conditioning",
+      "Fitness center"
+    ],
+    "locationI": {
+      "lat": 39.462691,
+      "lng": -0.378323
+    },
+    "locationII": {
+      "lat": 36.710241,
+      "lng": -4.405582
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "108",
+    "nameI": "Youth Inn",
+    "nameII": "Colorful Stay",
+    "price": 54.73,
+    "reviews": 3.3,
+    "distance": 8.1,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Private room",
+      "Lockers",
+      "Hostel entertainment",
+      "Luggage storage",
+      "Shared kitchen",
+      "Shared bathroom",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.454818,
+      "lng": -0.36997
+    },
+    "locationII": {
+      "lat": 36.73498,
+      "lng": -4.406964
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "109",
+    "nameI": "Elegant Resort",
+    "nameII": "Exclusive Suites",
+    "price": 269.56,
+    "reviews": 1.2,
+    "distance": 6.7,
+    "type": "Luxury Hotel",
+    "features": [
+      "Restaurant",
+      "Sea view",
+      "Spa",
+      "Valet parking",
+      "Bar",
+      "Concierge"
+    ],
+    "locationI": {
+      "lat": 39.474148,
+      "lng": -0.396143
+    },
+    "locationII": {
+      "lat": 36.720019,
+      "lng": -4.43723
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "110",
+    "nameI": "Sunny Villa",
+    "nameII": "Modern Apartment",
+    "price": 71.99,
+    "reviews": 3.8,
+    "distance": 8.2,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Washer",
+      "Parking",
+      "Balcony",
+      "Air conditioning",
+      "Pet-friendly"
+    ],
+    "locationI": {
+      "lat": 39.465778,
+      "lng": -0.386055
+    },
+    "locationII": {
+      "lat": 36.711707,
+      "lng": -4.438747
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "111",
+    "nameI": "Elegant Suites",
+    "nameII": "Trendy Hotel",
+    "price": 184.14,
+    "reviews": 3.6,
+    "distance": 3.5,
+    "type": "Upper Mid-Range Hotel",
+    "features": ["Free Wi-Fi", "Private bathroom", "Bar"],
+    "locationI": {
+      "lat": 39.460513,
+      "lng": -0.385964
+    },
+    "locationII": {
+      "lat": 36.728304,
+      "lng": -4.420089
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "112",
+    "nameI": "Charming House",
+    "nameII": "Peaceful B&B",
+    "price": 69.55,
+    "reviews": 3.6,
+    "distance": 7.6,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Breakfast included",
+      "Terrace",
+      "Free Wi-Fi",
+      "Tea/coffee maker",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.458494,
+      "lng": -0.369341
+    },
+    "locationII": {
+      "lat": 36.720914,
+      "lng": -4.421632
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "113",
+    "nameI": "Modern Suites",
+    "nameII": "Stylish Residence",
+    "price": 107.25,
+    "reviews": 1.7,
+    "distance": 3.9,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "24h reception",
+      "Room service",
+      "Private bathroom",
+      "Free Wi-Fi",
+      "Restaurant"
+    ],
+    "locationI": {
+      "lat": 39.455057,
+      "lng": -0.376924
+    },
+    "locationII": {
+      "lat": 36.725306,
+      "lng": -4.40742
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "114",
+    "nameI": "Budget Suites",
+    "nameII": "Easy Suites",
+    "price": 88.48,
+    "reviews": 4.3,
+    "distance": 1.3,
+    "type": "Budget Hotel",
+    "features": ["Private bathroom", "24h reception", "Free Wi-Fi"],
+    "locationI": {
+      "lat": 39.485078,
+      "lng": -0.391226
+    },
+    "locationII": {
+      "lat": 36.738387,
+      "lng": -4.415152
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "115",
+    "nameI": "Easy Suites",
+    "nameII": "Friendly Residence",
+    "price": 81.78,
+    "reviews": 2.3,
+    "distance": 8.8,
+    "type": "Budget Hotel",
+    "features": ["Private bathroom", "24h reception", "Free Wi-Fi"],
+    "locationI": {
+      "lat": 39.47855,
+      "lng": -0.38486
+    },
+    "locationII": {
+      "lat": 36.717054,
+      "lng": -4.404874
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "116",
+    "nameI": "Simple Hotel",
+    "nameII": "Urban Residence",
+    "price": 88.78,
+    "reviews": 1.6,
+    "distance": 1.4,
+    "type": "Budget Hotel",
+    "features": [
+      "Free Wi-Fi",
+      "24h reception",
+      "Daily housekeeping",
+      "TV in room",
+      "Breakfast available",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.458226,
+      "lng": -0.391807
+    },
+    "locationII": {
+      "lat": 36.717253,
+      "lng": -4.431171
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "117",
+    "nameI": "Classic Inn",
+    "nameII": "Budget Residence",
+    "price": 55.51,
+    "reviews": 4.6,
+    "distance": 8.4,
+    "type": "Budget Hotel",
+    "features": [
+      "Private bathroom",
+      "TV in room",
+      "24h reception",
+      "Air conditioning",
+      "Free Wi-Fi",
+      "Daily housekeeping"
+    ],
+    "locationI": {
+      "lat": 39.482416,
+      "lng": -0.376467
+    },
+    "locationII": {
+      "lat": 36.732018,
+      "lng": -4.415588
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "118",
+    "nameI": "Boutique Hotel",
+    "nameII": "Boutique Hotel",
+    "price": 199.59,
+    "reviews": 3.8,
+    "distance": 7.3,
+    "type": "Upper Mid-Range Hotel",
+    "features": ["Gym", "Bar", "Restaurant", "Private bathroom"],
+    "locationI": {
+      "lat": 39.467877,
+      "lng": -0.383109
+    },
+    "locationII": {
+      "lat": 36.717727,
+      "lng": -4.429353
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "119",
+    "nameI": "Elegant Residence",
+    "nameII": "Stylish Stay",
+    "price": 158.24,
+    "reviews": 1.8,
+    "distance": 6.8,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Bar",
+      "Air conditioning",
+      "Free Wi-Fi",
+      "Room service",
+      "Private bathroom",
+      "Restaurant",
+      "Rooftop terrace"
+    ],
+    "locationI": {
+      "lat": 39.473967,
+      "lng": -0.371856
+    },
+    "locationII": {
+      "lat": 36.70432,
+      "lng": -4.40627
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "120",
+    "nameI": "Trendy Rooms",
+    "nameII": "Urban Place",
+    "price": 74.88,
+    "reviews": 2.6,
+    "distance": 7.8,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Free Wi-Fi",
+      "Lockers",
+      "Hostel entertainment",
+      "Luggage storage",
+      "Private room",
+      "Shared bathroom"
+    ],
+    "locationI": {
+      "lat": 39.470087,
+      "lng": -0.370109
+    },
+    "locationII": {
+      "lat": 36.735267,
+      "lng": -4.414859
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "121",
+    "nameI": "Youth Place",
+    "nameII": "Cozy Hostel",
+    "price": 28.34,
+    "reviews": 1.7,
+    "distance": 2.0,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "24h reception",
+      "Shared kitchen",
+      "Shared bathroom",
+      "Free Wi-Fi",
+      "Common room"
+    ],
+    "locationI": {
+      "lat": 39.452624,
+      "lng": -0.395576
+    },
+    "locationII": {
+      "lat": 36.730248,
+      "lng": -4.429416
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "122",
+    "nameI": "Cozy Rooms",
+    "nameII": "Cool Hostel",
+    "price": 24.91,
+    "reviews": 3.5,
+    "distance": 3.9,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Free Wi-Fi",
+      "Common room",
+      "Lockers",
+      "Shared bathroom",
+      "Hostel entertainment"
+    ],
+    "locationI": {
+      "lat": 39.453392,
+      "lng": -0.38385
+    },
+    "locationII": {
+      "lat": 36.729215,
+      "lng": -4.406383
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "123",
+    "nameI": "Family Cottage",
+    "nameII": "Country Cottage",
+    "price": 83.95,
+    "reviews": 1.5,
+    "distance": 5.6,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Family-friendly",
+      "Breakfast included",
+      "Terrace",
+      "Tea/coffee maker",
+      "Private bathroom",
+      "Garden",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.468182,
+      "lng": -0.366224
+    },
+    "locationII": {
+      "lat": 36.721504,
+      "lng": -4.440753
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "124",
+    "nameI": "Urban Rooms",
+    "nameII": "Trendy Rooms",
+    "price": 22.67,
+    "reviews": 4.5,
+    "distance": 9.8,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Luggage storage",
+      "Shared kitchen",
+      "24h reception",
+      "Shared bathroom",
+      "Hostel entertainment",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.466635,
+      "lng": -0.357497
+    },
+    "locationII": {
+      "lat": 36.710678,
+      "lng": -4.438647
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "125",
+    "nameI": "Friendly Inn",
+    "nameII": "Simple Suites",
+    "price": 77.76,
+    "reviews": 3.3,
+    "distance": 9.7,
+    "type": "Budget Hotel",
+    "features": [
+      "24h reception",
+      "Breakfast available",
+      "Air conditioning",
+      "TV in room",
+      "Daily housekeeping",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.464943,
+      "lng": -0.374439
+    },
+    "locationII": {
+      "lat": 36.724588,
+      "lng": -4.427729
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "126",
+    "nameI": "Colorful Stay",
+    "nameII": "Urban Hostel",
+    "price": 79.96,
+    "reviews": 2.1,
+    "distance": 5.8,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "24h reception",
+      "Shared kitchen",
+      "Hostel entertainment",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.487787,
+      "lng": -0.366699
+    },
+    "locationII": {
+      "lat": 36.725467,
+      "lng": -4.415322
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "127",
+    "nameI": "Charming Inn",
+    "nameII": "Family Cottage",
+    "price": 70.27,
+    "reviews": 3.4,
+    "distance": 9.2,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": ["Non-smoking rooms", "Garden", "Family-friendly"],
+    "locationI": {
+      "lat": 39.456092,
+      "lng": -0.396104
+    },
+    "locationII": {
+      "lat": 36.735317,
+      "lng": -4.428918
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "128",
+    "nameI": "Trendy Rooms",
+    "nameII": "Trendy Hostel",
+    "price": 31.36,
+    "reviews": 2.9,
+    "distance": 8.2,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Common room",
+      "Shared bathroom",
+      "Shared kitchen",
+      "Luggage storage",
+      "Hostel entertainment",
+      "Lockers",
+      "24h reception"
+    ],
+    "locationI": {
+      "lat": 39.485004,
+      "lng": -0.370402
+    },
+    "locationII": {
+      "lat": 36.707383,
+      "lng": -4.406519
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "129",
+    "nameI": "Comfy Cottage",
+    "nameII": "Family B&B",
+    "price": 69.55,
+    "reviews": 3.4,
+    "distance": 1.6,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": ["Non-smoking rooms", "Family-friendly", "Breakfast included"],
+    "locationI": {
+      "lat": 39.463839,
+      "lng": -0.383559
+    },
+    "locationII": {
+      "lat": 36.712522,
+      "lng": -4.422738
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "130",
+    "nameI": "Easy Stay",
+    "nameII": "Budget Hotel",
+    "price": 68.75,
+    "reviews": 4.1,
+    "distance": 6.8,
+    "type": "Budget Hotel",
+    "features": [
+      "Free Wi-Fi",
+      "Private bathroom",
+      "24h reception",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.487438,
+      "lng": -0.361818
+    },
+    "locationII": {
+      "lat": 36.729553,
+      "lng": -4.409698
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "131",
+    "nameI": "Budget Stay",
+    "nameII": "Friendly Suites",
+    "price": 83.71,
+    "reviews": 4.9,
+    "distance": 1.7,
+    "type": "Budget Hotel",
+    "features": ["Air conditioning", "Free Wi-Fi", "Breakfast available"],
+    "locationI": {
+      "lat": 39.486234,
+      "lng": -0.373468
+    },
+    "locationII": {
+      "lat": 36.73794,
+      "lng": -4.426073
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "132",
+    "nameI": "Classic Inn",
+    "nameII": "Easy Stay",
+    "price": 78.99,
+    "reviews": 3.0,
+    "distance": 4.9,
+    "type": "Budget Hotel",
+    "features": [
+      "TV in room",
+      "Free Wi-Fi",
+      "Air conditioning",
+      "Private bathroom",
+      "Breakfast available",
+      "24h reception",
+      "Daily housekeeping"
+    ],
+    "locationI": {
+      "lat": 39.476483,
+      "lng": -0.359747
+    },
+    "locationII": {
+      "lat": 36.724792,
+      "lng": -4.412784
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "133",
+    "nameI": "Charming Cottage",
+    "nameII": "Comfy B&B",
+    "price": 100.64,
+    "reviews": 4.7,
+    "distance": 5.7,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Non-smoking rooms",
+      "Terrace",
+      "Breakfast included",
+      "Private bathroom",
+      "Garden",
+      "Tea/coffee maker"
+    ],
+    "locationI": {
+      "lat": 39.452288,
+      "lng": -0.366731
+    },
+    "locationII": {
+      "lat": 36.738304,
+      "lng": -4.437621
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "134",
+    "nameI": "Urban Inn",
+    "nameII": "Youth Place",
+    "price": 18.8,
+    "reviews": 4.6,
+    "distance": 9.4,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Luggage storage",
+      "Shared kitchen",
+      "24h reception",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.476776,
+      "lng": -0.372108
+    },
+    "locationII": {
+      "lat": 36.719128,
+      "lng": -4.431445
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "135",
+    "nameI": "Youth Place",
+    "nameII": "Cozy Inn",
+    "price": 58.6,
+    "reviews": 4.9,
+    "distance": 5.7,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Shared kitchen",
+      "Shared bathroom",
+      "Hostel entertainment",
+      "Lockers",
+      "24h reception",
+      "Free Wi-Fi",
+      "Private room"
+    ],
+    "locationI": {
+      "lat": 39.479357,
+      "lng": -0.392302
+    },
+    "locationII": {
+      "lat": 36.717517,
+      "lng": -4.41541
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "136",
+    "nameI": "Country Cottage",
+    "nameII": "Comfy Guesthouse",
+    "price": 109.98,
+    "reviews": 3.5,
+    "distance": 7.3,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Breakfast included",
+      "Terrace",
+      "Non-smoking rooms",
+      "Private bathroom",
+      "Family-friendly",
+      "Free Wi-Fi",
+      "Tea/coffee maker"
+    ],
+    "locationI": {
+      "lat": 39.486567,
+      "lng": -0.367803
+    },
+    "locationII": {
+      "lat": 36.726073,
+      "lng": -4.426234
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "137",
+    "nameI": "Central Place",
+    "nameII": "Modern Hotel",
+    "price": 102.63,
+    "reviews": 2.7,
+    "distance": 9.4,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Private bathroom",
+      "Air conditioning",
+      "Free Wi-Fi",
+      "Fitness center",
+      "Restaurant",
+      "Room service",
+      "24h reception"
+    ],
+    "locationI": {
+      "lat": 39.459227,
+      "lng": -0.366294
+    },
+    "locationII": {
+      "lat": 36.738714,
+      "lng": -4.408146
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "138",
+    "nameI": "Stylish Studio",
+    "nameII": "Cozy Loft",
+    "price": 239.23,
+    "reviews": 4.7,
+    "distance": 9.7,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Pet-friendly",
+      "Self check-in",
+      "Kitchen",
+      "Entire place",
+      "Air conditioning"
+    ],
+    "locationI": {
+      "lat": 39.474892,
+      "lng": -0.383561
+    },
+    "locationII": {
+      "lat": 36.730234,
+      "lng": -4.409704
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "139",
+    "nameI": "Friendly Suites",
+    "nameII": "Friendly Inn",
+    "price": 50.87,
+    "reviews": 4.5,
+    "distance": 1.4,
+    "type": "Budget Hotel",
+    "features": [
+      "Breakfast available",
+      "Private bathroom",
+      "Air conditioning",
+      "24h reception",
+      "TV in room"
+    ],
+    "locationI": {
+      "lat": 39.484187,
+      "lng": -0.395205
+    },
+    "locationII": {
+      "lat": 36.724853,
+      "lng": -4.407215
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "140",
+    "nameI": "Classic Inn",
+    "nameII": "Classic Inn",
+    "price": 58.11,
+    "reviews": 5.0,
+    "distance": 1.3,
+    "type": "Budget Hotel",
+    "features": [
+      "Free Wi-Fi",
+      "TV in room",
+      "Daily housekeeping",
+      "24h reception",
+      "Private bathroom"
+    ],
+    "locationI": {
+      "lat": 39.461167,
+      "lng": -0.367011
+    },
+    "locationII": {
+      "lat": 36.705257,
+      "lng": -4.414388
+    },
+    "imagesI": ["budget1.jpg", "budget2.jpg", "budget3.jpg"],
+    "imagesII": ["budget4.jpg", "budget5.jpg", "budget6.jpg"]
+  },
+  {
+    "id": "141",
+    "nameI": "Sunny Studio",
+    "nameII": "Modern Apartment",
+    "price": 167.72,
+    "reviews": 1.9,
+    "distance": 3.2,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Pet-friendly",
+      "Air conditioning",
+      "Entire place",
+      "Kitchen",
+      "Balcony",
+      "Coffee machine",
+      "Parking"
+    ],
+    "locationI": {
+      "lat": 39.466458,
+      "lng": -0.37575
+    },
+    "locationII": {
+      "lat": 36.712292,
+      "lng": -4.408281
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "142",
+    "nameI": "Trendy Stay",
+    "nameII": "Happy Place",
+    "price": 20.7,
+    "reviews": 3.6,
+    "distance": 5.5,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Luggage storage",
+      "24h reception",
+      "Shared kitchen",
+      "Free Wi-Fi",
+      "Common room"
+    ],
+    "locationI": {
+      "lat": 39.451638,
+      "lng": -0.371966
+    },
+    "locationII": {
+      "lat": 36.721272,
+      "lng": -4.440431
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "143",
+    "nameI": "Central Villa",
+    "nameII": "Cozy Flat",
+    "price": 262.58,
+    "reviews": 1.1,
+    "distance": 9.0,
+    "type": "Entire Apartment / House",
+    "features": [
+      "Parking",
+      "Kitchen",
+      "Coffee machine",
+      "Air conditioning",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.470781,
+      "lng": -0.365391
+    },
+    "locationII": {
+      "lat": 36.727033,
+      "lng": -4.403608
+    },
+    "imagesI": ["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"],
+    "imagesII": ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"]
+  },
+  {
+    "id": "144",
+    "nameI": "Colorful Rooms",
+    "nameII": "Youth Rooms",
+    "price": 63.52,
+    "reviews": 3.2,
+    "distance": 7.9,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Luggage storage",
+      "Shared kitchen",
+      "Private room",
+      "Hostel entertainment"
+    ],
+    "locationI": {
+      "lat": 39.488019,
+      "lng": -0.380271
+    },
+    "locationII": {
+      "lat": 36.714653,
+      "lng": -4.423565
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "145",
+    "nameI": "Comfy Inn",
+    "nameII": "Rustic Guesthouse",
+    "price": 111.93,
+    "reviews": 4.6,
+    "distance": 1.7,
+    "type": "Guesthouse / Bed & Breakfast (B&B)",
+    "features": [
+      "Private bathroom",
+      "Family-friendly",
+      "Tea/coffee maker",
+      "Free Wi-Fi",
+      "Breakfast included"
+    ],
+    "locationI": {
+      "lat": 39.460333,
+      "lng": -0.363815
+    },
+    "locationII": {
+      "lat": 36.73262,
+      "lng": -4.42491
+    },
+    "imagesI": ["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"],
+    "imagesII": ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]
+  },
+  {
+    "id": "146",
+    "nameI": "Boutique Suites",
+    "nameII": "Trendy Suites",
+    "price": 140.63,
+    "reviews": 2.5,
+    "distance": 5.8,
+    "type": "Upper Mid-Range Hotel",
+    "features": [
+      "Pool",
+      "Free Wi-Fi",
+      "Gym",
+      "Restaurant",
+      "Rooftop terrace",
+      "Room service",
+      "Bar"
+    ],
+    "locationI": {
+      "lat": 39.484224,
+      "lng": -0.385872
+    },
+    "locationII": {
+      "lat": 36.73758,
+      "lng": -4.408411
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "147",
+    "nameI": "Modern Place",
+    "nameII": "Modern Hotel",
+    "price": 126.96,
+    "reviews": 2.4,
+    "distance": 8.1,
+    "type": "Mid-Range Hotel",
+    "features": [
+      "Fitness center",
+      "Air conditioning",
+      "24h reception",
+      "Bar",
+      "Free Wi-Fi"
+    ],
+    "locationI": {
+      "lat": 39.4658,
+      "lng": -0.35968
+    },
+    "locationII": {
+      "lat": 36.728842,
+      "lng": -4.406741
+    },
+    "imagesI": ["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"],
+    "imagesII": ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]
+  },
+  {
+    "id": "148",
+    "nameI": "Cozy Rooms",
+    "nameII": "Urban Hostel",
+    "price": 51.72,
+    "reviews": 1.2,
+    "distance": 6.6,
+    "type": "Hostel (Private Room)",
+    "features": [
+      "Shared kitchen",
+      "Free Wi-Fi",
+      "Hostel entertainment",
+      "Private room"
+    ],
+    "locationI": {
+      "lat": 39.456466,
+      "lng": -0.393847
+    },
+    "locationII": {
+      "lat": 36.713286,
+      "lng": -4.437102
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  },
+  {
+    "id": "149",
+    "nameI": "Grand Palace",
+    "nameII": "Exclusive Hotel",
+    "price": 305.15,
+    "reviews": 3.8,
+    "distance": 4.4,
+    "type": "Luxury Hotel",
+    "features": [
+      "Valet parking",
+      "Room service",
+      "Restaurant",
+      "Airport shuttle",
+      "Private beach"
+    ],
+    "locationI": {
+      "lat": 39.477241,
+      "lng": -0.392942
+    },
+    "locationII": {
+      "lat": 36.719846,
+      "lng": -4.438243
+    },
+    "imagesI": ["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"],
+    "imagesII": ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]
+  },
+  {
+    "id": "150",
+    "nameI": "Cool Inn",
+    "nameII": "Cozy Rooms",
+    "price": 33.33,
+    "reviews": 4.4,
+    "distance": 4.4,
+    "type": "Hostel (Dormitory Bed)",
+    "features": [
+      "Common room",
+      "Shared bathroom",
+      "24h reception",
+      "Shared kitchen",
+      "Hostel entertainment",
+      "Free Wi-Fi",
+      "Luggage storage"
+    ],
+    "locationI": {
+      "lat": 39.465918,
+      "lng": -0.380533
+    },
+    "locationII": {
+      "lat": 36.734573,
+      "lng": -4.409536
+    },
+    "imagesI": ["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"],
+    "imagesII": ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]
+  }
+]
