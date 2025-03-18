@@ -1,10 +1,10 @@
 import './App.css';
-import { FilterPane } from './components/FilterPane';
+import { FilterPanel } from './components/FilterPanel';
 
 function App() {
   return (
     <>
-      <FilterPane />
+      <FilterPanel />
     </>
   );
 }
