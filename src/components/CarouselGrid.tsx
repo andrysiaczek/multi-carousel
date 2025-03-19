@@ -15,6 +15,11 @@ export const CarouselGrid = () => {
     scrollRight,
     scrollUp,
     scrollDown,
+    hoveredRow,
+    hoveredColumn,
+    setHoveredRow,
+    setHoveredColumn,
+    resetHover,
   } = useCarouselStore();
 
   useEffect(() => {
@@ -34,14 +39,18 @@ export const CarouselGrid = () => {
       <div className="flex">
         <div className="w-[120px]"></div> {/* Space for row headers */}
         <div
-          className={`flex items-center w-[${
+          className={`flex items-center gap-2 w-[${
             visibleColumns * cellWidth
           }px] h-[80px] font-medium text-sm text-gray-500`}
         >
           {currentXLabels.map((xLabel, col) => (
             <div
               key={col}
-              className={`w-[${cellWidth}px] text-center text-pretty p-2`}
+              className={`w-[${cellWidth}px] text-center text-pretty p-2 cursor-pointer ${
+                hoveredColumn === col ? 'font-semibold text-darkOrange' : ''
+              }`}
+              onMouseEnter={() => setHoveredColumn(col)}
+              onMouseLeave={() => resetHover()}
             >
               {xLabel}
             </div>
@@ -52,14 +61,18 @@ export const CarouselGrid = () => {
       <div className="flex">
         {/* Row Headers (Y-Axis Labels) */}
         <div
-          className={`flex flex-col align-center w-[120px] h-[${
+          className={`flex flex-col align-center gap-2 w-[120px] h-[${
             visibleRows * cellHeight
           }px] overflow-hidden font-medium text-sm text-gray-500`}
         >
           {currentYLabels.map((yLabel, row) => (
             <div
               key={row}
-              className={`w-[120px] h-[${cellHeight}px] flex items-center justify-center -rotate-90 origin-center p-2 text-pretty`}
+              className={`w-[120px] h-[${cellHeight}px] flex items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
+                hoveredRow === row ? 'font-semibold text-darkOrange' : ''
+              }`}
+              onMouseEnter={() => setHoveredRow(row)}
+              onMouseLeave={() => resetHover()}
             >
               {yLabel}
             </div>
@@ -71,12 +84,12 @@ export const CarouselGrid = () => {
           ref={carouselRef}
           className="relative overflow-hidden border rounded-lg"
           style={{
-            width: `${visibleColumns * cellWidth}px`,
-            height: `${visibleRows * cellHeight}px`,
+            width: `${visibleColumns * cellWidth + (visibleColumns - 1) * 8}px`,
+            height: `${visibleRows * cellHeight + (visibleRows - 1) * 8}px`,
           }}
         >
           <div
-            className="grid transition-transform"
+            className="grid transition-transform gap-2"
             style={{
               gridTemplateColumns: `repeat(${visibleColumns}, ${cellWidth}px)`,
               gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
@@ -88,16 +101,9 @@ export const CarouselGrid = () => {
                   key={`${row}-${col}`}
                   row={row}
                   col={col}
-                  xLabel={
-                    currentXLabels[col] && currentYLabels[row]
-                      ? currentXLabels[col]
-                      : ''
-                  }
-                  yLabel={
-                    currentXLabels[col] && currentYLabels[row]
-                      ? currentYLabels[row]
-                      : ''
-                  }
+                  xLabel={currentXLabels[col]}
+                  yLabel={currentYLabels[row]}
+                  isFillerCell={!currentXLabels[col] || !currentYLabels[row]}
                 />
               ))
             )}

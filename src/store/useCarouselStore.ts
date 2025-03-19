@@ -13,24 +13,24 @@ interface CarouselState {
   allYLabels: string[];
   currentXLabels: string[];
   currentYLabels: string[];
-  selectedRow: number | null;
-  selectedColumn: number | null;
-  selectedCell: { row: number; col: number } | null;
+  hoveredRow: number | null;
+  hoveredColumn: number | null;
+  hoveredCell: { row: number; col: number } | null;
   scrollLeft: () => void;
   scrollRight: () => void;
   scrollUp: () => void;
   scrollDown: () => void;
   resetPosition: () => void;
-  selectRow: (row: number) => void;
-  selectColumn: (col: number) => void;
-  selectCell: (row: number, col: number) => void;
-  resetSelection: () => void;
   updateGridSize: (
     rows: number,
     cols: number,
     xLabels: string[],
     yLabels: string[]
   ) => void;
+  setHoveredRow: (row: number) => void;
+  setHoveredColumn: (col: number) => void;
+  setHoveredCell: (row: number, col: number) => void;
+  resetHover: () => void;
 }
 
 export const useCarouselStore = create<CarouselState>((set, get) => ({
@@ -46,9 +46,9 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   allYLabels: [],
   currentXLabels: [],
   currentYLabels: [],
-  selectedColumn: null,
-  selectedRow: null,
-  selectedCell: null,
+  hoveredRow: null,
+  hoveredColumn: null,
+  hoveredCell: null,
 
   scrollLeft: () =>
     set((state) => {
@@ -106,26 +106,6 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
 
   resetPosition: () => set({ rowOffset: 0, columnOffset: 0 }),
 
-  selectColumn: (col) =>
-    set(() => ({ selectedColumn: col, selectedRow: null, selectedCell: null })),
-
-  selectRow: (row) =>
-    set(() => ({ selectedRow: row, selectedColumn: null, selectedCell: null })),
-
-  selectCell: (row, col) =>
-    set(() => ({
-      selectedCell: { row, col },
-      selectedColumn: null,
-      selectedRow: null,
-    })),
-
-  resetSelection: () =>
-    set(() => ({
-      selectedColumn: null,
-      selectedRow: null,
-      selectedCell: null,
-    })),
-
   updateGridSize: (rows, cols, xLabels, yLabels) =>
     set({
       totalRows: rows,
@@ -135,4 +115,20 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       currentXLabels: xLabels.slice(0, get().visibleColumns),
       currentYLabels: yLabels.slice(0, get().visibleRows),
     }),
+
+  setHoveredRow: (row) =>
+    set({ hoveredRow: row, hoveredColumn: null, hoveredCell: null }),
+
+  setHoveredColumn: (col) =>
+    set({ hoveredColumn: col, hoveredRow: null, hoveredCell: null }),
+
+  setHoveredCell: (row, col) =>
+    set({ hoveredCell: { row, col }, hoveredRow: null, hoveredColumn: null }),
+
+  resetHover: () =>
+    set(() => ({
+      hoveredRow: null,
+      hoveredColumn: null,
+      hoveredCell: null,
+    })),
 }));
