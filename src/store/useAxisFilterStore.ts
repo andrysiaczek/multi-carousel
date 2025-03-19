@@ -1,30 +1,30 @@
 import { create } from 'zustand';
 
 interface AxisFilterState {
-  xAxis: string;
-  yAxis: string;
+  xAxisFilter: string;
+  yAxisFilter: string;
   chosenType: string | null;
 
-  setXAxis: (filter: string) => void;
-  setYAxis: (filter: string) => void;
-  setChosenType: (type: string | null) => void; // can also reset type
+  setXAxisFilter: (filter: string) => void;
+  setYAxisFilter: (filter: string) => void;
+  setChosenType: (type: string | null) => void;
 }
 
 export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
-  xAxis: 'Price',
-  yAxis: 'Reviews',
+  xAxisFilter: 'Price',
+  yAxisFilter: 'Reviews',
   chosenType: null,
 
-  setXAxis: (filter) => {
+  setXAxisFilter: (filter) => {
     // Ensure mutual exclusion with Y-axis
-    if (filter !== get().yAxis) {
-      set({ xAxis: filter });
+    if (filter !== get().yAxisFilter) {
+      set({ xAxisFilter: filter });
     }
   },
-  setYAxis: (filter) => {
+  setYAxisFilter: (filter) => {
     // Ensure mutual exclusion with X-axis
-    if (filter !== get().xAxis) {
-      set({ yAxis: filter });
+    if (filter !== get().xAxisFilter) {
+      set({ yAxisFilter: filter });
     }
   },
   setChosenType: (type) => set({ chosenType: type }),

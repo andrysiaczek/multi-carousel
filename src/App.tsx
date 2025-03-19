@@ -1,10 +1,10 @@
 import './App.css';
-import { FilterPanel } from './components/FilterPanel';
+import { CarouselPage } from './pages/CarouselPage';
 
 function App() {
   return (
     <>
-      <FilterPanel />
+      <CarouselPage />
     </>
   );
 }

@@ -49,26 +49,21 @@ export const DecisionChipsPanel = () => {
   const { selectedChips, toggleChip, resetChips } = useDecisionChipsStore();
 
   return (
-    <div className="p-4 space-y-4 border rounded-lg bg-gray-50">
-      <h3 className="font-semibold">Additional Filters:</h3>
-
-      <div className="flex flex-wrap gap-2">
-        {decisionChips.map((chip) => (
-          <button
-            key={chip}
-            type="button"
-            onClick={() => toggleChip(chip)}
-            className={`px-4 py-2 rounded-full border text-sm transition ${
-              selectedChips.includes(chip)
-                ? 'bg-darkGreen text-white border-darkGreen'
-                : 'bg-white text-gray-700 hover:bg-gray-100'
-            }`}
-          >
-            {chip}
-          </button>
-        ))}
-      </div>
-
+    <div className="flex flex-wrap justify-center gap-2 p-4 border-b">
+      {decisionChips.map((chip) => (
+        <button
+          key={chip}
+          type="button"
+          onClick={() => toggleChip(chip)}
+          className={`px-3 py-1 rounded-full border text-xs transition ${
+            selectedChips.includes(chip)
+              ? 'bg-darkGreen text-white border-darkGreen'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          {chip}
+        </button>
+      ))}
       {selectedChips.length > 0 && (
         <button
           type="button"
