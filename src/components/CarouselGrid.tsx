@@ -2,24 +2,19 @@ import { useEffect, useRef } from 'react';
 import { useCarouselStore } from '../store/useCarouselStore';
 import { CarouselCell } from './CarouselCell';
 
-interface CarouselGridProps {
-  xLabels: string[];
-  yLabels: string[];
-}
-
-export const CarouselGrid = ({ xLabels, yLabels }: CarouselGridProps) => {
+export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const {
-    rowOffset,
-    columnOffset,
+    cellHeight,
+    cellWidth,
+    visibleRows,
+    visibleColumns,
+    currentXLabels,
+    currentYLabels,
     scrollLeft,
     scrollRight,
     scrollUp,
     scrollDown,
-    totalRows,
-    totalColumns,
-    visibleRows,
-    visibleColumns,
   } = useCarouselStore();
 
   useEffect(() => {
@@ -35,71 +30,110 @@ export const CarouselGrid = ({ xLabels, yLabels }: CarouselGridProps) => {
 
   return (
     <div className="relative flex flex-col items-center p-10">
-      {/* Wrapper to prevent arrows from getting clipped */}
-      <div className="relative">
+      {/* Column Headers (X-Axis Labels) */}
+      <div className="flex">
+        <div className="w-[120px]"></div> {/* Space for row headers */}
+        <div
+          className={`flex items-center w-[${
+            visibleColumns * cellWidth
+          }px] h-[80px] font-medium text-sm text-gray-500`}
+        >
+          {currentXLabels.map((xLabel, col) => (
+            <div
+              key={col}
+              className={`w-[${cellWidth}px] text-center text-pretty p-2`}
+            >
+              {xLabel}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex">
+        {/* Row Headers (Y-Axis Labels) */}
+        <div
+          className={`flex flex-col align-center w-[120px] h-[${
+            visibleRows * cellHeight
+          }px] overflow-hidden font-medium text-sm text-gray-500`}
+        >
+          {currentYLabels.map((yLabel, row) => (
+            <div
+              key={row}
+              className={`w-[120px] h-[${cellHeight}px] flex items-center justify-center -rotate-90 origin-center p-2 text-pretty`}
+            >
+              {yLabel}
+            </div>
+          ))}
+        </div>
+
         {/* Scrollable Grid Container */}
         <div
           ref={carouselRef}
           className="relative overflow-hidden border rounded-lg"
           style={{
-            width: `${visibleColumns * 200}px`,
-            height: `${visibleRows * 150}px`,
+            width: `${visibleColumns * cellWidth}px`,
+            height: `${visibleRows * cellHeight}px`,
           }}
         >
           <div
             className="grid transition-transform"
             style={{
-              gridTemplateColumns: `repeat(${totalColumns}, 200px)`,
-              gridTemplateRows: `repeat(${totalRows}, 150px)`,
-              transform: `translate(${-columnOffset * 200}px, ${
-                -rowOffset * 150
-              }px)`,
+              gridTemplateColumns: `repeat(${visibleColumns}, ${cellWidth}px)`,
+              gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
             }}
           >
-            {yLabels.map((yLabel, row) =>
-              xLabels.map((xLabel, col) => (
+            {Array.from({ length: visibleRows }).map((_, row) =>
+              Array.from({ length: visibleColumns }).map((_, col) => (
                 <CarouselCell
                   key={`${row}-${col}`}
                   row={row}
                   col={col}
-                  xLabel={xLabel}
-                  yLabel={yLabel}
+                  xLabel={
+                    currentXLabels[col] && currentYLabels[row]
+                      ? currentXLabels[col]
+                      : ''
+                  }
+                  yLabel={
+                    currentXLabels[col] && currentYLabels[row]
+                      ? currentYLabels[row]
+                      : ''
+                  }
                 />
               ))
             )}
           </div>
         </div>
-
-        {/* Navigation Buttons */}
-        <button
-          type="button"
-          onClick={scrollLeft}
-          className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-        >
-          ←
-        </button>
-        <button
-          type="button"
-          onClick={scrollRight}
-          className="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-        >
-          →
-        </button>
-        <button
-          type="button"
-          onClick={scrollUp}
-          className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-        >
-          ↑
-        </button>
-        <button
-          type="button"
-          onClick={scrollDown}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-        >
-          ↓
-        </button>
       </div>
+
+      {/* Navigation Buttons */}
+      <button
+        type="button"
+        onClick={scrollLeft}
+        className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
+      >
+        ←
+      </button>
+      <button
+        type="button"
+        onClick={scrollRight}
+        className="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
+      >
+        →
+      </button>
+      <button
+        type="button"
+        onClick={scrollUp}
+        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
+      >
+        ↑
+      </button>
+      <button
+        type="button"
+        onClick={scrollDown}
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
+      >
+        ↓
+      </button>
     </div>
   );
 };

@@ -50,7 +50,7 @@ export const CarouselPage = () => {
   }, [xAxisFilter, yAxisFilter, resetPosition]);
 
   useEffect(() => {
-    updateGridSize(yLabels.length, xLabels.length);
+    updateGridSize(yLabels.length, xLabels.length, xLabels, yLabels);
   }, [xLabels, yLabels, updateGridSize]);
 
   return (
@@ -67,7 +67,7 @@ export const CarouselPage = () => {
         <FilterAxisSelector axis="Y" />
 
         {/* Carousel */}
-        <CarouselGrid xLabels={xLabels} yLabels={yLabels} />
+        <CarouselGrid />
       </div>
     </div>
   );
