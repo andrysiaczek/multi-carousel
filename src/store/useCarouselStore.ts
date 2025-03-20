@@ -1,4 +1,17 @@
 import { create } from 'zustand';
+import accommodations from '../data/accommodationDataset.json';
+import {
+  Accommodation,
+  FilterOption,
+  FilterOptionType,
+  Subrange,
+} from '../data/types';
+
+interface CarouselCell {
+  row: number;
+  col: number;
+  accommodations: Accommodation[];
+}
 
 interface CarouselState {
   rowOffset: number;
@@ -13,19 +26,29 @@ interface CarouselState {
   allYLabels: string[];
   currentXLabels: string[];
   currentYLabels: string[];
+  currentXSublabels: string[];
+  currentYSublabels: string[];
   hoveredRow: number | null;
   hoveredColumn: number | null;
   hoveredCell: { row: number; col: number } | null;
+  filteredCarouselData: CarouselCell[][]; // Stores accommodations per cell
+  updateCarouselData: (
+    xAxisFilter: FilterOption,
+    yAxisFilter: FilterOption,
+    filters: FilterOptionType
+  ) => void;
   scrollLeft: () => void;
   scrollRight: () => void;
   scrollUp: () => void;
   scrollDown: () => void;
   resetPosition: () => void;
-  updateGridSize: (
+  updateCarouselSizeAndLabels: (
     rows: number,
     cols: number,
     xLabels: string[],
-    yLabels: string[]
+    yLabels: string[],
+    xSublabels: string[],
+    ySublabels: string[]
   ) => void;
   setHoveredRow: (row: number) => void;
   setHoveredColumn: (col: number) => void;
@@ -46,9 +69,110 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   allYLabels: [],
   currentXLabels: [],
   currentYLabels: [],
+  currentXSublabels: [],
+  currentYSublabels: [],
   hoveredRow: null,
   hoveredColumn: null,
   hoveredCell: null,
+  filteredCarouselData: [], // Dynamically populated in the component
+
+  // Function to categorize accommodations into grid cells
+  updateCarouselData: (xAxisFilter, yAxisFilter, filters) => {
+    const { visibleColumns, visibleRows } = get();
+    const carousel: CarouselCell[][] = [];
+
+    // Handle Type Filter Differently
+    const isXType = xAxisFilter === FilterOption.Type;
+    const isYType = yAxisFilter === FilterOption.Type;
+
+    // Get the correct range object from filters
+    const xFilterRanges = isXType
+      ? (filters[FilterOption.Type] as string[]) // Type is just a list of strings
+      : (filters[xAxisFilter] as Subrange[]); // Otherwise array of Subrange objects
+
+    const yFilterRanges = isYType
+      ? (filters[FilterOption.Type] as string[])
+      : (filters[yAxisFilter] as Subrange[]);
+
+    if (!xFilterRanges || !yFilterRanges) {
+      console.warn('Filter ranges are missing!');
+      return false;
+    }
+
+    // Generate Labels & Sublabels
+    const allXLabels = isXType
+      ? (xFilterRanges as string[])
+      : (xFilterRanges as Subrange[]).map((r) => r.label);
+
+    const allYLabels = isYType
+      ? (yFilterRanges as string[])
+      : (yFilterRanges as Subrange[]).map((r) => r.label);
+
+    const allXSublabels = isXType
+      ? Array(allXLabels.length).fill('') // Type filter doesn't have sublabels
+      : (xFilterRanges as Subrange[]).map((r) => r.sublabel ?? '');
+
+    const allYSublabels = isYType
+      ? Array(allYLabels.length).fill('') // Type filter doesn't have sublabels
+      : (yFilterRanges as Subrange[]).map((r) => r.sublabel ?? '');
+
+    for (let row = 0; row < allYLabels.length; row++) {
+      carousel[row] = [];
+      for (let col = 0; col < allXLabels.length; col++) {
+        const filteredAccommodations = accommodations.filter((acc) => {
+          let isXMatch = false;
+          let isYMatch = false;
+
+          // Handle Type separately
+          if (isXType) {
+            isXMatch = acc.type === allXLabels[col]; // Exact match
+          } else {
+            // Find matching range
+            const xRange = (xFilterRanges as Subrange[]).find(
+              (r) => r.label === allXLabels[col]
+            );
+            if (xRange) {
+              isXMatch =
+                (!xRange.lowerBound || acc[xAxisFilter] >= xRange.lowerBound) &&
+                (!xRange.upperBound || acc[xAxisFilter] < xRange.upperBound);
+            }
+          }
+
+          if (isYType) {
+            isYMatch = acc.type === allYLabels[row]; // Exact match
+          } else {
+            // Find matching range
+            const yRange = (yFilterRanges as Subrange[]).find(
+              (r) => r.label === allYLabels[row]
+            );
+            if (yRange) {
+              isYMatch =
+                (!yRange.lowerBound || acc[yAxisFilter] >= yRange.lowerBound) &&
+                (!yRange.upperBound || acc[yAxisFilter] < yRange.upperBound);
+            }
+          }
+
+          return isXMatch && isYMatch;
+        });
+
+        carousel[row][col] = {
+          row,
+          col,
+          accommodations: filteredAccommodations,
+        };
+      }
+    }
+
+    set({
+      filteredCarouselData: carousel,
+      allXLabels,
+      allYLabels,
+      currentXLabels: allXLabels.slice(0, visibleColumns),
+      currentYLabels: allYLabels.slice(0, visibleRows),
+      currentXSublabels: allXSublabels.slice(0, visibleColumns),
+      currentYSublabels: allYSublabels.slice(0, visibleRows),
+    });
+  },
 
   scrollLeft: () =>
     set((state) => {
@@ -106,7 +230,14 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
 
   resetPosition: () => set({ rowOffset: 0, columnOffset: 0 }),
 
-  updateGridSize: (rows, cols, xLabels, yLabels) =>
+  updateCarouselSizeAndLabels: (
+    rows,
+    cols,
+    xLabels,
+    yLabels,
+    xSublabels,
+    ySublabels
+  ) =>
     set({
       totalRows: rows,
       totalColumns: cols,
@@ -114,6 +245,8 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       allYLabels: yLabels,
       currentXLabels: xLabels.slice(0, get().visibleColumns),
       currentYLabels: yLabels.slice(0, get().visibleRows),
+      currentXSublabels: xSublabels,
+      currentYSublabels: ySublabels,
     }),
 
   setHoveredRow: (row) =>

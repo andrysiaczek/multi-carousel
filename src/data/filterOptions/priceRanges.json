@@ -1,0 +1,350 @@
+[
+  {
+    "label": "Low",
+    "sublabel": "(Less than \u20ac100)",
+    "lowerBound": null,
+    "upperBound": 100,
+    "subranges": [
+      {
+        "label": "Less than \u20ac38",
+        "lowerBound": null,
+        "upperBound": 38,
+        "subranges": [
+          {
+            "label": "Less than \u20ac23",
+            "lowerBound": null,
+            "upperBound": 23
+          },
+          {
+            "label": "\u20ac23 - \u20ac28",
+            "lowerBound": 23,
+            "upperBound": 28
+          },
+          {
+            "label": "\u20ac28 - \u20ac33",
+            "lowerBound": 28,
+            "upperBound": 33
+          },
+          {
+            "label": "Above \u20ac33",
+            "lowerBound": 33,
+            "upperBound": 38
+          }
+        ]
+      },
+      {
+        "label": "\u20ac38 - \u20ac59",
+        "lowerBound": 38,
+        "upperBound": 59,
+        "subranges": [
+          {
+            "label": "Less than \u20ac43",
+            "lowerBound": 38,
+            "upperBound": 43
+          },
+          {
+            "label": "\u20ac43 - \u20ac48",
+            "lowerBound": 43,
+            "upperBound": 48
+          },
+          {
+            "label": "\u20ac48 - \u20ac53",
+            "lowerBound": 48,
+            "upperBound": 53
+          },
+          {
+            "label": "Above \u20ac53",
+            "lowerBound": 53,
+            "upperBound": 59
+          }
+        ]
+      },
+      {
+        "label": "\u20ac59 - \u20ac79",
+        "lowerBound": 59,
+        "upperBound": 79,
+        "subranges": [
+          {
+            "label": "Less than \u20ac64",
+            "lowerBound": null,
+            "upperBound": 64
+          },
+          {
+            "label": "\u20ac64 - \u20ac69",
+            "lowerBound": 64,
+            "upperBound": 69
+          },
+          {
+            "label": "\u20ac69 - \u20ac74",
+            "lowerBound": 69,
+            "upperBound": 74
+          },
+          {
+            "label": "Above \u20ac74",
+            "lowerBound": 74,
+            "upperBound": 79
+          }
+        ]
+      },
+      {
+        "label": "Above \u20ac79",
+        "lowerBound": 79,
+        "upperBound": 100,
+        "subranges": [
+          {
+            "label": "Less than \u20ac84",
+            "lowerBound": 79,
+            "upperBound": 84
+          },
+          {
+            "label": "\u20ac84 - \u20ac89",
+            "lowerBound": 84,
+            "upperBound": 89
+          },
+          {
+            "label": "\u20ac89 - \u20ac94",
+            "lowerBound": 89,
+            "upperBound": 94
+          },
+          {
+            "label": "Above \u20ac94",
+            "lowerBound": 94,
+            "upperBound": 100
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Medium",
+    "sublabel": "(\u20ac101 - \u20ac250)",
+    "lowerBound": 101,
+    "upperBound": 250,
+    "subranges": [
+      {
+        "label": "Less than \u20ac138",
+        "lowerBound": 101,
+        "upperBound": 138,
+        "subranges": [
+          {
+            "label": "Less than \u20ac110",
+            "lowerBound": 101,
+            "upperBound": 110
+          },
+          {
+            "label": "\u20ac110 - \u20ac119",
+            "lowerBound": 110,
+            "upperBound": 119
+          },
+          {
+            "label": "\u20ac119 - \u20ac128",
+            "lowerBound": 119,
+            "upperBound": 128
+          },
+          {
+            "label": "Above \u20ac128",
+            "lowerBound": 128,
+            "upperBound": 138
+          }
+        ]
+      },
+      {
+        "label": "\u20ac138 - \u20ac175",
+        "lowerBound": 138,
+        "upperBound": 175,
+        "subranges": [
+          {
+            "label": "Less than \u20ac147",
+            "lowerBound": 138,
+            "upperBound": 147
+          },
+          {
+            "label": "\u20ac147 - \u20ac156",
+            "lowerBound": 147,
+            "upperBound": 156
+          },
+          {
+            "label": "\u20ac156 - \u20ac166",
+            "lowerBound": 156,
+            "upperBound": 166
+          },
+          {
+            "label": "Above \u20ac166",
+            "lowerBound": 166,
+            "upperBound": 175
+          }
+        ]
+      },
+      {
+        "label": "\u20ac175 - \u20ac212",
+        "lowerBound": 175,
+        "upperBound": 212,
+        "subranges": [
+          {
+            "label": "Less than \u20ac184",
+            "lowerBound": 175,
+            "upperBound": 184
+          },
+          {
+            "label": "\u20ac184 - \u20ac194",
+            "lowerBound": 184,
+            "upperBound": 194
+          },
+          {
+            "label": "\u20ac194 - \u20ac203",
+            "lowerBound": 194,
+            "upperBound": 203
+          },
+          {
+            "label": "Above \u20ac203",
+            "lowerBound": 203,
+            "upperBound": 212
+          }
+        ]
+      },
+      {
+        "label": "Above \u20ac212",
+        "lowerBound": 212,
+        "upperBound": 250,
+        "subranges": [
+          {
+            "label": "Less than \u20ac222",
+            "lowerBound": 212,
+            "upperBound": 222
+          },
+          {
+            "label": "\u20ac222 - \u20ac231",
+            "lowerBound": 222,
+            "upperBound": 231
+          },
+          {
+            "label": "\u20ac231 - \u20ac240",
+            "lowerBound": 231,
+            "upperBound": 240
+          },
+          {
+            "label": "Above \u20ac240",
+            "lowerBound": 240,
+            "upperBound": 250
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "High",
+    "sublabel": "(Above \u20ac251)",
+    "lowerBound": 251,
+    "upperBound": null,
+    "subranges": [
+      {
+        "label": "Less than \u20ac338",
+        "lowerBound": 251,
+        "upperBound": 338,
+        "subranges": [
+          {
+            "label": "Less than \u20ac272",
+            "lowerBound": 251,
+            "upperBound": 272
+          },
+          {
+            "label": "\u20ac272 - \u20ac294",
+            "lowerBound": 272,
+            "upperBound": 294
+          },
+          {
+            "label": "\u20ac294 - \u20ac316",
+            "lowerBound": 294,
+            "upperBound": 316
+          },
+          {
+            "label": "Above \u20ac316",
+            "lowerBound": 316,
+            "upperBound": 338
+          }
+        ]
+      },
+      {
+        "label": "\u20ac338 - \u20ac425",
+        "lowerBound": 338,
+        "upperBound": 425,
+        "subranges": [
+          {
+            "label": "Less than \u20ac360",
+            "lowerBound": 338,
+            "upperBound": 360
+          },
+          {
+            "label": "\u20ac360 - \u20ac381",
+            "lowerBound": 360,
+            "upperBound": 381
+          },
+          {
+            "label": "\u20ac381 - \u20ac403",
+            "lowerBound": 381,
+            "upperBound": 403
+          },
+          {
+            "label": "Above \u20ac403",
+            "lowerBound": 403,
+            "upperBound": 425
+          }
+        ]
+      },
+      {
+        "label": "\u20ac425 - \u20ac512",
+        "lowerBound": 425,
+        "upperBound": 512,
+        "subranges": [
+          {
+            "label": "Less than \u20ac447",
+            "lowerBound": 425,
+            "upperBound": 447
+          },
+          {
+            "label": "\u20ac447 - \u20ac469",
+            "lowerBound": 447,
+            "upperBound": 469
+          },
+          {
+            "label": "\u20ac469 - \u20ac490",
+            "lowerBound": 469,
+            "upperBound": 490
+          },
+          {
+            "label": "Above \u20ac490",
+            "lowerBound": 490,
+            "upperBound": 512
+          }
+        ]
+      },
+      {
+        "label": "Above \u20ac512",
+        "lowerBound": 512,
+        "upperBound": null,
+        "subranges": [
+          {
+            "label": "Less than \u20ac534",
+            "lowerBound": 512,
+            "upperBound": 534
+          },
+          {
+            "label": "\u20ac534 - \u20ac556",
+            "lowerBound": 534,
+            "upperBound": 556
+          },
+          {
+            "label": "\u20ac556 - \u20ac578",
+            "lowerBound": 556,
+            "upperBound": 578
+          },
+          {
+            "label": "Above \u20ac578",
+            "lowerBound": 578,
+            "upperBound": null
+          }
+        ]
+      }
+    ]
+  }
+]

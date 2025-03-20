@@ -125,7 +125,7 @@ for i in range(1, 151):  # 150 accommodations
     accom_type = random.choice(list(accommodation_types.keys()))
     price_range = accommodation_types[accom_type]
     price = round(random.uniform(price_range[0], price_range[1]), 2)
-    reviews = round(random.uniform(1.0, 5.0), 1)
+    rating = round(random.uniform(1.0, 5.0), 1)
     distance = round(random.uniform(1.0, 10.0), 1)
     features = generate_features(accom_type)
     nameI = generate_accommodation_name(accom_type)
@@ -139,7 +139,7 @@ for i in range(1, 151):  # 150 accommodations
         "nameI": nameI,
         "nameII": nameII,
         "price": price,
-        "reviews": reviews,
+        "rating": rating,
         "distance": distance,
         "type": accom_type,
         "features": features,

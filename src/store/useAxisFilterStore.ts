@@ -1,18 +1,19 @@
 import { create } from 'zustand';
+import { FilterOption } from '../data/types';
 
 interface AxisFilterState {
-  xAxisFilter: string;
-  yAxisFilter: string;
+  xAxisFilter: FilterOption;
+  yAxisFilter: FilterOption;
   chosenType: string | null;
 
-  setXAxisFilter: (filter: string) => void;
-  setYAxisFilter: (filter: string) => void;
+  setXAxisFilter: (filter: FilterOption) => void;
+  setYAxisFilter: (filter: FilterOption) => void;
   setChosenType: (type: string | null) => void;
 }
 
 export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
-  xAxisFilter: 'Price',
-  yAxisFilter: 'Reviews',
+  xAxisFilter: FilterOption.Price,
+  yAxisFilter: FilterOption.Rating,
   chosenType: null,
 
   setXAxisFilter: (filter) => {

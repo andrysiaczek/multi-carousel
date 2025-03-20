@@ -1,0 +1,350 @@
+[
+  {
+    "label": "Very Close",
+    "sublabel": "(Less than 2 km)",
+    "lowerBound": null,
+    "upperBound": 2,
+    "subranges": [
+      {
+        "label": "Less than 500 m",
+        "lowerBound": null,
+        "upperBound": 0.5,
+        "subranges": [
+          {
+            "label": "Less than 120 m",
+            "lowerBound": null,
+            "upperBound": 0.12
+          },
+          {
+            "label": "120 m - 250 m",
+            "lowerBound": 0.12,
+            "upperBound": 0.25
+          },
+          {
+            "label": "250 m - 380 m",
+            "lowerBound": 0.25,
+            "upperBound": 0.38
+          },
+          {
+            "label": "380 m - 500 m",
+            "lowerBound": 0.38,
+            "upperBound": 0.5
+          }
+        ]
+      },
+      {
+        "label": "500 m - 1 km",
+        "lowerBound": 0.5,
+        "upperBound": 1,
+        "subranges": [
+          {
+            "label": "500 m - 620 m",
+            "lowerBound": 0.5,
+            "upperBound": 0.62
+          },
+          {
+            "label": "620 m - 750 m",
+            "lowerBound": 0.62,
+            "upperBound": 0.75
+          },
+          {
+            "label": "750 m - 880 m",
+            "lowerBound": 0.75,
+            "upperBound": 0.88
+          },
+          {
+            "label": "880 m - 1 km",
+            "lowerBound": 0.88,
+            "upperBound": 1
+          }
+        ]
+      },
+      {
+        "label": "1 - 1.5 km",
+        "lowerBound": 1,
+        "upperBound": 1.5,
+        "subranges": [
+          {
+            "label": "Less than 1.1 km",
+            "lowerBound": 1,
+            "upperBound": 1.1
+          },
+          {
+            "label": "1.1 - 1.2 km",
+            "lowerBound": 1.1,
+            "upperBound": 1.2
+          },
+          {
+            "label": "1.2 - 1.4 km",
+            "lowerBound": 1.2,
+            "upperBound": 1.4
+          },
+          {
+            "label": "Above 1.4 km",
+            "lowerBound": 1.4,
+            "upperBound": 1.5
+          }
+        ]
+      },
+      {
+        "label": "Above 1.5 km",
+        "lowerBound": 1.5,
+        "upperBound": 2,
+        "subranges": [
+          {
+            "label": "Less than 1.6 km",
+            "lowerBound": 1.5,
+            "upperBound": 1.6
+          },
+          {
+            "label": "1.6 - 1.8 km",
+            "lowerBound": 1.6,
+            "upperBound": 1.8
+          },
+          {
+            "label": "1.8 - 1.9 km",
+            "lowerBound": 1.8,
+            "upperBound": 1.9
+          },
+          {
+            "label": "Above 1.9 km",
+            "lowerBound": 1.9,
+            "upperBound": 2
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Close",
+    "sublabel": "(2 - 5 km)",
+    "lowerBound": 2,
+    "upperBound": 5,
+    "subranges": [
+      {
+        "label": "Less than 2.8 km",
+        "lowerBound": 2,
+        "upperBound": 2.8,
+        "subranges": [
+          {
+            "label": "Less than 2.2 km",
+            "lowerBound": 2,
+            "upperBound": 2.2
+          },
+          {
+            "label": "2.2 - 2.4 km",
+            "lowerBound": 2.2,
+            "upperBound": 2.4
+          },
+          {
+            "label": "2.4 - 2.6 km",
+            "lowerBound": 2.4,
+            "upperBound": 2.6
+          },
+          {
+            "label": "Above 2.6 km",
+            "lowerBound": 2.6,
+            "upperBound": 2.8
+          }
+        ]
+      },
+      {
+        "label": "2.8 - 3.5 km",
+        "lowerBound": 2.8,
+        "upperBound": 3.5,
+        "subranges": [
+          {
+            "label": "Less than 2.9 km",
+            "lowerBound": 2.8,
+            "upperBound": 2.9
+          },
+          {
+            "label": "2.9 - 3.1 km",
+            "lowerBound": 2.9,
+            "upperBound": 3.1
+          },
+          {
+            "label": "3.1 - 3.3 km",
+            "lowerBound": 3.1,
+            "upperBound": 3.3
+          },
+          {
+            "label": "Above 3.3 km",
+            "lowerBound": 3.3,
+            "upperBound": 3.5
+          }
+        ]
+      },
+      {
+        "label": "3.5 - 4.2 km",
+        "lowerBound": 3.5,
+        "upperBound": 4.2,
+        "subranges": [
+          {
+            "label": "Less than 3.7 km",
+            "lowerBound": 3.5,
+            "upperBound": 3.7
+          },
+          {
+            "label": "3.7 - 3.9 km",
+            "lowerBound": 3.7,
+            "upperBound": 3.9
+          },
+          {
+            "label": "3.9 - 4.1 km",
+            "lowerBound": 3.9,
+            "upperBound": 4.1
+          },
+          {
+            "label": "Above 4.1 km",
+            "lowerBound": 4.1,
+            "upperBound": 4.2
+          }
+        ]
+      },
+      {
+        "label": "Above 4.2 km",
+        "lowerBound": 4.2,
+        "upperBound": 5,
+        "subranges": [
+          {
+            "label": "Less than 4.4 km",
+            "lowerBound": 4.2,
+            "upperBound": 4.4
+          },
+          {
+            "label": "4.4 - 4.6 km",
+            "lowerBound": 4.4,
+            "upperBound": 4.6
+          },
+          {
+            "label": "4.6 - 4.8 km",
+            "lowerBound": 4.6,
+            "upperBound": 4.8
+          },
+          {
+            "label": "Above 4.8 km",
+            "lowerBound": 4.8,
+            "upperBound": 5
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Far",
+    "sublabel": "(Above 5 km)",
+    "lowerBound": 5,
+    "upperBound": null,
+    "subranges": [
+      {
+        "label": "Less than 6.2 km",
+        "lowerBound": 5,
+        "upperBound": 6.2,
+        "subranges": [
+          {
+            "label": "Less than 5.3 km",
+            "lowerBound": 5,
+            "upperBound": 5.3
+          },
+          {
+            "label": "5.3 - 5.6 km",
+            "lowerBound": 5.3,
+            "upperBound": 5.6
+          },
+          {
+            "label": "5.6 - 5.9 km",
+            "lowerBound": 5.6,
+            "upperBound": 5.9
+          },
+          {
+            "label": "Above 5.9 km",
+            "lowerBound": 5.9,
+            "upperBound": 6.2
+          }
+        ]
+      },
+      {
+        "label": "6.2 - 7.5 km",
+        "lowerBound": 6.2,
+        "upperBound": 7.5,
+        "subranges": [
+          {
+            "label": "Less than 6.6 km",
+            "lowerBound": 6.2,
+            "upperBound": 6.6
+          },
+          {
+            "label": "6.6 - 6.9 km",
+            "lowerBound": 6.6,
+            "upperBound": 6.9
+          },
+          {
+            "label": "6.9 - 7.2 km",
+            "lowerBound": 6.9,
+            "upperBound": 7.2
+          },
+          {
+            "label": "Above 7.2 km",
+            "lowerBound": 7.2,
+            "upperBound": 7.5
+          }
+        ]
+      },
+      {
+        "label": "7.5 - 8.8 km",
+        "lowerBound": 7.5,
+        "upperBound": 8.8,
+        "subranges": [
+          {
+            "label": "Less than 7.8 km",
+            "lowerBound": 7.5,
+            "upperBound": 7.8
+          },
+          {
+            "label": "7.8 - 8.1 km",
+            "lowerBound": 7.8,
+            "upperBound": 8.1
+          },
+          {
+            "label": "8.1 - 8.4 km",
+            "lowerBound": 8.1,
+            "upperBound": 8.4
+          },
+          {
+            "label": "Above 8.4 km",
+            "lowerBound": 8.4,
+            "upperBound": 8.8
+          }
+        ]
+      },
+      {
+        "label": "Above 8.8 km",
+        "lowerBound": 8.8,
+        "upperBound": null,
+        "subranges": [
+          {
+            "label": "Less than 9.1 km",
+            "lowerBound": 8.8,
+            "upperBound": 9.1
+          },
+          {
+            "label": "9.1 - 9.4 km",
+            "lowerBound": 9.1,
+            "upperBound": 9.4
+          },
+          {
+            "label": "9.4 - 9.7 km",
+            "lowerBound": 9.4,
+            "upperBound": 9.7
+          },
+          {
+            "label": "Above 9.7 km",
+            "lowerBound": 9.7,
+            "upperBound": null
+          }
+        ]
+      }
+    ]
+  }
+]

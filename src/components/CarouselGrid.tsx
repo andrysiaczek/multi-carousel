@@ -5,11 +5,15 @@ import { CarouselCell } from './CarouselCell';
 export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const {
+    rowOffset,
+    columnOffset,
     cellHeight,
     cellWidth,
     visibleRows,
     visibleColumns,
     currentXLabels,
+    currentYSublabels,
+    currentXSublabels,
     currentYLabels,
     scrollLeft,
     scrollRight,
@@ -17,6 +21,7 @@ export const CarouselGrid = () => {
     scrollDown,
     hoveredRow,
     hoveredColumn,
+    filteredCarouselData,
     setHoveredRow,
     setHoveredColumn,
     resetHover,
@@ -53,6 +58,16 @@ export const CarouselGrid = () => {
               onMouseLeave={() => resetHover()}
             >
               {xLabel}
+              <br />
+              <span
+                className={`text-xs ${
+                  hoveredColumn === col
+                    ? 'font-semibold text-darkOrange'
+                    : 'text-gray-400'
+                }`}
+              >
+                {currentXSublabels[col] ?? ''}
+              </span>
             </div>
           ))}
         </div>
@@ -68,13 +83,23 @@ export const CarouselGrid = () => {
           {currentYLabels.map((yLabel, row) => (
             <div
               key={row}
-              className={`w-[120px] h-[${cellHeight}px] flex items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
+              className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
                 hoveredRow === row ? 'font-semibold text-darkOrange' : ''
               }`}
               onMouseEnter={() => setHoveredRow(row)}
               onMouseLeave={() => resetHover()}
             >
               {yLabel}
+              <br />
+              <span
+                className={`text-xs ${
+                  hoveredRow === row
+                    ? 'font-semibold text-darkOrange'
+                    : 'text-gray-400'
+                }`}
+              >
+                {currentYSublabels[row] ?? ''}
+              </span>
             </div>
           ))}
         </div>
@@ -95,17 +120,23 @@ export const CarouselGrid = () => {
               gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
             }}
           >
-            {Array.from({ length: visibleRows }).map((_, row) =>
-              Array.from({ length: visibleColumns }).map((_, col) => (
-                <CarouselCell
-                  key={`${row}-${col}`}
-                  row={row}
-                  col={col}
-                  xLabel={currentXLabels[col]}
-                  yLabel={currentYLabels[row]}
-                  isFillerCell={!currentXLabels[col] || !currentYLabels[row]}
-                />
-              ))
+            {Array.from({ length: visibleRows }).map((_, rowIndex) =>
+              Array.from({ length: visibleColumns }).map((_, colIndex) => {
+                const row = filteredCarouselData[rowOffset + rowIndex];
+                const cell = row ? row[columnOffset + colIndex] : null;
+
+                return (
+                  <CarouselCell
+                    key={`${rowOffset + rowIndex}-${columnOffset + colIndex}`}
+                    row={rowOffset + rowIndex}
+                    col={columnOffset + colIndex}
+                    xLabel={currentXLabels[colIndex]}
+                    yLabel={currentYLabels[rowIndex]}
+                    accommodations={cell ? cell.accommodations : []}
+                    isFillerCell={!cell}
+                  />
+                );
+              })
             )}
           </div>
         </div>

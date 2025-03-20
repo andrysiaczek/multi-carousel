@@ -1,6 +1,5 @@
+import { FilterOption } from '../data/types';
 import { useAxisFilterStore } from '../store/useAxisFilterStore';
-
-const availableFilters = ['Price', 'Reviews', 'Distance', 'Type'];
 
 export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
   const xAxisFilter = useAxisFilterStore((state) => state.xAxisFilter);
@@ -9,12 +8,18 @@ export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
   const setXAxisFilter = useAxisFilterStore((state) => state.setXAxisFilter);
   const setYAxisFilter = useAxisFilterStore((state) => state.setYAxisFilter);
 
-  const handleClick = (filter: string) => {
+  const handleClick = (filter: FilterOption) => {
     if (axis === 'X') setXAxisFilter(filter);
     else setYAxisFilter(filter);
   };
 
   const otherAxisFilter = axis === 'X' ? yAxisFilter : xAxisFilter;
+  const filterOptionsArray = Object.values(FilterOption);
+
+  const capitalize = (str: string): string => {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   return (
     <div
@@ -24,8 +29,11 @@ export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
           : 'flex-col gap-3 items-center'
       }`}
     >
-      {availableFilters
-        .filter((filter) => !(filter === 'Type' && chosenType !== null)) // Exclude Type if already chosen
+      {filterOptionsArray
+        .filter(
+          // Exclude Type filter option if already chosen
+          (filter) => !(filter === FilterOption.Type && chosenType !== null)
+        )
         .map((filter) => (
           <button
             key={filter}
@@ -40,7 +48,7 @@ export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
                 : 'bg-white text-gray-700 hover:bg-gray-100'
             }`}
           >
-            {filter}
+            {capitalize(filter)}
           </button>
         ))}
     </div>

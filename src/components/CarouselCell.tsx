@@ -1,3 +1,4 @@
+import { Accommodation } from '../data/types';
 import { useCarouselStore } from '../store/useCarouselStore';
 
 interface CarouselCellProps {
@@ -5,6 +6,7 @@ interface CarouselCellProps {
   col: number;
   xLabel: string;
   yLabel: string;
+  accommodations: Accommodation[];
   isFillerCell: boolean;
 }
 
@@ -13,6 +15,7 @@ export const CarouselCell = ({
   col,
   xLabel,
   yLabel,
+  accommodations,
   isFillerCell = false,
 }: CarouselCellProps) => {
   const {
@@ -35,16 +38,25 @@ export const CarouselCell = ({
       className={`w-[${cellWidth}px] h-[${cellHeight}px] flex items-center justify-center border transition ${
         !isFillerCell && (isHoveredRow || isHoveredColumn || isHoveredCell)
           ? 'bg-lightOrange'
+          : isFillerCell
+          ? 'bg-gray-100'
           : 'bg-white'
       }`}
       onMouseEnter={() => setHoveredCell(row, col)}
       onMouseLeave={() => resetHover()}
     >
-      <div className="text-center">
-        <span className="font-medium">{!isFillerCell && xLabel}</span>
-        <br />
-        <span className="text-gray-600">{!isFillerCell && yLabel}</span>
-      </div>
+      {!isFillerCell && (
+        <>
+          <div className="text-center">
+            <span className="text-gray-600">{xLabel}</span>
+            <br />
+            <span className="text-gray-600">{yLabel}</span>
+            <br />
+            <span className="font-medium text-lg">{accommodations.length}</span>
+            <span className="text-gray-600 text-sm"> accommodations</span>
+          </div>
+        </>
+      )}
     </div>
   );
 };
