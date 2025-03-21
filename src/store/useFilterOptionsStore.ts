@@ -5,7 +5,7 @@ import {
   ratingRanges,
   typeCategories,
 } from '../data/filterOptions';
-import { FilterOption, FilterOptionType, Subrange } from '../data/types';
+import { FilterOption, FilterOptionType, Subrange } from '../types';
 
 interface FilterOptionsState {
   filters: FilterOptionType;

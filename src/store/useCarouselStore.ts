@@ -5,7 +5,7 @@ import {
   FilterOption,
   FilterOptionType,
   Subrange,
-} from '../data/types';
+} from '../types';
 
 interface CarouselCell {
   row: number;

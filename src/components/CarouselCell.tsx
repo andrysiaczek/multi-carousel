@@ -1,4 +1,4 @@
-import { Accommodation } from '../data/types';
+import { Accommodation } from '../types';
 import { useCarouselStore } from '../store/useCarouselStore';
 
 interface CarouselCellProps {

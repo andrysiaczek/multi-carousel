@@ -1,4 +1,4 @@
-import { FilterOption } from '../data/types';
+import { FilterOption } from '../types';
 import { useAxisFilterStore } from '../store/useAxisFilterStore';
 
 export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {

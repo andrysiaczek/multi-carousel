@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { FilterOption } from '../data/types';
+import { FilterOption } from '../types';
 
 interface AxisFilterState {
   xAxisFilter: FilterOption;
