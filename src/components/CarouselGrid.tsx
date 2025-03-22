@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { useCarouselStore } from '../store/useCarouselStore';
-import { CarouselCell } from './CarouselCell';
+import { CarouselCell } from '../components';
+import {
+  useAxisFilterStore,
+  useCarouselStore,
+  useFilterOptionsStore,
+} from '../store';
 
 export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -11,21 +15,23 @@ export const CarouselGrid = () => {
     cellWidth,
     visibleRows,
     visibleColumns,
-    currentXLabels,
-    currentYSublabels,
-    currentXSublabels,
-    currentYLabels,
     scrollLeft,
     scrollRight,
     scrollUp,
     scrollDown,
     hoveredRow,
     hoveredColumn,
-    filteredCarouselData,
+    columnRanges,
+    rowRanges,
+    dataPerCell,
+    drillDownColumn,
+    drillDownRow,
     setHoveredRow,
     setHoveredColumn,
     resetHover,
   } = useCarouselStore();
+  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
+  const { filters } = useFilterOptionsStore();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -38,6 +44,12 @@ export const CarouselGrid = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [scrollLeft, scrollRight, scrollUp, scrollDown]);
 
+  const visibleColumnRanges = columnRanges.slice(
+    columnOffset,
+    columnOffset + visibleColumns
+  );
+  const visibleRowRanges = rowRanges.slice(rowOffset, rowOffset + visibleRows);
+
   return (
     <div className="relative flex flex-col items-center p-10">
       {/* Column Headers (X-Axis Labels) */}
@@ -48,25 +60,30 @@ export const CarouselGrid = () => {
             visibleColumns * cellWidth
           }px] h-[80px] font-medium text-sm text-gray-500`}
         >
-          {currentXLabels.map((xLabel, col) => (
+          {visibleColumnRanges.map((colRange, colIndex) => (
             <div
-              key={col}
+              key={colIndex}
               className={`w-[${cellWidth}px] text-center text-pretty p-2 cursor-pointer ${
-                hoveredColumn === col ? 'font-semibold text-darkOrange' : ''
+                hoveredColumn === colIndex
+                  ? 'font-semibold text-darkOrange'
+                  : ''
               }`}
-              onMouseEnter={() => setHoveredColumn(col)}
+              onMouseEnter={() => setHoveredColumn(colIndex)}
               onMouseLeave={() => resetHover()}
+              onClick={() =>
+                drillDownColumn(colIndex, xAxisFilter, yAxisFilter, filters)
+              }
             >
-              {xLabel}
+              {colRange.label}
               <br />
               <span
                 className={`text-xs ${
-                  hoveredColumn === col
+                  hoveredColumn === colIndex
                     ? 'font-semibold text-darkOrange'
                     : 'text-gray-400'
                 }`}
               >
-                {currentXSublabels[col] ?? ''}
+                {colRange.sublabel ?? ''}
               </span>
             </div>
           ))}
@@ -80,25 +97,28 @@ export const CarouselGrid = () => {
             visibleRows * cellHeight
           }px] overflow-hidden font-medium text-sm text-gray-500`}
         >
-          {currentYLabels.map((yLabel, row) => (
+          {visibleRowRanges.map((rowRange, rowIndex) => (
             <div
-              key={row}
+              key={rowIndex}
               className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
-                hoveredRow === row ? 'font-semibold text-darkOrange' : ''
+                hoveredRow === rowIndex ? 'font-semibold text-darkOrange' : ''
               }`}
-              onMouseEnter={() => setHoveredRow(row)}
+              onMouseEnter={() => setHoveredRow(rowIndex)}
               onMouseLeave={() => resetHover()}
+              onClick={() =>
+                drillDownRow(rowIndex, xAxisFilter, yAxisFilter, filters)
+              }
             >
-              {yLabel}
+              {rowRange.label}
               <br />
               <span
                 className={`text-xs ${
-                  hoveredRow === row
+                  hoveredRow === rowIndex
                     ? 'font-semibold text-darkOrange'
                     : 'text-gray-400'
                 }`}
               >
-                {currentYSublabels[row] ?? ''}
+                {rowRange.sublabel ?? ''}
               </span>
             </div>
           ))}
@@ -122,16 +142,16 @@ export const CarouselGrid = () => {
           >
             {Array.from({ length: visibleRows }).map((_, rowIndex) =>
               Array.from({ length: visibleColumns }).map((_, colIndex) => {
-                const row = filteredCarouselData[rowOffset + rowIndex];
+                const row = dataPerCell[rowOffset + rowIndex];
                 const cell = row ? row[columnOffset + colIndex] : null;
 
                 return (
                   <CarouselCell
                     key={`${rowOffset + rowIndex}-${columnOffset + colIndex}`}
-                    row={rowOffset + rowIndex}
                     col={columnOffset + colIndex}
-                    xLabel={currentXLabels[colIndex]}
-                    yLabel={currentYLabels[rowIndex]}
+                    row={rowOffset + rowIndex}
+                    xLabel={columnRanges[columnOffset + colIndex]?.label ?? ''}
+                    yLabel={rowRanges[rowOffset + rowIndex]?.label ?? ''}
                     accommodations={cell ? cell.accommodations : []}
                     isFillerCell={!cell}
                   />

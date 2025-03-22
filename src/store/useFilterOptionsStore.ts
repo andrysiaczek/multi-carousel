@@ -4,8 +4,8 @@ import {
   priceRanges,
   ratingRanges,
   typeCategories,
-} from '../data/filterOptions';
-import { FilterOption, FilterOptionType, Subrange } from '../types';
+} from '../data';
+import { FilterOption, FilterOptionType } from '../types';
 
 interface FilterOptionsState {
   filters: FilterOptionType;
@@ -13,39 +13,21 @@ interface FilterOptionsState {
   getFilterSublabels: (filterType: FilterOption) => string[];
 }
 
+const filters: FilterOptionType = {
+  [FilterOption.Distance]: distanceRanges,
+  [FilterOption.Price]: priceRanges,
+  [FilterOption.Rating]: ratingRanges,
+  [FilterOption.Type]: typeCategories,
+};
+
 export const useFilterOptionsStore = create<FilterOptionsState>((_, get) => ({
-  filters: {
-    [FilterOption.Distance]: distanceRanges as Subrange[],
-    [FilterOption.Price]: priceRanges as Subrange[],
-    [FilterOption.Rating]: ratingRanges as Subrange[],
-    [FilterOption.Type]: typeCategories as string[],
-  },
+  filters: filters,
 
   getFilterLabels: (filterType: FilterOption) => {
-    const filterData = get().filters[filterType];
-
-    if (filterType === FilterOption.Type) {
-      return filterData as string[];
-    }
-
-    if (Array.isArray(filterData) && typeof filterData[0] === 'object') {
-      return (filterData as Subrange[]).map((item) => item.label);
-    }
-
-    return [];
+    return get().filters[filterType].map((item) => item.label);
   },
 
   getFilterSublabels: (filterType: FilterOption) => {
-    const filterData = get().filters[filterType];
-
-    if (filterType === FilterOption.Type) {
-      return [];
-    }
-
-    if (Array.isArray(filterData) && typeof filterData[0] === 'object') {
-      return (filterData as Subrange[]).map((item) => item.sublabel ?? '');
-    }
-
-    return [];
+    return get().filters[filterType].map((item) => item.sublabel ?? '');
   },
 }));

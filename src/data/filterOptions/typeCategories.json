@@ -1,10 +1,42 @@
 [
-  "Hostel (Dormitory Bed)",
-  "Hostel (Private Room)",
-  "Budget Hotel",
-  "Guesthouse / Bed & Breakfast (B&B)",
-  "Mid-Range Hotel",
-  "Upper Mid-Range Hotel",
-  "Luxury Hotel",
-  "Entire Apartment / House"
+  {
+    "label": "Hostel (Dormitory Bed)",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Hostel (Private Room)",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Budget Hotel",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Guesthouse / Bed & Breakfast (B&B)",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Mid-Range Hotel",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Upper Mid-Range Hotel",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Luxury Hotel",
+    "lowerBound": null,
+    "upperBound": null
+  },
+  {
+    "label": "Entire Apartment / House",
+    "lowerBound": null,
+    "upperBound": null
+  }
 ]

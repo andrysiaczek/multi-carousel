@@ -1,5 +1,6 @@
+import { useAxisFilterStore } from '../store';
 import { FilterOption } from '../types';
-import { useAxisFilterStore } from '../store/useAxisFilterStore';
+import { capitalize } from '../utils';
 
 export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
   const xAxisFilter = useAxisFilterStore((state) => state.xAxisFilter);
@@ -15,11 +16,6 @@ export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
 
   const otherAxisFilter = axis === 'X' ? yAxisFilter : xAxisFilter;
   const filterOptionsArray = Object.values(FilterOption);
-
-  const capitalize = (str: string): string => {
-    if (!str) return '';
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
   return (
     <div

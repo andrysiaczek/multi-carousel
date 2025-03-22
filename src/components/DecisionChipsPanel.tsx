@@ -1,4 +1,4 @@
-import { useDecisionChipsStore } from '../store/useDecisionChipsStore';
+import { useDecisionChipsStore } from '../store';
 
 const decisionChips = [
   'Shared kitchen',

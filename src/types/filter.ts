@@ -5,16 +5,12 @@ export enum FilterOption {
   Type = 'type',
 }
 
-export type FilterOptionType = Record<
-  FilterOption.Distance | FilterOption.Price | FilterOption.Rating,
-  Subrange[]
-> &
-  Record<FilterOption.Type, string[]>;
+export type FilterOptionType = Record<FilterOption, Subrange[]>;
 
 export type Subrange = {
   label: string;
   sublabel?: string;
-  lowerBound: number;
-  upperBound: number;
+  lowerBound: number | null;
+  upperBound: number | null;
   subranges?: Subrange[];
 };

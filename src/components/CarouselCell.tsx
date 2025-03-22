@@ -1,5 +1,9 @@
+import {
+  useAxisFilterStore,
+  useCarouselStore,
+  useFilterOptionsStore,
+} from '../store';
 import { Accommodation } from '../types';
-import { useCarouselStore } from '../store/useCarouselStore';
 
 interface CarouselCellProps {
   row: number;
@@ -19,14 +23,19 @@ export const CarouselCell = ({
   isFillerCell = false,
 }: CarouselCellProps) => {
   const {
-    cellHeight,
     cellWidth,
-    hoveredRow,
+    cellHeight,
+    columnOffset,
+    rowOffset,
     hoveredColumn,
+    hoveredRow,
     hoveredCell,
     setHoveredCell,
     resetHover,
+    drillDownCell,
   } = useCarouselStore();
+  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
+  const { filters } = useFilterOptionsStore();
 
   // Determine if this cell, row, or column is being hovered
   const isHoveredRow = hoveredRow === row;
@@ -44,6 +53,15 @@ export const CarouselCell = ({
       }`}
       onMouseEnter={() => setHoveredCell(row, col)}
       onMouseLeave={() => resetHover()}
+      onClick={() =>
+        drillDownCell(
+          columnOffset + col,
+          rowOffset + row,
+          xAxisFilter,
+          yAxisFilter,
+          filters
+        )
+      }
     >
       {!isFillerCell && (
         <>

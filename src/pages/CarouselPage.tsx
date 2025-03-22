@@ -1,45 +1,32 @@
-import { useEffect, useMemo } from 'react';
-import { CarouselGrid } from '../components/CarouselGrid';
-import { DecisionChipsPanel } from '../components/DecisionChipsPanel';
-import { FilterAxisSelector } from '../components/FilterAxisSelector';
-import { useAxisFilterStore } from '../store/useAxisFilterStore';
-import { useCarouselStore } from '../store/useCarouselStore';
-import { useFilterOptionsStore } from '../store/useFilterOptionsStore';
+import { useEffect } from 'react';
+import {
+  CarouselGrid,
+  DecisionChipsPanel,
+  FilterAxisSelector,
+} from '../components';
+import {
+  useAxisFilterStore,
+  useCarouselStore,
+  useFilterOptionsStore,
+} from '../store';
 
 export const CarouselPage = () => {
   const {
     resetPosition,
     totalRows,
     totalColumns,
-    updateCarouselData,
-    updateCarouselSizeAndLabels,
+    columnRanges,
+    rowRanges,
+    populateCarouselData,
+    updateCarouselSize,
   } = useCarouselStore();
-  const { filters, getFilterLabels, getFilterSublabels } =
-    useFilterOptionsStore();
+  const { filters } = useFilterOptionsStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
-
-  const xLabels = useMemo(
-    () => getFilterLabels(xAxisFilter),
-    [xAxisFilter, getFilterLabels]
-  );
-  const yLabels = useMemo(
-    () => getFilterLabels(yAxisFilter),
-    [yAxisFilter, getFilterLabels]
-  );
-
-  const xSublabels = useMemo(
-    () => getFilterSublabels(xAxisFilter),
-    [xAxisFilter, getFilterSublabels]
-  );
-  const ySublabels = useMemo(
-    () => getFilterSublabels(yAxisFilter),
-    [yAxisFilter, getFilterSublabels]
-  );
 
   // Update carousel accommodations when X or Y axis filter selection changes
   useEffect(() => {
-    updateCarouselData(xAxisFilter, yAxisFilter, filters);
-  }, [xAxisFilter, yAxisFilter, filters, updateCarouselData]);
+    populateCarouselData(xAxisFilter, yAxisFilter, filters);
+  }, [xAxisFilter, yAxisFilter, filters, populateCarouselData]);
 
   // Reset carousel position to (0,0) when X or Y axis filter selection changes
   useEffect(() => {
@@ -47,24 +34,18 @@ export const CarouselPage = () => {
   }, [xAxisFilter, yAxisFilter, resetPosition]);
 
   useEffect(() => {
-    if (totalRows !== yLabels.length || totalColumns !== xLabels.length) {
-      updateCarouselSizeAndLabels(
-        yLabels.length,
-        xLabels.length,
-        xLabels,
-        yLabels,
-        xSublabels,
-        ySublabels
-      );
+    if (
+      totalRows !== rowRanges.length ||
+      totalColumns !== columnRanges.length
+    ) {
+      updateCarouselSize(rowRanges.length, columnRanges.length);
     }
   }, [
     totalRows,
     totalColumns,
-    xLabels,
-    yLabels,
-    xSublabels,
-    ySublabels,
-    updateCarouselSizeAndLabels,
+    updateCarouselSize,
+    rowRanges.length,
+    columnRanges.length,
   ]);
 
   return (
