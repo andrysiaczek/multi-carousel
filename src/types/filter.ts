@@ -1,3 +1,8 @@
+export enum Axis {
+  X = 'x',
+  Y = 'y',
+}
+
 export enum FilterOption {
   Distance = 'distance',
   Price = 'price',

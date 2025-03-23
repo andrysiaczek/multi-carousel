@@ -1,19 +1,5 @@
-import { Accommodation, CarouselCell, FilterOption, Subrange } from '../types';
+import { Accommodation, Axis, FilterOption, Subrange } from '../types';
 import { clean } from '../utils';
-
-export const findSubrangeByLabel = (
-  ranges: Subrange[],
-  label: string
-): Subrange | null => {
-  for (const range of ranges) {
-    if (clean(range.label) === clean(label)) return range;
-    if (range.subranges) {
-      const found = findSubrangeByLabel(range.subranges, label);
-      if (found) return found;
-    }
-  }
-  return null;
-};
 
 export const filterAccommodations = (
   data: Accommodation[],
@@ -43,43 +29,29 @@ export const filterAccommodations = (
   });
 };
 
-export const buildCarouselGrid = (
-  xRanges: Subrange[],
-  yRanges: Subrange[],
-  data: Accommodation[],
-  xAxisFilter: FilterOption,
-  yAxisFilter: FilterOption
-): { carousel: CarouselCell[][]; accommodations: Accommodation[] } => {
-  const carousel: CarouselCell[][] = [];
-  const accommodations: Accommodation[] = [];
-
-  for (let row = 0; row < yRanges.length; row++) {
-    carousel[row] = [];
-    for (let col = 0; col < xRanges.length; col++) {
-      const xRange = xRanges[col];
-      const yRange = yRanges[row];
-
-      const filtered = filterAccommodations(
-        data,
-        xRange,
-        yRange,
-        xAxisFilter,
-        yAxisFilter
-      );
-
-      for (const acc of filtered) {
-        if (!accommodations.some((a) => a.id === acc.id)) {
-          accommodations.push(acc);
-        }
-      }
-
-      carousel[row][col] = {
-        row,
-        column: col,
-        accommodations: filtered,
-      };
+export const findSubrangeByLabel = (
+  ranges: Subrange[],
+  label: string
+): Subrange | null => {
+  for (const range of ranges) {
+    if (clean(range.label) === clean(label)) return range;
+    if (range.subranges) {
+      const found = findSubrangeByLabel(range.subranges, label);
+      if (found) return found;
     }
   }
+  return null;
+};
 
-  return { carousel, accommodations };
+export const getFallbackFilter = (
+  axis: Axis,
+  otherFilter: FilterOption
+): FilterOption => {
+  return axis === Axis.X
+    ? otherFilter !== FilterOption.Price
+      ? FilterOption.Price
+      : FilterOption.Rating
+    : otherFilter !== FilterOption.Rating
+    ? FilterOption.Rating
+    : FilterOption.Price;
 };
