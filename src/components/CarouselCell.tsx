@@ -25,8 +25,6 @@ export const CarouselCell = ({
   const {
     cellWidth,
     cellHeight,
-    columnOffset,
-    rowOffset,
     hoveredColumn,
     hoveredRow,
     hoveredCell,
@@ -42,9 +40,13 @@ export const CarouselCell = ({
   const isHoveredColumn = hoveredColumn === col;
   const isHoveredCell = hoveredCell?.row === row && hoveredCell?.col === col;
 
+  const handleCellClick = (colIndex: number, rowIndex: number) => {
+    drillDownCell(colIndex, rowIndex, xAxisFilter, yAxisFilter, filters);
+  };
+
   return (
     <div
-      className={`w-[${cellWidth}px] h-[${cellHeight}px] flex items-center justify-center border transition ${
+      className={`w-[${cellWidth}px] h-[${cellHeight}px] flex items-center justify-center border transition cursor-pointer ${
         !isFillerCell && (isHoveredRow || isHoveredColumn || isHoveredCell)
           ? 'bg-lightOrange'
           : isFillerCell
@@ -53,15 +55,7 @@ export const CarouselCell = ({
       }`}
       onMouseEnter={() => setHoveredCell(row, col)}
       onMouseLeave={() => resetHover()}
-      onClick={() =>
-        drillDownCell(
-          columnOffset + col,
-          rowOffset + row,
-          xAxisFilter,
-          yAxisFilter,
-          filters
-        )
-      }
+      onClick={() => handleCellClick(col, row)}
     >
       {!isFillerCell && (
         <>

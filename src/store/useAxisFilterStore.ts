@@ -9,6 +9,11 @@ interface AxisFilterState {
   setXAxisFilter: (filter: FilterOption) => void;
   setYAxisFilter: (filter: FilterOption) => void;
   setChosenType: (type: string | null) => void;
+  setAxisFiltersAndType: (
+    xAxisFilter: FilterOption,
+    yAxisFilter: FilterOption,
+    type: string
+  ) => void;
 }
 
 export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
@@ -29,4 +34,13 @@ export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
     }
   },
   setChosenType: (type) => set({ chosenType: type }),
+  setAxisFiltersAndType: (xAxisFilter, yAxisFilter, type) => {
+    if (xAxisFilter !== yAxisFilter) {
+      set({
+        xAxisFilter: xAxisFilter,
+        yAxisFilter: yAxisFilter,
+        chosenType: type,
+      });
+    }
+  },
 }));

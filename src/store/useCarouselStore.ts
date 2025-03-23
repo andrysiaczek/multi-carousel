@@ -7,7 +7,12 @@ import {
   FilterOptionType,
   Subrange,
 } from '../types';
-import { buildCarouselGrid } from '../utils';
+import {
+  buildCarouselGrid,
+  filterAccommodations,
+  findSubrangeByLabel,
+} from '../utils';
+import { useAxisFilterStore } from './useAxisFilterStore';
 
 interface CarouselState {
   // Carousel Layout
@@ -140,6 +145,7 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
     const { carouselData } = get();
 
     // Get the correct range object from filters
+    // TODO: FilterHistory: Retrieve the last selected subrange for each axis from filter history
     const xRanges = filters[xAxisFilter] as Subrange[];
     const yRanges = filters[yAxisFilter] as Subrange[];
 
@@ -166,13 +172,44 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   drillDownColumn: (colIndex, xAxisFilter, yAxisFilter, filters) => {
     const { columnRanges, rowRanges, carouselData } = get();
 
-    const parentRange = filters[xAxisFilter].find(
-      (r) => r.label === columnRanges[colIndex].label
+    const parentRange = findSubrangeByLabel(
+      filters[xAxisFilter],
+      columnRanges[colIndex].label
     );
 
     if (!parentRange?.subranges) {
-      console.warn('No subranges to drill into for selected column.');
-      return;
+      if (xAxisFilter === FilterOption.Type) {
+        const newCarouselData = carouselData.filter(
+          (acc) => acc.type === columnRanges[colIndex].label
+        );
+        const newXAxisFilter =
+          yAxisFilter !== FilterOption.Price
+            ? FilterOption.Price
+            : FilterOption.Rating;
+        const newColumnRanges =
+          yAxisFilter !== FilterOption.Price
+            ? filters[FilterOption.Price]
+            : filters[FilterOption.Rating];
+
+        const { carousel, accommodations } = buildCarouselGrid(
+          newColumnRanges,
+          rowRanges,
+          newCarouselData,
+          newXAxisFilter,
+          yAxisFilter
+        );
+
+        set({
+          columnOffset: 0,
+          columnRanges: newColumnRanges,
+          dataPerCell: carousel,
+          carouselData: accommodations,
+        });
+        return;
+      } else {
+        console.warn('No subranges to drill into for selected column.');
+        return;
+      }
     }
 
     const { carousel, accommodations } = buildCarouselGrid(
@@ -199,13 +236,44 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   drillDownRow: (rowIndex, xAxisFilter, yAxisFilter, filters) => {
     const { columnRanges, rowRanges, carouselData } = get();
 
-    const parentRange = filters[yAxisFilter].find(
-      (r) => r.label === rowRanges[rowIndex].label
+    const parentRange = findSubrangeByLabel(
+      filters[yAxisFilter],
+      rowRanges[rowIndex].label
     );
 
     if (!parentRange?.subranges) {
-      console.warn('No subranges to drill into for selected row.');
-      return;
+      if (yAxisFilter === FilterOption.Type) {
+        const newCarouselData = carouselData.filter(
+          (acc) => acc.type === rowRanges[rowIndex].label
+        );
+        const newYAxisFilter =
+          xAxisFilter !== FilterOption.Rating
+            ? FilterOption.Rating
+            : FilterOption.Price;
+        const newRowRanges =
+          xAxisFilter !== FilterOption.Rating
+            ? filters[FilterOption.Rating]
+            : filters[FilterOption.Price];
+
+        const { carousel, accommodations } = buildCarouselGrid(
+          columnRanges,
+          newRowRanges,
+          newCarouselData,
+          xAxisFilter,
+          newYAxisFilter
+        );
+
+        set({
+          rowOffset: 0,
+          rowRanges: newRowRanges,
+          dataPerCell: carousel,
+          carouselData: accommodations,
+        });
+        return;
+      } else {
+        console.warn('No subranges to drill into for selected row.');
+        return;
+      }
     }
 
     const { carousel, accommodations } = buildCarouselGrid(
@@ -232,12 +300,109 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   drillDownCell: (colIndex, rowIndex, xAxisFilter, yAxisFilter, filters) => {
     const { columnRanges, rowRanges, carouselData } = get();
 
-    const xParent = filters[xAxisFilter].find(
-      (r) => r.label === columnRanges[colIndex].label
+    const xParent = findSubrangeByLabel(
+      filters[xAxisFilter],
+      columnRanges[colIndex].label
     );
-    const yParent = filters[yAxisFilter].find(
-      (r) => r.label === rowRanges[rowIndex].label
+    const yParent = findSubrangeByLabel(
+      filters[yAxisFilter],
+      rowRanges[rowIndex].label
     );
+
+    const isXType = xAxisFilter === FilterOption.Type;
+    const isYType = yAxisFilter === FilterOption.Type;
+
+    // Handle TYPE filter logic if no subranges found: X Type
+    if (isXType && yParent?.subranges) {
+      const newCarouselData = filterAccommodations(
+        carouselData,
+        columnRanges[colIndex],
+        rowRanges[rowIndex],
+        xAxisFilter,
+        yAxisFilter
+      );
+
+      // Pick fallback filter
+      const newXAxisFilter =
+        yAxisFilter !== FilterOption.Price
+          ? FilterOption.Price
+          : FilterOption.Rating;
+
+      const newColumnRanges = filters[newXAxisFilter];
+      const newRowRanges = yParent.subranges;
+
+      const { carousel, accommodations } = buildCarouselGrid(
+        newColumnRanges,
+        newRowRanges,
+        newCarouselData,
+        newXAxisFilter,
+        yAxisFilter
+      );
+
+      set({
+        columnOffset: 0,
+        rowOffset: 0,
+        columnRanges: newColumnRanges,
+        rowRanges: newRowRanges,
+        dataPerCell: carousel,
+        carouselData: accommodations,
+      });
+
+      const { setAxisFiltersAndType: setAxesFiltersAndType } =
+        useAxisFilterStore.getState();
+      setAxesFiltersAndType(
+        newXAxisFilter,
+        yAxisFilter,
+        columnRanges[colIndex].label
+      );
+      return;
+    }
+
+    // Handle TYPE filter logic if no subranges found: Y Type
+    if (isYType && xParent?.subranges) {
+      const newCarouselData = filterAccommodations(
+        carouselData,
+        columnRanges[colIndex],
+        rowRanges[rowIndex],
+        xAxisFilter,
+        yAxisFilter
+      );
+
+      // Pick fallback filters for each axis
+      const newYAxisFilter =
+        xAxisFilter !== FilterOption.Rating
+          ? FilterOption.Rating
+          : FilterOption.Price;
+
+      const newColumnRanges = xParent.subranges;
+      const newRowRanges = filters[newYAxisFilter];
+
+      const { carousel, accommodations } = buildCarouselGrid(
+        newColumnRanges,
+        newRowRanges,
+        newCarouselData,
+        xAxisFilter,
+        newYAxisFilter
+      );
+
+      const { setAxisFiltersAndType: setAxesFiltersAndType } =
+        useAxisFilterStore.getState();
+      setAxesFiltersAndType(
+        xAxisFilter,
+        newYAxisFilter,
+        rowRanges[rowIndex].label
+      );
+
+      set({
+        columnOffset: 0,
+        rowOffset: 0,
+        columnRanges: newColumnRanges,
+        rowRanges: newRowRanges,
+        dataPerCell: carousel,
+        carouselData: accommodations,
+      });
+      return;
+    }
 
     if (!xParent?.subranges || !yParent?.subranges) {
       console.warn('No subranges to drill into for selected cell.');

@@ -5,6 +5,7 @@ import {
   useCarouselStore,
   useFilterOptionsStore,
 } from '../store';
+import { FilterOption } from '../types';
 
 export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -30,7 +31,7 @@ export const CarouselGrid = () => {
     setHoveredColumn,
     resetHover,
   } = useCarouselStore();
-  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
+  const { setChosenType, xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { filters } = useFilterOptionsStore();
 
   useEffect(() => {
@@ -50,6 +51,18 @@ export const CarouselGrid = () => {
   );
   const visibleRowRanges = rowRanges.slice(rowOffset, rowOffset + visibleRows);
 
+  const handleColumnClick = (colIndex: number) => {
+    if (xAxisFilter === FilterOption.Type)
+      setChosenType(columnRanges[colIndex].label);
+    drillDownColumn(columnOffset + colIndex, xAxisFilter, yAxisFilter, filters);
+  };
+
+  const handleRowClick = (rowIndex: number) => {
+    if (yAxisFilter === FilterOption.Type)
+      setChosenType(rowRanges[rowIndex].label);
+    drillDownRow(rowOffset + rowIndex, xAxisFilter, yAxisFilter, filters);
+  };
+
   return (
     <div className="relative flex flex-col items-center p-10">
       {/* Column Headers (X-Axis Labels) */}
@@ -68,11 +81,9 @@ export const CarouselGrid = () => {
                   ? 'font-semibold text-darkOrange'
                   : ''
               }`}
-              onMouseEnter={() => setHoveredColumn(colIndex)}
+              onMouseEnter={() => setHoveredColumn(columnOffset + colIndex)}
               onMouseLeave={() => resetHover()}
-              onClick={() =>
-                drillDownColumn(colIndex, xAxisFilter, yAxisFilter, filters)
-              }
+              onClick={() => handleColumnClick(colIndex)}
             >
               {colRange.label}
               <br />
@@ -103,11 +114,9 @@ export const CarouselGrid = () => {
               className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
                 hoveredRow === rowIndex ? 'font-semibold text-darkOrange' : ''
               }`}
-              onMouseEnter={() => setHoveredRow(rowIndex)}
+              onMouseEnter={() => setHoveredRow(rowOffset + rowIndex)}
               onMouseLeave={() => resetHover()}
-              onClick={() =>
-                drillDownRow(rowIndex, xAxisFilter, yAxisFilter, filters)
-              }
+              onClick={() => handleRowClick(rowIndex)}
             >
               {rowRange.label}
               <br />

@@ -1,4 +1,19 @@
 import { Accommodation, CarouselCell, FilterOption, Subrange } from '../types';
+import { clean } from '../utils';
+
+export const findSubrangeByLabel = (
+  ranges: Subrange[],
+  label: string
+): Subrange | null => {
+  for (const range of ranges) {
+    if (clean(range.label) === clean(label)) return range;
+    if (range.subranges) {
+      const found = findSubrangeByLabel(range.subranges, label);
+      if (found) return found;
+    }
+  }
+  return null;
+};
 
 export const filterAccommodations = (
   data: Accommodation[],
@@ -67,9 +82,4 @@ export const buildCarouselGrid = (
   }
 
   return { carousel, accommodations };
-};
-
-export const capitalize = (str: string): string => {
-  if (!str) return '';
-  return str.charAt(0).toUpperCase() + str.slice(1);
 };
