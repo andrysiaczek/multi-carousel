@@ -3,6 +3,7 @@ import { CarouselCell } from '../components';
 import {
   useAxisFilterStore,
   useCarouselStore,
+  useDecisionChipsStore,
   useFilterOptionsStore,
 } from '../store';
 import { FilterOption } from '../types';
@@ -25,6 +26,7 @@ export const CarouselGrid = () => {
     columnRanges,
     rowRanges,
     dataPerCell,
+    applyDecisionChipsToCarousel,
     drillDownColumn,
     drillDownRow,
     setHoveredRow,
@@ -32,6 +34,7 @@ export const CarouselGrid = () => {
     resetHover,
   } = useCarouselStore();
   const { setChosenType, xAxisFilter, yAxisFilter } = useAxisFilterStore();
+  const { selectedChips } = useDecisionChipsStore();
   const { filters } = useFilterOptionsStore();
 
   useEffect(() => {
@@ -44,6 +47,10 @@ export const CarouselGrid = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [scrollLeft, scrollRight, scrollUp, scrollDown]);
+
+  useEffect(() => {
+    applyDecisionChipsToCarousel();
+  }, [selectedChips, applyDecisionChipsToCarousel]);
 
   const visibleColumnRanges = columnRanges.slice(
     columnOffset,

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { accommodationDataset } from '../data';
+import { useAxisFilterStore, useDecisionChipsStore } from '../store';
 import {
   Accommodation,
   CarouselCell,
@@ -49,14 +50,15 @@ interface CarouselState {
   resetPosition: () => void;
 
   // Methods: Carousel Setup
-  updateCarouselSize: (rows: number, cols: number) => void;
   populateCarouselData: (
     xAxisFilter: FilterOption,
     yAxisFilter: FilterOption,
     filters: FilterOptionType
   ) => void;
+  updateCarouselSize: (rows: number, cols: number) => void;
 
   // Methods: Filtering
+  applyDecisionChipsToCarousel: () => void;
   drillDownColumn: (
     colIndex: number,
     xAxisFilter: FilterOption,
@@ -119,9 +121,34 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       totalColumns: cols,
     }),
 
+  // Reapply decision chip filters to the carousel grid when selection changes
+  applyDecisionChipsToCarousel: () => {
+    const { columnRanges, rowRanges, carouselData } = get();
+    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+    const { selectedChips } = useDecisionChipsStore.getState();
+
+    if (!columnRanges.length || !rowRanges.length) {
+      return console.warn('Cannot apply decision chips: missing axis ranges.');
+    }
+
+    const { carousel } = buildCarouselGrid(
+      columnRanges,
+      rowRanges,
+      carouselData,
+      xAxisFilter,
+      yAxisFilter,
+      selectedChips
+    );
+
+    set({
+      dataPerCell: carousel,
+    });
+  },
+
   // Function to categorize accommodations into grid cells
   populateCarouselData: (xAxisFilter, yAxisFilter, filters) => {
     const { carouselData } = get();
+    const { selectedChips } = useDecisionChipsStore.getState();
 
     // Get the correct range object from filters
     // TODO: FilterHistory: Retrieve the last selected subrange for each axis from filter history
@@ -138,7 +165,8 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       yRanges,
       carouselData,
       xAxisFilter,
-      yAxisFilter
+      yAxisFilter,
+      selectedChips
     );
 
     set({

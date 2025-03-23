@@ -1,4 +1,8 @@
-import { useAxisFilterStore, useCarouselStore } from '../store';
+import {
+  useAxisFilterStore,
+  useCarouselStore,
+  useDecisionChipsStore,
+} from '../store';
 import {
   Accommodation,
   Axis,
@@ -18,7 +22,8 @@ export const buildCarouselGrid = (
   yRanges: Subrange[],
   data: Accommodation[],
   xAxisFilter: FilterOption,
-  yAxisFilter: FilterOption
+  yAxisFilter: FilterOption,
+  selectedChips: string[] = []
 ): { carousel: CarouselCell[][]; accommodations: Accommodation[] } => {
   const carousel: CarouselCell[][] = [];
   const accommodations: Accommodation[] = [];
@@ -29,7 +34,7 @@ export const buildCarouselGrid = (
       const xRange = xRanges[col];
       const yRange = yRanges[row];
 
-      const filtered = filterAccommodations(
+      let filtered = filterAccommodations(
         data,
         xRange,
         yRange,
@@ -41,6 +46,13 @@ export const buildCarouselGrid = (
         if (!accommodations.some((a) => a.id === acc.id)) {
           accommodations.push(acc);
         }
+      }
+
+      // Apply Decision Chips as a second filtering layer
+      if (selectedChips.length > 0) {
+        filtered = filtered.filter((acc) =>
+          selectedChips.every((chip) => acc.features?.includes(chip))
+        );
       }
 
       carousel[row][col] = {
@@ -62,6 +74,7 @@ export const drillDownCell = (
   filters: FilterOptionType
 ) => {
   const { columnRanges, rowRanges, carouselData } = useCarouselStore.getState();
+  const { selectedChips } = useDecisionChipsStore.getState();
 
   const colLabel = columnRanges[colIndex].label;
   const rowLabel = rowRanges[rowIndex].label;
@@ -126,7 +139,8 @@ export const drillDownCell = (
     yParent.subranges,
     carouselData,
     xAxisFilter,
-    yAxisFilter
+    yAxisFilter,
+    selectedChips
   );
 
   useCarouselStore.setState({
@@ -146,6 +160,7 @@ export const drillDownColumn = (
   filters: FilterOptionType
 ) => {
   const { columnRanges, rowRanges, carouselData } = useCarouselStore.getState();
+  const { selectedChips } = useDecisionChipsStore.getState();
   const label = columnRanges[colIndex].label;
   const parentRange = findSubrangeByLabel(filters[xAxisFilter], label);
 
@@ -181,7 +196,8 @@ export const drillDownColumn = (
     rowRanges,
     carouselData,
     xAxisFilter,
-    yAxisFilter
+    yAxisFilter,
+    selectedChips
   );
 
   useCarouselStore.setState({
@@ -199,6 +215,7 @@ export const drillDownRow = (
   filters: FilterOptionType
 ) => {
   const { columnRanges, rowRanges, carouselData } = useCarouselStore.getState();
+  const { selectedChips } = useDecisionChipsStore.getState();
   const label = rowRanges[rowIndex].label;
   const parentRange = findSubrangeByLabel(filters[yAxisFilter], label);
 
@@ -234,7 +251,8 @@ export const drillDownRow = (
     parentRange.subranges,
     carouselData,
     xAxisFilter,
-    yAxisFilter
+    yAxisFilter,
+    selectedChips
   );
 
   useCarouselStore.setState({
@@ -260,6 +278,7 @@ export const handleTypeDrill = ({
   filters: FilterOptionType;
   data: Accommodation[];
 }) => {
+  const { selectedChips } = useDecisionChipsStore.getState();
   const filteredData = data.filter((acc) => acc.type === type);
   const fallbackAxis = getFallbackFilter(axis, otherFilter);
   // TODO: FilterHistory: Retrieve the last selected subrange for this axis from filter history
@@ -272,7 +291,8 @@ export const handleTypeDrill = ({
     isXType ? otherAxisRanges : newRanges,
     filteredData,
     isXType ? fallbackAxis : otherFilter,
-    isXType ? otherFilter : fallbackAxis
+    isXType ? otherFilter : fallbackAxis,
+    selectedChips
   );
 
   return {
