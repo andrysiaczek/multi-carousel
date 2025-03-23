@@ -127,9 +127,13 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
     const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
     const { selectedChips } = useDecisionChipsStore.getState();
 
-    if (!columnRanges.length || !rowRanges.length) {
-      return console.warn('Cannot apply decision chips: missing axis ranges.');
-    }
+    if (
+      !xAxisFilter ||
+      !yAxisFilter ||
+      !columnRanges.length ||
+      !rowRanges.length
+    )
+      return;
 
     const { carousel } = buildCarouselGrid(
       columnRanges,

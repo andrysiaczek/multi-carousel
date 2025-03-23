@@ -179,13 +179,12 @@ export const drillDownColumn = (
         .getState()
         .setAxisFiltersAndType(result.xAxis, result.yAxis, label);
 
-      useCarouselStore.setState({
+      return useCarouselStore.setState({
         columnOffset: 0,
         columnRanges: result.xRanges,
         dataPerCell: result.carousel,
         carouselData: result.accommodations,
       });
-      return;
     } else {
       return console.warn('No subranges to drill into for selected column.');
     }
@@ -234,13 +233,12 @@ export const drillDownRow = (
         .getState()
         .setAxisFiltersAndType(result.xAxis, result.yAxis, label);
 
-      useCarouselStore.setState({
+      return useCarouselStore.setState({
         rowOffset: 0,
         rowRanges: result.yRanges,
         dataPerCell: result.carousel,
         carouselData: result.accommodations,
       });
-      return;
     } else {
       return console.warn('No subranges to drill into for selected row.');
     }
