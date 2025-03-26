@@ -1,13 +1,11 @@
 import { create } from 'zustand';
 import { accommodationDataset } from '../data';
-import { useAxisFilterStore, useDecisionChipsStore } from '../store';
 import {
-  Accommodation,
-  CarouselCell,
-  FilterOption,
-  FilterOptionType,
-  Subrange,
-} from '../types';
+  useAxisFilterStore,
+  useFilterHistoryStore,
+  useFilterOptionsStore,
+} from '../store';
+import { Accommodation, CarouselCell, Subrange } from '../types';
 import {
   buildCarouselGrid,
   drillDownCell,
@@ -50,34 +48,14 @@ interface CarouselState {
   resetPosition: () => void;
 
   // Methods: Carousel Setup
-  populateCarouselData: (
-    xAxisFilter: FilterOption,
-    yAxisFilter: FilterOption,
-    filters: FilterOptionType
-  ) => void;
+  populateCarouselData: () => void;
   updateCarouselSize: (rows: number, cols: number) => void;
 
   // Methods: Filtering
   applyDecisionChipsToCarousel: () => void;
-  drillDownColumn: (
-    colIndex: number,
-    xAxisFilter: FilterOption,
-    yAxisFilter: FilterOption,
-    filters: FilterOptionType
-  ) => void;
-  drillDownRow: (
-    rowIndex: number,
-    xAxisFilter: FilterOption,
-    yAxisFilter: FilterOption,
-    filters: FilterOptionType
-  ) => void;
-  drillDownCell: (
-    colIndex: number,
-    rowIndex: number,
-    xAxisFilter: FilterOption,
-    yAxisFilter: FilterOption,
-    filters: FilterOptionType
-  ) => void;
+  drillDownColumn: (colIndex: number) => void;
+  drillDownRow: (rowIndex: number) => void;
+  drillDownCell: (colIndex: number, rowIndex: number) => void;
 
   // Methods: Hover Interaction
   setHoveredColumn: (col: number) => void;
@@ -125,7 +103,6 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   applyDecisionChipsToCarousel: () => {
     const { columnRanges, rowRanges, carouselData } = get();
     const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
-    const { selectedChips } = useDecisionChipsStore.getState();
 
     if (
       !xAxisFilter ||
@@ -140,8 +117,7 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       rowRanges,
       carouselData,
       xAxisFilter,
-      yAxisFilter,
-      selectedChips
+      yAxisFilter
     );
 
     set({
@@ -149,19 +125,21 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
     });
   },
 
-  // Function to categorize accommodations into grid cells
-  populateCarouselData: (xAxisFilter, yAxisFilter, filters) => {
+  // Function to categorize accommodations into carousel cells
+  populateCarouselData: () => {
     const { carouselData } = get();
-    const { selectedChips } = useDecisionChipsStore.getState();
+    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+    const { getLastSubrange } = useFilterHistoryStore.getState();
+    const { filters } = useFilterOptionsStore.getState();
 
-    // Get the correct range object from filters
-    // TODO: FilterHistory: Retrieve the last selected subrange for each axis from filter history
-    const xRanges = filters[xAxisFilter] as Subrange[];
-    const yRanges = filters[yAxisFilter] as Subrange[];
+    // Get the correct range object from filter history or filters
+    const xRanges =
+      getLastSubrange(xAxisFilter)?.subranges ?? filters[xAxisFilter];
+    const yRanges =
+      getLastSubrange(yAxisFilter)?.subranges ?? filters[yAxisFilter];
 
     if (!xRanges || !yRanges) {
-      console.warn('Filter ranges are missing!');
-      return false;
+      return console.warn('Filter ranges are missing!');
     }
 
     const { carousel } = buildCarouselGrid(
@@ -169,8 +147,7 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       yRanges,
       carouselData,
       xAxisFilter,
-      yAxisFilter,
-      selectedChips
+      yAxisFilter
     );
 
     set({

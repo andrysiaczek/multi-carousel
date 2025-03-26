@@ -5,12 +5,12 @@ import {
   ratingRanges,
   typeCategories,
 } from '../data';
-import { FilterOption, FilterOptionType } from '../types';
+import { FilterOption, Subrange } from '../types';
+
+type FilterOptionType = Record<FilterOption, Subrange[]>;
 
 interface FilterOptionsState {
   filters: FilterOptionType;
-  getFilterLabels: (filterType: FilterOption) => string[];
-  getFilterSublabels: (filterType: FilterOption) => string[];
 }
 
 const filters: FilterOptionType = {
@@ -20,14 +20,6 @@ const filters: FilterOptionType = {
   [FilterOption.Type]: typeCategories,
 };
 
-export const useFilterOptionsStore = create<FilterOptionsState>((_, get) => ({
+export const useFilterOptionsStore = create<FilterOptionsState>(() => ({
   filters: filters,
-
-  getFilterLabels: (filterType: FilterOption) => {
-    return get().filters[filterType].map((item) => item.label);
-  },
-
-  getFilterSublabels: (filterType: FilterOption) => {
-    return get().filters[filterType].map((item) => item.sublabel ?? '');
-  },
 }));

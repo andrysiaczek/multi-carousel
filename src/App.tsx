@@ -1,5 +1,5 @@
 import './App.css';
-import { CarouselPage } from './pages/CarouselPage';
+import { CarouselPage } from './pages';
 
 function App() {
   return (

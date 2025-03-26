@@ -1,12 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { CarouselCell } from '../components';
 import {
-  useAxisFilterStore,
   useCarouselStore,
   useDecisionChipsStore,
-  useFilterOptionsStore,
+  useFilterHistoryStore,
 } from '../store';
-import { FilterOption } from '../types';
+import { Axis, Subrange } from '../types';
 
 export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -33,9 +32,25 @@ export const CarouselGrid = () => {
     setHoveredColumn,
     resetHover,
   } = useCarouselStore();
-  const { setChosenType, xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { selectedChips } = useDecisionChipsStore();
-  const { filters } = useFilterOptionsStore();
+  const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
+
+  const visibleColumnRanges = columnRanges.slice(
+    columnOffset,
+    columnOffset + visibleColumns
+  );
+  const visibleRowRanges = rowRanges.slice(rowOffset, rowOffset + visibleRows);
+
+  const handleMouseEnter = (axis: Axis, index: number, range: Subrange) => {
+    if (axis === Axis.X) setHoveredColumn(columnOffset + index);
+    else setHoveredRow(rowOffset + index);
+    setHoveredStep(range);
+  };
+
+  const handleMouseLeave = () => {
+    resetHover();
+    resetHoveredStep();
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,24 +67,6 @@ export const CarouselGrid = () => {
     applyDecisionChipsToCarousel();
   }, [selectedChips, applyDecisionChipsToCarousel]);
 
-  const visibleColumnRanges = columnRanges.slice(
-    columnOffset,
-    columnOffset + visibleColumns
-  );
-  const visibleRowRanges = rowRanges.slice(rowOffset, rowOffset + visibleRows);
-
-  const handleColumnClick = (colIndex: number) => {
-    if (xAxisFilter === FilterOption.Type)
-      setChosenType(columnRanges[colIndex].label);
-    drillDownColumn(columnOffset + colIndex, xAxisFilter, yAxisFilter, filters);
-  };
-
-  const handleRowClick = (rowIndex: number) => {
-    if (yAxisFilter === FilterOption.Type)
-      setChosenType(rowRanges[rowIndex].label);
-    drillDownRow(rowOffset + rowIndex, xAxisFilter, yAxisFilter, filters);
-  };
-
   return (
     <div className="relative flex flex-col items-center p-10">
       {/* Column Headers (X-Axis Labels) */}
@@ -82,15 +79,15 @@ export const CarouselGrid = () => {
         >
           {visibleColumnRanges.map((colRange, colIndex) => (
             <div
-              key={colIndex}
+              key={`${colRange.label}`}
               className={`w-[${cellWidth}px] text-center text-pretty p-2 cursor-pointer ${
                 hoveredColumn === colIndex
                   ? 'font-semibold text-darkOrange'
                   : ''
               }`}
-              onMouseEnter={() => setHoveredColumn(columnOffset + colIndex)}
-              onMouseLeave={() => resetHover()}
-              onClick={() => handleColumnClick(colIndex)}
+              onMouseEnter={() => handleMouseEnter(Axis.X, colIndex, colRange)}
+              onMouseLeave={() => handleMouseLeave()}
+              onClick={() => drillDownColumn(columnOffset + colIndex)}
             >
               {colRange.label}
               <br />
@@ -117,13 +114,13 @@ export const CarouselGrid = () => {
         >
           {visibleRowRanges.map((rowRange, rowIndex) => (
             <div
-              key={rowIndex}
+              key={`${rowRange.label}`}
               className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
                 hoveredRow === rowIndex ? 'font-semibold text-darkOrange' : ''
               }`}
-              onMouseEnter={() => setHoveredRow(rowOffset + rowIndex)}
-              onMouseLeave={() => resetHover()}
-              onClick={() => handleRowClick(rowIndex)}
+              onMouseEnter={() => handleMouseEnter(Axis.Y, rowIndex, rowRange)}
+              onMouseLeave={() => handleMouseLeave()}
+              onClick={() => drillDownRow(rowOffset + rowIndex)}
             >
               {rowRange.label}
               <br />
@@ -166,8 +163,8 @@ export const CarouselGrid = () => {
                     key={`${rowOffset + rowIndex}-${columnOffset + colIndex}`}
                     col={columnOffset + colIndex}
                     row={rowOffset + rowIndex}
-                    xLabel={columnRanges[columnOffset + colIndex]?.label ?? ''}
-                    yLabel={rowRanges[rowOffset + rowIndex]?.label ?? ''}
+                    columnRange={columnRanges[columnOffset + colIndex]}
+                    rowRange={rowRanges[rowOffset + rowIndex]}
                     accommodations={cell ? cell.accommodations : []}
                     isFillerCell={!cell}
                   />

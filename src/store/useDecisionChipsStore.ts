@@ -16,5 +16,5 @@ export const useDecisionChipsStore = create<DecisionChipsState>((set) => ({
         : [...state.selectedChips, chip], // Add if not selected
     })),
 
-  resetChips: () => set({ selectedChips: [] }), // Reset all filters
+  resetChips: () => set({ selectedChips: [] }),
 }));

@@ -1,10 +1,11 @@
+export { buildCarouselGrid } from './carouselUtils';
+export { drillDownCell, drillDownColumn, drillDownRow } from './drillLogic';
 export {
-  buildCarouselGrid,
-  drillDownCell,
-  drillDownColumn,
-  drillDownRow,
-  handleTypeDrill,
-} from './carouselLogic';
+  addStandardAxisDrillStep,
+  addTypeAxisDrillStep,
+  generateFilterLabel,
+  restoreAxisFiltersFromStep,
+} from './filterHistoryUtils';
 export {
   filterAccommodations,
   findSubrangeByLabel,

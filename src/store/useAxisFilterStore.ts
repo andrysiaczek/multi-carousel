@@ -8,12 +8,17 @@ interface AxisFilterState {
 
   setXAxisFilter: (filter: FilterOption) => void;
   setYAxisFilter: (filter: FilterOption) => void;
+  setAxisFilters: (
+    xAxisFilter: FilterOption,
+    yAxisFilter: FilterOption
+  ) => void;
   setChosenType: (type: string | null) => void;
   setAxisFiltersAndType: (
     xAxisFilter: FilterOption,
     yAxisFilter: FilterOption,
     type: string
   ) => void;
+  resetAxisFiltersAndType: () => void;
 }
 
 export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
@@ -33,6 +38,15 @@ export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
       set({ yAxisFilter: filter });
     }
   },
+  setAxisFilters: (xAxisFilter, yAxisFilter) => {
+    // Ensure mutual exclusion
+    if (xAxisFilter !== yAxisFilter) {
+      set({
+        xAxisFilter: xAxisFilter,
+        yAxisFilter: yAxisFilter,
+      });
+    }
+  },
   setChosenType: (type) => set({ chosenType: type }),
   setAxisFiltersAndType: (xAxisFilter, yAxisFilter, type) => {
     if (xAxisFilter !== yAxisFilter) {
@@ -42,5 +56,12 @@ export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
         chosenType: type,
       });
     }
+  },
+  resetAxisFiltersAndType: () => {
+    set({
+      xAxisFilter: FilterOption.Price,
+      yAxisFilter: FilterOption.Rating,
+      chosenType: null,
+    });
   },
 }));

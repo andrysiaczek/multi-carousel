@@ -4,4 +4,4 @@ export {
   ratingRanges,
   typeCategories,
 } from './filterOptions';
-export { default as accommodationDataset } from '../data/accommodationDataset.json';
+export { default as accommodationDataset } from './accommodationDataset.json';

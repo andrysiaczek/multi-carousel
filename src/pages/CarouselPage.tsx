@@ -3,12 +3,9 @@ import {
   CarouselGrid,
   DecisionChipsPanel,
   FilterAxisSelector,
+  FilterHistoryPanel,
 } from '../components';
-import {
-  useAxisFilterStore,
-  useCarouselStore,
-  useFilterOptionsStore,
-} from '../store';
+import { useAxisFilterStore, useCarouselStore } from '../store';
 
 export const CarouselPage = () => {
   const {
@@ -20,13 +17,12 @@ export const CarouselPage = () => {
     populateCarouselData,
     updateCarouselSize,
   } = useCarouselStore();
-  const { filters } = useFilterOptionsStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
 
   // Update carousel accommodations when X or Y axis filter selection changes
   useEffect(() => {
-    populateCarouselData(xAxisFilter, yAxisFilter, filters);
-  }, [xAxisFilter, yAxisFilter, filters, populateCarouselData]);
+    populateCarouselData();
+  }, [xAxisFilter, yAxisFilter, populateCarouselData]);
 
   // Reset carousel position to (0,0) when X or Y axis filter selection changes
   useEffect(() => {
@@ -52,6 +48,9 @@ export const CarouselPage = () => {
     <div className="flex flex-col items-center space-y-4 p-6">
       {/* Decision Chips Panel */}
       <DecisionChipsPanel />
+
+      {/* Filter History Panel */}
+      <FilterHistoryPanel />
 
       {/* X-Axis Filter (Above the Carousel) */}
       <FilterAxisSelector axis="X" />

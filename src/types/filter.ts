@@ -10,8 +10,6 @@ export enum FilterOption {
   Type = 'type',
 }
 
-export type FilterOptionType = Record<FilterOption, Subrange[]>;
-
 export type Subrange = {
   label: string;
   sublabel?: string;
