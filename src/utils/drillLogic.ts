@@ -1,8 +1,8 @@
+import { filters } from '../data';
 import {
   useAxisFilterStore,
   useCarouselStore,
   useFilterHistoryStore,
-  useFilterOptionsStore,
 } from '../store';
 import {
   Accommodation,
@@ -31,7 +31,8 @@ const drillDownAxis = (axis: Axis, index: number) => {
   const filter = isXAxis ? xAxisFilter : yAxisFilter;
   const otherFilter = isXAxis ? yAxisFilter : xAxisFilter;
   const parentRange = findSubrangeByLabel(
-    useFilterOptionsStore.getState().filters[filter],
+    useFilterHistoryStore.getState().getLastSubrange(filter)?.subranges ??
+      filters[filter],
     label
   );
 
@@ -70,8 +71,8 @@ const drillDownAxis = (axis: Axis, index: number) => {
     isXAxis ? parentRange.subranges : columnRanges,
     isXAxis ? rowRanges : parentRange.subranges,
     carouselData,
-    filter,
-    otherFilter
+    xAxisFilter,
+    yAxisFilter
   );
 
   useCarouselStore.setState({
@@ -83,8 +84,8 @@ const drillDownAxis = (axis: Axis, index: number) => {
 
   addStandardAxisDrillStep(
     axis,
-    filter,
-    otherFilter,
+    xAxisFilter,
+    yAxisFilter,
     parentRange,
     accommodations
   );
@@ -94,16 +95,22 @@ export const drillDownCell = (colIndex: number, rowIndex: number) => {
   const { xAxisFilter, yAxisFilter, setAxisFiltersAndType } =
     useAxisFilterStore.getState();
   const { columnRanges, rowRanges, carouselData } = useCarouselStore.getState();
-  const { getLastStep, addStep } = useFilterHistoryStore.getState();
-  const { filters } = useFilterOptionsStore.getState();
+  const { getLastStep, getLastSubrange, addStep } =
+    useFilterHistoryStore.getState();
 
   const lastStep = getLastStep();
 
   const colLabel = columnRanges[colIndex].label;
   const rowLabel = rowRanges[rowIndex].label;
 
-  const xParent = findSubrangeByLabel(filters[xAxisFilter], colLabel);
-  const yParent = findSubrangeByLabel(filters[yAxisFilter], rowLabel);
+  const xParent = findSubrangeByLabel(
+    getLastSubrange(xAxisFilter)?.subranges ?? filters[xAxisFilter],
+    colLabel
+  );
+  const yParent = findSubrangeByLabel(
+    getLastSubrange(yAxisFilter)?.subranges ?? filters[yAxisFilter],
+    rowLabel
+  );
 
   const updateCarouselState = (result: ReturnType<typeof drillDownTypeAxis>) =>
     useCarouselStore.setState({
@@ -262,8 +269,6 @@ const drillDownTypeAxis = ({
   otherAxisRanges: Subrange[];
   data: Accommodation[];
 }) => {
-  const { filters } = useFilterOptionsStore.getState();
-
   const filteredData = data.filter((acc) => acc.type === type);
   const fallbackAxis = getFallbackFilter(axis, otherFilter);
   const newRanges =

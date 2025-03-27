@@ -33,7 +33,7 @@ export const CarouselGrid = () => {
     resetHover,
   } = useCarouselStore();
   const { selectedChips } = useDecisionChipsStore();
-  const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
+  const { setHoveredStepForAxis, resetHoveredStep } = useFilterHistoryStore();
 
   const visibleColumnRanges = columnRanges.slice(
     columnOffset,
@@ -44,7 +44,7 @@ export const CarouselGrid = () => {
   const handleMouseEnter = (axis: Axis, index: number, range: Subrange) => {
     if (axis === Axis.X) setHoveredColumn(columnOffset + index);
     else setHoveredRow(rowOffset + index);
-    setHoveredStep(range);
+    setHoveredStepForAxis(axis, range);
   };
 
   const handleMouseLeave = () => {
@@ -81,7 +81,7 @@ export const CarouselGrid = () => {
             <div
               key={`${colRange.label}`}
               className={`w-[${cellWidth}px] text-center text-pretty p-2 cursor-pointer ${
-                hoveredColumn === colIndex
+                hoveredColumn === columnOffset + colIndex
                   ? 'font-semibold text-darkOrange'
                   : ''
               }`}
@@ -93,7 +93,7 @@ export const CarouselGrid = () => {
               <br />
               <span
                 className={`text-xs ${
-                  hoveredColumn === colIndex
+                  hoveredColumn === columnOffset + colIndex
                     ? 'font-semibold text-darkOrange'
                     : 'text-gray-400'
                 }`}
@@ -116,7 +116,9 @@ export const CarouselGrid = () => {
             <div
               key={`${rowRange.label}`}
               className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
-                hoveredRow === rowIndex ? 'font-semibold text-darkOrange' : ''
+                hoveredRow === rowOffset + rowIndex
+                  ? 'font-semibold text-darkOrange'
+                  : ''
               }`}
               onMouseEnter={() => handleMouseEnter(Axis.Y, rowIndex, rowRange)}
               onMouseLeave={() => handleMouseLeave()}
@@ -126,7 +128,7 @@ export const CarouselGrid = () => {
               <br />
               <span
                 className={`text-xs ${
-                  hoveredRow === rowIndex
+                  hoveredRow === rowOffset + rowIndex
                     ? 'font-semibold text-darkOrange'
                     : 'text-gray-400'
                 }`}

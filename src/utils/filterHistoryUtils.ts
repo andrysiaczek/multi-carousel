@@ -6,7 +6,7 @@ import {
   FilterOption,
   Subrange,
 } from '../types';
-import { capitalize } from '../utils';
+import { capitalize, getFallbackFilter } from '../utils';
 
 export const addStandardAxisDrillStep = (
   axis: Axis,
@@ -117,16 +117,38 @@ export const generateFilterLabel = (
 };
 
 /**
- * Restores the axis filters and chosen type from a given step.
- * If no step is provided, resets the filters.
+ * Restores axis filters and chosen type from the given drill step.
+ * If the initial (zero) step is provided, resets the filters.
  */
-export const restoreAxisFiltersFromStep = (step: DrillStep | null) => {
-  const { resetAxisFiltersAndType, setAxisFilters, setChosenType } =
+export const restoreAxisFiltersFromStep = (step: DrillStep) => {
+  const { resetAxisFiltersAndType, setAxisFiltersAndType } =
     useAxisFilterStore.getState();
 
-  if (!step) return resetAxisFiltersAndType();
+  if (!step.stepNumber) return resetAxisFiltersAndType();
 
-  if (!step.filterState[FilterOption.Type]) setChosenType(null);
+  const chosenType = step.filterState[FilterOption.Type];
+  const chosenTypeLabel = chosenType?.label ?? null;
 
-  setAxisFilters(step.xAxisFilter, step.yAxisFilter);
+  // Type on X axis
+  if (step.xAxisFilter === FilterOption.Type && chosenType)
+    return setAxisFiltersAndType(
+      getFallbackFilter(Axis.X, step.yAxisFilter),
+      step.yAxisFilter,
+      chosenTypeLabel
+    );
+
+  // Type on Y axis
+  if (step.yAxisFilter === FilterOption.Type && chosenType)
+    return setAxisFiltersAndType(
+      step.xAxisFilter,
+      getFallbackFilter(Axis.Y, step.xAxisFilter),
+      chosenTypeLabel
+    );
+
+  // Default restoration
+  return setAxisFiltersAndType(
+    step.xAxisFilter,
+    step.yAxisFilter,
+    chosenTypeLabel
+  );
 };

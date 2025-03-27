@@ -1,26 +1,33 @@
 import { useAxisFilterStore } from '../store';
-import { FilterOption } from '../types';
+import { Axis, FilterOption } from '../types';
 import { capitalize } from '../utils';
 
-export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
-  const xAxisFilter = useAxisFilterStore((state) => state.xAxisFilter);
-  const yAxisFilter = useAxisFilterStore((state) => state.yAxisFilter);
-  const chosenType = useAxisFilterStore((state) => state.chosenType);
-  const setXAxisFilter = useAxisFilterStore((state) => state.setXAxisFilter);
-  const setYAxisFilter = useAxisFilterStore((state) => state.setYAxisFilter);
+interface FilterAxisSelectorProps {
+  axis: Axis;
+}
+
+export const FilterAxisSelector = ({ axis }: FilterAxisSelectorProps) => {
+  const {
+    xAxisFilter,
+    yAxisFilter,
+    chosenType,
+    setXAxisFilter,
+    setYAxisFilter,
+  } = useAxisFilterStore();
+
+  const isXAxis = axis === Axis.X;
+  const otherAxisFilter = isXAxis ? yAxisFilter : xAxisFilter;
+  const filterOptionsArray = Object.values(FilterOption);
 
   const handleClick = (filter: FilterOption) => {
-    if (axis === 'X') setXAxisFilter(filter);
+    if (isXAxis) setXAxisFilter(filter);
     else setYAxisFilter(filter);
   };
-
-  const otherAxisFilter = axis === 'X' ? yAxisFilter : xAxisFilter;
-  const filterOptionsArray = Object.values(FilterOption);
 
   return (
     <div
       className={`flex ${
-        axis === 'X'
+        isXAxis
           ? 'gap-2 flex-wrap justify-cente'
           : 'flex-col gap-3 items-center'
       }`}
@@ -28,7 +35,7 @@ export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
       {filterOptionsArray
         .filter(
           // Exclude Type filter option if already chosen
-          (filter) => !(filter === FilterOption.Type && chosenType !== null)
+          (filter) => !(filter === FilterOption.Type && chosenType)
         )
         .map((filter) => (
           <button
@@ -37,7 +44,7 @@ export const FilterAxisSelector = ({ axis }: { axis: 'X' | 'Y' }) => {
             onClick={() => handleClick(filter)}
             disabled={otherAxisFilter === filter}
             className={`px-4 py-2 rounded-full border text-sm transition ${
-              (axis === 'X' ? xAxisFilter : yAxisFilter) === filter
+              (isXAxis ? xAxisFilter : yAxisFilter) === filter
                 ? 'bg-gray-700 text-white border-gray-500 shadow-lg'
                 : otherAxisFilter === filter
                 ? 'bg-gray-200 text-gray-400 cursor-not-allowed'

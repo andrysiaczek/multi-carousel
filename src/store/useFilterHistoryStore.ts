@@ -1,11 +1,32 @@
 import { create } from 'zustand';
-import { useAxisFilterStore } from '../store';
-import { DrillStep, FilterOption, NewDrillStep, Subrange } from '../types';
+import { accommodationDataset } from '../data';
+import { useAxisFilterStore, useCarouselStore } from '../store';
+import {
+  Axis,
+  DrillStep,
+  FilterOption,
+  NewDrillStep,
+  Subrange,
+} from '../types';
 import { generateFilterLabel, restoreAxisFiltersFromStep } from '../utils';
+
+const initialStep: DrillStep = {
+  stepNumber: 0,
+  label: 'Reset',
+  xAxisFilter: FilterOption.Price,
+  yAxisFilter: FilterOption.Rating,
+  filterState: {
+    [FilterOption.Distance]: null,
+    [FilterOption.Price]: null,
+    [FilterOption.Rating]: null,
+    [FilterOption.Type]: null,
+  },
+  carouselDataSnapshot: accommodationDataset,
+};
 
 interface FilterHistoryState {
   steps: DrillStep[];
-  hoveredStep: string | null;
+  hoveredStepLabel: string | null;
 
   getLastStep: () => DrillStep | null;
   getLastSubrange: (filter: FilterOption) => Subrange | null;
@@ -13,13 +34,15 @@ interface FilterHistoryState {
   addStep: (step: NewDrillStep) => void;
   goToStep: (index: number) => void;
   resetHistory: () => void;
-  setHoveredStep: (firstRange: Subrange, secondRange?: Subrange) => void;
+
+  setHoveredStep: (columnRange: Subrange, rowRange: Subrange) => void;
+  setHoveredStepForAxis: (axis: Axis, range: Subrange) => void;
   resetHoveredStep: () => void;
 }
 
 export const useFilterHistoryStore = create<FilterHistoryState>((set, get) => ({
-  steps: [],
-  hoveredStep: null,
+  steps: [initialStep],
+  hoveredStepLabel: null,
 
   getLastStep: () => {
     const steps = get().steps;
@@ -36,29 +59,45 @@ export const useFilterHistoryStore = create<FilterHistoryState>((set, get) => ({
         ...state.steps,
         {
           ...step,
-          stepNumber: state.steps.length,
+          stepNumber: state.steps.length + 1,
         },
       ],
-      hoveredStep: null,
+      hoveredStepLabel: null,
     })),
 
   goToStep: (stepNumber) => {
+    const { setCarouselData } = useCarouselStore.getState();
     const steps = get().steps.slice(0, stepNumber + 1);
-    set({ steps, hoveredStep: null });
+    const lastStep = steps[steps.length - 1];
 
-    restoreAxisFiltersFromStep(steps.length ? steps[steps.length - 1] : null);
+    if (!lastStep) return;
+
+    set({ steps, hoveredStepLabel: null });
+    setCarouselData(lastStep.carouselDataSnapshot);
+    restoreAxisFiltersFromStep(lastStep);
   },
 
-  resetHistory: () => set({ steps: [], hoveredStep: null }),
+  resetHistory: () => set({ steps: [], hoveredStepLabel: null }),
 
-  setHoveredStep: (firstRange, secondRange) => {
+  setHoveredStep: (columnRange, rowRange) => {
     const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
-    const label = secondRange
-      ? generateFilterLabel(xAxisFilter, firstRange, yAxisFilter, secondRange)
-      : generateFilterLabel(xAxisFilter, firstRange);
 
-    set({ hoveredStep: label });
+    set({
+      hoveredStepLabel: generateFilterLabel(
+        xAxisFilter,
+        columnRange,
+        yAxisFilter,
+        rowRange
+      ),
+    });
   },
 
-  resetHoveredStep: () => set({ hoveredStep: null }),
+  setHoveredStepForAxis: (axis, range) => {
+    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+    const filter = axis === Axis.X ? xAxisFilter : yAxisFilter;
+
+    set({ hoveredStepLabel: generateFilterLabel(filter, range) });
+  },
+
+  resetHoveredStep: () => set({ hoveredStepLabel: null }),
 }));

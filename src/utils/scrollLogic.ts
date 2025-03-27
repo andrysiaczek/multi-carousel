@@ -1,8 +1,8 @@
 import { useCarouselStore } from '../store';
 
 export const scrollLeft = () => {
-  const state = useCarouselStore.getState();
-  const { columnOffset, totalColumns, visibleColumns } = state;
+  const { columnOffset, totalColumns, visibleColumns } =
+    useCarouselStore.getState();
 
   useCarouselStore.setState({
     columnOffset:
@@ -13,8 +13,7 @@ export const scrollLeft = () => {
 };
 
 export const scrollRight = () => {
-  const state = useCarouselStore.getState();
-  const { columnOffset, totalColumns } = state;
+  const { columnOffset, totalColumns } = useCarouselStore.getState();
 
   useCarouselStore.setState({
     columnOffset: (columnOffset + 1) % totalColumns,
@@ -22,8 +21,7 @@ export const scrollRight = () => {
 };
 
 export const scrollUp = () => {
-  const state = useCarouselStore.getState();
-  const { rowOffset, totalRows, visibleRows } = state;
+  const { rowOffset, totalRows, visibleRows } = useCarouselStore.getState();
 
   useCarouselStore.setState({
     rowOffset: rowOffset === 0 ? totalRows - (visibleRows - 1) : rowOffset - 1,
@@ -31,14 +29,17 @@ export const scrollUp = () => {
 };
 
 export const scrollDown = () => {
-  const state = useCarouselStore.getState();
-  const { rowOffset, totalRows } = state;
+  const { rowOffset, totalRows } = useCarouselStore.getState();
 
   useCarouselStore.setState({
     rowOffset: (rowOffset + 1) % totalRows,
   });
 };
 
-export const resetPosition = () => {
+export const resetColumnOffset = () =>
+  useCarouselStore.setState({ columnOffset: 0 });
+
+export const resetRowOffset = () => useCarouselStore.setState({ rowOffset: 0 });
+
+export const resetPosition = () =>
   useCarouselStore.setState({ columnOffset: 0, rowOffset: 0 });
-};

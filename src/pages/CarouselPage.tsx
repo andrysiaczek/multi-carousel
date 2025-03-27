@@ -6,6 +6,8 @@ import {
   FilterHistoryPanel,
 } from '../components';
 import { useAxisFilterStore, useCarouselStore } from '../store';
+import { Axis } from '../types';
+import { resetColumnOffset, resetRowOffset } from '../utils';
 
 export const CarouselPage = () => {
   const {
@@ -14,34 +16,47 @@ export const CarouselPage = () => {
     totalColumns,
     columnRanges,
     rowRanges,
+    carouselData,
     populateCarouselData,
     updateCarouselSize,
   } = useCarouselStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
 
-  // Update carousel accommodations when X or Y axis filter selection changes
+  // Update carousel content when axis filters or underlying data change
   useEffect(() => {
     populateCarouselData();
-  }, [xAxisFilter, yAxisFilter, populateCarouselData]);
+  }, [xAxisFilter, yAxisFilter, carouselData, populateCarouselData]);
 
-  // Reset carousel position to (0,0) when X or Y axis filter selection changes
+  // Update carousel size and reset its position when axis filters or their range counts change
   useEffect(() => {
-    resetPosition();
-  }, [xAxisFilter, yAxisFilter, resetPosition]);
+    const rowCount = rowRanges.length;
+    const columnCount = columnRanges.length;
 
-  useEffect(() => {
-    if (
-      totalRows !== rowRanges.length ||
-      totalColumns !== columnRanges.length
-    ) {
-      updateCarouselSize(rowRanges.length, columnRanges.length);
+    const rowsChanged = totalRows !== rowCount;
+    const columnsChanged = totalColumns !== columnCount;
+
+    if (!rowsChanged && !columnsChanged) return;
+
+    updateCarouselSize(rowCount, columnCount);
+
+    if (rowsChanged && !columnsChanged) {
+      return resetRowOffset();
     }
+
+    if (columnsChanged && !rowsChanged) {
+      return resetColumnOffset();
+    }
+
+    resetPosition();
   }, [
     totalRows,
     totalColumns,
-    updateCarouselSize,
     rowRanges.length,
     columnRanges.length,
+    xAxisFilter,
+    yAxisFilter,
+    updateCarouselSize,
+    resetPosition,
   ]);
 
   return (
@@ -53,12 +68,12 @@ export const CarouselPage = () => {
       <FilterHistoryPanel />
 
       {/* X-Axis Filter (Above the Carousel) */}
-      <FilterAxisSelector axis="X" />
+      <FilterAxisSelector axis={Axis.X} />
 
       {/* Main Carousel with Y-Axis Filter on the Left */}
       <div className="flex">
         {/* Y-Axis Filter */}
-        <FilterAxisSelector axis="Y" />
+        <FilterAxisSelector axis={Axis.Y} />
 
         {/* Carousel */}
         <CarouselGrid />

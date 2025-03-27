@@ -1,17 +1,15 @@
 import { create } from 'zustand';
-import { accommodationDataset } from '../data';
-import {
-  useAxisFilterStore,
-  useFilterHistoryStore,
-  useFilterOptionsStore,
-} from '../store';
+import { accommodationDataset, filters } from '../data';
+import { useAxisFilterStore, useFilterHistoryStore } from '../store';
 import { Accommodation, CarouselCell, Subrange } from '../types';
 import {
   buildCarouselGrid,
   drillDownCell,
   drillDownColumn,
   drillDownRow,
+  resetColumnOffset,
   resetPosition,
+  resetRowOffset,
   scrollDown,
   scrollLeft,
   scrollRight,
@@ -46,8 +44,11 @@ interface CarouselState {
   scrollUp: () => void;
   scrollDown: () => void;
   resetPosition: () => void;
+  resetColumnOffset: () => void;
+  resetRowOffset: () => void;
 
   // Methods: Carousel Setup
+  setCarouselData: (carouselData: Accommodation[]) => void;
   populateCarouselData: () => void;
   updateCarouselSize: (rows: number, cols: number) => void;
 
@@ -88,6 +89,8 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   scrollUp,
   scrollDown,
   resetPosition,
+  resetColumnOffset,
+  resetRowOffset,
 
   drillDownColumn,
   drillDownRow,
@@ -125,12 +128,13 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
     });
   },
 
+  setCarouselData: (carouselData: Accommodation[]) => set({ carouselData }),
+
   // Function to categorize accommodations into carousel cells
   populateCarouselData: () => {
     const { carouselData } = get();
     const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
     const { getLastSubrange } = useFilterHistoryStore.getState();
-    const { filters } = useFilterOptionsStore.getState();
 
     // Get the correct range object from filter history or filters
     const xRanges =

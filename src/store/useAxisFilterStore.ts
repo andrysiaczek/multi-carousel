@@ -6,62 +6,55 @@ interface AxisFilterState {
   yAxisFilter: FilterOption;
   chosenType: string | null;
 
-  setXAxisFilter: (filter: FilterOption) => void;
-  setYAxisFilter: (filter: FilterOption) => void;
+  setXAxisFilter: (xAxisFilter: FilterOption) => void;
+  setYAxisFilter: (yAxisFilter: FilterOption) => void;
   setAxisFilters: (
     xAxisFilter: FilterOption,
     yAxisFilter: FilterOption
   ) => void;
-  setChosenType: (type: string | null) => void;
+  setChosenType: (chosenType: string | null) => void;
   setAxisFiltersAndType: (
     xAxisFilter: FilterOption,
     yAxisFilter: FilterOption,
-    type: string
+    chosenType: string | null
   ) => void;
   resetAxisFiltersAndType: () => void;
 }
 
-export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
+const initialAxisFilterState = {
   xAxisFilter: FilterOption.Price,
   yAxisFilter: FilterOption.Rating,
   chosenType: null,
+};
 
-  setXAxisFilter: (filter) => {
+export const useAxisFilterStore = create<AxisFilterState>((set, get) => ({
+  ...initialAxisFilterState,
+
+  setXAxisFilter: (xAxisFilter) => {
     // Ensure mutual exclusion with Y-axis
-    if (filter !== get().yAxisFilter) {
-      set({ xAxisFilter: filter });
-    }
+    if (xAxisFilter !== get().yAxisFilter) set({ xAxisFilter });
   },
-  setYAxisFilter: (filter) => {
+  setYAxisFilter: (yAxisFilter) => {
     // Ensure mutual exclusion with X-axis
-    if (filter !== get().xAxisFilter) {
-      set({ yAxisFilter: filter });
-    }
+    if (yAxisFilter !== get().xAxisFilter) set({ yAxisFilter });
   },
   setAxisFilters: (xAxisFilter, yAxisFilter) => {
     // Ensure mutual exclusion
-    if (xAxisFilter !== yAxisFilter) {
+    if (xAxisFilter !== yAxisFilter)
       set({
         xAxisFilter: xAxisFilter,
         yAxisFilter: yAxisFilter,
       });
-    }
   },
-  setChosenType: (type) => set({ chosenType: type }),
-  setAxisFiltersAndType: (xAxisFilter, yAxisFilter, type) => {
-    if (xAxisFilter !== yAxisFilter) {
+  setChosenType: (chosenType) => set({ chosenType }),
+  setAxisFiltersAndType: (xAxisFilter, yAxisFilter, chosenType) => {
+    // Ensure mutual exclusion
+    if (xAxisFilter !== yAxisFilter)
       set({
-        xAxisFilter: xAxisFilter,
-        yAxisFilter: yAxisFilter,
-        chosenType: type,
+        xAxisFilter,
+        yAxisFilter,
+        chosenType,
       });
-    }
   },
-  resetAxisFiltersAndType: () => {
-    set({
-      xAxisFilter: FilterOption.Price,
-      yAxisFilter: FilterOption.Rating,
-      chosenType: null,
-    });
-  },
+  resetAxisFiltersAndType: () => set(initialAxisFilterState),
 }));

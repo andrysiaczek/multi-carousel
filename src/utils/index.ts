@@ -12,7 +12,9 @@ export {
   getFallbackFilter,
 } from './filterUtils';
 export {
+  resetColumnOffset,
   resetPosition,
+  resetRowOffset,
   scrollDown,
   scrollLeft,
   scrollRight,
