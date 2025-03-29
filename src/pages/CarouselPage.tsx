@@ -7,7 +7,11 @@ import {
 } from '../components';
 import { useAxisFilterStore, useCarouselStore } from '../store';
 import { Axis } from '../types';
-import { resetColumnOffset, resetRowOffset } from '../utils';
+import {
+  resetColumnOffset,
+  resetRowOffset,
+  updateAvailableChips,
+} from '../utils';
 
 export const CarouselPage = () => {
   const {
@@ -22,9 +26,10 @@ export const CarouselPage = () => {
   } = useCarouselStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
 
-  // Update carousel content when axis filters or underlying data change
+  // Update carousel content and available chips when axis filters or underlying data change
   useEffect(() => {
     populateCarouselData();
+    updateAvailableChips(carouselData);
   }, [xAxisFilter, yAxisFilter, carouselData, populateCarouselData]);
 
   // Update carousel size and reset its position when axis filters or their range counts change

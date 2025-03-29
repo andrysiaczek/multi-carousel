@@ -1,6 +1,6 @@
-import { filterAccommodations } from '.';
 import { useDecisionChipsStore } from '../store';
 import { Accommodation, CarouselCell, FilterOption, Subrange } from '../types';
+import { filterAccommodations } from '../utils';
 
 export const buildCarouselGrid = (
   xRanges: Subrange[],

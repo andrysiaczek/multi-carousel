@@ -1,55 +1,12 @@
 import { useDecisionChipsStore } from '../store';
 
-const decisionChips = [
-  'Shared kitchen',
-  'Free Wi-Fi',
-  'Common room',
-  'Lockers',
-  'Shared bathroom',
-  '24h reception',
-  'Hostel entertainment',
-  'Luggage storage',
-  'Private room',
-  'Private bathroom',
-  'Air conditioning',
-  'TV in room',
-  'Breakfast available',
-  'Daily housekeeping',
-  'Breakfast included',
-  'Garden',
-  'Terrace',
-  'Family-friendly',
-  'Non-smoking rooms',
-  'Tea/coffee maker',
-  'Restaurant',
-  'Bar',
-  'Room service',
-  'Fitness center',
-  'Rooftop terrace',
-  'Pool',
-  'Gym',
-  'Spa',
-  'Concierge',
-  'Luxury rooms',
-  'Sea view',
-  'Private beach',
-  'Airport shuttle',
-  'Entire place',
-  'Kitchen',
-  'Washer',
-  'Balcony',
-  'Coffee machine',
-  'Self check-in',
-  'Parking',
-  'Pet-friendly',
-];
-
 export const DecisionChipsPanel = () => {
-  const { selectedChips, toggleChip, resetChips } = useDecisionChipsStore();
+  const { availableChips, selectedChips, toggleChip, resetChips } =
+    useDecisionChipsStore();
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 p-4 pt-10 border-b">
-      {decisionChips.map((chip) => (
+    <div className="flex flex-wrap justify-center gap-2 p-4 pt-8 border-b">
+      {availableChips.map((chip) => (
         <button
           key={chip}
           type="button"

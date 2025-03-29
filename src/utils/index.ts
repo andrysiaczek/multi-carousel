@@ -1,4 +1,5 @@
 export { buildCarouselGrid } from './carouselUtils';
+export { updateAvailableChips } from './decisionChipsUtils';
 export { drillDownCell, drillDownColumn, drillDownRow } from './drillLogic';
 export {
   addStandardAxisDrillStep,

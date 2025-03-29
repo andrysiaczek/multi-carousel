@@ -16,28 +16,55 @@ accommodation_types = {
 # Features list (tailored to accommodation type)
 features_by_type = {
     "Hostel (Dormitory Bed)": [
-        "Common room", "Free Wi-Fi", "Shared kitchen", "Lockers", "Shared bathroom", "24h reception", "Luggage storage", "Hostel entertainment"
+        "Hostel entertainment", "Shared kitchen", "Common room", "Lockers", "Shared bathroom", 
     ],
     "Hostel (Private Room)": [
-        "Private room", "Free Wi-Fi", "Shared kitchen", "Lockers", "Shared bathroom", "24h reception", "Luggage storage", "Hostel entertainment"
+        "Hostel entertainment", "Shared kitchen", "Lockers", "Shared bathroom", "Private room", "Tea/coffee maker"
     ],
     "Budget Hotel": [
-        "Free Wi-Fi", "Private bathroom", "Air conditioning", "24h reception", "TV in room", "Breakfast available", "Daily housekeeping"
+        "Private room", "Private bathroom", "Tea/coffee maker"
     ],
     "Guesthouse / Bed & Breakfast (B&B)": [
-        "Breakfast included", "Free Wi-Fi", "Garden", "Terrace", "Private bathroom", "Family-friendly", "Non-smoking rooms", "Tea/coffee maker"
+       "Private room", "Private bathroom", "Breakfast available", "Tea/coffee maker"
     ],
     "Mid-Range Hotel": [
-        "Free Wi-Fi", "Private bathroom", "Air conditioning", "24h reception", "Restaurant", "Bar", "Room service", "Fitness center"
+        "Free Wi-Fi", "Luggage storage", "Private room", "Private bathroom", "Breakfast available", "Tea/coffee maker"
     ],
     "Upper Mid-Range Hotel": [
-        "Free Wi-Fi", "Private bathroom", "Rooftop terrace", "Air conditioning", "Restaurant", "Room service", "Pool", "Gym", "Bar"
+       "Free Wi-Fi", "24h reception", "Luggage storage", "Private room", "Private bathroom", "Air conditioning", "TV in room", "Breakfast available", "Restaurant", "Bar", "Airport shuttle", "Coffee machine", "Parking"
     ],
     "Luxury Hotel": [
-        "Spa", "Pool", "Restaurant", "Concierge", "Parking", "Luxury rooms", "Bar", "Room service", "Fitness center", "Sea view", "Private beach", "Airport shuttle"
+        "Free Wi-Fi", "24h reception", "Luggage storage", "Private room", "Private bathroom", "Air conditioning", "TV in room", "Breakfast available", "Daily housekeeping", "Restaurant", "Bar", "Room service", "Fitness center", "Pool", "Gym", "Airport shuttle", "Coffee machine", "Parking"
     ],
     "Entire Apartment / House": [
-        "Entire place", "Kitchen", "Free Wi-Fi", "Washer", "Balcony", "Air conditioning", "Coffee machine", "Self check-in", "Parking", "Pet-friendly"
+       "Free Wi-Fi", "Tea/coffee maker", "Entire place", "Kitchen", "Washer", "Washing machine", "Pet-friendly"
+    ]
+}
+
+dynamic_features_by_type = {
+    "Hostel (Dormitory Bed)": [
+        "Free Wi-Fi", "24h reception", "Breakfast available", "Non-smoking rooms", "Bar", "Rooftop terrace", "Pool", "Self check-in"
+    ],
+    "Hostel (Private Room)": [
+        "Free Wi-Fi", "24h reception", "Breakfast available", "Non-smoking rooms", "Bar", "Rooftop terrace", "Pool", "Self check-in"
+    ],
+    "Budget Hotel": [
+        "Free Wi-Fi", "Shared bathroom", "24h reception", "Luggage storage", "Air conditioning", "Breakfast available", "Non-smoking rooms", "Balcony", "Self check-in", "Parking", "Pet-friendly"
+    ],
+    "Guesthouse / Bed & Breakfast (B&B)": [
+       "Shared kitchen", "Free Wi-Fi", "24h reception", "Luggage storage", "Air conditioning", "TV in room", "Breakfast included", "Family-friendly", "Non-smoking rooms", "Restaurant", "Room service", "Rooftop terrace", "Balcony", "Parking", "Pet-friendly"
+    ],
+    "Mid-Range Hotel": [
+        "24h reception", "Air conditioning", "TV in room", "Breakfast included", "Family-friendly", "Non-smoking rooms", "Restaurant", "Bar", "Room service", "Fitness center", "Rooftop terrace", "Pool", "Gym", "Sea view", "Balcony", "Self check-in", "Parking", "Pet-friendly"
+    ],
+    "Upper Mid-Range Hotel": [
+        "Daily housekeeping", "Breakfast included", "Family-friendly", "Non-smoking rooms", "Room service", "Fitness center", "Rooftop terrace", "Pool", "Gym", "Spa", "Concierge", "Sea view", "Private beach", "Balcony"
+    ],
+    "Luxury Hotel": [
+        "Breakfast included", "Non-smoking rooms", "Rooftop terrace", "Spa", "Concierge", "Sea view", "Private beach", "Balcony"
+    ],
+    "Entire Apartment / House": [
+       "Luggage storage", "Air conditioning", "TV", "Garden", "Terrace", "Non-smoking rooms", "Pool", "Sea view", "Private beach", "Balcony", "Self check-in", "Parking"
     ]
 }
 
@@ -81,10 +108,22 @@ names_part_2_by_type = {
 }
 
 # Helper to pick appropriate features based on type
-def generate_features(accommodation_type, min_count=3, max_count=7):
-    possible_features = features_by_type[accommodation_type]
-    count = random.randint(min_count, max_count)
-    return random.sample(possible_features, count)
+def generate_features(accommodation_type):
+    features = features_by_type[accommodation_type]
+    dynamic_features = dynamic_features_by_type[accommodation_type]
+
+    # Determine the number of dynamic features to pick
+    max_dynamic_count = len(dynamic_features)
+    min_dynamic_count = max(0, max_dynamic_count - 6)
+    dynamic_count = random.randint(min_dynamic_count, max_dynamic_count)
+
+    # Randomly select the determined number of dynamic features
+    selected_dynamic_features = random.sample(dynamic_features, dynamic_count)
+
+    # Combine static and dynamic features
+    combined_features = list(set(features + selected_dynamic_features))
+
+    return combined_features
 
 # Helper to generate accommodation name
 def generate_accommodation_name(accommodation_type):

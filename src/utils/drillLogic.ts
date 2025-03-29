@@ -18,6 +18,7 @@ import {
   findSubrangeByLabel,
   generateFilterLabel,
   getFallbackFilter,
+  updateAvailableChips,
 } from '../utils';
 
 const drillDownAxis = (axis: Axis, index: number) => {
@@ -61,6 +62,9 @@ const drillDownAxis = (axis: Axis, index: number) => {
         parentRange,
         result.accommodations
       );
+
+      updateAvailableChips(result.accommodations);
+
       return;
     } else {
       return console.warn(`No subranges to drill into for selected ${prefix}.`);
@@ -89,6 +93,8 @@ const drillDownAxis = (axis: Axis, index: number) => {
     parentRange,
     accommodations
   );
+
+  updateAvailableChips(accommodations);
 };
 
 export const drillDownCell = (colIndex: number, rowIndex: number) => {
@@ -192,6 +198,7 @@ export const drillDownCell = (colIndex: number, rowIndex: number) => {
     setAxisFiltersAndType(result.xAxisFilter, result.yAxisFilter, colLabel);
     updateCarouselState(result);
     addCellDrillStepWithTypeAxis(Axis.X, result.accommodations);
+    updateAvailableChips(result.accommodations);
     return;
   }
 
@@ -208,6 +215,7 @@ export const drillDownCell = (colIndex: number, rowIndex: number) => {
     setAxisFiltersAndType(result.xAxisFilter, result.yAxisFilter, rowLabel);
     updateCarouselState(result);
     addCellDrillStepWithTypeAxis(Axis.Y, result.accommodations);
+    updateAvailableChips(result.accommodations);
     return;
   }
 
@@ -233,7 +241,7 @@ export const drillDownCell = (colIndex: number, rowIndex: number) => {
     carouselData: accommodations,
   });
 
-  return addStep({
+  addStep({
     xAxisFilter,
     yAxisFilter,
     label: generateFilterLabel(xAxisFilter, xParent, yAxisFilter, yParent),
@@ -246,6 +254,8 @@ export const drillDownCell = (colIndex: number, rowIndex: number) => {
     ),
     carouselDataSnapshot: accommodations,
   });
+
+  return updateAvailableChips(accommodations);
 };
 
 export const drillDownColumn = (colIndex: number) => {
