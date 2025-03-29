@@ -1,4 +1,10 @@
 import { useEffect, useRef } from 'react';
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+} from 'lucide-react';
 import { CarouselCell } from '../components';
 import {
   useCarouselStore,
@@ -67,24 +73,29 @@ export const CarouselGrid = () => {
     applyDecisionChipsToCarousel();
   }, [selectedChips, applyDecisionChipsToCarousel]);
 
+  const gridWidth = visibleColumns * cellWidth + (visibleColumns - 1) * 8;
+  const gridHeight = visibleRows * cellHeight + (visibleRows - 1) * 8;
+
   return (
-    <div className="relative flex flex-col items-center p-10">
+    <div className="relative flex flex-col items-center px-4 pt-4 pb-2 h-full">
       {/* Column Headers (X-Axis Labels) */}
-      <div className="flex">
-        <div className="w-[120px]"></div> {/* Space for row headers */}
+      <div className="flex w-full">
+        {/* Space for row headers and the left arrow */}
+        <div className="w-[120px] ml-6" />
         <div
-          className={`flex items-center gap-2 w-[${
-            visibleColumns * cellWidth
-          }px] h-[80px] font-medium text-sm text-gray-500`}
+          className={`flex items-center gap-2 w-[${gridWidth}px] h-[80px] font-medium text-sm text-gray-500`}
         >
           {visibleColumnRanges.map((colRange, colIndex) => (
             <div
-              key={`${colRange.label}`}
-              className={`w-[${cellWidth}px] text-center text-pretty p-2 cursor-pointer ${
+              key={colRange.label}
+              className={`text-center text-pretty p-2 cursor-pointer ${
                 hoveredColumn === columnOffset + colIndex
                   ? 'font-semibold text-darkOrange'
                   : ''
               }`}
+              style={{
+                width: `${cellWidth}px`,
+              }}
               onMouseEnter={() => handleMouseEnter(Axis.X, colIndex, colRange)}
               onMouseLeave={() => handleMouseLeave()}
               onClick={() => drillDownColumn(columnOffset + colIndex)}
@@ -108,14 +119,14 @@ export const CarouselGrid = () => {
       <div className="flex">
         {/* Row Headers (Y-Axis Labels) */}
         <div
-          className={`flex flex-col align-center gap-2 w-[120px] h-[${
+          className={`flex flex-col align-center justify-content gap-2 my-6 h-[${
             visibleRows * cellHeight
-          }px] overflow-hidden font-medium text-sm text-gray-500`}
+          }px] font-medium text-sm text-gray-500`}
         >
           {visibleRowRanges.map((rowRange, rowIndex) => (
             <div
               key={`${rowRange.label}`}
-              className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
+              className={`w-[120px] h-[${cellHeight}px] flex flex-col items-center text-center justify-center -rotate-90 origin-center p-2 text-pretty cursor-pointer ${
                 hoveredRow === rowOffset + rowIndex
                   ? 'font-semibold text-darkOrange'
                   : ''
@@ -139,73 +150,76 @@ export const CarouselGrid = () => {
           ))}
         </div>
 
-        {/* Scrollable Grid Container */}
+        {/* Carousel + Arrows */}
         <div
-          ref={carouselRef}
-          className="relative overflow-hidden border rounded-lg"
-          style={{
-            width: `${visibleColumns * cellWidth + (visibleColumns - 1) * 8}px`,
-            height: `${visibleRows * cellHeight + (visibleRows - 1) * 8}px`,
-          }}
+          className="relative m-6"
+          style={{ width: `${gridWidth}px`, height: `${gridHeight}px` }}
         >
+          {/* Carousel */}
           <div
-            className="grid transition-transform gap-2"
-            style={{
-              gridTemplateColumns: `repeat(${visibleColumns}, ${cellWidth}px)`,
-              gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
-            }}
+            ref={carouselRef}
+            className="overflow-auto"
+            style={{ width: `${gridWidth}px`, height: `${gridHeight}px` }}
           >
-            {Array.from({ length: visibleRows }).map((_, rowIndex) =>
-              Array.from({ length: visibleColumns }).map((_, colIndex) => {
-                const row = dataPerCell[rowOffset + rowIndex];
-                const cell = row ? row[columnOffset + colIndex] : null;
+            <div
+              className="grid gap-2 transition-transform"
+              style={{
+                gridTemplateColumns: `repeat(${visibleColumns}, ${cellWidth}px)`,
+                gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
+              }}
+            >
+              {Array.from({ length: visibleRows }).map((_, rowIndex) =>
+                Array.from({ length: visibleColumns }).map((_, colIndex) => {
+                  const row = dataPerCell[rowOffset + rowIndex];
+                  const cell = row ? row[columnOffset + colIndex] : null;
 
-                return (
-                  <CarouselCell
-                    key={`${rowOffset + rowIndex}-${columnOffset + colIndex}`}
-                    col={columnOffset + colIndex}
-                    row={rowOffset + rowIndex}
-                    columnRange={columnRanges[columnOffset + colIndex]}
-                    rowRange={rowRanges[rowOffset + rowIndex]}
-                    accommodations={cell ? cell.accommodations : []}
-                    isFillerCell={!cell}
-                  />
-                );
-              })
-            )}
+                  return (
+                    <CarouselCell
+                      key={`${rowOffset + rowIndex}-${columnOffset + colIndex}`}
+                      col={columnOffset + colIndex}
+                      row={rowOffset + rowIndex}
+                      columnRange={columnRanges[columnOffset + colIndex]}
+                      rowRange={rowRanges[rowOffset + rowIndex]}
+                      accommodations={cell ? cell.accommodations : []}
+                      isFillerCell={!cell}
+                    />
+                  );
+                })
+              )}
+            </div>
           </div>
+
+          {/* Arrows (subtle) */}
+          <button
+            type="button"
+            onClick={scrollLeft}
+            className="absolute left-[-28px] top-1/2 -translate-y-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
+          >
+            <ChevronLeft size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={scrollRight}
+            className="absolute right-[-28px] top-1/2 -translate-y-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
+          >
+            <ChevronRight size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={scrollUp}
+            className="absolute top-[-28px] left-1/2 -translate-x-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
+          >
+            <ChevronUp size={18} />
+          </button>
+          <button
+            type="button"
+            onClick={scrollDown}
+            className="absolute bottom-[-28px] left-1/2 -translate-x-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
+          >
+            <ChevronDown size={18} />
+          </button>
         </div>
       </div>
-
-      {/* Navigation Buttons */}
-      <button
-        type="button"
-        onClick={scrollLeft}
-        className="absolute left-0 top-1/2 transform -translate-x-full -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-      >
-        ←
-      </button>
-      <button
-        type="button"
-        onClick={scrollRight}
-        className="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2 bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-      >
-        →
-      </button>
-      <button
-        type="button"
-        onClick={scrollUp}
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-      >
-        ↑
-      </button>
-      <button
-        type="button"
-        onClick={scrollDown}
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full bg-gray-700 text-white p-2 rounded-full hover:bg-gray-800 transition"
-      >
-        ↓
-      </button>
     </div>
   );
 };

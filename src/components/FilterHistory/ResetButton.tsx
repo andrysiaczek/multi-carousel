@@ -15,6 +15,9 @@ export const ResetButton = ({ onClick, inHoverState }: ResetButtonProps) => (
     aria-label="Reset filters"
     title="Reset filters"
   >
-    <RotateCcw size={14} />
+    <RotateCcw
+      size={14}
+      className={`${inHoverState ? 'text-darkOrange' : ''}`}
+    />
   </button>
 );

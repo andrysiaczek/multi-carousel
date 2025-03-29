@@ -34,7 +34,7 @@ features_by_type = {
         "Free Wi-Fi", "Private bathroom", "Rooftop terrace", "Air conditioning", "Restaurant", "Room service", "Pool", "Gym", "Bar"
     ],
     "Luxury Hotel": [
-        "Spa", "Pool", "Restaurant", "Concierge", "Valet parking", "Luxury rooms", "Bar", "Room service", "Fitness center", "Sea view", "Private beach", "Airport shuttle"
+        "Spa", "Pool", "Restaurant", "Concierge", "Parking", "Luxury rooms", "Bar", "Room service", "Fitness center", "Sea view", "Private beach", "Airport shuttle"
     ],
     "Entire Apartment / House": [
         "Entire place", "Kitchen", "Free Wi-Fi", "Washer", "Balcony", "Air conditioning", "Coffee machine", "Self check-in", "Parking", "Pet-friendly"

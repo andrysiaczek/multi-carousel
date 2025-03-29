@@ -5,7 +5,7 @@ export const FilterHistoryPanel = () => {
   const { steps, hoveredStepLabel, goToStep } = useFilterHistoryStore();
 
   return (
-    <div className="flex items-center gap-2 p-4 min-h-14">
+    <div className="flex items-center gap-2 p-4 min-h-14 mx-4">
       {/* Initial step - Reset button */}
       {(steps.length > 1 || hoveredStepLabel) && (
         <ResetButton

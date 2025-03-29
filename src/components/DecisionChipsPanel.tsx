@@ -30,7 +30,6 @@ const decisionChips = [
   'Gym',
   'Spa',
   'Concierge',
-  'Valet parking',
   'Luxury rooms',
   'Sea view',
   'Private beach',
@@ -49,7 +48,7 @@ export const DecisionChipsPanel = () => {
   const { selectedChips, toggleChip, resetChips } = useDecisionChipsStore();
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 p-4 border-b">
+    <div className="flex flex-wrap justify-center gap-2 p-4 pt-10 border-b">
       {decisionChips.map((chip) => (
         <button
           key={chip}
@@ -68,7 +67,7 @@ export const DecisionChipsPanel = () => {
         <button
           type="button"
           onClick={resetChips}
-          className="mt-3 text-sm text-red-500 underline"
+          className="text-sm text-red-500 underline"
         >
           Reset Filters
         </button>
