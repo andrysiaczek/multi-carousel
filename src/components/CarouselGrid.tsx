@@ -181,7 +181,7 @@ export const CarouselGrid = () => {
                       columnRange={columnRanges[columnOffset + colIndex]}
                       rowRange={rowRanges[rowOffset + rowIndex]}
                       accommodations={cell ? cell.accommodations : []}
-                      isFillerCell={!cell}
+                      isFillerCell={!cell || !cell.accommodations.length}
                     />
                   );
                 })
