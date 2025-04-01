@@ -175,7 +175,7 @@
     "label": "Far",
     "sublabel": "(6 - 10 km)",
     "lowerBound": 6,
-    "upperBound": 10,
+    "upperBound": null,
     "subranges": [
       {
         "label": "Less than 7 km",
@@ -195,7 +195,7 @@
       {
         "label": "Above 9 km",
         "lowerBound": 9,
-        "upperBound": 10
+        "upperBound": null
       }
     ]
   }

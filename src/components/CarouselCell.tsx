@@ -77,12 +77,12 @@ export const CarouselCell = ({
 
   const handleResultsMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     resetHover();
-    e.currentTarget.classList.add('bg-gray-200', 'text-darkGreen');
+    e.currentTarget.classList.add('bg-lightOrange', 'text-darkOrange');
   };
 
   const handleResultsMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
     setHoveredCell(row, col);
-    e.currentTarget.classList.remove('bg-gray-200', 'text-darkGreen');
+    e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
   };
 
   const handleRedirectClick = (e: MouseEvent) => {
@@ -133,7 +133,7 @@ export const CarouselCell = ({
                 >
                   {truncateName(nameI)}
                 </span>
-                <span className="absolute top-[-36px] left-1/2 transform -translate-x-1/2 text-xs text-gray-500 bg-gray-200 rounded px-1 py-0.5 opacity-0 group-hover:opacity-100 transition">
+                <span className="absolute top-[-36px] left-1/2 transform -translate-x-1/2 text-xs text-darkOrange bg-lightOrange rounded px-1 py-0.5 opacity-0 group-hover:opacity-100 transition">
                   {accommodations.length === 1
                     ? 'Show this accommodation'
                     : 'See all results'}
