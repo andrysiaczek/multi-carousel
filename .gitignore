@@ -23,6 +23,10 @@ dist-ssr
 # Vite cache
 .vite
 
+# Image files
+/src/assets/images/
+*.jpg
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

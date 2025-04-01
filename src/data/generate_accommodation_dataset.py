@@ -1,8 +1,9 @@
-import random
 import json
+import os
+import random
 
 # Accommodation types and corresponding price ranges
-accommodation_types = {
+accommodation_types_with_prices = {
     "Hostel (Dormitory Bed)": (18, 35),
     "Hostel (Private Room)": (50, 80),
     "Budget Hotel": (50, 90),
@@ -19,7 +20,7 @@ features_by_type = {
         "Hostel entertainment", "Shared kitchen", "Common room", "Lockers", "Shared bathroom", 
     ],
     "Hostel (Private Room)": [
-        "Hostel entertainment", "Shared kitchen", "Lockers", "Shared bathroom", "Private room", "Tea/coffee maker"
+        "Hostel entertainment", "Shared kitchen", "Shared bathroom", "Private room", "Tea/coffee maker"
     ],
     "Budget Hotel": [
         "Private room", "Private bathroom", "Tea/coffee maker"
@@ -37,7 +38,7 @@ features_by_type = {
         "Free Wi-Fi", "24h reception", "Luggage storage", "Private room", "Private bathroom", "Air conditioning", "TV in room", "Breakfast available", "Daily housekeeping", "Restaurant", "Bar", "Room service", "Fitness center", "Pool", "Gym", "Airport shuttle", "Coffee machine", "Parking"
     ],
     "Entire Apartment / House": [
-       "Free Wi-Fi", "Tea/coffee maker", "Entire place", "Kitchen", "Washer", "Washing machine", "Pet-friendly"
+       "Free Wi-Fi", "Tea/coffee maker", "Entire place", "Kitchen", "Washer", "Washing machine", "Pet-friendly", "Balcony"
     ]
 }
 
@@ -46,7 +47,7 @@ dynamic_features_by_type = {
         "Free Wi-Fi", "24h reception", "Breakfast available", "Non-smoking rooms", "Bar", "Rooftop terrace", "Pool", "Self check-in"
     ],
     "Hostel (Private Room)": [
-        "Free Wi-Fi", "24h reception", "Breakfast available", "Non-smoking rooms", "Bar", "Rooftop terrace", "Pool", "Self check-in"
+        "Free Wi-Fi", "24h reception", "Breakfast available", "Non-smoking rooms", "Bar", "Rooftop terrace", "Pool", "Self check-in", "Lockers"
     ],
     "Budget Hotel": [
         "Free Wi-Fi", "Shared bathroom", "24h reception", "Luggage storage", "Air conditioning", "Breakfast available", "Non-smoking rooms", "Balcony", "Self check-in", "Parking", "Pet-friendly"
@@ -64,19 +65,8 @@ dynamic_features_by_type = {
         "Breakfast included", "Non-smoking rooms", "Rooftop terrace", "Spa", "Concierge", "Sea view", "Private beach", "Balcony"
     ],
     "Entire Apartment / House": [
-       "Luggage storage", "Air conditioning", "TV", "Garden", "Terrace", "Non-smoking rooms", "Pool", "Sea view", "Private beach", "Balcony", "Self check-in", "Parking"
+       "Luggage storage", "Air conditioning", "TV", "Garden", "Terrace", "Non-smoking rooms", "Pool", "Sea view", "Private beach", "Self check-in", "Parking"
     ]
-}
-
-# Image mappings
-image_mappings = {
-    "Hostel": (["hostel1.jpg", "hostel2.jpg", "hostel3.jpg"], ["hostel4.jpg", "hostel5.jpg", "hostel6.jpg"]),
-    "Budget Hotel": (["budget1.jpg", "budget2.jpg", "budget3.jpg"], ["budget4.jpg", "budget5.jpg", "budget6.jpg"]),
-    "Guesthouse": (["guesthouse1.jpg", "guesthouse2.jpg", "guesthouse3.jpg"], ["guesthouse4.jpg", "guesthouse5.jpg", "guesthouse6.jpg"]),
-    "Mid-Range Hotel": (["midrange1.jpg", "midrange2.jpg", "midrange3.jpg"], ["midrange4.jpg", "midrange5.jpg", "midrange6.jpg"]),
-    "Upper Mid-Range Hotel": (["uppermid1.jpg", "uppermid2.jpg", "uppermid3.jpg"], ["uppermid4.jpg", "uppermid5.jpg", "uppermid6.jpg"]),
-    "Luxury Hotel": (["luxury1.jpg", "luxury2.jpg", "luxury3.jpg"], ["luxury4.jpg", "luxury5.jpg", "luxury6.jpg"]),
-    "Entire Apartment": (["apartment1.jpg", "apartment2.jpg", "apartment3.jpg"], ["apartment4.jpg", "apartment5.jpg", "apartment6.jpg"])
 }
 
 # Location centers
@@ -140,29 +130,63 @@ def random_location(center):
     return {"lat": round(center[0] + lat_offset, 6), "lng": round(center[1] + lng_offset, 6)}
 
 # Helper to pick appropriate images based on type
-def get_images(accom_type):
-    if "Hostel" in accom_type:
-        return image_mappings["Hostel"]
-    elif "Budget Hotel" in accom_type:
-        return image_mappings["Budget Hotel"]
-    elif "Guesthouse" in accom_type:
-        return image_mappings["Guesthouse"]
-    elif "Mid-Range Hotel" in accom_type:
-        return image_mappings["Mid-Range Hotel"]
-    elif "Upper Mid-Range Hotel" in accom_type:
-        return image_mappings["Upper Mid-Range Hotel"]
-    elif "Luxury Hotel" in accom_type:
-        return image_mappings["Luxury Hotel"]
-    elif "Entire Apartment" in accom_type:
-        return image_mappings["Entire Apartment"]
+def get_images(accom_type, features):
+    # Accommodation type mappings
+    type_mapping = {
+        "Hostel (Dormitory Bed)": "hostel_dormitory_bed",
+        "Hostel (Private Room)": "hostel_private_room",
+        "Budget Hotel": "budget_hotel",
+        "Guesthouse / Bed & Breakfast (B&B)": "guesthouse_bnb",
+        "Mid-Range Hotel": "midrange_hotel",
+        "Upper Mid-Range Hotel": "upper_midrange_hotel",
+        "Luxury Hotel": "luxury_hotel",
+        "Entire Apartment / House": "entire_apartment_house"
+    }
+
+    # Feature mapping for images
+    feature_mapping = {
+        "Gym": "gym",
+        "Pool": "pool",
+        "Rooftop terrace": "rooftop_terrace",
+        "Sauna": "sauna",
+        "Sea view": "sea_view",
+    }
+
+    # Determine folder paths based on accommodation type
+    base_path = "/src/assets/images/"
+    accom_folder = type_mapping.get(accom_type, "generic")
+
+    # Accommodation image categories
+    if accom_type == "Entire Apartment / House":
+        categories = ["balcony", "bathroom", "kitchen", "living_room", "room"]
     else:
-        return ([], [])
+        categories = ["room", "bathroom", "reception"]
+
+    # Gather accommodation images
+    image_paths = []
+    for category in categories:
+        image_number = random.randint(1, 10)  # Randomly pick a number from 1 to 10
+        image_file = f"{category}{image_number}.jpg"
+        image_path = os.path.join(base_path, accom_folder, category, image_file)
+        image_paths.append(image_path)
+
+    # Gather feature images
+    for feature in features:
+        if feature in feature_mapping:
+            folder_name = feature_mapping[feature]
+            image_number = random.randint(1, 5)  # Randomly pick from 5 feature images
+            image_file = f"{folder_name}{image_number}.jpg"
+            image_path = os.path.join(base_path, "features", folder_name, image_file)
+            image_paths.append(image_path)
+
+    return image_paths
+
 
 # Generate dataset
 dataset = []
 for i in range(1, 151):  # 150 accommodations
-    accom_type = random.choice(list(accommodation_types.keys()))
-    price_range = accommodation_types[accom_type]
+    accom_type = random.choice(list(accommodation_types_with_prices.keys()))
+    price_range = accommodation_types_with_prices[accom_type]
     price = round(random.uniform(price_range[0], price_range[1]), 2)
     rating = round(random.uniform(1.0, 5.0), 1)
     distance = round(random.uniform(1.0, 10.0), 1)
@@ -171,7 +195,7 @@ for i in range(1, 151):  # 150 accommodations
     nameII = generate_accommodation_name(accom_type)
     locationI = random_location(valencia_center)
     locationII = random_location(malaga_center)
-    imagesI, imagesII = get_images(accom_type)
+    imagesI, imagesII = get_images(accom_type, features)
 
     dataset.append({
         "id": str(i),
