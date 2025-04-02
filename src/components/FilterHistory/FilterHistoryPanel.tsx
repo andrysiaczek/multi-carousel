@@ -1,20 +1,15 @@
+import { useNavigate } from 'react-router-dom';
 import { accommodationDataset } from '../../data';
 import { useCarouselStore, useFilterHistoryStore } from '../../store';
 import { ResetButton } from '../FilterHistory';
 
 export const FilterHistoryPanel = () => {
   const { steps, hoveredStepLabel, goToStep } = useFilterHistoryStore();
-  const { dataPerCell } = useCarouselStore();
+  const navigate = useNavigate();
 
   // Calculate the number of unique filtered accommodations from dataPerCell
-  const filteredAccommodationsCount = Array.from(
-    new Set(
-      dataPerCell
-        .flat()
-        .map((cell) => cell.accommodations.map((acc) => acc.id))
-        .flat()
-    )
-  ).length;
+  const filteredAccommodations = useCarouselStore().getFilteredAccommodations();
+  const filteredAccommodationsCount = filteredAccommodations.length;
 
   const isDataFiltered =
     filteredAccommodationsCount < accommodationDataset.length;
@@ -23,7 +18,12 @@ export const FilterHistoryPanel = () => {
     : 'Show All Results';
 
   const handleShowResults = () => {
-    console.log('Redirect to the Results Page'); // TODO
+    // Set the filtered accommodations and navigate to results
+    localStorage.setItem(
+      'filteredAccommodations',
+      JSON.stringify(filteredAccommodations)
+    );
+    navigate('/results');
   };
 
   return (

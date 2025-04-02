@@ -51,6 +51,7 @@ interface CarouselState {
   setCarouselData: (carouselData: Accommodation[]) => void;
   populateCarouselData: () => void;
   updateCarouselSize: (rows: number, cols: number) => void;
+  getFilteredAccommodations: () => Accommodation[];
 
   // Methods: Filtering
   applyDecisionChipsToCarousel: () => void;
@@ -66,8 +67,8 @@ interface CarouselState {
 }
 
 export const useCarouselStore = create<CarouselState>((set, get) => ({
-  cellWidth: 200, // Default width of a single cell [px]
-  cellHeight: 150, // Default height of a single cell [px]
+  cellWidth: 250, // Default width of a single cell [px]
+  cellHeight: 200, // Default height of a single cell [px]
   totalColumns: 0, // Dynamically updated in the component
   totalRows: 0, // Dynamically updated in the component
   visibleColumns: 3, // Default number of visible columns
@@ -75,14 +76,14 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   columnOffset: 0,
   rowOffset: 0,
 
+  hoveredColumn: null,
+  hoveredRow: null,
+  hoveredCell: null,
+
   columnRanges: [],
   rowRanges: [],
   carouselData: accommodationDataset,
   dataPerCell: [], // Dynamically populated in the component
-
-  hoveredColumn: null,
-  hoveredRow: null,
-  hoveredCell: null,
 
   scrollLeft,
   scrollRight,
@@ -91,42 +92,6 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
   resetPosition,
   resetColumnOffset,
   resetRowOffset,
-
-  drillDownColumn,
-  drillDownRow,
-  drillDownCell,
-
-  updateCarouselSize: (rows, cols) =>
-    set({
-      totalRows: rows,
-      totalColumns: cols,
-    }),
-
-  // Reapply decision chip filters to the carousel grid when selection changes
-  applyDecisionChipsToCarousel: () => {
-    const { columnRanges, rowRanges, carouselData } = get();
-    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
-
-    if (
-      !xAxisFilter ||
-      !yAxisFilter ||
-      !columnRanges.length ||
-      !rowRanges.length
-    )
-      return;
-
-    const { carousel } = buildCarouselGrid(
-      columnRanges,
-      rowRanges,
-      carouselData,
-      xAxisFilter,
-      yAxisFilter
-    );
-
-    set({
-      dataPerCell: carousel,
-    });
-  },
 
   setCarouselData: (carouselData: Accommodation[]) => set({ carouselData }),
 
@@ -160,6 +125,49 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       dataPerCell: carousel,
     });
   },
+
+  updateCarouselSize: (rows, cols) =>
+    set({
+      totalRows: rows,
+      totalColumns: cols,
+    }),
+
+  // Returns a list of filtered accommodations after applying carousel and decision chip filters
+  getFilteredAccommodations: () =>
+    get()
+      .dataPerCell.flat()
+      .map((cell) => cell.accommodations)
+      .flat(),
+
+  // Reapply decision chip filters to the carousel grid when selection changes
+  applyDecisionChipsToCarousel: () => {
+    const { columnRanges, rowRanges, carouselData } = get();
+    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+
+    if (
+      !xAxisFilter ||
+      !yAxisFilter ||
+      !columnRanges.length ||
+      !rowRanges.length
+    )
+      return;
+
+    const { carousel } = buildCarouselGrid(
+      columnRanges,
+      rowRanges,
+      carouselData,
+      xAxisFilter,
+      yAxisFilter
+    );
+
+    set({
+      dataPerCell: carousel,
+    });
+  },
+
+  drillDownColumn,
+  drillDownRow,
+  drillDownCell,
 
   setHoveredRow: (row) =>
     set({ hoveredRow: row, hoveredColumn: null, hoveredCell: null }),
