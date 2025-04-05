@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { CarouselPage, ResultsPage } from './pages';
+import { CarouselPage, DetailPage, ResultsPage } from './pages';
 import './App.css';
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CarouselPage />} />
         <Route path="/results" element={<ResultsPage />} />
+        <Route path="/details/:id" element={<DetailPage />} />
       </Routes>
     </Router>
   );

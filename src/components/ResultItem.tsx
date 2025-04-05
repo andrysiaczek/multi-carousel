@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { Accommodation } from '../types';
 
@@ -17,12 +18,13 @@ export const ResultItem = ({ accommodation }: ResultItemProps) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [shuffledImages, setShuffledImages] = useState<string[]>([]);
   const [shuffledFeatures, setShuffledFeatures] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   // Shuffle images and features on mount
   useEffect(() => {
-    setShuffledImages(shuffleArray(accommodation.imagesI));
+    setShuffledImages(shuffleArray(accommodation.images));
     setShuffledFeatures(shuffleArray(accommodation.features));
-  }, [accommodation.imagesI, accommodation.features]);
+  }, [accommodation.images, accommodation.features]);
 
   const handleDotClick = (index: number) => {
     setActiveImageIndex(index);
@@ -76,6 +78,9 @@ export const ResultItem = ({ accommodation }: ResultItemProps) => {
         <button
           type="button"
           className="flex items-center pl-4 pr-1 py-1.5 text-xs font-semibold text-antiflashWhite bg-darkGreen rounded-md transition group hover:pr-3 hover:gap-1"
+          onClick={() => {
+            navigate(`/details/${accommodation.id}`);
+          }}
         >
           Show More
           <ChevronRight

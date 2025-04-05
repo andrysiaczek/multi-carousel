@@ -7,5 +7,5 @@ export type Accommodation = {
   type: string;
   features: string[];
   locationI: { lat: number; lng: number };
-  imagesI: string[];
+  images: string[];
 };

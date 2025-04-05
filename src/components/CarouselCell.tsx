@@ -143,7 +143,7 @@ export const CarouselCell = ({
           >
             {/* Displayed Accommodation at the center */}
             {displayedAccommodation && (
-              <div className="flex-grow flex items-center justify-center font-semibold text-lg text-gray-700 text-center relative">
+              <div className="flex-grow flex items-center gap-0.5 justify-center font-semibold text-lg text-gray-700 text-center relative">
                 {Icon && <Icon size={20} className="mr-1 text-gray-600" />}
                 <span
                   className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full group-hover:underline"

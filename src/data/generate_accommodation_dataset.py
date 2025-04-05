@@ -14,6 +14,33 @@ accommodation_types_with_prices = {
     "Entire Apartment / House": (70, 300)
 }
 
+# Generate a skewed rating: few low, some medium, many high
+def generate_skewed_rating():
+    random_value = random.random()
+    if random_value < 0.05:
+        # Low ratings (1.0 - 3.0) - 5% probability
+        return round(random.uniform(1.0, 3.0), 1)
+    elif random_value < 0.25:
+        # Medium ratings (3.0 - 4.0) - 20% probability
+        return round(random.uniform(3.0, 4.0), 1)
+    else:
+        # High ratings (4.0 - 5.0) - 75% probability
+        return round(random.uniform(4.0, 5.0), 1)
+    
+    # Generate a skewed distance: most close, some medium, few far
+def generate_skewed_distance():
+    random_value = random.random()
+    if random_value < 0.7:
+        # Most distances (0 km - 2 km) - 70% probability
+        return round(random.uniform(0.0, 2.0), 1)
+    elif random_value < 0.9:
+        # Medium distances (2 km - 4 km) - 20% probability
+        return round(random.uniform(2.0, 4.0), 1)
+    else:
+        # Few distances (4 km - 10 km) - 10% probability
+        return round(random.uniform(4.0, 10.0), 1)
+
+
 # Features list (tailored to accommodation type)
 features_by_type = {
     "Hostel (Dormitory Bed)": [
@@ -188,14 +215,14 @@ for i in range(1, 151):  # 150 accommodations
     accom_type = random.choice(list(accommodation_types_with_prices.keys()))
     price_range = accommodation_types_with_prices[accom_type]
     price = round(random.uniform(price_range[0], price_range[1]), 2)
-    rating = round(random.uniform(1.0, 5.0), 1)
-    distance = round(random.uniform(1.0, 10.0), 1)
+    rating = generate_skewed_rating()
+    distance = generate_skewed_distance()
     features = generate_features(accom_type)
     nameI = generate_accommodation_name(accom_type)
     nameII = generate_accommodation_name(accom_type)
     locationI = random_location(valencia_center)
     locationII = random_location(malaga_center)
-    imagesI, imagesII = get_images(accom_type, features)
+    images = get_images(accom_type, features)
 
     dataset.append({
         "id": str(i),
@@ -208,8 +235,7 @@ for i in range(1, 151):  # 150 accommodations
         "features": features,
         "locationI": locationI,
         "locationII": locationII,
-        "imagesI": imagesI,
-        "imagesII": imagesII
+        "images": images
     })
 
 # Save dataset
