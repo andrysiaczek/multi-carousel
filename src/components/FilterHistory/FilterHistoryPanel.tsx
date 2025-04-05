@@ -10,6 +10,7 @@ export const FilterHistoryPanel = () => {
   // Calculate the number of unique filtered accommodations from dataPerCell
   const filteredAccommodations = useCarouselStore().getFilteredAccommodations();
   const filteredAccommodationsCount = filteredAccommodations.length;
+  const noFilteredResults = filteredAccommodationsCount === 0;
 
   const isDataFiltered =
     filteredAccommodationsCount < accommodationDataset.length;
@@ -33,7 +34,9 @@ export const FilterHistoryPanel = () => {
         {(steps.length > 1 || hoveredStepLabel) && (
           <ResetButton
             onClick={() => goToStep(0)}
-            inHoverState={steps.length === 1 && !!hoveredStepLabel}
+            isHighlighted={
+              noFilteredResults || (steps.length === 1 && !!hoveredStepLabel)
+            }
           />
         )}
       </div>
@@ -43,7 +46,7 @@ export const FilterHistoryPanel = () => {
         index === 0 ? null : (
           <div
             key={`${step.label}-${step.stepNumber}`}
-            className={`px-3 py-1 text-xs text-gray-700 cursor-pointer bg-gray-300 hover:bg-lightOrange hover:text-darkOrange 
+            className={`px-3 py-1 text-xs text-gray-700 cursor-pointer bg-gray-300 hover:bg-darkOrange hover:text-lightOrange 
             ${
               index === 1 && steps.length <= 2 && !hoveredStepLabel
                 ? 'rounded-r-lg pr-4'
@@ -72,8 +75,14 @@ export const FilterHistoryPanel = () => {
       {/* Show Results Button */}
       <button
         type="button"
-        className="ml-auto px-4 py-1.5 text-xs font-semibold bg-lightOrange text-darkOrange rounded-lg hover:bg-darkOrange hover:text-lightOrange transition"
+        className={`ml-auto px-4 py-1.5 text-xs font-semibold rounded-lg transition  
+      ${
+        noFilteredResults
+          ? 'bg-gray-300 text-gray-500'
+          : 'bg-lightOrange text-darkOrange hover:bg-darkOrange hover:text-lightOrange'
+      }`}
         onClick={handleShowResults}
+        disabled={noFilteredResults}
       >
         {showResultsText}
       </button>

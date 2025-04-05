@@ -29,7 +29,12 @@ export const ResultsPage = () => {
       {/* Results List */}
       <div className="w-full max-w-2xl space-y-6">
         {filteredAccommodations.length === 0 ? (
-          <p>No results found.</p>
+          <div className="flex flex-col items-center justify-center gap-2 py-6 bg-white text-gray-600 rounded-lg shadow-md">
+            <p className="text-lg font-semibold">No Results Found</p>
+            <p className="text-sm">
+              Try adjusting your filters to find more options.
+            </p>
+          </div>
         ) : (
           filteredAccommodations.map((accommodation) => (
             <ResultItem key={accommodation.id} accommodation={accommodation} />
