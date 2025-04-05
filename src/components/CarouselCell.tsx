@@ -10,6 +10,7 @@ import {
   House,
   Landmark,
   MoreHorizontal,
+  Search,
 } from 'lucide-react';
 import {
   useAxisFilterStore,
@@ -61,6 +62,9 @@ export const CarouselCell = ({
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
   const navigate = useNavigate();
 
+  const isEmptyCell = !accommodations.length;
+  const isActiveCell = !isEmptyCell && !isFillerCell;
+
   // Determine if this cell, row, or column is being hovered
   const isHoveredRow = hoveredRow === row;
   const isHoveredColumn = hoveredColumn === col;
@@ -68,14 +72,17 @@ export const CarouselCell = ({
 
   const getCellBackground = () => {
     if (isFillerCell) return 'bg-gray-100';
+    if (isEmptyCell) return 'bg-gray-50';
     if (isHoveredRow || isHoveredColumn || isHoveredCell)
       return 'bg-lightOrange';
     return 'bg-white';
   };
 
   const handleFilterMouseEnter = () => {
-    setHoveredCell(row, col);
-    setHoveredStep(columnRange, rowRange);
+    if (isActiveCell) {
+      setHoveredCell(row, col);
+      setHoveredStep(columnRange, rowRange);
+    }
   };
 
   const handleFilterMouseLeave = () => {
@@ -84,28 +91,34 @@ export const CarouselCell = ({
   };
 
   const handleResultsMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    resetHover();
-    resetHoveredStep();
-    e.currentTarget.classList.add('bg-lightOrange', 'text-darkOrange');
+    if (isActiveCell) {
+      resetHover();
+      resetHoveredStep();
+      e.currentTarget.classList.add('bg-lightOrange', 'text-darkOrange');
+    }
   };
 
   const handleResultsMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    setHoveredCell(row, col);
-    setHoveredStep(columnRange, rowRange);
-    e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
+    if (isActiveCell) {
+      setHoveredCell(row, col);
+      setHoveredStep(columnRange, rowRange);
+      e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
+    }
   };
 
   const handleRedirectClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    handleFilterMouseLeave();
-    e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
+    if (isActiveCell) {
+      e.stopPropagation();
+      handleFilterMouseLeave();
+      e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
 
-    // Set the filtered accommodations and navigate to results
-    localStorage.setItem(
-      'filteredAccommodations',
-      JSON.stringify(accommodations)
-    );
-    navigate('/results');
+      // Set the filtered accommodations and navigate to results
+      localStorage.setItem(
+        'filteredAccommodations',
+        JSON.stringify(accommodations)
+      );
+      navigate('/results');
+    }
   };
 
   // Highlighted accommodation for display
@@ -122,51 +135,60 @@ export const CarouselCell = ({
 
   return (
     <div
-      className={`w-[${cellWidth}px] h-[${cellHeight}px] flex flex-col justify-center p-3 border transition cursor-pointer ${getCellBackground()}`}
+      className={`w-[${cellWidth}px] h-[${cellHeight}px] flex flex-col justify-center p-3 border transition ${
+        isActiveCell ? 'cursor-pointer' : ''
+      } ${getCellBackground()}`}
       onMouseEnter={handleFilterMouseEnter}
       onMouseLeave={handleFilterMouseLeave}
-      onClick={() => drillDownCell(col, row)}
+      onClick={() => isActiveCell && drillDownCell(col, row)}
     >
       {!isFillerCell && (
         <div className="flex flex-col h-full justify-around px-1">
-          {/* Top-left: Title */}
-          <div className="text-xs font-medium text-gray-400 mb-1">
-            {capitalize(xAxisFilter)}: {columnRange.label} /{' '}
-            {capitalize(yAxisFilter)}: {rowRange.label}
-          </div>
-
-          <div
-            className="flex flex-col group cursor-pointer p-2 rounded h-full"
-            onMouseEnter={handleResultsMouseEnter}
-            onMouseLeave={handleResultsMouseLeave}
-            onClick={handleRedirectClick}
-          >
-            {/* Displayed Accommodation at the center */}
-            {displayedAccommodation && (
-              <div className="flex-grow flex items-center gap-0.5 justify-center font-semibold text-lg text-gray-700 text-center relative">
-                {Icon && <Icon size={20} className="mr-1 text-gray-600" />}
-                <span
-                  className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full group-hover:underline"
-                  title={nameI}
-                >
-                  {truncateName(nameI)}
-                </span>
-                <span className="absolute top-[-36px] left-1/2 transform -translate-x-1/2 text-xs text-darkOrange bg-lightOrange rounded px-1 py-0.5 opacity-0 group-hover:opacity-100 transition">
-                  {accommodations.length === 1
-                    ? 'Show this accommodation'
-                    : `See ${accommodations.length} results`}
-                </span>
+          {isEmptyCell ? (
+            <div className="flex flex-col h-full items-center justify-center gap-1 text-gray-400">
+              <Search size={20} />
+              <div className="text-sm font-semibold">No Results</div>
+              <span className="text-xs">Try adjusting your filters</span>
+            </div>
+          ) : (
+            <>
+              {/* Top-left: Title */}
+              <div className="text-xs font-medium text-gray-400 mb-1">
+                {capitalize(xAxisFilter)}: {columnRange.label} /{' '}
+                {capitalize(yAxisFilter)}: {rowRange.label}
               </div>
-            )}
+              <div
+                className="flex flex-col group cursor-pointer p-2 rounded h-full"
+                onMouseEnter={handleResultsMouseEnter}
+                onMouseLeave={handleResultsMouseLeave}
+                onClick={handleRedirectClick}
+              >
+                {/* Displayed Accommodation at the center */}
+                <div className="flex-grow flex items-center gap-0.5 justify-center font-semibold text-lg text-gray-700 text-center relative">
+                  {Icon && <Icon size={20} className="mr-1 text-gray-600" />}
+                  <span
+                    className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full group-hover:underline"
+                    title={nameI}
+                  >
+                    {truncateName(nameI)}
+                  </span>
+                  <span className="absolute top-[-36px] left-1/2 transform -translate-x-1/2 text-xs text-darkOrange bg-lightOrange rounded px-1 py-0.5 opacity-0 group-hover:opacity-100 transition">
+                    {accommodations.length === 1
+                      ? 'Show this accommodation'
+                      : `See ${accommodations.length} results`}
+                  </span>
+                </div>
 
-            {/* Bottom: Additional count */}
-            {additionalCount > 0 && (
-              <div className="flex items-end justify-end self-end gap-1 text-s text-gray-500 cursor-pointer group-hover:underline">
-                <MoreHorizontal size={12} />
-                and {additionalCount} more
+                {/* Bottom: Additional count */}
+                {additionalCount > 0 && (
+                  <div className="flex items-end justify-end self-end gap-1 text-s text-gray-500 cursor-pointer group-hover:underline">
+                    <MoreHorizontal size={12} />
+                    and {additionalCount} more
+                  </div>
+                )}
               </div>
-            )}
-          </div>
+            </>
+          )}
         </div>
       )}
     </div>

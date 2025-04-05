@@ -5,7 +5,7 @@ import {
   ChevronRight,
   ChevronUp,
 } from 'lucide-react';
-import { CarouselCell } from '../components';
+import { CarouselCell, ResetButton } from '../components';
 import {
   useCarouselStore,
   useDecisionChipsStore,
@@ -26,6 +26,7 @@ export const CarouselGrid = () => {
     scrollRight,
     scrollUp,
     scrollDown,
+    resetPosition,
     hoveredRow,
     hoveredColumn,
     columnRanges,
@@ -116,6 +117,12 @@ export const CarouselGrid = () => {
         </div>
       </div>
 
+      {/* Reset Button at the Intersection */}
+      <ResetButton
+        onClick={resetPosition}
+        disabled={rowOffset === 0 && columnOffset === 0}
+      />
+
       <div className="flex">
         {/* Row Headers (Y-Axis Labels) */}
         <div
@@ -181,7 +188,7 @@ export const CarouselGrid = () => {
                       columnRange={columnRanges[columnOffset + colIndex]}
                       rowRange={rowRanges[rowOffset + rowIndex]}
                       accommodations={cell ? cell.accommodations : []}
-                      isFillerCell={!cell || !cell.accommodations.length}
+                      isFillerCell={!cell}
                     />
                   );
                 })

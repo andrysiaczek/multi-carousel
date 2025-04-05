@@ -5,4 +5,5 @@ export { DecisionChipsPanel } from './DecisionChipsPanel';
 export { FilterAxisSelector } from './FilterAxisSelector';
 export { FilterHistoryPanel } from './FilterHistory';
 export { MapLibreMap } from './MapLibreMap';
+export { ResetButton } from './ResetButton';
 export { ResultItem } from './ResultItem';
