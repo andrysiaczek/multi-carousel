@@ -5,13 +5,16 @@ import {
   ChevronRight,
   ChevronUp,
 } from 'lucide-react';
-import { CarouselCell, ResetButton } from '../components';
+import {
+  CarouselCell,
+  ResetButtonCarousel as ResetButton,
+} from '../../components';
 import {
   useCarouselStore,
   useDecisionChipsStore,
   useFilterHistoryStore,
-} from '../store';
-import { Axis, Subrange } from '../types';
+} from '../../store';
+import { Axis, Subrange } from '../../types';
 
 export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);

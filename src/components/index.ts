@@ -1,9 +1,12 @@
-export { ArrowButton } from './ArrowButton';
-export { CarouselCell } from './CarouselCell';
-export { CarouselGrid } from './CarouselGrid';
+export {
+  CarouselCell,
+  CarouselGrid,
+  FilterAxisSelector,
+  ResetButton as ResetButtonCarousel,
+} from './Carousel';
 export { DecisionChipsPanel } from './DecisionChipsPanel';
-export { FilterAxisSelector } from './FilterAxisSelector';
-export { FilterHistoryPanel } from './FilterHistory';
-export { MapLibreMap } from './MapLibreMap';
-export { ResetButton } from './ResetButton';
-export { ResultItem } from './ResultItem';
+export {
+  FilterHistoryPanel,
+  ResetButton as ResetButtonFilterHistory,
+} from './FilterHistory';
+export { ArrowButton, MapLibreMap, ResultItem } from './Result';

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import { Accommodation } from '../types';
+import { Accommodation } from '../../types';
 
 const shuffleArray = (array: string[]) => {
   return array

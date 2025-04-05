@@ -1,6 +1,6 @@
-import { useAxisFilterStore } from '../store';
-import { Axis, FilterOption } from '../types';
-import { capitalize } from '../utils';
+import { useAxisFilterStore } from '../../store';
+import { Axis, FilterOption } from '../../types';
+import { capitalize } from '../../utils';
 
 interface FilterAxisSelectorProps {
   axis: Axis;

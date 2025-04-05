@@ -16,9 +16,9 @@ import {
   useAxisFilterStore,
   useCarouselStore,
   useFilterHistoryStore,
-} from '../store';
-import { Accommodation, Subrange } from '../types';
-import { capitalize } from '../utils';
+} from '../../store';
+import { Accommodation, Subrange } from '../../types';
+import { capitalize } from '../../utils';
 
 const iconMapping: Record<string, React.ElementType> = {
   'Hostel (Dormitory Bed)': BedSingle,

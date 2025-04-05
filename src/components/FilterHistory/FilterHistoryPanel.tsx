@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { ResetButtonFilterHistory as ResetButton } from '../../components';
 import { accommodationDataset } from '../../data';
 import { useCarouselStore, useFilterHistoryStore } from '../../store';
-import { ResetButton } from '../FilterHistory';
 
 export const FilterHistoryPanel = () => {
   const { steps, hoveredStepLabel, goToStep } = useFilterHistoryStore();

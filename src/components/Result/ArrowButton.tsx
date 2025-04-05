@@ -1,6 +1,5 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Reusable Button Component
 export const ArrowButton = ({
   onClick,
   position,
