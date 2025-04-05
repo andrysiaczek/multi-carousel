@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ArrowButton, MapLibreMap } from '../components';
+import { ArrowButton, LoadingMessage, MapLibreMap } from '../components';
 import { Accommodation } from '../types';
 
 export const DetailPage = () => {
@@ -55,7 +55,8 @@ export const DetailPage = () => {
     setTimeout(() => setShowModal(false), 5000);
   };
 
-  if (!accommodation) return <div>Loading...</div>;
+  if (!accommodation)
+    return <LoadingMessage message="Loading accommodation details..." />;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-4 px-2">
@@ -105,7 +106,7 @@ export const DetailPage = () => {
             <button
               type="button"
               onClick={() => navigate(-1)}
-              className="absolute top-4 left-4 flex items-center gap-2 text-antiflashWhite bg-darkGreen/70 pl-3 pr-4 py-2 rounded-full shadow-lg transition-transform duration-300 hover:bg-darkGreen/90 hover:scale-105 active:scale-95"
+              className="absolute top-4 left-4 flex items-center gap-2 text-antiflashWhite bg-darkGreen/70 pl-3 pr-4 py-2 rounded-full shadow-lg transition-transform duration-300 hover:bg-darkGreen/95 hover:scale-105 active:scale-95"
             >
               <ChevronLeft
                 size={20}
