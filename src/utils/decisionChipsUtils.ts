@@ -1,7 +1,7 @@
 import { useDecisionChipsStore } from '../store';
 import { Accommodation } from '../types';
 
-const decisionChips = [
+export const decisionChips = [
   'Free Wi-Fi',
   'Air conditioning',
   'Private room',

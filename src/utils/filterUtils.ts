@@ -1,4 +1,4 @@
-import { Accommodation, Axis, FilterOption, Subrange } from '../types';
+import { Accommodation, FilterOption, Subrange } from '../types';
 import { clean } from '../utils';
 
 export const filterAccommodations = (
@@ -41,17 +41,4 @@ export const findSubrangeByLabel = (
     }
   }
   return null;
-};
-
-export const getFallbackFilter = (
-  axis: Axis,
-  otherFilter: FilterOption
-): FilterOption => {
-  return axis === Axis.X
-    ? otherFilter !== FilterOption.Price
-      ? FilterOption.Price
-      : FilterOption.Rating
-    : otherFilter !== FilterOption.Rating
-    ? FilterOption.Rating
-    : FilterOption.Price;
 };

@@ -1,4 +1,4 @@
-import { Accommodation, FilterOption, Subrange } from '../types';
+import { Accommodation, FilterOption } from '../types';
 
 export type DrillStep = {
   stepNumber: number;
@@ -15,3 +15,11 @@ export type DrillStep = {
 };
 
 export type NewDrillStep = Omit<DrillStep, 'stepNumber'>;
+
+export type Subrange = {
+  label: string;
+  sublabel?: string;
+  lowerBound: number | null;
+  upperBound: number | null;
+  subranges?: Subrange[];
+};

@@ -17,7 +17,6 @@ import {
   buildCarouselGrid,
   findSubrangeByLabel,
   generateFilterLabel,
-  getFallbackFilter,
   updateAvailableChips,
 } from '../utils';
 
@@ -307,4 +306,17 @@ const drillDownTypeAxis = ({
     xRanges,
     yRanges,
   };
+};
+
+export const getFallbackFilter = (
+  axis: Axis,
+  otherFilter: FilterOption
+): FilterOption => {
+  return axis === Axis.X
+    ? otherFilter !== FilterOption.Price
+      ? FilterOption.Price
+      : FilterOption.Rating
+    : otherFilter !== FilterOption.Rating
+    ? FilterOption.Rating
+    : FilterOption.Price;
 };

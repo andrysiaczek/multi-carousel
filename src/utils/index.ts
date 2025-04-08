@@ -1,17 +1,19 @@
 export { buildCarouselGrid } from './carouselUtils';
-export { updateAvailableChips } from './decisionChipsUtils';
-export { drillDownCell, drillDownColumn, drillDownRow } from './drillLogic';
+export { decisionChips, updateAvailableChips } from './decisionChipsUtils';
+export {
+  drillDownCell,
+  drillDownColumn,
+  drillDownRow,
+  getFallbackFilter,
+} from './drillLogic';
+export { getFeatureIcon } from './featuresUtils';
 export {
   addStandardAxisDrillStep,
   addTypeAxisDrillStep,
   generateFilterLabel,
   restoreAxisFiltersFromStep,
 } from './filterHistoryUtils';
-export {
-  filterAccommodations,
-  findSubrangeByLabel,
-  getFallbackFilter,
-} from './filterUtils';
+export { filterAccommodations, findSubrangeByLabel } from './filterUtils';
 export {
   resetColumnOffset,
   resetPosition,
@@ -21,4 +23,5 @@ export {
   scrollRight,
   scrollUp,
 } from './scrollLogic';
+export { sortAccommodations } from './sortUtils';
 export { capitalize, clean } from './stringUtils';

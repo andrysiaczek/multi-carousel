@@ -9,3 +9,12 @@ body,
 * {
   box-sizing: border-box;
 }
+
+/* Custom class for left scrollbar */
+.scrollbar-left {
+  direction: rtl;
+}
+
+.scrollbar-left > * {
+  direction: ltr;
+}

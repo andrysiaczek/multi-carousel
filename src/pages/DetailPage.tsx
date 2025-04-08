@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ArrowButton, LoadingMessage, MapLibreMap } from '../components';
+import { accommodationDataset } from '../data';
 import { Accommodation } from '../types';
 
 export const DetailPage = () => {
@@ -16,13 +17,7 @@ export const DetailPage = () => {
 
   // Fetch accommodation data
   useEffect(() => {
-    const storedAccommodations = JSON.parse(
-      localStorage.getItem('filteredAccommodations') || '[]'
-    );
-    const found = storedAccommodations.find(
-      (acc: Accommodation) => acc.id === id
-    );
-    setAccommodation(found);
+    setAccommodation(accommodationDataset.find((acc) => acc.id === id) || null);
   }, [id]);
 
   // Image navigation handlers
@@ -159,7 +154,7 @@ export const DetailPage = () => {
               <div className="flex flex-col w-full items-end gap-2 text-gray-500 text-sm font-medium">
                 <span>Rating</span>
                 <span>Price</span>
-                <span>Distance to the center</span>
+                <span>Distance to the city center</span>
               </div>
 
               {/* Vertical Divider */}
@@ -169,7 +164,11 @@ export const DetailPage = () => {
               <div className="flex flex-col w-full items-start gap-2 text-sm font-semibold text-gray-600">
                 <span>{accommodation.rating} ★</span>
                 <span>€{accommodation.price}</span>
-                <span>{accommodation.distance} km</span>
+                <span>
+                  {accommodation.distance === 0
+                    ? 'Right in the center'
+                    : `${accommodation.distance} km`}
+                </span>
               </div>
             </div>
 

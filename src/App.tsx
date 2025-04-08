@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { CarouselPage, DetailPage, ResultsPage } from './pages';
+import { BenchmarkPage, CarouselPage, DetailPage, ResultsPage } from './pages';
 import './App.css';
 
 function App() {
@@ -7,8 +7,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<CarouselPage />} />
-        <Route path="/results" element={<ResultsPage />} />
+        <Route path="/benchmark" element={<BenchmarkPage />} />
         <Route path="/details/:id" element={<DetailPage />} />
+        <Route path="/results" element={<ResultsPage />} />
       </Routes>
     </Router>
   );

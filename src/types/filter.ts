@@ -10,10 +10,10 @@ export enum FilterOption {
   Type = 'type',
 }
 
-export type Subrange = {
-  label: string;
-  sublabel?: string;
-  lowerBound: number | null;
-  upperBound: number | null;
-  subranges?: Subrange[];
-};
+export enum FilterOptionWithFeature {
+  Distance = 'distance',
+  Price = 'price',
+  Rating = 'rating',
+  Type = 'type',
+  Feature = 'feature',
+}
