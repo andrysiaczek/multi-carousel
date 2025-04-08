@@ -1,4 +1,5 @@
 import { useDecisionChipsStore } from '../store';
+// import { getFeatureIcon } from '../utils';
 
 export const DecisionChipsPanel = () => {
   const { availableChips, selectedChips, toggleChip, resetChips } =
@@ -6,20 +7,30 @@ export const DecisionChipsPanel = () => {
 
   return (
     <div className="flex flex-wrap justify-center gap-2 p-4 pt-8 border-b">
-      {availableChips.map((chip) => (
-        <button
-          key={chip}
-          type="button"
-          onClick={() => toggleChip(chip)}
-          className={`px-3 py-1 rounded-full border text-xs transition ${
-            selectedChips.includes(chip)
-              ? 'bg-darkGreen text-white border-darkGreen'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
-        >
-          {chip}
-        </button>
-      ))}
+      {availableChips.map((chip) => {
+        // const Icon = getFeatureIcon(chip);
+
+        return (
+          <button
+            key={chip}
+            type="button"
+            onClick={() => toggleChip(chip)}
+            className={`flex items-center gap-1 px-3 py-1 rounded-full border text-xs transition ${
+              selectedChips.includes(chip)
+                ? 'bg-darkGreen text-white border-darkGreen'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            {/* <Icon
+              size={16}
+              className={`${
+                selectedChips.includes(chip) ? 'text-white' : 'text-gray-500'
+              }`}
+            /> */}
+            {chip}
+          </button>
+        );
+      })}
       {selectedChips.length > 0 && (
         <button
           type="button"

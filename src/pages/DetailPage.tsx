@@ -144,12 +144,12 @@ export const DetailPage = () => {
           {/* Main Info (Right Side) */}
           <div className="w-[40%] flex flex-col justify-between bg-lightGreen p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out">
             {/* Title */}
-            <h2 className="text-2xl font-bold text-darkGreen text-center mb-2">
+            <h2 className="text-2xl font-bold text-darkGreen text-center">
               {accommodation.nameI}
             </h2>
 
             {/* Info Section */}
-            <div className="flex justify-between items-center gap-4">
+            <div className="flex justify-between items-center gap-4 mb-2">
               {/* Labels Column */}
               <div className="flex flex-col w-full items-end gap-2 text-gray-500 text-sm font-medium">
                 <span>Rating</span>
