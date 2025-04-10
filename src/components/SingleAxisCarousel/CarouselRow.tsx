@@ -1,0 +1,173 @@
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+} from 'lucide-react';
+import { CarouselItem } from '../../components';
+import { accommodationDataset, filters } from '../../data';
+import { useDecisionChipsStore, useSingleAxisCarouselStore } from '../../store';
+import { FilterOption } from '../../types';
+import {
+  capitalize,
+  filterAccommodationsSingleAxisCarousel,
+} from '../../utils';
+import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
+
+interface CarouselRowProps {
+  filterOption: FilterOption;
+}
+
+export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
+  const { titles, scrolls, setTitleIndex, setScrollPosition } =
+    useSingleAxisCarouselStore();
+  const { selectedChips } = useDecisionChipsStore();
+  const navigate = useNavigate();
+
+  const titleIndex = titles[filterOption];
+  const scrollPosition = scrolls[filterOption];
+
+  // Load the range data for the current filter option
+  const filterRanges = useMemo(() => {
+    return filters[filterOption] || [];
+  }, [filterOption]);
+  const accommodations = useMemo(() => {
+    return filterAccommodationsSingleAxisCarousel(
+      accommodationDataset,
+      filterOption,
+      filterRanges[titleIndex]?.label,
+      selectedChips
+    );
+  }, [filterOption, titleIndex, selectedChips, filterRanges]);
+
+  // Scroll Handlers for Carousel
+  const scrollLeft = () =>
+    setScrollPosition(filterOption, Math.max(scrollPosition - 1, 0));
+  const scrollRight = () =>
+    setScrollPosition(
+      filterOption,
+      Math.min(scrollPosition + 1, Math.max(0, accommodations.length - 5))
+    );
+
+  // Scroll Handlers for Vertical Title
+  const scrollTitleUp = () =>
+    setTitleIndex(filterOption, Math.max(titleIndex - 1, 0));
+  const scrollTitleDown = () =>
+    setTitleIndex(
+      filterOption,
+      Math.min(titleIndex + 1, filterRanges.length - 1)
+    );
+
+  const handleShowList = () => {
+    // Set the filtered accommodations and navigate to results
+    localStorage.setItem(
+      'filteredAccommodations',
+      JSON.stringify(accommodations)
+    );
+    navigate('/results');
+  };
+
+  return (
+    <div className="w-full py-4 relative bg-gray-100">
+      {/* Vertically Scrollable Title with Minimalistic Arrows */}
+      <div className="flex flex-col items-center gap-1 mb-2">
+        <button
+          type="button"
+          aria-label="Scroll title up"
+          onClick={scrollTitleUp}
+          className={`p-1 rounded-full text-gray-500 hover:bg-gray-100 ${
+            titleIndex === 0 ? 'text-gray-300 cursor-not-allowed' : ''
+          }`}
+          disabled={titleIndex === 0}
+        >
+          <ChevronUp size={16} />
+        </button>
+        <div className="flex flex-col items-center justify-center text-center">
+          <h2 className="text-xl flex items-center gap-2">
+            <span className="font-semibold text-darkGreen w-60 text-end">
+              {capitalize(filterOption)}
+            </span>
+            <span className="w-[1px] h-5 bg-gray-500 mx-2" />
+            {/* Vertical Divider */}
+            <span className="font-semibold text-darkGreen w-60 text-start">
+              {filterRanges[titleIndex]?.label}
+            </span>
+          </h2>
+          <span className="text-sm font-medium text-gray-500 mt-1">
+            {filterRanges[titleIndex]?.sublabel || ''}
+          </span>
+        </div>
+        <button
+          type="button"
+          aria-label="Scroll title down"
+          onClick={scrollTitleDown}
+          className={`p-1 rounded-full text-gray-500 hover:bg-gray-100 ${
+            titleIndex === filterRanges.length - 1
+              ? 'text-gray-300 cursor-not-allowed'
+              : ''
+          }`}
+          disabled={titleIndex === filterRanges.length - 1}
+        >
+          <ChevronDown size={16} />
+        </button>
+      </div>
+
+      {/* Carousel with Left and Right Arrows */}
+      <div className="relative">
+        {/* Left Arrow */}
+        <button
+          type="button"
+          aria-label="Scroll carousel left"
+          onClick={scrollLeft}
+          disabled={scrollPosition === 0}
+          className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition ${
+            scrollPosition === 0
+              ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
+        >
+          <ChevronLeft size={24} />
+        </button>
+
+        {/* Carousel Items */}
+        <div className="flex overflow-x-auto overflow-visible scrollbar-hide space-x-2 py-2 justify-center">
+          {accommodations
+            .slice(scrollPosition, scrollPosition + 5)
+            .map((item) => (
+              <CarouselItem key={item.id} accommodation={item} />
+            ))}
+        </div>
+
+        {/* Right Arrow */}
+        <button
+          type="button"
+          aria-label="Scroll carousel right"
+          onClick={scrollRight}
+          disabled={scrollPosition + 5 >= accommodations.length}
+          className={`absolute right-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition ${
+            scrollPosition + 5 >= accommodations.length
+              ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          }`}
+        >
+          <ChevronRight size={24} />
+        </button>
+
+        {/* Show List Button */}
+        <button
+          type="button"
+          aria-label="Show all accommodations in this list"
+          className="flex items-center absolute -top-6 right-14 text-sm font-medium text-darkGreen hover:underline hover:font-semibold transition-all duration-300 group"
+          onClick={handleShowList}
+        >
+          Show this list
+          <ChevronRight
+            size={12}
+            className="ml-1 text-darkGreen transform transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-90 group-hover:stroke-[2.5]"
+          />
+        </button>
+      </div>
+    </div>
+  );
+};

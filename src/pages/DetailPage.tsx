@@ -125,11 +125,11 @@ export const DetailPage = () => {
         {/* Lower Half: Features + Main Info */}
         <div className="flex w-full h-1/3 space-x-4">
           {/* Features (Left Side) */}
-          <div className="w-[60%] bg-white p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out">
+          <div className="w-[60%] bg-white px-4 py-2 rounded-lg shadow-md transition-all duration-300 ease-in-out">
             <h3 className="text-center text-lg text-darkGreen font-semibold mb-2">
               Features
             </h3>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-2">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-2 mb-2">
               {accommodation.features.slice(0, 12).map((feature) => (
                 <span
                   key={feature}

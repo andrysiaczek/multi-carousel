@@ -5,10 +5,7 @@ import {
   ChevronRight,
   ChevronUp,
 } from 'lucide-react';
-import {
-  CarouselCell,
-  ResetButtonCarousel as ResetButton,
-} from '../../components';
+import { CarouselCell, ResetButtonCarousel as ResetButton } from '..';
 import {
   useCarouselStore,
   useDecisionChipsStore,

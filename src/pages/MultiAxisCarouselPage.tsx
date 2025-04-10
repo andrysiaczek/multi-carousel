@@ -13,7 +13,7 @@ import {
   updateAvailableChips,
 } from '../utils';
 
-export const CarouselPage = () => {
+export const MultiAxisCarouselPage = () => {
   const {
     resetPosition,
     totalRows,

@@ -35,7 +35,7 @@ export const DecisionChipsPanel = () => {
         <button
           type="button"
           onClick={resetChips}
-          className="text-sm text-red-500 underline"
+          className="text-sm text-gray-500 underline"
         >
           Reset Filters
         </button>

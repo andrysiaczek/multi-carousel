@@ -1,4 +1,5 @@
 export { BenchmarkPage } from './BenchmarkPage';
-export { CarouselPage } from './CarouselPage';
 export { DetailPage } from './DetailPage';
+export { MultiAxisCarouselPage } from './MultiAxisCarouselPage';
 export { ResultsPage } from './ResultsPage';
+export { SingleAxisCarouselPage } from './SingleAxisCarouselPage';

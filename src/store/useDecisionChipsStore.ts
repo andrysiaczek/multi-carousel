@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { decisionChips } from '../utils';
 
 interface DecisionChipsState {
   availableChips: string[];
@@ -9,7 +10,7 @@ interface DecisionChipsState {
 }
 
 export const useDecisionChipsStore = create<DecisionChipsState>((set) => ({
-  availableChips: [],
+  availableChips: decisionChips,
   selectedChips: [],
 
   setAvailableChips: (chips) => set({ availableChips: chips }),

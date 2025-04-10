@@ -47,5 +47,12 @@ export const useSortStore = create<SortState>((set) => ({
       };
     }),
 
-  setAccommodations: (accommodations) => set({ accommodations }),
+  setAccommodations: (accommodations) =>
+    set((state) => ({
+      accommodations: sortAccommodations(
+        accommodations,
+        state.sortField,
+        state.sortAscending
+      ),
+    })),
 }));

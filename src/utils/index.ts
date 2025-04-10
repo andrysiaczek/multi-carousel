@@ -13,7 +13,11 @@ export {
   generateFilterLabel,
   restoreAxisFiltersFromStep,
 } from './filterHistoryUtils';
-export { filterAccommodations, findSubrangeByLabel } from './filterUtils';
+export {
+  filterAccommodationsMultiAxisCarousel,
+  filterAccommodationsSingleAxisCarousel,
+  findSubrangeByLabel,
+} from './filterUtils';
 export {
   resetColumnOffset,
   resetPosition,

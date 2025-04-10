@@ -6,4 +6,5 @@ export {
   initialFilterSidebarState,
   useFilterSidebarStore,
 } from './useFilterSidebarStore';
+export { useSingleAxisCarouselStore } from './useSingleAxisCarouselStore';
 export { useSortStore } from './useSortStore';
