@@ -65,42 +65,45 @@ export const MultiAxisCarouselPage = () => {
   ]);
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
-      {/* Decision Chips Panel */}
-      <div className="flex-shrink-0">
-        <DecisionChipsPanel />
-      </div>
-
-      <div className="flex-shrink-0">
-        <FilterHistoryPanel />
-      </div>
-
-      {/* Axis Selectors + Carousel */}
-      <div className="flex flex-col flex-1 items-center overflow-hidden pl-2 pr-6">
-        {/* X-Axis Filter (Above the Carousel) */}
-        <div className="w-full flex justify-center mb-2">
-          <div className="w-fit ml-[205px]">
-            <FilterAxisSelector axis={Axis.X} />
-          </div>
+    <>
+      {/* <LogoHeader size="small" /> */}
+      <div className="flex flex-col h-screen overflow-hidden">
+        {/* Decision Chips Panel */}
+        <div className="flex-shrink-0">
+          <DecisionChipsPanel />
         </div>
 
-        {/* Main Carousel with Y-Axis Filter on the Left */}
-        <div className="flex flex-1 overflow-hidden">
-          {/* Y-Axis Filter */}
-          <div className="flex pr-2 mt-44">
-            <div className="h-fit">
-              <FilterAxisSelector axis={Axis.Y} />
+        <div className="flex-shrink-0">
+          <FilterHistoryPanel />
+        </div>
+
+        {/* Axis Selectors + Carousel */}
+        <div className="flex flex-col flex-1 items-center overflow-hidden pl-2 pr-6">
+          {/* X-Axis Filter (Above the Carousel) */}
+          <div className="w-full flex justify-center mb-2">
+            <div className="w-fit ml-[205px]">
+              <FilterAxisSelector axis={Axis.X} />
             </div>
           </div>
 
-          {/* Carousel */}
-          <div className="flex-1 overflow-hidden">
-            <div className="h-fit w-fit">
-              <CarouselGrid />
+          {/* Main Carousel with Y-Axis Filter on the Left */}
+          <div className="flex flex-1 overflow-hidden">
+            {/* Y-Axis Filter */}
+            <div className="flex pr-2 mt-44">
+              <div className="h-fit">
+                <FilterAxisSelector axis={Axis.Y} />
+              </div>
+            </div>
+
+            {/* Carousel */}
+            <div className="flex-1 overflow-hidden">
+              <div className="h-fit w-fit">
+                <CarouselGrid />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
