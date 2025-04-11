@@ -142,7 +142,7 @@ export const DetailPage = () => {
           </div>
 
           {/* Main Info (Right Side) */}
-          <div className="w-[40%] flex flex-col justify-between bg-lightGreen p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out">
+          <div className="w-[40%] flex flex-col justify-around bg-lightGreen p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out">
             {/* Title */}
             <h2 className="text-2xl font-bold text-darkGreen text-center">
               {accommodation.nameI}
@@ -190,13 +190,16 @@ export const DetailPage = () => {
 
       {/* Booking Confirmation Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-            <h3 className="text-xl font-semibold">Booking Confirmed!</h3>
-            <p className="text-gray-600">
-              Enjoy your stay at {accommodation.nameI}!
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white px-10 py-8 rounded-2xl shadow-2xl text-center max-w-sm w-full animate-fadeIn">
+            <h3 className="text-2xl font-bold text-darkGreen mb-1">
+              Booking Confirmed!
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Enjoy your stay at{' '}
+              <span className="font-semibold">{accommodation.nameI}</span>!
             </p>
-            <div className="text-4xl mt-2 animate-bounce">🎉</div>
+            <div className="text-4xl mt-4 animate-bounce">🎉</div>
           </div>
         </div>
       )}

@@ -120,10 +120,9 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
           type="button"
           aria-label="Scroll carousel left"
           onClick={scrollLeft}
-          disabled={scrollPosition === 0}
           className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition ${
             scrollPosition === 0
-              ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+              ? 'hidden'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >
@@ -144,10 +143,9 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
           type="button"
           aria-label="Scroll carousel right"
           onClick={scrollRight}
-          disabled={scrollPosition + 5 >= accommodations.length}
           className={`absolute right-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition ${
             scrollPosition + 5 >= accommodations.length
-              ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+              ? 'hidden'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >
