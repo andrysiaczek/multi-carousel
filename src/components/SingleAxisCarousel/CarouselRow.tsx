@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   ChevronDown,
   ChevronLeft,
@@ -12,8 +14,6 @@ import {
   capitalize,
   filterAccommodationsSingleAxisCarousel,
 } from '../../utils';
-import { useNavigate } from 'react-router-dom';
-import { useMemo } from 'react';
 
 interface CarouselRowProps {
   filterOption: FilterOption;
@@ -27,6 +27,36 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
 
   const titleIndex = titles[filterOption];
   const scrollPosition = scrolls[filterOption];
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [visibleCount, setVisibleCount] = useState(5); // fallback default
+  const [showListOffset, setShowListOffset] = useState(36); // 32px the right arrow + 4px from the additional margin
+
+  // Item + margin width
+  const itemTotalWidth = 256 + 8; // 256px + 8px gap
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth - 64 + 8; // 32px each arrow & 8px additional margin
+        const count = Math.floor(containerWidth / itemTotalWidth);
+        const visibleCount = count > 0 ? count : 1;
+        setVisibleCount(visibleCount);
+        setShowListOffset(
+          (containerRef.current.offsetWidth -
+            visibleCount * itemTotalWidth +
+            8 -
+            64) /
+            2 +
+            32
+        ); // calculated additional space left on one side + 32px from the arrow width
+      }
+    };
+
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
+  }, []);
 
   // Load the range data for the current filter option
   const filterRanges = useMemo(() => {
@@ -47,7 +77,10 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
   const scrollRight = () =>
     setScrollPosition(
       filterOption,
-      Math.min(scrollPosition + 1, Math.max(0, accommodations.length - 5))
+      Math.min(
+        scrollPosition + 1,
+        Math.max(0, accommodations.length - visibleCount)
+      )
     );
 
   // Scroll Handlers for Vertical Title
@@ -114,15 +147,15 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
       </div>
 
       {/* Carousel with Left and Right Arrows */}
-      <div className="relative">
+      <div className="relative" ref={containerRef}>
         {/* Left Arrow */}
         <button
           type="button"
           aria-label="Scroll carousel left"
           onClick={scrollLeft}
-          className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition ${
+          className={`absolute left-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition z-10 ${
             scrollPosition === 0
-              ? 'hidden'
+              ? 'opacity-0 pointer-events-none'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >
@@ -130,12 +163,28 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
         </button>
 
         {/* Carousel Items */}
-        <div className="flex overflow-x-auto overflow-visible scrollbar-hide space-x-2 py-2 justify-center">
+        <div className="flex overflow-visible scrollbar-hide space-x-2 py-2 justify-center relative">
           {accommodations
-            .slice(scrollPosition, scrollPosition + 5)
+            .slice(scrollPosition, scrollPosition + visibleCount)
             .map((item) => (
               <CarouselItem key={item.id} accommodation={item} />
             ))}
+          {/* Show List Button */}
+          <button
+            type="button"
+            aria-label="Show all accommodations in this list"
+            className="flex items-center absolute -top-6 text-sm font-medium text-darkGreen hover:underline hover:font-semibold transition-all duration-300 group"
+            style={{
+              right: `${showListOffset}px`,
+            }}
+            onClick={handleShowList}
+          >
+            Show this list
+            <ChevronRight
+              size={12}
+              className="ml-1 text-darkGreen transform transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-90 group-hover:stroke-[2.5]"
+            />
+          </button>
         </div>
 
         {/* Right Arrow */}
@@ -144,26 +193,12 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
           aria-label="Scroll carousel right"
           onClick={scrollRight}
           className={`absolute right-0 top-1/2 transform -translate-y-1/2 p-1 rounded-full transition ${
-            scrollPosition + 5 >= accommodations.length
-              ? 'hidden'
+            scrollPosition + visibleCount >= accommodations.length
+              ? 'opacity-0 pointer-events-none'
               : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
           }`}
         >
           <ChevronRight size={24} />
-        </button>
-
-        {/* Show List Button */}
-        <button
-          type="button"
-          aria-label="Show all accommodations in this list"
-          className="flex items-center absolute -top-6 right-14 text-sm font-medium text-darkGreen hover:underline hover:font-semibold transition-all duration-300 group"
-          onClick={handleShowList}
-        >
-          Show this list
-          <ChevronRight
-            size={12}
-            className="ml-1 text-darkGreen transform transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-90 group-hover:stroke-[2.5]"
-          />
         </button>
       </div>
     </div>
