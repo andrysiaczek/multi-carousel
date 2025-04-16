@@ -28,7 +28,7 @@ export const FilterHistoryPanel = () => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-2 p-4 min-h-14 mx-4">
+    <div className="flex items-center justify-between gap-2 px-8 min-h-14">
       <div className="flex items-center gap-2">
         {/* Initial step - Reset button */}
         {(steps.length > 1 || hoveredStepLabel) && (

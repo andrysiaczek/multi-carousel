@@ -6,7 +6,7 @@ export const DecisionChipsPanel = () => {
     useDecisionChipsStore();
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 p-4 pt-8 border-b">
+    <div className="flex flex-wrap justify-center gap-2 p-4 border-b">
       {availableChips.map((chip) => {
         // const Icon = getFeatureIcon(chip);
 

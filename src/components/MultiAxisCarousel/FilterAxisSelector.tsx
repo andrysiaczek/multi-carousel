@@ -25,13 +25,7 @@ export const FilterAxisSelector = ({ axis }: FilterAxisSelectorProps) => {
   };
 
   return (
-    <div
-      className={`flex ${
-        isXAxis
-          ? 'gap-2 flex-wrap justify-cente'
-          : 'flex-col gap-3 items-center'
-      }`}
-    >
+    <div className={`flex ${isXAxis ? 'gap-2 pb-2' : 'flex-col gap-3'}`}>
       {filterOptionsArray
         .filter(
           // Exclude Type filter option if already chosen
@@ -43,7 +37,7 @@ export const FilterAxisSelector = ({ axis }: FilterAxisSelectorProps) => {
             type="button"
             onClick={() => handleClick(filter)}
             disabled={otherAxisFilter === filter}
-            className={`px-4 py-2 rounded-full border text-sm transition ${
+            className={`w-24 px-4 py-2 rounded-full border text-sm transition ${
               (isXAxis ? xAxisFilter : yAxisFilter) === filter
                 ? 'bg-gray-700 text-white border-gray-500 shadow-lg'
                 : otherAxisFilter === filter

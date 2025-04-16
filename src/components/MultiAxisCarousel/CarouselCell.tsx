@@ -135,7 +135,8 @@ export const CarouselCell = ({
 
   return (
     <div
-      className={`w-[${cellWidth}px] h-[${cellHeight}px] flex flex-col justify-center p-3 border transition ${
+      style={{ width: `${cellWidth}px`, height: `${cellHeight}px` }}
+      className={`flex flex-col justify-center p-3 border transition ${
         isActiveCell ? 'cursor-pointer' : ''
       } ${getCellBackground()}`}
       onMouseEnter={handleFilterMouseEnter}

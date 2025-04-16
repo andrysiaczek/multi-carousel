@@ -50,7 +50,9 @@ interface CarouselState {
   // Methods: Carousel Setup
   setCarouselData: (carouselData: Accommodation[]) => void;
   populateCarouselData: () => void;
+  setCellSize: (width: number, height: number) => void;
   updateCarouselSize: (rows: number, cols: number) => void;
+  updateVisibleCarouselSize: (rows: number, cols: number) => void;
   getFilteredAccommodations: () => Accommodation[];
 
   // Methods: Filtering
@@ -67,8 +69,8 @@ interface CarouselState {
 }
 
 export const useCarouselStore = create<CarouselState>((set, get) => ({
-  cellWidth: 250, // Default width of a single cell [px]
-  cellHeight: 200, // Default height of a single cell [px]
+  cellWidth: 0, // Width of a single cell [px]
+  cellHeight: 0, // Height of a single cell [px]
   totalColumns: 0, // Dynamically updated in the component
   totalRows: 0, // Dynamically updated in the component
   visibleColumns: 3, // Default number of visible columns
@@ -126,10 +128,22 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
     });
   },
 
+  setCellSize: (width: number, height: number) =>
+    set({
+      cellWidth: width,
+      cellHeight: height,
+    }),
+
   updateCarouselSize: (rows, cols) =>
     set({
       totalRows: rows,
       totalColumns: cols,
+    }),
+
+  updateVisibleCarouselSize: (rows, cols) =>
+    set({
+      visibleRows: rows,
+      visibleColumns: cols,
     }),
 
   // Returns a list of filtered accommodations after applying carousel and decision chip filters
