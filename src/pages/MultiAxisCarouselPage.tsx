@@ -65,7 +65,7 @@ export const MultiAxisCarouselPage = () => {
   ]);
 
   return (
-    <div className="flex flex-col w-screen h-screen px-8 py-4 overflow-hidden">
+    <div className="flex flex-col w-screen h-screen px-8 py-4 overflow-hidden bg-gray-50">
       {/* Decision Chips Panel */}
       <div className="flex-shrink-0">
         <DecisionChipsPanel />
@@ -78,14 +78,14 @@ export const MultiAxisCarouselPage = () => {
       {/* Axis Selectors + Carousel */}
       <div className="flex flex-col flex-1 items-center overflow-hidden">
         {/* X-Axis Filter (Above the Carousel) */}
-        <div className="flex flex-shrink-0 w-full ml-48 justify-center">
+        <div className="flex flex-shrink-0 w-full ml-yFilterAxisSelectorAndRowLabels justify-center">
           <FilterAxisSelector axis={Axis.X} />
         </div>
 
         {/* Main Carousel with Y-Axis Filter on the Left */}
         <div className="flex flex-1 overflow-hidden w-full h-full">
           {/* Y-Axis Filter */}
-          <div className="flex flex-shrink-0 flex-col w-24 mt-16 justify-center">
+          <div className="flex flex-shrink-0 flex-col w-yFilterAxisSelector mt-columnLabels justify-center">
             <FilterAxisSelector axis={Axis.Y} />
           </div>
 

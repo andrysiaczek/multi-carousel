@@ -1,3 +1,4 @@
+export { CarouselArrow } from './CarouselArrow';
 export { CarouselCell } from './CarouselCell';
 export { CarouselGrid } from './CarouselGrid';
 export { FilterAxisSelector } from './FilterAxisSelector';

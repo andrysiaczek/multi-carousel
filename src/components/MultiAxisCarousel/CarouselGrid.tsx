@@ -4,8 +4,10 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  Search,
 } from 'lucide-react';
 import {
+  CarouselArrow,
   CarouselCell,
   ResetButtonCarousel as ResetButton,
 } from '../../components';
@@ -46,7 +48,8 @@ export const CarouselGrid = () => {
     resetHover,
   } = useCarouselStore();
   const { selectedChips } = useDecisionChipsStore();
-  const { setHoveredStepForAxis, resetHoveredStep } = useFilterHistoryStore();
+  const { setHoveredStepForAxis, resetHoveredStep, goToStep } =
+    useFilterHistoryStore();
 
   useResponsiveCarousel({
     ref: carouselRef,
@@ -66,6 +69,9 @@ export const CarouselGrid = () => {
     columnOffset + visibleColumns
   );
   const visibleRowRanges = rowRanges.slice(rowOffset, rowOffset + visibleRows);
+  const isEmptyGrid = dataPerCell.every((row) =>
+    row.every((cell) => !cell || cell.accommodations.length === 0)
+  );
 
   const handleMouseEnter = (axis: Axis, index: number, range: Subrange) => {
     if (axis === Axis.X) setHoveredColumn(columnOffset + index);
@@ -98,9 +104,9 @@ export const CarouselGrid = () => {
       {/* Column Headers (X-Axis Labels) */}
       <div className="flex w-full">
         {/* Space for row headers */}
-        <div className="w-24" />
+        <div className="w-rowLabels" />
         <div
-          className={`flex flex-1 gap-2 h-16 justify-center items-center font-medium text-sm text-gray-500`}
+          className={`flex flex-1 gap-2 h-columnLabels justify-center items-center font-medium text-sm text-gray-500`}
           style={{
             width: `${visibleColumns * cellWidth + (visibleColumns - 1) * 8}px`,
           }}
@@ -133,6 +139,19 @@ export const CarouselGrid = () => {
               </span>
             </div>
           ))}
+
+          {/* Add invisible placeholders to preserve layout */}
+          {Array.from({
+            length: visibleColumns - visibleColumnRanges.length,
+          }).map((_, i) => (
+            <div
+              key={`placeholder-${i}`}
+              className="invisible"
+              style={{ width: `${cellWidth}px` }}
+            >
+              {/* Empty to preserve spacing */}
+            </div>
+          ))}
         </div>
       </div>
 
@@ -145,7 +164,7 @@ export const CarouselGrid = () => {
       <div className="flex w-full h-full">
         {/* Row Headers (Y-Axis Labels) */}
         <div
-          className={`flex flex-shrink-0 w-24 h-[${
+          className={`flex flex-shrink-0 w-rowLabels h-[${
             visibleRows * cellHeight + (visibleRows - 1) * 8
           }px] my-[36px]`}
         >
@@ -189,63 +208,76 @@ export const CarouselGrid = () => {
         <div className="relative w-full h-full">
           {/* Carousel */}
           <div ref={carouselRef} className="overflow-auto w-full h-full p-2">
-            <div
-              className="grid gap-2 transition-transform w-full h-full grid place-content-center"
-              style={{
-                gridTemplateColumns: `repeat(${visibleColumns}, ${cellWidth}px)`,
-                gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
-              }}
-            >
-              {Array.from({ length: visibleRows }).map((_, rowIndex) =>
-                Array.from({ length: visibleColumns }).map((_, colIndex) => {
-                  const row = dataPerCell[rowOffset + rowIndex];
-                  const cell = row ? row[columnOffset + colIndex] : null;
+            {isEmptyGrid ? (
+              <div className="flex flex-col items-center justify-center w-full h-full text-gray-400 text-sm gap-2">
+                <div className="flex items-center gap-1 text-base font-semibold">
+                  <Search size={16} />
+                  No accommodations found
+                </div>
+                <span className="text-xs text-center max-w-xs">
+                  Try changing or resetting some filters.
+                </span>
+                <button
+                  type="button"
+                  onClick={() => goToStep(0)}
+                  className="mt-4 px-4 py-2 text-sm text-white bg-darkOrange rounded-lg hover:bg-darkOrange/90 transition"
+                >
+                  Reset all filters
+                </button>
+              </div>
+            ) : (
+              <div
+                className="grid gap-2 transition-transform w-full h-full grid place-content-center"
+                style={{
+                  gridTemplateColumns: `repeat(${visibleColumns}, ${cellWidth}px)`,
+                  gridTemplateRows: `repeat(${visibleRows}, ${cellHeight}px)`,
+                }}
+              >
+                {Array.from({ length: visibleRows }).map((_, rowIndex) =>
+                  Array.from({ length: visibleColumns }).map((_, colIndex) => {
+                    const row = dataPerCell[rowOffset + rowIndex];
+                    const cell = row ? row[columnOffset + colIndex] : null;
 
-                  return (
-                    <CarouselCell
-                      key={`${rowOffset + rowIndex}-${columnOffset + colIndex}`}
-                      col={columnOffset + colIndex}
-                      row={rowOffset + rowIndex}
-                      columnRange={columnRanges[columnOffset + colIndex]}
-                      rowRange={rowRanges[rowOffset + rowIndex]}
-                      accommodations={cell ? cell.accommodations : []}
-                      isFillerCell={!cell}
-                    />
-                  );
-                })
-              )}
-            </div>
+                    return (
+                      <CarouselCell
+                        key={`${rowOffset + rowIndex}-${
+                          columnOffset + colIndex
+                        }`}
+                        col={columnOffset + colIndex}
+                        row={rowOffset + rowIndex}
+                        columnRange={columnRanges[columnOffset + colIndex]}
+                        rowRange={rowRanges[rowOffset + rowIndex]}
+                        accommodations={cell ? cell.accommodations : []}
+                        isFillerCell={!cell}
+                      />
+                    );
+                  })
+                )}
+              </div>
+            )}
           </div>
 
           {/* Arrows (subtle) */}
-          <button
-            type="button"
+          <CarouselArrow
+            position="left-0 top-1/2 -translate-y-1/2"
             onClick={scrollLeft}
-            className="absolute left-[6px] top-1/2 -translate-y-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <button
-            type="button"
+            icon={<ChevronLeft size={18} />}
+          />
+          <CarouselArrow
+            position="right-0 top-1/2 -translate-y-1/2"
             onClick={scrollRight}
-            className="absolute right-[6px] top-1/2 -translate-y-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
-          >
-            <ChevronRight size={18} />
-          </button>
-          <button
-            type="button"
+            icon={<ChevronRight size={18} />}
+          />
+          <CarouselArrow
+            position="top-0 left-1/2 -translate-x-1/2"
             onClick={scrollUp}
-            className="absolute top-[6px] left-1/2 -translate-x-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
-          >
-            <ChevronUp size={18} />
-          </button>
-          <button
-            type="button"
+            icon={<ChevronUp size={18} />}
+          />
+          <CarouselArrow
+            position="bottom-[4px] left-1/2 -translate-x-1/2"
             onClick={scrollDown}
-            className="absolute bottom-[6px] left-1/2 -translate-x-1/2 bg-white/80 hover:bg-gray-200 text-gray-500 rounded-full p-1 transition"
-          >
-            <ChevronDown size={18} />
-          </button>
+            icon={<ChevronDown size={18} />}
+          />
         </div>
       </div>
     </div>

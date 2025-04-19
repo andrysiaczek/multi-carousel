@@ -37,7 +37,7 @@ export const FilterAxisSelector = ({ axis }: FilterAxisSelectorProps) => {
             type="button"
             onClick={() => handleClick(filter)}
             disabled={otherAxisFilter === filter}
-            className={`w-24 px-4 py-2 rounded-full border text-sm transition ${
+            className={`w-yFilterAxisSelector px-4 py-2 rounded-full border text-sm transition ${
               (isXAxis ? xAxisFilter : yAxisFilter) === filter
                 ? 'bg-gray-700 text-white border-gray-500 shadow-lg'
                 : otherAxisFilter === filter

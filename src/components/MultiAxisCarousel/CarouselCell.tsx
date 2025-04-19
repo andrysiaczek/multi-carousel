@@ -1,35 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  BedDouble,
-  BedSingle,
-  Building,
-  Crown,
-  Home,
-  Hotel,
-  House,
-  Landmark,
-  MoreHorizontal,
-  Search,
-} from 'lucide-react';
+import { MoreHorizontal, Search } from 'lucide-react';
 import {
   useAxisFilterStore,
   useCarouselStore,
   useFilterHistoryStore,
 } from '../../store';
 import { Accommodation, Subrange } from '../../types';
-import { capitalize } from '../../utils';
-
-const iconMapping: Record<string, React.ElementType> = {
-  'Hostel (Dormitory Bed)': BedSingle,
-  'Hostel (Private Room)': BedDouble,
-  'Budget Hotel': Hotel,
-  'Guesthouse / Bed & Breakfast (B&B)': Home,
-  'Mid-Range Hotel': Building,
-  'Upper Mid-Range Hotel': Landmark,
-  'Luxury Hotel': Crown,
-  'Entire Apartment / House': House,
-};
+import { capitalize, getFeatureIcon } from '../../utils';
 
 interface CarouselCellProps {
   col: number;
@@ -62,21 +40,12 @@ export const CarouselCell = ({
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
   const navigate = useNavigate();
 
-  const isEmptyCell = !accommodations.length;
+  const isEmptyCell = accommodations.length === 0;
   const isActiveCell = !isEmptyCell && !isFillerCell;
-
-  // Determine if this cell, row, or column is being hovered
+  const additionalCount = accommodations.length - 1;
   const isHoveredRow = hoveredRow === row;
   const isHoveredColumn = hoveredColumn === col;
   const isHoveredCell = hoveredCell?.row === row && hoveredCell?.col === col;
-
-  const getCellBackground = () => {
-    if (isFillerCell) return 'bg-gray-100';
-    if (isEmptyCell) return 'bg-gray-50';
-    if (isHoveredRow || isHoveredColumn || isHoveredCell)
-      return 'bg-lightOrange';
-    return 'bg-white';
-  };
 
   const handleFilterMouseEnter = () => {
     if (isActiveCell) {
@@ -121,76 +90,181 @@ export const CarouselCell = ({
     }
   };
 
-  // Highlighted accommodation for display
-  const displayedAccommodation = accommodations[0];
-  const { type, nameI } = displayedAccommodation || {};
-  const additionalCount = accommodations.length - 1;
+  const getAccommodationScore = (acc: Accommodation) =>
+    acc.rating * 3.5 - acc.price * 2 - acc.distance;
 
-  // Icon for the displayed accommodation type
-  const Icon = type && iconMapping[type];
+  const bestAccommodation = useMemo(() => {
+    if (isEmptyCell) return null;
+    return accommodations.reduce((best, current) =>
+      getAccommodationScore(current) > getAccommodationScore(best)
+        ? current
+        : best
+    );
+  }, [accommodations, isEmptyCell]);
+
+  const getCellStyling = () => {
+    if (isFillerCell) return 'bg-gray-50';
+    if (isEmptyCell) return 'bg-gray-100 border';
+    if (isHoveredRow || isHoveredColumn || isHoveredCell)
+      return 'bg-lightOrange cursor-pointer shadow-xl';
+    return 'bg-white border border-gray-100 cursor-pointer';
+  };
+
+  const cardPadding = cellWidth > 300 ? 'p-4' : 'p-2';
+  const cardClass = `flex flex-1 flex-col justify-between ${cardPadding} rounded-lg bg-darkGreen/5 cursor-pointer group transform transition duration-300 ease-in-out hover:bg-lightOrange hover:shadow-xl hover:scale-[1.02]`;
+  const featureLimit = cellHeight < 280 ? 5 : 7;
 
   // Truncate long accommodation names
   const truncateName = (name: string) =>
-    name.length > 25 ? `${name.slice(0, 22)}...` : name;
+    cellWidth < 350
+      ? name.length > 20
+        ? `${name.slice(0, 15)}...`
+        : name
+      : name.length > 25
+      ? `${name.slice(0, 20)}...`
+      : name;
 
   return (
     <div
       style={{ width: `${cellWidth}px`, height: `${cellHeight}px` }}
-      className={`flex flex-col justify-center p-3 border transition ${
-        isActiveCell ? 'cursor-pointer' : ''
-      } ${getCellBackground()}`}
+      className={`px-4 py-3 transition rounded flex flex-col ${getCellStyling()}`}
       onMouseEnter={handleFilterMouseEnter}
       onMouseLeave={handleFilterMouseLeave}
       onClick={() => isActiveCell && drillDownCell(col, row)}
     >
       {!isFillerCell && (
-        <div className="flex flex-col h-full justify-around px-1">
+        <>
           {isEmptyCell ? (
             <div className="flex flex-col h-full items-center justify-center gap-1 text-gray-400">
-              <Search size={20} />
-              <div className="text-sm font-semibold">No Results</div>
+              <div className="flex gap-1 text-sm font-semibold">
+                <Search size={20} />
+                No Results
+              </div>
               <span className="text-xs">Try adjusting your filters</span>
             </div>
           ) : (
             <>
-              {/* Top-left: Title */}
-              <div className="text-xs font-medium text-gray-400 mb-1">
+              {/* Top-left: Cell Title */}
+              <div className="text-xs font-medium text-gray-400 mb-2">
                 {capitalize(xAxisFilter)}: {columnRange.label} /{' '}
                 {capitalize(yAxisFilter)}: {rowRange.label}
               </div>
+
+              {/* Best Accommodation & more */}
               <div
-                className="flex flex-col group cursor-pointer p-2 rounded h-full"
+                className={cardClass}
                 onMouseEnter={handleResultsMouseEnter}
                 onMouseLeave={handleResultsMouseLeave}
                 onClick={handleRedirectClick}
+                title="Explore accommodations for this category"
               >
-                {/* Displayed Accommodation at the center */}
-                <div className="flex-grow flex items-center gap-0.5 justify-center font-semibold text-lg text-gray-700 text-center relative">
-                  {Icon && <Icon size={20} className="mr-1 text-gray-600" />}
-                  <span
-                    className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full group-hover:underline"
-                    title={nameI}
-                  >
-                    {truncateName(nameI)}
-                  </span>
-                  <span className="absolute top-[-36px] left-1/2 transform -translate-x-1/2 text-xs text-darkOrange bg-lightOrange rounded px-1 py-0.5 opacity-0 group-hover:opacity-100 transition">
-                    {accommodations.length === 1
-                      ? 'Show this accommodation'
-                      : `See ${accommodations.length} results`}
-                  </span>
-                </div>
+                {/* Best Accommodation */}
+                {bestAccommodation && (
+                  <div className="flex flex-grow gap-2 overflow-hidden">
+                    {/* Image */}
+                    <div
+                      className={`${
+                        cellWidth > 400 ? 'w-36' : 'w-28'
+                      } flex-shrink-0 flex flex-col gap-1 h-full`}
+                    >
+                      {cellHeight > 250 ? (
+                        <>
+                          <img
+                            src={bestAccommodation.images[0]}
+                            alt={bestAccommodation.nameI}
+                            className="w-full h-1/2 object-cover rounded"
+                          />
+                          <img
+                            src={
+                              bestAccommodation.images[1] ||
+                              bestAccommodation.images[0]
+                            }
+                            alt={bestAccommodation.nameI}
+                            className="w-full h-1/2 object-cover rounded"
+                          />
+                        </>
+                      ) : (
+                        <img
+                          src={bestAccommodation.images[0]}
+                          alt={bestAccommodation.nameI}
+                          className="w-full h-full object-cover rounded"
+                        />
+                      )}
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex flex-col justify-around flex-1">
+                      <div className="flex flex-col gap-2">
+                        {/* Name */}
+                        <h2
+                          className={`${
+                            cellHeight > 300 ? 'text-lg' : 'text-md'
+                          } text-center font-semibold text-darkGreen w-full group-hover:text-darkOrange`}
+                        >
+                          {truncateName(bestAccommodation.nameI)}
+                        </h2>
+
+                        {/* Price, Rating & Distance */}
+                        <div className="flex gap-2 items-center text-xs font-normal text-gray-500">
+                          {/* Labels Column */}
+                          <div className="flex flex-col w-full items-end gap-1">
+                            <span>Rating</span>
+                            <span>Price</span>
+                            <span>Distance</span>
+                          </div>
+
+                          {/* Vertical Divider */}
+                          <div className="h-full w-[1px] bg-gray-300" />
+
+                          {/* Values Column */}
+                          <div className="flex flex-col w-full items-start gap-1 ">
+                            <span>{bestAccommodation.rating} ★</span>
+                            <span>€{bestAccommodation.price}</span>
+                            <span>
+                              {bestAccommodation.distance === 0
+                                ? 'Central'
+                                : `${bestAccommodation.distance} km`}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Features */}
+                      <div className="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-gray-400 text-xxs">
+                        {bestAccommodation.features
+                          .filter((f) => f.length < 15)
+                          .slice(0, featureLimit)
+                          .map((feature) => {
+                            const Icon = getFeatureIcon(feature);
+                            return (
+                              <div
+                                key={feature}
+                                className="flex items-center gap-1"
+                              >
+                                <Icon size={12} />
+                                {cellHeight > 280 && <span>{feature}</span>}
+                              </div>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Bottom: Additional count */}
                 {additionalCount > 0 && (
-                  <div className="flex items-end justify-end self-end gap-1 text-s text-gray-500 cursor-pointer group-hover:underline">
-                    <MoreHorizontal size={12} />
+                  <div className="flex items-end self-end gap-1 text-xs text-darkGreen cursor-pointer group-hover:underline group-hover:text-darkOrange relative">
+                    <MoreHorizontal
+                      size={12}
+                      className="absolute bottom-[-2px] left-[-15px]"
+                    />
                     and {additionalCount} more
                   </div>
                 )}
               </div>
             </>
           )}
-        </div>
+        </>
       )}
     </div>
   );

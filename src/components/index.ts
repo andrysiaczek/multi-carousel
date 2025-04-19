@@ -7,6 +7,7 @@ export {
 export { LoadingMessage } from './LoadingMessage';
 export { LogoHeader } from './LogoHeader';
 export {
+  CarouselArrow,
   CarouselCell,
   CarouselGrid,
   FilterAxisSelector,

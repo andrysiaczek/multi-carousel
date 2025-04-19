@@ -18,6 +18,15 @@ export const FilterHistoryPanel = () => {
     ? `Show Filtered Results (${filteredAccommodationsCount})`
     : 'Show All Results';
 
+  const handleStepClick = (
+    index: number,
+    isOnlyOneStepNoHoveredStep: boolean,
+    isLastStepNoHoveredStep: boolean
+  ) => {
+    if (!isOnlyOneStepNoHoveredStep && !isLastStepNoHoveredStep)
+      goToStep(index);
+  };
+
   const handleShowResults = () => {
     // Set the filtered accommodations and navigate to results
     localStorage.setItem(
@@ -34,36 +43,43 @@ export const FilterHistoryPanel = () => {
         {(steps.length > 1 || hoveredStepLabel) && (
           <ResetButton
             onClick={() => goToStep(0)}
-            isHighlighted={
-              noFilteredResults || (steps.length === 1 && !!hoveredStepLabel)
-            }
+            isHighlighted={noFilteredResults}
+            isPreviewing={steps.length === 1 && !!hoveredStepLabel}
           />
         )}
       </div>
 
       {/* Filter history steps */}
-      {steps.map((step, index) =>
-        index === 0 ? null : (
+      {steps.map((step, index) => {
+        const isOnlyOneStepNoHoveredStep =
+          index === 1 && steps.length <= 2 && !hoveredStepLabel;
+        const isFirstStepNoHoveredStep = index === 1 && steps.length > 2;
+        const isLastStepNoHoveredStep =
+          index === steps.length - 1 && !hoveredStepLabel;
+
+        return index === 0 ? null : (
           <div
             key={`${step.label}-${step.stepNumber}`}
-            className={`px-3 py-1 text-xs text-gray-700 cursor-pointer bg-gray-300 hover:bg-darkOrange hover:text-lightOrange 
-            ${
-              index === 1 && steps.length <= 2 && !hoveredStepLabel
-                ? 'rounded-r-lg pr-4'
-                : ''
+            className={`px-3 py-1 text-xs bg-gray-300 text-gray-700
+              ${
+                isOnlyOneStepNoHoveredStep || isLastStepNoHoveredStep
+                  ? 'rounded-r-lg pr-4 hover:bg-gray-300 hover:text-gray-700 cursor-not-allowed rounded-r-lg pr-4'
+                  : 'cursor-pointer hover:bg-darkOrange hover:text-lightOrange'
+              }
+              ${isFirstStepNoHoveredStep ? 'pl-4' : ''}
+            `}
+            onClick={() =>
+              handleStepClick(
+                index,
+                isOnlyOneStepNoHoveredStep,
+                isLastStepNoHoveredStep
+              )
             }
-            ${index === 1 && steps.length > 2 ? 'pl-4' : ''}
-            ${
-              index === steps.length - 1 && !hoveredStepLabel
-                ? 'rounded-r-lg pr-4'
-                : ''
-            }`}
-            onClick={() => goToStep(index)}
           >
             {step.label}
           </div>
-        )
-      )}
+        );
+      })}
 
       {/* Hover preview step */}
       {hoveredStepLabel && (
@@ -78,8 +94,8 @@ export const FilterHistoryPanel = () => {
         className={`ml-auto px-4 py-1.5 text-xs font-semibold rounded-lg transition  
       ${
         noFilteredResults
-          ? 'bg-gray-300 text-gray-500'
-          : 'bg-lightOrange text-darkOrange hover:bg-darkOrange hover:text-lightOrange'
+          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          : 'bg-lightOrange text-darkOrange hover:bg-darkOrange hover:text-lightOrange cursor-pointer'
       }`}
         onClick={handleShowResults}
         disabled={noFilteredResults}
