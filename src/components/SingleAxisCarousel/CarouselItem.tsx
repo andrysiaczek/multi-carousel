@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import { Accommodation } from '../../types';
-import { getFeatureIcon } from '../../utils';
+import { Accommodation, InterfaceOption } from '../../types';
+import { generateDetailPageUrl, getFeatureIcon } from '../../utils';
 
 interface CarouselItemProps {
   accommodation: Accommodation;
@@ -15,9 +15,16 @@ export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
       {/* Show More Button */}
       <button
         type="button"
-        aria-label={`View details about ${accommodation.nameI}`}
+        aria-label={`View details about ${accommodation.versionSingleAxisCarousel.name}`}
         className="absolute top-3 right-2 z-10 flex items-center justify-center pl-4 pr-1 py-1.5 text-xs font-semibold text-antiflashWhite bg-darkGreen/60 rounded-md transition-transform duration-300 hover:scale-105 active:scale-95 hover:shadow-lg group hover:pr-3 hover:gap-1 hover:bg-darkGreen"
-        onClick={() => navigate(`/details/${accommodation.id}`)}
+        onClick={() =>
+          navigate(
+            generateDetailPageUrl(
+              InterfaceOption.SingleAxisCarousel,
+              accommodation.id
+            )
+          )
+        }
       >
         Show More
         <ChevronRight
@@ -26,8 +33,8 @@ export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
         />
       </button>
       <img
-        src={accommodation.images[0]}
-        alt={accommodation.nameI}
+        src={accommodation.versionSingleAxisCarousel.images[0]}
+        alt={accommodation.versionSingleAxisCarousel.name}
         className="w-full h-32 object-cover"
       />
       <div className="px-1 py-2">
@@ -35,8 +42,11 @@ export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
         <div className="flex flex-col justify-around gap-2 px-4 w-full">
           {/* Title and Price */}
           <div className="flex items-center justify-between font-semibold text-darkGreen">
-            <h2 className="truncate" title={accommodation.nameI}>
-              {accommodation.nameI}
+            <h2
+              className="truncate"
+              title={accommodation.versionSingleAxisCarousel.name}
+            >
+              {accommodation.versionSingleAxisCarousel.name}
             </h2>
             <p>€{accommodation.price}</p>
           </div>

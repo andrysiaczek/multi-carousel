@@ -86,7 +86,7 @@ export const CarouselCell = ({
         'filteredAccommodations',
         JSON.stringify(accommodations)
       );
-      navigate('/results');
+      navigate('/multi-carousel/results');
     }
   };
 
@@ -170,23 +170,34 @@ export const CarouselCell = ({
                       {cellHeight > 250 ? (
                         <>
                           <img
-                            src={bestAccommodation.images[0]}
-                            alt={bestAccommodation.nameI}
+                            src={
+                              bestAccommodation.versionMultiAxisCarousel
+                                .images[0]
+                            }
+                            alt={
+                              bestAccommodation.versionMultiAxisCarousel.name
+                            }
                             className="w-full h-1/2 object-cover rounded"
                           />
                           <img
                             src={
-                              bestAccommodation.images[1] ||
-                              bestAccommodation.images[0]
+                              bestAccommodation.versionMultiAxisCarousel
+                                .images[1] ||
+                              bestAccommodation.versionMultiAxisCarousel
+                                .images[0]
                             }
-                            alt={bestAccommodation.nameI}
+                            alt={
+                              bestAccommodation.versionMultiAxisCarousel.name
+                            }
                             className="w-full h-1/2 object-cover rounded"
                           />
                         </>
                       ) : (
                         <img
-                          src={bestAccommodation.images[0]}
-                          alt={bestAccommodation.nameI}
+                          src={
+                            bestAccommodation.versionMultiAxisCarousel.images[0]
+                          }
+                          alt={bestAccommodation.versionMultiAxisCarousel.name}
                           className="w-full h-full object-cover rounded"
                         />
                       )}
@@ -201,7 +212,9 @@ export const CarouselCell = ({
                             cellHeight > 300 ? 'text-lg' : 'text-md'
                           } text-center font-semibold text-darkGreen w-full group-hover:text-darkOrange`}
                         >
-                          {truncateName(bestAccommodation.nameI)}
+                          {truncateName(
+                            bestAccommodation.versionMultiAxisCarousel.name
+                          )}
                         </h2>
 
                         {/* Price, Rating & Distance */}

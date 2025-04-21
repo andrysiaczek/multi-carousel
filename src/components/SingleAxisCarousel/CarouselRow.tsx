@@ -98,7 +98,7 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
       'filteredAccommodations',
       JSON.stringify(accommodations)
     );
-    navigate('/results');
+    navigate('/single-carousel/results');
   };
 
   return (

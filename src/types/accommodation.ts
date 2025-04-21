@@ -1,11 +1,19 @@
 export type Accommodation = {
   id: string;
-  nameI: string;
+  versionBenchmark: AccommodationVersion;
+  versionSingleAxisCarousel: AccommodationVersion;
+  versionMultiAxisCarousel: AccommodationVersion;
   price: number;
   rating: number;
   distance: number;
   type: string;
   features: string[];
-  locationI: { lat: number; lng: number };
+};
+
+type AccommodationVersion = {
+  name: string;
+  location: Location;
   images: string[];
 };
+
+type Location = { lat: number; lng: number };

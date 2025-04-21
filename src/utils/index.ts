@@ -19,6 +19,10 @@ export {
   findSubrangeByLabel,
 } from './filterUtils';
 export {
+  generateDetailPageUrl,
+  resolveAccommodationVariant,
+} from './interfaceUtils';
+export {
   resetColumnOffset,
   resetPosition,
   resetRowOffset,

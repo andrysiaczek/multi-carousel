@@ -2,8 +2,11 @@ import json
 import os
 import random
 
+from geopy.distance import distance as geopy_distance
+from geopy.point import Point
+
 # Accommodation types and corresponding price ranges
-accommodation_types_with_prices = {
+price_ranges = {
     "Hostel (Dormitory Bed)": (18, 35),
     "Hostel (Private Room)": (50, 80),
     "Budget Hotel": (50, 90),
@@ -14,32 +17,17 @@ accommodation_types_with_prices = {
     "Entire Apartment / House": (70, 300)
 }
 
-# Generate a skewed rating: few low, some medium, many high
-def generate_skewed_rating():
-    random_value = random.random()
-    if random_value < 0.05:
-        # Low ratings (1.0 - 3.0) - 5% probability
-        return round(random.uniform(1.0, 3.0), 1)
-    elif random_value < 0.25:
-        # Medium ratings (3.0 - 4.0) - 20% probability
-        return round(random.uniform(3.0, 4.0), 1)
-    else:
-        # High ratings (4.0 - 5.0) - 75% probability
-        return round(random.uniform(4.0, 5.0), 1)
-    
-    # Generate a skewed distance: most close, some medium, few far
-def generate_skewed_distance():
-    random_value = random.random()
-    if random_value < 0.7:
-        # Most distances (0 km - 2 km) - 70% probability
-        return round(random.uniform(0.0, 2.0), 1)
-    elif random_value < 0.9:
-        # Medium distances (2 km - 4 km) - 20% probability
-        return round(random.uniform(2.0, 4.0), 1)
-    else:
-        # Few distances (4 km - 10 km) - 10% probability
-        return round(random.uniform(4.0, 10.0), 1)
-
+# Accommodation types and corresponding rating ranges
+rating_ranges = {
+    "Hostel (Dormitory Bed)": (2.5, 4.2),
+    "Hostel (Private Room)": (3.0, 4.5),
+    "Budget Hotel": (3.0, 4.2),
+    "Guesthouse / Bed & Breakfast (B&B)": (3.5, 4.8),
+    "Mid-Range Hotel": (3.8, 4.7),
+    "Upper Mid-Range Hotel": (4.0, 4.9),
+    "Luxury Hotel": (4.3, 5.0),
+    "Entire Apartment / House": (3.8, 5.0),
+}
 
 # Features list (tailored to accommodation type)
 features_by_type = {
@@ -96,33 +84,100 @@ dynamic_features_by_type = {
     ]
 }
 
-# Location centers
+# Location center
 valencia_center = (39.4699, -0.3763)
-malaga_center = (36.7213, -4.4214)
 
 # First part of the name (adjective/descriptive) (tailored to accommodation type)
 names_part_1_by_type = {
-    "Hostel (Dormitory Bed)": ["Cozy", "Urban", "Trendy", "Happy", "Youth", "Chill", "Cool"],
-    "Hostel (Private Room)": ["Cozy", "Urban", "Charming", "Youth", "Trendy", "Colorful"],
-    "Budget Hotel": ["Budget", "Simple", "Easy", "Urban", "Classic", "Friendly"],
-    "Guesthouse / Bed & Breakfast (B&B)": ["Charming", "Rustic", "Peaceful", "Country", "Family", "Comfy"],
-    "Mid-Range Hotel": ["Modern", "Stylish", "Classic", "Central", "Elegant", "City"],
-    "Upper Mid-Range Hotel": ["Boutique", "Elegant", "Trendy", "Classic", "Stylish", "Grand"],
-    "Luxury Hotel": ["Luxury", "Grand", "Royal", "Elegant", "Exclusive", "Majestic"],
-    "Entire Apartment / House": ["Sunny", "Modern", "Cozy", "Charming", "Stylish", "Central", "Hidden"]
+    "Hostel (Dormitory Bed)": [
+        "Cozy", "Urban", "Trendy", "Happy", "Youth", "Chill", "Cool",
+        "Breezy", "Cheerful", "Wander", "Roaming", "Lively", "Vibrant"
+    ],
+    "Hostel (Private Room)": [
+        "Cozy", "Urban", "Charming", "Youth", "Trendy", "Colorful",
+        "Friendly", "Hip", "Nest", "Quiet", "Warm", "Crisp"
+    ],
+    "Budget Hotel": [
+        "Budget", "Simple", "Easy", "Urban", "Classic", "Friendly",
+        "Essential", "Compact", "Bright", "Smart", "City", "Affordable"
+    ],
+    "Guesthouse / Bed & Breakfast (B&B)": [
+        "Charming", "Rustic", "Peaceful", "Country", "Family", "Comfy",
+        "Homely", "Quaint", "Sunny", "Quiet", "Inviting", "Relaxing"
+    ],
+    "Mid-Range Hotel": [
+        "Modern", "Stylish", "Classic", "Central", "Elegant", "City",
+        "Urban", "Convenient", "Smart", "Comfort", "Civic", "Balance"
+    ],
+    "Upper Mid-Range Hotel": [
+        "Boutique", "Elegant", "Trendy", "Classic", "Stylish", "Grand",
+        "Artisan", "Refined", "Executive", "Chic", "Polished", "Grace"
+    ],
+    "Luxury Hotel": [
+        "Luxury", "Grand", "Royal", "Elegant", "Exclusive", "Majestic",
+        "Opulent", "Prestige", "Premier", "Palatial", "Golden", "Serene"
+    ],
+    "Entire Apartment / House": [
+        "Sunny", "Modern", "Cozy", "Charming", "Stylish", "Central", "Hidden",
+        "Private", "Minimal", "Airy", "Open", "Scenic", "Peaceful"
+    ]
 }
 
 # Second part of the name (tailored to accommodation type)
 names_part_2_by_type = {
-    "Hostel (Dormitory Bed)": ["Hostel", "Inn", "Place", "Stay", "Rooms"],
-    "Hostel (Private Room)": ["Hostel", "Inn", "Place", "Stay", "Rooms"],
-    "Budget Hotel": ["Hotel", "Inn", "Stay", "Residence", "Suites"],
-    "Guesthouse / Bed & Breakfast (B&B)": ["Guesthouse", "House", "B&B", "Cottage", "Inn"],
-    "Mid-Range Hotel": ["Hotel", "Residence", "Suites", "Place"],
-    "Upper Mid-Range Hotel": ["Hotel", "Boutique", "Suites", "Residence", "Stay"],
-    "Luxury Hotel": ["Hotel", "Suites", "Resort", "Palace", "Villa"],
-    "Entire Apartment / House": ["Apartment", "House", "Flat", "Villa", "Loft", "Studio"]
+    "Hostel (Dormitory Bed)": [
+        "Hostel", "Inn", "Place", "Stay", "Rooms", "Lounge", "Bunk", "Commons", "Camp"
+    ],
+    "Hostel (Private Room)": [
+        "Hostel", "Inn", "Place", "Stay", "Rooms", "Retreat", "Nook", "Den", "Corner"
+    ],
+    "Budget Hotel": [
+        "Hotel", "Inn", "Stay", "Residence", "Suites", "Rooms", "Lodge", "Stopover", "Nights"
+    ],
+    "Guesthouse / Bed & Breakfast (B&B)": [
+        "Guesthouse", "House", "B&B", "Cottage", "Inn", "Lodge", "Villa", "Retreat", "Haven"
+    ],
+    "Mid-Range Hotel": [
+        "Hotel", "Residence", "Suites", "Place", "Stay", "Commons", "Inn", "Center", "Spot"
+    ],
+    "Upper Mid-Range Hotel": [
+        "Hotel", "Boutique", "Suites", "Residence", "Stay", "Haven", "Collection", "Villa"
+    ],
+    "Luxury Hotel": [
+        "Hotel", "Suites", "Resort", "Palace", "Villa", "Collection", "Estate", "Sanctuary", "Retreat"
+    ],
+    "Entire Apartment / House": [
+        "Apartment", "House", "Flat", "Villa", "Loft", "Studio", "Suite", "Cabin", "Getaway", "Retreat"
+    ]
 }
+
+# Generate a skewed rating
+def generate_rating_by_type(accommodation_type: str) -> float:
+    low, high = rating_ranges.get(accommodation_type, (3.0, 4.5))
+    # Bias towards higher values in range
+    return round(random.triangular(low, high, high), 1)
+    
+# Generate a skewed distance: most close, some medium, few far    
+def generate_skewed_distance():
+    random_value = random.random()
+    if random_value < 0.6:
+        # Central (0.0–1.5 km): 60%
+        return round(random.uniform(0.0, 1.5), 2)
+    elif random_value < 0.85:
+        # Walkable but farther (1.5–3.5 km): 25%
+        return round(random.uniform(1.5, 3.5), 2)
+    elif random_value < 0.97:
+        # Commutable (3.5–6.0 km): 12%
+        return round(random.uniform(3.5, 6.0), 2)
+    else:
+        # Far suburbs or remote (6.0–10.0 km): 3%
+        return round(random.uniform(6.0, 10.0), 2)
+    
+def random_location_at_distance(center, dist_km):
+    bearing = random.uniform(0, 360)  # Random direction in degrees
+    origin = Point(center[0], center[1])
+    destination = geopy_distance(kilometers=dist_km).destination(origin, bearing)
+    return {"lat": round(destination.latitude, 6), "lng": round(destination.longitude, 6)}
 
 # Helper to pick appropriate features based on type
 def generate_features(accommodation_type):
@@ -157,7 +212,7 @@ def random_location(center):
     return {"lat": round(center[0] + lat_offset, 6), "lng": round(center[1] + lng_offset, 6)}
 
 # Helper to pick appropriate images based on type
-def get_images(accom_type, features):
+def generate_images(accom_type, features):
     # Accommodation type mappings
     type_mapping = {
         "Hostel (Dormitory Bed)": "hostel_dormitory_bed",
@@ -208,34 +263,33 @@ def get_images(accom_type, features):
 
     return image_paths
 
-
 # Generate dataset
 dataset = []
-for i in range(1, 151):  # 150 accommodations
-    accom_type = random.choice(list(accommodation_types_with_prices.keys()))
-    price_range = accommodation_types_with_prices[accom_type]
-    price = round(random.uniform(price_range[0], price_range[1]), 2)
-    rating = generate_skewed_rating()
+for i in range(1, 1001):  # 1000 accommodations
+    accom_type = random.choice(list(price_ranges.keys()))
+    price_range = price_ranges[accom_type]
     distance = generate_skewed_distance()
     features = generate_features(accom_type)
-    nameI = generate_accommodation_name(accom_type)
-    nameII = generate_accommodation_name(accom_type)
-    locationI = random_location(valencia_center)
-    locationII = random_location(malaga_center)
-    images = get_images(accom_type, features)
 
     dataset.append({
         "id": str(i),
-        "nameI": nameI,
-        "nameII": nameII,
-        "price": price,
-        "rating": rating,
+        "versionBenchmark": {
+            "name": generate_accommodation_name(accom_type),
+            "location": random_location_at_distance(valencia_center, distance),
+            "images": generate_images(accom_type, features)},
+        "versionSingleAxisCarousel": {
+            "name": generate_accommodation_name(accom_type),
+            "location": random_location_at_distance(valencia_center, distance),
+            "images": generate_images(accom_type, features)},
+        "versionMultiAxisCarousel": {
+            "name": generate_accommodation_name(accom_type),
+            "location": random_location_at_distance(valencia_center, distance),
+            "images": generate_images(accom_type, features)},
+        "price": round(random.uniform(price_range[0], price_range[1]), 2),
+        "rating": generate_rating_by_type(accom_type),
         "distance": distance,
         "type": accom_type,
         "features": features,
-        "locationI": locationI,
-        "locationII": locationII,
-        "images": images
     })
 
 # Save dataset

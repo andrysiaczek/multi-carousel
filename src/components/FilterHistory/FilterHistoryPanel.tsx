@@ -33,7 +33,7 @@ export const FilterHistoryPanel = () => {
       'filteredAccommodations',
       JSON.stringify(filteredAccommodations)
     );
-    navigate('/results');
+    navigate('/multi-carousel/results');
   };
 
   return (

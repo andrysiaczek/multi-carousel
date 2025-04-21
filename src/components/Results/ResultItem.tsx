@@ -1,8 +1,12 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import { Accommodation } from '../../types';
-import { getFeatureIcon } from '../../utils';
+import { Accommodation, InterfaceOption } from '../../types';
+import {
+  generateDetailPageUrl,
+  getFeatureIcon,
+  resolveAccommodationVariant,
+} from '../../utils';
 
 const shuffleArray = (array: string[]) => {
   return array
@@ -13,21 +17,24 @@ const shuffleArray = (array: string[]) => {
 
 interface ResultItemProps {
   accommodation: Accommodation;
+  interfaceOption: InterfaceOption;
   padding?: boolean;
 }
 
 export const ResultItem = ({
   accommodation,
+  interfaceOption,
   padding = false,
 }: ResultItemProps) => {
   const navigate = useNavigate();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const { name, images } = resolveAccommodationVariant(
+    interfaceOption,
+    accommodation
+  );
 
   // Shuffle images and features only once when the accommodation changes
-  const shuffledImages = useMemo(
-    () => shuffleArray(accommodation.images),
-    [accommodation.images]
-  );
+  const shuffledImages = useMemo(() => shuffleArray(images), [images]);
 
   const shuffledFeatures = useMemo(
     () => shuffleArray(accommodation.features),
@@ -62,7 +69,7 @@ export const ResultItem = ({
       <div className="relative w-[250px] h-[200px] flex-shrink-0 overflow-hidden rounded-l-xl">
         <img
           src={shuffledImages[activeImageIndex]}
-          alt={accommodation.nameI}
+          alt={name}
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
@@ -74,9 +81,7 @@ export const ResultItem = ({
       <div className="flex flex-col justify-around pl-6 pr-4 my-2 w-full">
         {/* Title and Price */}
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-darkGreen">
-            {accommodation.nameI}
-          </h2>
+          <h2 className="text-xl font-semibold text-darkGreen">{name}</h2>
           <p className="text-xl font-semibold text-darkGreen">
             €{accommodation.price}
           </p>
@@ -118,7 +123,9 @@ export const ResultItem = ({
             type="button"
             aria-label="Show more"
             className="flex items-center justify-center pl-4 pr-1 py-1.5 text-xs font-semibold text-antiflashWhite bg-darkGreen rounded-md transition-transform duration-300 hover:scale-105 active:scale-95 hover:shadow-md group hover:pr-3 hover:gap-1"
-            onClick={() => navigate(`/details/${accommodation.id}`)}
+            onClick={() =>
+              navigate(generateDetailPageUrl(interfaceOption, accommodation.id))
+            }
           >
             Show More
             <ChevronRight

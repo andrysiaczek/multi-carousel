@@ -1,7 +1,7 @@
-import { SortOption, FilterOptionWithFeature } from '../types';
+import { FilterSidebar, ResultItem, ResultsHeader } from '../components';
 import { accommodationDataset } from '../data';
-import { ResultItem, FilterSidebar, ResultsHeader } from '../components';
 import { useFilterSidebarStore, useSortStore } from '../store';
+import { FilterOptionWithFeature, InterfaceOption, SortOption } from '../types';
 
 export const BenchmarkPage = () => {
   const { getAppliedFilters } = useFilterSidebarStore();
@@ -125,6 +125,7 @@ export const BenchmarkPage = () => {
                 key={accommodation.id}
                 accommodation={accommodation}
                 padding
+                interfaceOption={InterfaceOption.Benchmark}
               />
             ))
           )}

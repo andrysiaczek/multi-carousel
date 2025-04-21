@@ -3,9 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { ResultItem, ResultsHeader } from '../components';
 import { useSortStore } from '../store';
-import { SortOption } from '../types';
+import { InterfaceOption, SortOption } from '../types';
 
-export const ResultsPage = () => {
+interface ResultsPageProps {
+  interfaceOption: InterfaceOption;
+}
+
+export const ResultsPage = ({ interfaceOption }: ResultsPageProps) => {
   const navigate = useNavigate();
   const {
     sortField,
@@ -71,7 +75,11 @@ export const ResultsPage = () => {
           </div>
         ) : (
           accommodations.map((accommodation) => (
-            <ResultItem key={accommodation.id} accommodation={accommodation} />
+            <ResultItem
+              key={accommodation.id}
+              accommodation={accommodation}
+              interfaceOption={interfaceOption}
+            />
           ))
         )}
       </div>

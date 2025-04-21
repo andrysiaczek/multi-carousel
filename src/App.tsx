@@ -1,4 +1,9 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from 'react-router-dom';
 import {
   BenchmarkPage,
   DetailPage,
@@ -6,23 +11,49 @@ import {
   ResultsPage,
   SingleAxisCarouselPage,
 } from './pages';
+import { InterfaceOption } from './types';
 import './App.css';
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MultiAxisCarouselPage />} />
-        <Route
-          path="/benchmark/carousel"
-          element={<SingleAxisCarouselPage />}
-        />
-        <Route path="/benchmark" element={<BenchmarkPage />} />
-        <Route path="/details/:id" element={<DetailPage />} />
-        <Route path="/results" element={<ResultsPage />} />
-      </Routes>
-    </Router>
-  );
-}
+const interfaces = [
+  {
+    path: 'benchmark',
+    option: InterfaceOption.Benchmark,
+    component: BenchmarkPage,
+  },
+  {
+    path: 'single-carousel',
+    option: InterfaceOption.SingleAxisCarousel,
+    component: SingleAxisCarouselPage,
+  },
+  {
+    path: 'multi-carousel',
+    option: InterfaceOption.MultiAxisCarousel,
+    component: MultiAxisCarouselPage,
+  },
+];
+
+const App = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<MultiAxisCarouselPage />} />
+
+      {interfaces.map(({ path, option, component: Component }) => (
+        <Route key={path}>
+          <Route path={`/${path}`} element={<Component />} />
+          <Route
+            path={`/${path}/results`}
+            element={<ResultsPage interfaceOption={option} />}
+          />
+          <Route
+            path={`/${path}/details/:id`}
+            element={<DetailPage interfaceOption={option} />}
+          />
+        </Route>
+      ))}
+
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  </Router>
+);
 
 export default App;

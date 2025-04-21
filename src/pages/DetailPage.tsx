@@ -3,13 +3,24 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ArrowButton, LoadingMessage, MapLibreMap } from '../components';
 import { accommodationDataset } from '../data';
-import { Accommodation } from '../types';
+import { Accommodation, InterfaceOption } from '../types';
+import { resolveAccommodationVariant } from '../utils';
 
-export const DetailPage = () => {
+interface DetailPageProps {
+  interfaceOption: InterfaceOption;
+}
+
+export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
   const { id } = useParams<{ id: string }>();
   const [accommodation, setAccommodation] = useState<Accommodation | null>(
     null
   );
+  const [name, setName] = useState<string>('');
+  const [location, setLocation] = useState<{ lat: number; lng: number }>({
+    lat: 0,
+    lng: 0,
+  });
+  const [images, setImages] = useState<string[]>([]);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [isGalleryHovered, setIsGalleryHovered] = useState(false);
@@ -17,24 +28,32 @@ export const DetailPage = () => {
 
   // Fetch accommodation data
   useEffect(() => {
-    setAccommodation(accommodationDataset.find((acc) => acc.id === id) || null);
-  }, [id]);
+    const accommodation = accommodationDataset.find((acc) => acc.id === id);
+
+    if (accommodation) {
+      setAccommodation(accommodation);
+      const { name, location, images } = resolveAccommodationVariant(
+        interfaceOption,
+        accommodation
+      );
+      setName(name);
+      setLocation(location);
+      setImages(images);
+    }
+  }, [id, interfaceOption]);
 
   // Image navigation handlers
   const handleNextImage = useCallback(() => {
     if (accommodation) {
-      setActiveImageIndex((prev) => (prev + 1) % accommodation.images.length);
+      setActiveImageIndex((prev) => (prev + 1) % images.length);
     }
-  }, [accommodation]);
+  }, [accommodation, images]);
 
   const handlePrevImage = useCallback(() => {
     if (accommodation) {
-      setActiveImageIndex(
-        (prev) =>
-          (prev - 1 + accommodation.images.length) % accommodation.images.length
-      );
+      setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length);
     }
-  }, [accommodation]);
+  }, [accommodation, images]);
 
   const handleDotClick = (index: number) => setActiveImageIndex(index);
 
@@ -65,8 +84,8 @@ export const DetailPage = () => {
             onMouseLeave={() => setIsGalleryHovered(false)}
           >
             <img
-              src={accommodation.images[activeImageIndex]}
-              alt={accommodation.nameI}
+              src={images[activeImageIndex]}
+              alt={name}
               className="w-full h-full object-cover transition-transform duration-300 ease-in-out"
             />
 
@@ -84,7 +103,7 @@ export const DetailPage = () => {
 
             {/* Dots */}
             <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
-              {accommodation.images.map((imagePath, index) => (
+              {images.map((imagePath, index) => (
                 <div
                   key={imagePath}
                   onClick={() => handleDotClick(index)}
@@ -114,10 +133,10 @@ export const DetailPage = () => {
           {/* Map */}
           <div className="w-[40%] h-full rounded-lg overflow-hidden shadow-md">
             <MapLibreMap
-              latitude={accommodation.locationI.lat}
-              longitude={accommodation.locationI.lng}
+              latitude={location.lat}
+              longitude={location.lng}
               zoom={13}
-              title={accommodation.nameI}
+              title={name}
             />
           </div>
         </div>
@@ -145,7 +164,7 @@ export const DetailPage = () => {
           <div className="w-[40%] flex flex-col justify-around bg-lightGreen p-4 rounded-lg shadow-md transition-all duration-300 ease-in-out">
             {/* Title */}
             <h2 className="text-2xl font-bold text-darkGreen text-center">
-              {accommodation.nameI}
+              {name}
             </h2>
 
             {/* Info Section */}
@@ -196,8 +215,7 @@ export const DetailPage = () => {
               Booking Confirmed!
             </h3>
             <p className="text-gray-600 mb-4">
-              Enjoy your stay at{' '}
-              <span className="font-semibold">{accommodation.nameI}</span>!
+              Enjoy your stay at <span className="font-semibold">{name}</span>!
             </p>
             <div className="text-4xl mt-4 animate-bounce">🎉</div>
           </div>
