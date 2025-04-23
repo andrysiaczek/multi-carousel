@@ -184,8 +184,10 @@ export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
                 <span>{accommodation.rating} ★</span>
                 <span>€{accommodation.price}</span>
                 <span>
-                  {accommodation.distance === 0
+                  {accommodation.distance < 0.1
                     ? 'Right in the center'
+                    : accommodation.distance < 1
+                    ? `${accommodation.distance * 1000} m`
                     : `${accommodation.distance} km`}
                 </span>
               </div>

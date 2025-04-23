@@ -76,18 +76,22 @@ export const CarouselCell = ({
   };
 
   const handleRedirectClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isActiveCell) {
-      e.stopPropagation();
-      handleFilterMouseLeave();
-      e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
+    if (!isActiveCell) return;
 
-      // Set the filtered accommodations and navigate to results
-      localStorage.setItem(
-        'filteredAccommodations',
-        JSON.stringify(accommodations)
-      );
-      navigate('/multi-carousel/results');
+    e.stopPropagation();
+    handleFilterMouseLeave();
+    e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
+
+    if (additionalCount === 0) {
+      navigate(`/multi-carousel/details/${accommodations[0].id}`);
     }
+
+    // Set the filtered accommodations and navigate to results
+    localStorage.setItem(
+      'filteredAccommodations',
+      JSON.stringify(accommodations)
+    );
+    navigate('/multi-carousel/results');
   };
 
   const getAccommodationScore = (acc: Accommodation) =>
@@ -156,7 +160,11 @@ export const CarouselCell = ({
                 onMouseEnter={handleResultsMouseEnter}
                 onMouseLeave={handleResultsMouseLeave}
                 onClick={handleRedirectClick}
-                title="Explore accommodations for this category"
+                title={
+                  additionalCount === 0
+                    ? 'View details for this accommodation'
+                    : 'Explore accommodations for this category'
+                }
               >
                 {/* Best Accommodation */}
                 {bestAccommodation && (
@@ -231,11 +239,13 @@ export const CarouselCell = ({
 
                           {/* Values Column */}
                           <div className="flex flex-col w-full items-start gap-1 ">
-                            <span>{bestAccommodation.rating} ★</span>
+                            <span>{bestAccommodation.rating.toFixed(1)} ★</span>
                             <span>€{bestAccommodation.price}</span>
                             <span>
-                              {bestAccommodation.distance === 0
+                              {bestAccommodation.distance < 0.1
                                 ? 'Central'
+                                : bestAccommodation.distance < 1
+                                ? `${bestAccommodation.distance * 1000} m`
                                 : `${bestAccommodation.distance} km`}
                             </span>
                           </div>

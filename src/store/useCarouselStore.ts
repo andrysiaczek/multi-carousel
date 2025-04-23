@@ -146,12 +146,22 @@ export const useCarouselStore = create<CarouselState>((set, get) => ({
       visibleColumns: cols,
     }),
 
-  // Returns a list of filtered accommodations after applying carousel and decision chip filters
-  getFilteredAccommodations: () =>
-    get()
+  // Returns a list of unique filtered accommodations after applying carousel and decision chip filters
+  getFilteredAccommodations: () => {
+    const allAccommodations = get()
       .dataPerCell.flat()
       .map((cell) => cell.accommodations)
-      .flat(),
+      .flat();
+
+    const uniqueAccommodations = allAccommodations.reduce((acc, curr) => {
+      if (!acc.has(curr.id)) {
+        acc.set(curr.id, curr);
+      }
+      return acc;
+    }, new Map());
+
+    return Array.from(uniqueAccommodations.values());
+  },
 
   // Reapply decision chip filters to the carousel grid when selection changes
   applyDecisionChipsToCarousel: () => {

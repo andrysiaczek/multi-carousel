@@ -6,343 +6,152 @@
     "upperBound": 50,
     "subranges": [
       {
-        "label": "Less than \u20ac15",
+        "label": "Less than \u20ac20",
         "lowerBound": null,
-        "upperBound": 15,
+        "upperBound": 20,
         "subranges": [
-          {
-            "label": "Less than \u20ac5",
-            "lowerBound": null,
-            "upperBound": 5
-          },
-          {
-            "label": "\u20ac5 - \u20ac10",
-            "lowerBound": 5,
-            "upperBound": 10
-          },
-          {
-            "label": "\u20ac10 - \u20ac13",
-            "lowerBound": 10,
-            "upperBound": 13
-          },
-          {
-            "label": "Above \u20ac13",
-            "lowerBound": 13,
-            "upperBound": 15
-          }
+          { "label": "Less than €10", "lowerBound": null, "upperBound": 10 },
+          { "label": "Less than €15", "lowerBound": null, "upperBound": 15 },
+          { "label": "Less than €17", "lowerBound": null, "upperBound": 17 },
+          { "label": "Less than €19", "lowerBound": null, "upperBound": 19 }
         ]
       },
       {
-        "label": "\u20ac15 - \u20ac30",
-        "lowerBound": 15,
+        "label": "Less than \u20ac30",
+        "lowerBound": null,
         "upperBound": 30,
         "subranges": [
-          {
-            "label": "Less than \u20ac20",
-            "lowerBound": 15,
-            "upperBound": 20
-          },
-          {
-            "label": "\u20ac20 - \u20ac25",
-            "lowerBound": 20,
-            "upperBound": 25
-          },
-          {
-            "label": "\u20ac25 - \u20ac28",
-            "lowerBound": 25,
-            "upperBound": 28
-          },
-          {
-            "label": "Above \u20ac28",
-            "lowerBound": 28,
-            "upperBound": 30
-          }
+          { "label": "Less than €15", "lowerBound": null, "upperBound": 15 },
+          { "label": "Less than €20", "lowerBound": null, "upperBound": 20 },
+          { "label": "Less than €25", "lowerBound": null, "upperBound": 25 },
+          { "label": "Less than €28", "lowerBound": null, "upperBound": 28 }
         ]
       },
       {
-        "label": "\u20ac30 - \u20ac40",
-        "lowerBound": 30,
+        "label": "Less than \u20ac40",
+        "lowerBound": null,
         "upperBound": 40,
         "subranges": [
-          {
-            "label": "Less than \u20ac33",
-            "lowerBound": 30,
-            "upperBound": 33
-          },
-          {
-            "label": "\u20ac33 - \u20ac36",
-            "lowerBound": 33,
-            "upperBound": 36
-          },
-          {
-            "label": "\u20ac36 - \u20ac38",
-            "lowerBound": 36,
-            "upperBound": 38
-          },
-          {
-            "label": "Above \u20ac38",
-            "lowerBound": 38,
-            "upperBound": 40
-          }
+          { "label": "Less than €20", "lowerBound": null, "upperBound": 20 },
+          { "label": "Less than €25", "lowerBound": null, "upperBound": 25 },
+          { "label": "Less than €30", "lowerBound": null, "upperBound": 30 },
+          { "label": "Less than €35", "lowerBound": null, "upperBound": 35 }
         ]
       },
       {
-        "label": "Above \u20ac40",
-        "lowerBound": 40,
-        "upperBound": 50,
+        "label": "Less than \u20ac45",
+        "lowerBound": null,
+        "upperBound": 45,
         "subranges": [
-          {
-            "label": "Less than \u20ac43",
-            "lowerBound": 40,
-            "upperBound": 43
-          },
-          {
-            "label": "\u20ac43 - \u20ac46",
-            "lowerBound": 43,
-            "upperBound": 46
-          },
-          {
-            "label": "\u20ac46 - \u20ac48",
-            "lowerBound": 46,
-            "upperBound": 48
-          },
-          {
-            "label": "Above \u20ac48",
-            "lowerBound": 48,
-            "upperBound": 50
-          }
+          { "label": "Less than €25", "lowerBound": null, "upperBound": 25 },
+          { "label": "Less than €30", "lowerBound": null, "upperBound": 30 },
+          { "label": "Less than €35", "lowerBound": null, "upperBound": 35 },
+          { "label": "Less than €40", "lowerBound": null, "upperBound": 40 }
         ]
       }
     ]
   },
   {
     "label": "Low",
-    "sublabel": "(\u20ac50 - \u20ac100)",
+    "sublabel": "(\u20ac50 – \u20ac100)",
     "lowerBound": 50,
     "upperBound": 100,
     "subranges": [
       {
-        "label": "Less than \u20ac65",
+        "label": "Up to \u20ac60",
         "lowerBound": 50,
-        "upperBound": 65,
+        "upperBound": 60,
         "subranges": [
-          {
-            "label": "Less than \u20ac55",
-            "lowerBound": 50,
-            "upperBound": 55
-          },
-          {
-            "label": "\u20ac55 - \u20ac60",
-            "lowerBound": 55,
-            "upperBound": 60
-          },
-          {
-            "label": "\u20ac60 - \u20ac63",
-            "lowerBound": 60,
-            "upperBound": 63
-          },
-          {
-            "label": "Above \u20ac63",
-            "lowerBound": 63,
-            "upperBound": 65
-          }
+          { "label": "Up to €52", "lowerBound": 50, "upperBound": 52 },
+          { "label": "Up to €54", "lowerBound": 50, "upperBound": 54 },
+          { "label": "Up to €56", "lowerBound": 50, "upperBound": 56 },
+          { "label": "Up to €58", "lowerBound": 50, "upperBound": 58 }
         ]
       },
       {
-        "label": "\u20ac65 - \u20ac80",
-        "lowerBound": 65,
+        "label": "Up to \u20ac70",
+        "lowerBound": 50,
+        "upperBound": 70,
+        "subranges": [
+          { "label": "Up to €55", "lowerBound": 50, "upperBound": 55 },
+          { "label": "Up to €60", "lowerBound": 50, "upperBound": 60 },
+          { "label": "Up to €65", "lowerBound": 50, "upperBound": 65 },
+          { "label": "Up to €68", "lowerBound": 50, "upperBound": 68 }
+        ]
+      },
+      {
+        "label": "Up to \u20ac80",
+        "lowerBound": 50,
         "upperBound": 80,
         "subranges": [
-          {
-            "label": "Less than \u20ac70",
-            "lowerBound": 65,
-            "upperBound": 70
-          },
-          {
-            "label": "\u20ac70 - \u20ac75",
-            "lowerBound": 70,
-            "upperBound": 75
-          },
-          {
-            "label": "\u20ac75 - \u20ac78",
-            "lowerBound": 75,
-            "upperBound": 78
-          },
-          {
-            "label": "Above \u20ac78",
-            "lowerBound": 78,
-            "upperBound": 80
-          }
+          { "label": "Up to €60", "lowerBound": 50, "upperBound": 60 },
+          { "label": "Up to €65", "lowerBound": 50, "upperBound": 65 },
+          { "label": "Up to €70", "lowerBound": 50, "upperBound": 70 },
+          { "label": "Up to €75", "lowerBound": 50, "upperBound": 75 }
         ]
       },
       {
-        "label": "\u20ac80 - \u20ac90",
-        "lowerBound": 80,
+        "label": "Up to \u20ac90",
+        "lowerBound": 50,
         "upperBound": 90,
         "subranges": [
-          {
-            "label": "Less than \u20ac83",
-            "lowerBound": 80,
-            "upperBound": 83
-          },
-          {
-            "label": "\u20ac83 - \u20ac86",
-            "lowerBound": 83,
-            "upperBound": 86
-          },
-          {
-            "label": "\u20ac86 - \u20ac88",
-            "lowerBound": 86,
-            "upperBound": 88
-          },
-          {
-            "label": "Above \u20ac88",
-            "lowerBound": 88,
-            "upperBound": 90
-          }
-        ]
-      },
-      {
-        "label": "Above \u20ac90",
-        "lowerBound": 90,
-        "upperBound": 100,
-        "subranges": [
-          {
-            "label": "Less than \u20ac94",
-            "lowerBound": 90,
-            "upperBound": 94
-          },
-          {
-            "label": "\u20ac94 - \u20ac97",
-            "lowerBound": 94,
-            "upperBound": 97
-          },
-          {
-            "label": "\u20ac97 - \u20ac99",
-            "lowerBound": 97,
-            "upperBound": 99
-          },
-          {
-            "label": "Above \u20ac99",
-            "lowerBound": 99,
-            "upperBound": 100
-          }
+          { "label": "Up to €70", "lowerBound": 50, "upperBound": 70 },
+          { "label": "Up to €75", "lowerBound": 50, "upperBound": 75 },
+          { "label": "Up to €80", "lowerBound": 50, "upperBound": 80 },
+          { "label": "Up to €85", "lowerBound": 50, "upperBound": 85 }
         ]
       }
     ]
   },
   {
     "label": "Medium",
-    "sublabel": "(\u20ac100 - \u20ac250)",
+    "sublabel": "(\u20ac100 – \u20ac250)",
     "lowerBound": 100,
     "upperBound": 250,
     "subranges": [
       {
-        "label": "Less than \u20ac140",
+        "label": "Up to \u20ac120",
         "lowerBound": 100,
-        "upperBound": 140,
+        "upperBound": 120,
         "subranges": [
-          {
-            "label": "Less than \u20ac115",
-            "lowerBound": 100,
-            "upperBound": 115
-          },
-          {
-            "label": "\u20ac115 - \u20ac125",
-            "lowerBound": 115,
-            "upperBound": 125
-          },
-          {
-            "label": "\u20ac125 - \u20ac135",
-            "lowerBound": 125,
-            "upperBound": 135
-          },
-          {
-            "label": "Above \u20ac135",
-            "lowerBound": 135,
-            "upperBound": 140
-          }
+          { "label": "Up to €105", "lowerBound": 100, "upperBound": 105 },
+          { "label": "Up to €110", "lowerBound": 100, "upperBound": 110 },
+          { "label": "Up to €115", "lowerBound": 100, "upperBound": 115 },
+          { "label": "Up to €118", "lowerBound": 100, "upperBound": 118 }
+        ]
+      },
+      { "label": "Up to \u20ac160", "lowerBound": 100, "upperBound": 160 },
+      {
+        "label": "Up to \u20ac150",
+        "lowerBound": 100,
+        "upperBound": 150,
+        "subranges": [
+          { "label": "Up to €130", "lowerBound": 100, "upperBound": 130 },
+          { "label": "Up to €135", "lowerBound": 100, "upperBound": 135 },
+          { "label": "Up to €140", "lowerBound": 100, "upperBound": 140 },
+          { "label": "Up to €145", "lowerBound": 100, "upperBound": 145 }
         ]
       },
       {
-        "label": "\u20ac140 - \u20ac180",
-        "lowerBound": 140,
-        "upperBound": 180,
+        "label": "Up to \u20ac190",
+        "lowerBound": 100,
+        "upperBound": 190,
         "subranges": [
-          {
-            "label": "Less than \u20ac155",
-            "lowerBound": 140,
-            "upperBound": 155
-          },
-          {
-            "label": "\u20ac155 - \u20ac165",
-            "lowerBound": 155,
-            "upperBound": 165
-          },
-          {
-            "label": "\u20ac165 - \u20ac175",
-            "lowerBound": 165,
-            "upperBound": 175
-          },
-          {
-            "label": "Above \u20ac175",
-            "lowerBound": 175,
-            "upperBound": 180
-          }
+          { "label": "Up to €150", "lowerBound": 100, "upperBound": 150 },
+          { "label": "Up to €160", "lowerBound": 100, "upperBound": 160 },
+          { "label": "Up to €170", "lowerBound": 100, "upperBound": 170 },
+          { "label": "Up to €180", "lowerBound": 100, "upperBound": 180 }
         ]
       },
       {
-        "label": "\u20ac180 - \u20ac220",
-        "lowerBound": 180,
+        "label": "Up to \u20ac220",
+        "lowerBound": 100,
         "upperBound": 220,
         "subranges": [
-          {
-            "label": "Less than \u20ac190",
-            "lowerBound": 180,
-            "upperBound": 190
-          },
-          {
-            "label": "\u20ac190 - \u20ac200",
-            "lowerBound": 190,
-            "upperBound": 200
-          },
-          {
-            "label": "\u20ac200 - \u20ac210",
-            "lowerBound": 200,
-            "upperBound": 210
-          },
-          {
-            "label": "Above \u20ac210",
-            "lowerBound": 210,
-            "upperBound": 220
-          }
-        ]
-      },
-      {
-        "label": "Above \u20ac220",
-        "lowerBound": 220,
-        "upperBound": 250,
-        "subranges": [
-          {
-            "label": "Less than \u20ac230",
-            "lowerBound": 220,
-            "upperBound": 230
-          },
-          {
-            "label": "\u20ac230 - \u20ac240",
-            "lowerBound": 230,
-            "upperBound": 240
-          },
-          {
-            "label": "\u20ac240 - \u20ac245",
-            "lowerBound": 240,
-            "upperBound": 245
-          },
-          {
-            "label": "Above \u20ac245",
-            "lowerBound": 245,
-            "upperBound": 250
-          }
+          { "label": "Up to €200", "lowerBound": 100, "upperBound": 200 },
+          { "label": "Up to €205", "lowerBound": 100, "upperBound": 205 },
+          { "label": "Up to €210", "lowerBound": 100, "upperBound": 210 },
+          { "label": "Up to €215", "lowerBound": 100, "upperBound": 215 }
         ]
       }
     ]
@@ -354,111 +163,47 @@
     "upperBound": null,
     "subranges": [
       {
-        "label": "Less than \u20ac350",
+        "label": "Up to \u20ac300",
         "lowerBound": 250,
-        "upperBound": 350,
+        "upperBound": 300,
         "subranges": [
-          {
-            "label": "Less than \u20ac280",
-            "lowerBound": 250,
-            "upperBound": 280
-          },
-          {
-            "label": "\u20ac280 - \u20ac310",
-            "lowerBound": 280,
-            "upperBound": 310
-          },
-          {
-            "label": "\u20ac310 - \u20ac330",
-            "lowerBound": 310,
-            "upperBound": 330
-          },
-          {
-            "label": "Above \u20ac330",
-            "lowerBound": 330,
-            "upperBound": 350
-          }
+          { "label": "Up to €260", "lowerBound": 250, "upperBound": 260 },
+          { "label": "Up to €270", "lowerBound": 250, "upperBound": 270 },
+          { "label": "Up to €280", "lowerBound": 250, "upperBound": 280 },
+          { "label": "Up to €290", "lowerBound": 250, "upperBound": 290 }
         ]
       },
       {
-        "label": "\u20ac350 - \u20ac450",
-        "lowerBound": 350,
-        "upperBound": 450,
+        "label": "Up to \u20ac400",
+        "lowerBound": 250,
+        "upperBound": 400,
         "subranges": [
-          {
-            "label": "Less than \u20ac380",
-            "lowerBound": 350,
-            "upperBound": 380
-          },
-          {
-            "label": "\u20ac380 - \u20ac410",
-            "lowerBound": 380,
-            "upperBound": 410
-          },
-          {
-            "label": "\u20ac410 - \u20ac430",
-            "lowerBound": 410,
-            "upperBound": 430
-          },
-          {
-            "label": "Above \u20ac430",
-            "lowerBound": 430,
-            "upperBound": 450
-          }
+          { "label": "Up to €320", "lowerBound": 250, "upperBound": 320 },
+          { "label": "Up to €350", "lowerBound": 250, "upperBound": 350 },
+          { "label": "Up to €370", "lowerBound": 250, "upperBound": 370 },
+          { "label": "Up to €390", "lowerBound": 250, "upperBound": 390 }
         ]
       },
       {
-        "label": "\u20ac450 - \u20ac525",
-        "lowerBound": 450,
-        "upperBound": 525,
+        "label": "Up to \u20ac500",
+        "lowerBound": 250,
+        "upperBound": 500,
         "subranges": [
-          {
-            "label": "Less than \u20ac480",
-            "lowerBound": 450,
-            "upperBound": 480
-          },
-          {
-            "label": "\u20ac480 - \u20ac500",
-            "lowerBound": 480,
-            "upperBound": 500
-          },
-          {
-            "label": "\u20ac500 - \u20ac515",
-            "lowerBound": 500,
-            "upperBound": 515
-          },
-          {
-            "label": "Above \u20ac515",
-            "lowerBound": 515,
-            "upperBound": 525
-          }
+          { "label": "Up to €420", "lowerBound": 250, "upperBound": 420 },
+          { "label": "Up to €450", "lowerBound": 250, "upperBound": 450 },
+          { "label": "Up to €470", "lowerBound": 250, "upperBound": 470 },
+          { "label": "Up to €490", "lowerBound": 250, "upperBound": 490 }
         ]
       },
       {
-        "label": "Above \u20ac525",
-        "lowerBound": 525,
-        "upperBound": null,
+        "label": "Up to \u20ac550",
+        "lowerBound": 250,
+        "upperBound": 550,
         "subranges": [
-          {
-            "label": "Less than \u20ac550",
-            "lowerBound": 525,
-            "upperBound": 550
-          },
-          {
-            "label": "\u20ac550 - \u20ac575",
-            "lowerBound": 550,
-            "upperBound": 575
-          },
-          {
-            "label": "\u20ac575 - \u20ac590",
-            "lowerBound": 575,
-            "upperBound": 590
-          },
-          {
-            "label": "Above \u20ac590",
-            "lowerBound": 590,
-            "upperBound": null
-          }
+          { "label": "Up to €510", "lowerBound": 250, "upperBound": 510 },
+          { "label": "Up to €520", "lowerBound": 250, "upperBound": 520 },
+          { "label": "Up to €530", "lowerBound": 250, "upperBound": 530 },
+          { "label": "Up to €540", "lowerBound": 250, "upperBound": 540 }
         ]
       }
     ]

@@ -89,11 +89,15 @@ export const ResultItem = ({
 
         {/* Rating and Distance */}
         <div className="flex items-center gap-2 text-gray-500 text-sm font-medium px-4">
-          <span className="flex items-center">{accommodation.rating} ★</span>
+          <span className="flex items-center">
+            {accommodation.rating.toFixed(1)} ★
+          </span>
           <div className="h-4 w-[1px] bg-gray-400 mx-4" />
           <span className="flex items-center">
-            {accommodation.distance === 0
+            {accommodation.distance < 0.1
               ? 'Central location'
+              : accommodation.distance < 1
+              ? `${accommodation.distance * 1000} m`
               : `${accommodation.distance} km`}
           </span>
         </div>

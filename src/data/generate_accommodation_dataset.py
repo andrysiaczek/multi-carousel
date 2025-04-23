@@ -7,7 +7,7 @@ from geopy.point import Point
 
 # Accommodation types and corresponding price ranges
 price_ranges = {
-    "Hostel (Dormitory Bed)": (18, 35),
+    "Hostel (Dormitory Bed)": (15, 35),
     "Hostel (Private Room)": (50, 80),
     "Budget Hotel": (50, 90),
     "Guesthouse / Bed & Breakfast (B&B)": (60, 120),
@@ -155,27 +155,30 @@ names_part_2_by_type = {
 def generate_rating_by_type(accommodation_type: str) -> float:
     low, high = rating_ranges.get(accommodation_type, (3.0, 4.5))
     # Bias towards higher values in range
-    return round(random.triangular(low, high, high), 1)
+    return round(random.triangular(low, high, high), 2)
     
 # Generate a skewed distance: most close, some medium, few far    
 def generate_skewed_distance():
     random_value = random.random()
-    if random_value < 0.6:
-        # Central (0.0–1.5 km): 60%
-        return round(random.uniform(0.0, 1.5), 2)
+    if random_value < 0.4:
+        # Central (0.0–1.0 km): 40%
+        return round(random.uniform(0.0, 1.0), 2)
+    elif random_value < 0.6:
+        # Walkable (1.5–3.5 km): 20%
+        return round(random.uniform(1.0, 1.5), 1)
     elif random_value < 0.85:
         # Walkable but farther (1.5–3.5 km): 25%
-        return round(random.uniform(1.5, 3.5), 2)
+        return round(random.uniform(1.5, 3.5), 1)
     elif random_value < 0.97:
         # Commutable (3.5–6.0 km): 12%
-        return round(random.uniform(3.5, 6.0), 2)
+        return round(random.uniform(3.5, 6.0), 1)
     else:
         # Far suburbs or remote (6.0–10.0 km): 3%
-        return round(random.uniform(6.0, 10.0), 2)
+        return round(random.uniform(6.0, 10.0), 1)
     
-def random_location_at_distance(center, dist_km):
+def random_location_at_distance(dist_km):
     bearing = random.uniform(0, 360)  # Random direction in degrees
-    origin = Point(center[0], center[1])
+    origin = Point(valencia_center[0], valencia_center[1])
     destination = geopy_distance(kilometers=dist_km).destination(origin, bearing)
     return {"lat": round(destination.latitude, 6), "lng": round(destination.longitude, 6)}
 
@@ -275,15 +278,15 @@ for i in range(1, 1001):  # 1000 accommodations
         "id": str(i),
         "versionBenchmark": {
             "name": generate_accommodation_name(accom_type),
-            "location": random_location_at_distance(valencia_center, distance),
+            "location": random_location_at_distance(distance),
             "images": generate_images(accom_type, features)},
         "versionSingleAxisCarousel": {
             "name": generate_accommodation_name(accom_type),
-            "location": random_location_at_distance(valencia_center, distance),
+            "location": random_location_at_distance(distance),
             "images": generate_images(accom_type, features)},
         "versionMultiAxisCarousel": {
             "name": generate_accommodation_name(accom_type),
-            "location": random_location_at_distance(valencia_center, distance),
+            "location": random_location_at_distance(distance),
             "images": generate_images(accom_type, features)},
         "price": round(random.uniform(price_range[0], price_range[1]), 2),
         "rating": generate_rating_by_type(accom_type),

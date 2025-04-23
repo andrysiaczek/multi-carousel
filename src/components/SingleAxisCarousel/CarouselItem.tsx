@@ -53,11 +53,15 @@ export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
 
           {/* Rating and Distance */}
           <div className="flex items-center justify-center gap-4 text-gray-600 w-full text-xs font-medium">
-            <span className="flex items-center">{accommodation.rating} ★</span>
+            <span className="flex items-center">
+              {accommodation.rating.toFixed(1)} ★
+            </span>
             <div className="h-4 w-[1px] bg-gray-400 mx-4" />
             <span className="flex items-center">
-              {accommodation.distance === 0
+              {accommodation.distance < 0.1
                 ? 'Central'
+                : accommodation.distance < 1
+                ? `${accommodation.distance * 1000} m`
                 : `${accommodation.distance} km`}
             </span>
           </div>

@@ -6,456 +6,312 @@
     "upperBound": 3.0,
     "subranges": [
       {
-        "label": "Less than 1.5\u2605",
-        "lowerBound": null,
-        "upperBound": 1.5,
-        "subranges": [
-          {
-            "label": "Less than 1.0\u2605",
-            "lowerBound": null,
-            "upperBound": 1.0
-          },
-          {
-            "label": "1.0\u2605 - 1.25\u2605",
-            "lowerBound": 1.0,
-            "upperBound": 1.25
-          },
-          {
-            "label": "1.25\u2605 - 1.38\u2605",
-            "lowerBound": 1.25,
-            "upperBound": 1.38
-          },
-          {
-            "label": "Above 1.38\u2605",
-            "lowerBound": 1.38,
-            "upperBound": 1.5
-          }
-        ]
-      },
-      {
-        "label": "1.5\u2605 - 2.0\u2605",
+        "label": "1.5\u2605 and higher",
         "lowerBound": 1.5,
-        "upperBound": 2.0,
+        "upperBound": 3.0,
         "subranges": [
-          {
-            "label": "Less than 1.62\u2605",
-            "lowerBound": 1.5,
-            "upperBound": 1.62
-          },
-          {
-            "label": "1.62\u2605 - 1.75\u2605",
-            "lowerBound": 1.62,
-            "upperBound": 1.75
-          },
-          {
-            "label": "1.75\u2605 - 1.88\u2605",
-            "lowerBound": 1.75,
-            "upperBound": 1.88
-          },
-          {
-            "label": "Above 1.88\u2605",
-            "lowerBound": 1.88,
-            "upperBound": 2.0
-          }
+          { "label": "1.6★ and higher", "lowerBound": 1.6, "upperBound": 3.0 },
+          { "label": "1.7★ and higher", "lowerBound": 1.7, "upperBound": 3.0 },
+          { "label": "1.8★ and higher", "lowerBound": 1.8, "upperBound": 3.0 },
+          { "label": "1.9★ and higher", "lowerBound": 1.9, "upperBound": 3.0 }
         ]
       },
       {
-        "label": "2.0\u2605 - 2.5\u2605",
+        "label": "2.0\u2605 and higher",
         "lowerBound": 2.0,
-        "upperBound": 2.5,
+        "upperBound": 3.0,
         "subranges": [
-          {
-            "label": "Less than 2.12\u2605",
-            "lowerBound": 2.0,
-            "upperBound": 2.12
-          },
-          {
-            "label": "2.12\u2605 - 2.25\u2605",
-            "lowerBound": 2.12,
-            "upperBound": 2.25
-          },
-          {
-            "label": "2.25\u2605 - 2.38\u2605",
-            "lowerBound": 2.25,
-            "upperBound": 2.38
-          },
-          {
-            "label": "Above 2.38\u2605",
-            "lowerBound": 2.38,
-            "upperBound": 2.5
-          }
+          { "label": "2.1★ and higher", "lowerBound": 2.1, "upperBound": 3.0 },
+          { "label": "2.2★ and higher", "lowerBound": 2.2, "upperBound": 3.0 },
+          { "label": "2.3★ and higher", "lowerBound": 2.3, "upperBound": 3.0 },
+          { "label": "2.4★ and higher", "lowerBound": 2.4, "upperBound": 3.0 }
         ]
       },
       {
-        "label": "2.5\u2605 - 3.0\u2605",
-        "lowerBound": 2.5,
+        "label": "2.3\u2605 and higher",
+        "lowerBound": 2.3,
+        "upperBound": 3.0,
+        "subranges": [
+          { "label": "2.4★ and higher", "lowerBound": 2.4, "upperBound": 3.0 },
+          { "label": "2.5★ and higher", "lowerBound": 2.5, "upperBound": 3.0 },
+          { "label": "2.6★ and higher", "lowerBound": 2.6, "upperBound": 3.0 },
+          { "label": "2.7★ and higher", "lowerBound": 2.7, "upperBound": 3.0 }
+        ]
+      },
+      {
+        "label": "2.7\u2605 and higher",
+        "lowerBound": 2.7,
         "upperBound": 3.0,
         "subranges": [
           {
-            "label": "Less than 2.62\u2605",
-            "lowerBound": 2.5,
-            "upperBound": 2.62
-          },
-          {
-            "label": "2.62\u2605 - 2.75\u2605",
-            "lowerBound": 2.62,
-            "upperBound": 2.75
-          },
-          {
-            "label": "2.75\u2605 - 2.88\u2605",
+            "label": "2.75★ and higher",
             "lowerBound": 2.75,
-            "upperBound": 2.88
-          },
-          {
-            "label": "Above 2.88\u2605",
-            "lowerBound": 2.88,
             "upperBound": 3.0
-          }
+          },
+          { "label": "2.8★ and higher", "lowerBound": 2.8, "upperBound": 3.0 },
+          {
+            "label": "2.85★ and higher",
+            "lowerBound": 2.85,
+            "upperBound": 3.0
+          },
+          { "label": "2.9★ and higher", "lowerBound": 2.9, "upperBound": 3.0 }
         ]
       }
     ]
   },
   {
     "label": "Medium",
-    "sublabel": "(3.0\u2605 - 4.0\u2605)",
+    "sublabel": "(3.0 – 4.0\u2605)",
     "lowerBound": 3.0,
     "upperBound": 4.0,
     "subranges": [
       {
-        "label": "3.0\u2605 - 3.25\u2605",
-        "lowerBound": 3.0,
-        "upperBound": 3.25,
+        "label": "3.2\u2605 and higher",
+        "lowerBound": 3.2,
+        "upperBound": 4.0,
         "subranges": [
-          {
-            "label": "Less than 3.08\u2605",
-            "lowerBound": 3.0,
-            "upperBound": 3.08
-          },
-          {
-            "label": "3.08\u2605 - 3.16\u2605",
-            "lowerBound": 3.08,
-            "upperBound": 3.16
-          },
-          {
-            "label": "3.16\u2605 - 3.22\u2605",
-            "lowerBound": 3.16,
-            "upperBound": 3.22
-          },
-          {
-            "label": "Above 3.22\u2605",
-            "lowerBound": 3.22,
-            "upperBound": 3.25
-          }
+          { "label": "3.3★ and higher", "lowerBound": 3.3, "upperBound": 4.0 },
+          { "label": "3.4★ and higher", "lowerBound": 3.4, "upperBound": 4.0 },
+          { "label": "3.5★ and higher", "lowerBound": 3.5, "upperBound": 4.0 },
+          { "label": "3.6★ and higher", "lowerBound": 3.6, "upperBound": 4.0 }
         ]
       },
       {
-        "label": "3.25\u2605 - 3.5\u2605",
-        "lowerBound": 3.25,
-        "upperBound": 3.5,
-        "subranges": [
-          {
-            "label": "Less than 3.31\u2605",
-            "lowerBound": 3.25,
-            "upperBound": 3.31
-          },
-          {
-            "label": "3.31\u2605 - 3.38\u2605",
-            "lowerBound": 3.31,
-            "upperBound": 3.38
-          },
-          {
-            "label": "3.38\u2605 - 3.44\u2605",
-            "lowerBound": 3.38,
-            "upperBound": 3.44
-          },
-          {
-            "label": "Above 3.44\u2605",
-            "lowerBound": 3.44,
-            "upperBound": 3.5
-          }
-        ]
-      },
-      {
-        "label": "3.5\u2605 - 3.75\u2605",
-        "lowerBound": 3.5,
-        "upperBound": 3.75,
-        "subranges": [
-          {
-            "label": "Less than 3.57\u2605",
-            "lowerBound": 3.5,
-            "upperBound": 3.57
-          },
-          {
-            "label": "3.57\u2605 - 3.63\u2605",
-            "lowerBound": 3.57,
-            "upperBound": 3.63
-          },
-          {
-            "label": "3.63\u2605 - 3.69\u2605",
-            "lowerBound": 3.63,
-            "upperBound": 3.69
-          },
-          {
-            "label": "Above 3.69\u2605",
-            "lowerBound": 3.69,
-            "upperBound": 3.75
-          }
-        ]
-      },
-      {
-        "label": "3.75\u2605 - 4.0\u2605",
-        "lowerBound": 3.75,
+        "label": "3.4\u2605 and higher",
+        "lowerBound": 3.4,
         "upperBound": 4.0,
         "subranges": [
           {
-            "label": "Less than 3.61\u2605",
-            "lowerBound": 3.75,
-            "upperBound": 3.81
-          },
-          {
-            "label": "3.81\u2605 - 3.88\u2605",
-            "lowerBound": 3.81,
-            "upperBound": 3.88
-          },
-          {
-            "label": "3.88\u2605 - 3.94\u2605",
-            "lowerBound": 3.88,
-            "upperBound": 3.94
-          },
-          {
-            "label": "Above 3.94\u2605",
-            "lowerBound": 3.94,
+            "label": "3.45★ and higher",
+            "lowerBound": 3.45,
             "upperBound": 4.0
-          }
+          },
+          { "label": "3.5★ and higher", "lowerBound": 3.5, "upperBound": 4.0 },
+          {
+            "label": "3.55★ and higher",
+            "lowerBound": 3.55,
+            "upperBound": 4.0
+          },
+          { "label": "3.6★ and higher", "lowerBound": 3.6, "upperBound": 4.0 }
+        ]
+      },
+      {
+        "label": "3.6\u2605 and higher",
+        "lowerBound": 3.6,
+        "upperBound": 4.0,
+        "subranges": [
+          {
+            "label": "3.65★ and higher",
+            "lowerBound": 3.65,
+            "upperBound": 4.0
+          },
+          { "label": "3.7★ and higher", "lowerBound": 3.7, "upperBound": 4.0 },
+          {
+            "label": "3.75★ and higher",
+            "lowerBound": 3.75,
+            "upperBound": 4.0
+          },
+          { "label": "3.8★ and higher", "lowerBound": 3.8, "upperBound": 4.0 }
+        ]
+      },
+      {
+        "label": "3.8\u2605 and higher",
+        "lowerBound": 3.8,
+        "upperBound": 4.0,
+        "subranges": [
+          {
+            "label": "3.85★ and higher",
+            "lowerBound": 3.85,
+            "upperBound": 4.0
+          },
+          { "label": "3.9★ and higher", "lowerBound": 3.9, "upperBound": 4.0 },
+          {
+            "label": "3.95★ and higher",
+            "lowerBound": 3.95,
+            "upperBound": 4.0
+          },
+          { "label": "3.97★ and higher", "lowerBound": 3.97, "upperBound": 4.0 }
         ]
       }
     ]
   },
   {
     "label": "High",
-    "sublabel": "(4.0\u2605 - 4.5\u2605)",
+    "sublabel": "(4.0 – 4.5\u2605)",
     "lowerBound": 4.0,
     "upperBound": 4.5,
     "subranges": [
       {
-        "label": "4.0\u2605 - 4.15\u2605",
-        "lowerBound": 4.0,
-        "upperBound": 4.15,
+        "label": "4.1\u2605 and higher",
+        "lowerBound": 4.1,
+        "upperBound": 4.5,
         "subranges": [
           {
-            "label": "Less than 4.05\u2605",
-            "lowerBound": 4.0,
-            "upperBound": 4.05
-          },
-          {
-            "label": "4.05\u2605 - 4.1\u2605",
-            "lowerBound": 4.05,
-            "upperBound": 4.1
-          },
-          {
-            "label": "4.1\u2605 - 4.12\u2605",
-            "lowerBound": 4.1,
-            "upperBound": 4.12
-          },
-          {
-            "label": "Above 4.12\u2605",
-            "lowerBound": 4.12,
-            "upperBound": 4.15
-          }
-        ]
-      },
-      {
-        "label": "4.15\u2605 - 4.3\u2605",
-        "lowerBound": 4.15,
-        "upperBound": 4.3,
-        "subranges": [
-          {
-            "label": "Less than 4.2\u2605",
+            "label": "4.15★ and higher",
             "lowerBound": 4.15,
-            "upperBound": 4.2
+            "upperBound": 4.5
           },
+          { "label": "4.2★ and higher", "lowerBound": 4.2, "upperBound": 4.5 },
           {
-            "label": "4.2\u2605 - 4.25\u2605",
-            "lowerBound": 4.2,
-            "upperBound": 4.25
-          },
-          {
-            "label": "4.25\u2605 - 4.28\u2605",
+            "label": "4.25★ and higher",
             "lowerBound": 4.25,
-            "upperBound": 4.28
+            "upperBound": 4.5
           },
-          {
-            "label": "Above 4.28\u2605",
-            "lowerBound": 4.28,
-            "upperBound": 4.3
-          }
+          { "label": "4.3★ and higher", "lowerBound": 4.3, "upperBound": 4.5 }
         ]
       },
       {
-        "label": "4.3\u2605 - 4.4\u2605",
-        "lowerBound": 4.3,
-        "upperBound": 4.4,
+        "label": "4.2\u2605 and higher",
+        "lowerBound": 4.2,
+        "upperBound": 4.5,
         "subranges": [
           {
-            "label": "Less than 4.33\u2605",
-            "lowerBound": 4.3,
-            "upperBound": 4.33
+            "label": "4.25★ and higher",
+            "lowerBound": 4.25,
+            "upperBound": 4.5
           },
+          { "label": "4.3★ and higher", "lowerBound": 4.3, "upperBound": 4.5 },
           {
-            "label": "4.33\u2605 - 4.36\u2605",
-            "lowerBound": 4.33,
-            "upperBound": 4.36
+            "label": "4.35★ and higher",
+            "lowerBound": 4.35,
+            "upperBound": 4.5
           },
-          {
-            "label": "4.36\u2605 - 4.39\u2605",
-            "lowerBound": 4.36,
-            "upperBound": 4.39
-          },
-          {
-            "label": "Above 4.39\u2605",
-            "lowerBound": 4.39,
-            "upperBound": 4.4
-          }
+          { "label": "4.4★ and higher", "lowerBound": 4.4, "upperBound": 4.5 }
         ]
       },
       {
-        "label": "4.4\u2605 - 4.5\u2605",
+        "label": "4.3\u2605 and higher",
+        "lowerBound": 4.3,
+        "upperBound": 4.5,
+        "subranges": [
+          {
+            "label": "4.35★ and higher",
+            "lowerBound": 4.35,
+            "upperBound": 4.5
+          },
+          { "label": "4.4★ and higher", "lowerBound": 4.4, "upperBound": 4.5 },
+          {
+            "label": "4.45★ and higher",
+            "lowerBound": 4.45,
+            "upperBound": 4.5
+          },
+          { "label": "4.48★ and higher", "lowerBound": 4.48, "upperBound": 4.5 }
+        ]
+      },
+      {
+        "label": "4.4\u2605 and higher",
         "lowerBound": 4.4,
         "upperBound": 4.5,
         "subranges": [
           {
-            "label": "Less than 4.42\u2605",
-            "lowerBound": 4.4,
-            "upperBound": 4.42
-          },
-          {
-            "label": "4.42\u2605 - 4.45\u2605",
+            "label": "4.42★ and higher",
             "lowerBound": 4.42,
-            "upperBound": 4.45
-          },
-          {
-            "label": "4.45\u2605 - 4.48\u2605",
-            "lowerBound": 4.45,
-            "upperBound": 4.48
-          },
-          {
-            "label": "Above 4.48\u2605",
-            "lowerBound": 4.48,
             "upperBound": 4.5
-          }
+          },
+          {
+            "label": "4.44★ and higher",
+            "lowerBound": 4.44,
+            "upperBound": 4.5
+          },
+          {
+            "label": "4.46★ and higher",
+            "lowerBound": 4.46,
+            "upperBound": 4.5
+          },
+          { "label": "4.48★ and higher", "lowerBound": 4.48, "upperBound": 4.5 }
         ]
       }
     ]
   },
   {
     "label": "Very High",
-    "sublabel": "(4.5\u2605 and above)",
+    "sublabel": "(Above 4.5\u2605)",
     "lowerBound": 4.5,
     "upperBound": null,
     "subranges": [
       {
-        "label": "4.5\u2605 - 4.7\u2605",
-        "lowerBound": 4.5,
-        "upperBound": 4.7,
-        "subranges": [
-          {
-            "label": "Less than 4.55\u2605",
-            "lowerBound": 4.5,
-            "upperBound": 4.55
-          },
-          {
-            "label": "4.55\u2605 - 4.6\u2605",
-            "lowerBound": 4.55,
-            "upperBound": 4.6
-          },
-          {
-            "label": "4.6\u2605 - 4.65\u2605",
-            "lowerBound": 4.6,
-            "upperBound": 4.65
-          },
-          {
-            "label": "Above 4.65\u2605",
-            "lowerBound": 4.65,
-            "upperBound": 4.7
-          }
-        ]
-      },
-      {
-        "label": "4.7\u2605 - 4.85\u2605",
-        "lowerBound": 4.7,
-        "upperBound": 4.85,
-        "subranges": [
-          {
-            "label": "Less than 4.75\u2605",
-            "lowerBound": 4.7,
-            "upperBound": 4.75
-          },
-          {
-            "label": "4.75\u2605 - 4.8\u2605",
-            "lowerBound": 4.75,
-            "upperBound": 4.8
-          },
-          {
-            "label": "4.8\u2605 - 4.83\u2605",
-            "lowerBound": 4.8,
-            "upperBound": 4.83
-          },
-          {
-            "label": "Above 4.83\u2605",
-            "lowerBound": 4.83,
-            "upperBound": 4.85
-          }
-        ]
-      },
-      {
-        "label": "4.85\u2605 - 4.95\u2605",
-        "lowerBound": 4.85,
-        "upperBound": 4.95,
-        "subranges": [
-          {
-            "label": "Less than 4.88\u2605",
-            "lowerBound": 4.85,
-            "upperBound": 4.88
-          },
-          {
-            "label": "4.88\u2605 - 4.91\u2605",
-            "lowerBound": 4.88,
-            "upperBound": 4.91
-          },
-          {
-            "label": "4.91\u2605 - 4.93\u2605",
-            "lowerBound": 4.91,
-            "upperBound": 4.93
-          },
-          {
-            "label": "Above 4.93\u2605",
-            "lowerBound": 4.93,
-            "upperBound": 4.95
-          }
-        ]
-      },
-      {
-        "label": "Above 4.95\u2605",
-        "lowerBound": 4.95,
+        "label": "4.6\u2605 and higher",
+        "lowerBound": 4.6,
         "upperBound": null,
         "subranges": [
           {
-            "label": "Less than 4.97\u2605",
+            "label": "4.65★ and higher",
+            "lowerBound": 4.65,
+            "upperBound": null
+          },
+          { "label": "4.7★ and higher", "lowerBound": 4.7, "upperBound": null },
+          {
+            "label": "4.75★ and higher",
+            "lowerBound": 4.75,
+            "upperBound": null
+          },
+          { "label": "4.8★ and higher", "lowerBound": 4.8, "upperBound": null }
+        ]
+      },
+      {
+        "label": "4.7\u2605 and higher",
+        "lowerBound": 4.7,
+        "upperBound": null,
+        "subranges": [
+          {
+            "label": "4.75★ and higher",
+            "lowerBound": 4.75,
+            "upperBound": null
+          },
+          { "label": "4.8★ and higher", "lowerBound": 4.8, "upperBound": null },
+          {
+            "label": "4.85★ and higher",
+            "lowerBound": 4.85,
+            "upperBound": null
+          },
+          { "label": "4.9★ and higher", "lowerBound": 4.9, "upperBound": null }
+        ]
+      },
+      {
+        "label": "4.8\u2605 and higher",
+        "lowerBound": 4.8,
+        "upperBound": null,
+        "subranges": [
+          {
+            "label": "4.85★ and higher",
+            "lowerBound": 4.85,
+            "upperBound": null
+          },
+          { "label": "4.9★ and higher", "lowerBound": 4.9, "upperBound": null },
+          {
+            "label": "4.95★ and higher",
             "lowerBound": 4.95,
-            "upperBound": 4.97
+            "upperBound": null
           },
           {
-            "label": "4.97\u2605 - 4.98\u2605",
-            "lowerBound": 4.97,
-            "upperBound": 4.98
-          },
-          {
-            "label": "4.98\u2605 - 4.99\u2605",
+            "label": "4.98★ and higher",
             "lowerBound": 4.98,
-            "upperBound": 4.99
+            "upperBound": null
+          }
+        ]
+      },
+      {
+        "label": "4.9\u2605 and higher",
+        "lowerBound": 4.9,
+        "upperBound": null,
+        "subranges": [
+          {
+            "label": "4.93★ and higher",
+            "lowerBound": 4.93,
+            "upperBound": null
           },
           {
-            "label": "Above 4.99\u2605",
+            "label": "4.95★ and higher",
+            "lowerBound": 4.95,
+            "upperBound": null
+          },
+          {
+            "label": "4.97★ and higher",
+            "lowerBound": 4.97,
+            "upperBound": null
+          },
+          {
+            "label": "4.99★ and higher",
             "lowerBound": 4.99,
             "upperBound": null
           }
