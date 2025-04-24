@@ -8,8 +8,12 @@ import {
 } from 'lucide-react';
 import { CarouselItem } from '../../components';
 import { accommodationDataset, filters } from '../../data';
-import { useDecisionChipsStore, useSingleAxisCarouselStore } from '../../store';
-import { FilterOption } from '../../types';
+import {
+  useDecisionChipsStore,
+  useSingleAxisCarouselStore,
+  useSortStore,
+} from '../../store';
+import { FilterOption, InterfaceOption, interfaceMap } from '../../types';
 import {
   capitalize,
   filterAccommodationsSingleAxisCarousel,
@@ -23,6 +27,7 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
   const { titles, scrolls, setTitleIndex, setScrollPosition } =
     useSingleAxisCarouselStore();
   const { selectedChips } = useDecisionChipsStore();
+  const { setAccommodations } = useSortStore();
   const navigate = useNavigate();
 
   const titleIndex = titles[filterOption];
@@ -93,12 +98,8 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
     );
 
   const handleShowList = () => {
-    // Set the filtered accommodations and navigate to results
-    localStorage.setItem(
-      'filteredAccommodations',
-      JSON.stringify(accommodations)
-    );
-    navigate('/single-carousel/results');
+    setAccommodations(accommodations);
+    navigate(interfaceMap[InterfaceOption.SingleAxisCarousel].resultsPagePath);
   };
 
   return (

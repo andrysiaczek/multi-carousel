@@ -4,7 +4,7 @@ import { useFilterSidebarStore, useSortStore } from '../store';
 import { FilterOptionWithFeature, InterfaceOption, SortOption } from '../types';
 
 export const BenchmarkPage = () => {
-  const { getAppliedFilters } = useFilterSidebarStore();
+  const { filters } = useFilterSidebarStore();
   const {
     sortField,
     sortAscending,
@@ -22,7 +22,6 @@ export const BenchmarkPage = () => {
   const applyFilters = (resetAll = false) => {
     if (resetAll) return setAccommodations(accommodationDataset);
 
-    const filters = getAppliedFilters();
     const filtered = accommodationDataset.filter((acc) => {
       // Check each filter condition
       for (const [key, value] of Object.entries(filters)) {

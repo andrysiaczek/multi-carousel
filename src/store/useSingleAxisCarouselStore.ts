@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { FilterOption } from '../types';
 
 interface CarouselState {
@@ -23,20 +24,28 @@ const initialScrollsState = {
   [FilterOption.Type]: 0,
 };
 
-export const useSingleAxisCarouselStore = create<CarouselState>((set) => ({
-  titles: initialTitlesState,
-  scrolls: initialScrollsState,
-  setTitleIndex: (option, index) =>
-    set((state) => ({
-      titles: { ...state.titles, [option]: index },
-    })),
-  setScrollPosition: (option, position) =>
-    set((state) => ({
-      scrolls: { ...state.scrolls, [option]: position },
-    })),
-  resetCarouselState: () =>
-    set({
+export const useSingleAxisCarouselStore = create<CarouselState>()(
+  persist(
+    (set) => ({
       titles: initialTitlesState,
       scrolls: initialScrollsState,
+      setTitleIndex: (option, index) =>
+        set((state) => ({
+          titles: { ...state.titles, [option]: index },
+        })),
+      setScrollPosition: (option, position) =>
+        set((state) => ({
+          scrolls: { ...state.scrolls, [option]: position },
+        })),
+      resetCarouselState: () =>
+        set({
+          titles: initialTitlesState,
+          scrolls: initialScrollsState,
+        }),
     }),
-}));
+    {
+      name: 'single-axis-carousel-store',
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

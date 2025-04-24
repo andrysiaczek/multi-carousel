@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { FilterOptionWithFeature } from '../types';
 
 interface FilterSidebarState {
@@ -26,7 +27,6 @@ interface FilterSidebarState {
   ) => void;
   resetFilter: (key: FilterOptionWithFeature) => void;
   resetFilters: () => void;
-  getAppliedFilters: () => FilterSidebarState['filters'];
 }
 
 export const initialFilterSidebarState: FilterSidebarState['filters'] = {
@@ -37,47 +37,56 @@ export const initialFilterSidebarState: FilterSidebarState['filters'] = {
   [FilterOptionWithFeature.Feature]: [],
 };
 
-export const useFilterSidebarStore = create<FilterSidebarState>((set, get) => ({
-  filters: initialFilterSidebarState,
+export const useFilterSidebarStore = create<FilterSidebarState>()(
+  persist(
+    (set) => ({
+      filters: initialFilterSidebarState,
 
-  setNumericalFilter: (key, value) =>
-    set((state) => ({
-      filters: {
-        ...state.filters,
-        [key]: value,
-      },
-    })),
-
-  addStringFilter: (key, value) =>
-    set((state) => {
-      const currentFeatures = state.filters[key];
-      if (!currentFeatures.includes(value)) {
-        return {
+      setNumericalFilter: (key, value) =>
+        set((state) => ({
           filters: {
             ...state.filters,
-            [key]: [...currentFeatures, value],
+            [key]: value,
           },
-        };
-      }
-      return state;
+        })),
+
+      addStringFilter: (key, value) =>
+        set((state) => {
+          const currentFeatures = state.filters[key];
+          if (!currentFeatures.includes(value)) {
+            return {
+              filters: {
+                ...state.filters,
+                [key]: [...currentFeatures, value],
+              },
+            };
+          }
+          return state;
+        }),
+
+      removeStringFilter: (key, value) =>
+        set((state) => ({
+          filters: {
+            ...state.filters,
+            [key]: state.filters[key].filter((feature) => feature !== value),
+          },
+        })),
+
+      resetFilter: (key) =>
+        set((state) => {
+          return {
+            filters: {
+              ...state.filters,
+              [key]: initialFilterSidebarState[key],
+            },
+          };
+        }),
+
+      resetFilters: () => set({ filters: initialFilterSidebarState }),
     }),
-
-  removeStringFilter: (key, value) =>
-    set((state) => ({
-      filters: {
-        ...state.filters,
-        [key]: state.filters[key].filter((feature) => feature !== value),
-      },
-    })),
-
-  resetFilter: (key) =>
-    set((state) => {
-      return {
-        filters: { ...state.filters, [key]: initialFilterSidebarState[key] },
-      };
-    }),
-
-  resetFilters: () => set({ filters: initialFilterSidebarState }),
-
-  getAppliedFilters: () => get().filters,
-}));
+    {
+      name: 'filter-sidebar-store',
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

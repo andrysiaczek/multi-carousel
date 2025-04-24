@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { ResultItem, ResultsHeader } from '../components';
@@ -17,26 +16,11 @@ export const ResultsPage = ({ interfaceOption }: ResultsPageProps) => {
     accommodations,
     setSortField,
     setSortDirection,
-    setAccommodations,
   } = useSortStore();
 
   const handleSortChange = (field: SortOption) => setSortField(field);
   const handleSortDirection = (ascending: boolean) =>
     setSortDirection(ascending);
-
-  const getStoredAccommodations = () => {
-    try {
-      const storedData = localStorage.getItem('filteredAccommodations');
-      return storedData ? JSON.parse(storedData) : [];
-    } catch {
-      console.warn('Error parsing accommodation data from localStorage');
-      return [];
-    }
-  };
-
-  useEffect(() => {
-    setAccommodations(getStoredAccommodations());
-  }, [setAccommodations]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 px-4 flex flex-col items-center">

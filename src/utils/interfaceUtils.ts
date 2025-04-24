@@ -1,17 +1,12 @@
-import { Accommodation, InterfaceOption } from '../types';
-
-const detailPathMap = {
-  [InterfaceOption.Benchmark]: '/benchmark',
-  [InterfaceOption.SingleAxisCarousel]: '/single-carousel',
-  [InterfaceOption.MultiAxisCarousel]: '/multi-carousel',
-};
+import { Accommodation, InterfaceOption, interfaceMap } from '../types';
 
 export const generateDetailPageUrl = (
   interfaceOption: InterfaceOption,
   accommodationId: string
 ) => {
   const basePath =
-    detailPathMap[interfaceOption] || detailPathMap[InterfaceOption.Benchmark];
+    interfaceMap[interfaceOption].basePath ||
+    interfaceMap[InterfaceOption.Benchmark].basePath;
   return `${basePath}/details/${accommodationId}`;
 };
 

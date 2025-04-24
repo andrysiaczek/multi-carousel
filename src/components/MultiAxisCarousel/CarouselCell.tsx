@@ -5,9 +5,15 @@ import {
   useAxisFilterStore,
   useCarouselStore,
   useFilterHistoryStore,
+  useSortStore,
 } from '../../store';
-import { Accommodation, Subrange } from '../../types';
-import { capitalize, getFeatureIcon } from '../../utils';
+import {
+  Accommodation,
+  interfaceMap,
+  InterfaceOption,
+  Subrange,
+} from '../../types';
+import { capitalize, generateDetailPageUrl, getFeatureIcon } from '../../utils';
 
 interface CarouselCellProps {
   col: number;
@@ -38,6 +44,7 @@ export const CarouselCell = ({
   } = useCarouselStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
+  const { setAccommodations } = useSortStore();
   const navigate = useNavigate();
 
   const isEmptyCell = accommodations.length === 0;
@@ -83,15 +90,16 @@ export const CarouselCell = ({
     e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
 
     if (additionalCount === 0) {
-      navigate(`/multi-carousel/details/${accommodations[0].id}`);
+      navigate(
+        generateDetailPageUrl(
+          InterfaceOption.MultiAxisCarousel,
+          accommodations[0].id
+        )
+      );
     }
 
-    // Set the filtered accommodations and navigate to results
-    localStorage.setItem(
-      'filteredAccommodations',
-      JSON.stringify(accommodations)
-    );
-    navigate('/multi-carousel/results');
+    setAccommodations(accommodations);
+    navigate(interfaceMap[InterfaceOption.MultiAxisCarousel].resultsPagePath);
   };
 
   const getAccommodationScore = (acc: Accommodation) =>

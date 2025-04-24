@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import { accommodationDataset, filters } from '../data';
 import { useAxisFilterStore, useFilterHistoryStore } from '../store';
 import { Accommodation, CarouselCell, Subrange } from '../types';
@@ -68,144 +69,156 @@ interface CarouselState {
   resetHover: () => void;
 }
 
-export const useCarouselStore = create<CarouselState>((set, get) => ({
-  cellWidth: 0, // Width of a single cell [px]
-  cellHeight: 0, // Height of a single cell [px]
-  totalColumns: 0, // Dynamically updated in the component
-  totalRows: 0, // Dynamically updated in the component
-  visibleColumns: 3, // Default number of visible columns
-  visibleRows: 2, // Default number of visible rows
-  columnOffset: 0,
-  rowOffset: 0,
+export const useCarouselStore = create<CarouselState>()(
+  persist(
+    (set, get) => ({
+      cellWidth: 0, // Width of a single cell [px]
+      cellHeight: 0, // Height of a single cell [px]
+      totalColumns: 0, // Dynamically updated in the component
+      totalRows: 0, // Dynamically updated in the component
+      visibleColumns: 3, // Default number of visible columns
+      visibleRows: 2, // Default number of visible rows
+      columnOffset: 0,
+      rowOffset: 0,
 
-  hoveredColumn: null,
-  hoveredRow: null,
-  hoveredCell: null,
-
-  columnRanges: [],
-  rowRanges: [],
-  carouselData: accommodationDataset,
-  dataPerCell: [], // Dynamically populated in the component
-
-  scrollLeft,
-  scrollRight,
-  scrollUp,
-  scrollDown,
-  resetPosition,
-  resetColumnOffset,
-  resetRowOffset,
-
-  setCarouselData: (carouselData: Accommodation[]) => set({ carouselData }),
-
-  // Function to categorize accommodations into carousel cells
-  populateCarouselData: () => {
-    const { carouselData } = get();
-    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
-    const { getLastSubrange } = useFilterHistoryStore.getState();
-
-    // Get the correct range object from filter history or filters
-    const xRanges =
-      getLastSubrange(xAxisFilter)?.subranges ?? filters[xAxisFilter];
-    const yRanges =
-      getLastSubrange(yAxisFilter)?.subranges ?? filters[yAxisFilter];
-
-    if (!xRanges || !yRanges) {
-      return console.warn('Filter ranges are missing!');
-    }
-
-    const { carousel } = buildCarouselGrid(
-      xRanges,
-      yRanges,
-      carouselData,
-      xAxisFilter,
-      yAxisFilter
-    );
-
-    set({
-      columnRanges: xRanges,
-      rowRanges: yRanges,
-      dataPerCell: carousel,
-    });
-  },
-
-  setCellSize: (width: number, height: number) =>
-    set({
-      cellWidth: width,
-      cellHeight: height,
-    }),
-
-  updateCarouselSize: (rows, cols) =>
-    set({
-      totalRows: rows,
-      totalColumns: cols,
-    }),
-
-  updateVisibleCarouselSize: (rows, cols) =>
-    set({
-      visibleRows: rows,
-      visibleColumns: cols,
-    }),
-
-  // Returns a list of unique filtered accommodations after applying carousel and decision chip filters
-  getFilteredAccommodations: () => {
-    const allAccommodations = get()
-      .dataPerCell.flat()
-      .map((cell) => cell.accommodations)
-      .flat();
-
-    const uniqueAccommodations = allAccommodations.reduce((acc, curr) => {
-      if (!acc.has(curr.id)) {
-        acc.set(curr.id, curr);
-      }
-      return acc;
-    }, new Map());
-
-    return Array.from(uniqueAccommodations.values());
-  },
-
-  // Reapply decision chip filters to the carousel grid when selection changes
-  applyDecisionChipsToCarousel: () => {
-    const { columnRanges, rowRanges, carouselData } = get();
-    const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
-
-    if (
-      !xAxisFilter ||
-      !yAxisFilter ||
-      !columnRanges.length ||
-      !rowRanges.length
-    )
-      return;
-
-    const { carousel } = buildCarouselGrid(
-      columnRanges,
-      rowRanges,
-      carouselData,
-      xAxisFilter,
-      yAxisFilter
-    );
-
-    set({
-      dataPerCell: carousel,
-    });
-  },
-
-  drillDownColumn,
-  drillDownRow,
-  drillDownCell,
-
-  setHoveredRow: (row) =>
-    set({ hoveredRow: row, hoveredColumn: null, hoveredCell: null }),
-
-  setHoveredColumn: (col) =>
-    set({ hoveredColumn: col, hoveredRow: null, hoveredCell: null }),
-
-  setHoveredCell: (row, col) =>
-    set({ hoveredCell: { row, col }, hoveredRow: null, hoveredColumn: null }),
-
-  resetHover: () =>
-    set(() => ({
-      hoveredRow: null,
       hoveredColumn: null,
+      hoveredRow: null,
       hoveredCell: null,
-    })),
-}));
+
+      columnRanges: [],
+      rowRanges: [],
+      carouselData: accommodationDataset,
+      dataPerCell: [], // Dynamically populated in the component
+
+      scrollLeft,
+      scrollRight,
+      scrollUp,
+      scrollDown,
+      resetPosition,
+      resetColumnOffset,
+      resetRowOffset,
+
+      setCarouselData: (carouselData: Accommodation[]) => set({ carouselData }),
+
+      // Function to categorize accommodations into carousel cells
+      populateCarouselData: () => {
+        const { carouselData } = get();
+        const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+        const { getLastSubrange } = useFilterHistoryStore.getState();
+
+        // Get the correct range object from filter history or filters
+        const xRanges =
+          getLastSubrange(xAxisFilter)?.subranges ?? filters[xAxisFilter];
+        const yRanges =
+          getLastSubrange(yAxisFilter)?.subranges ?? filters[yAxisFilter];
+
+        if (!xRanges || !yRanges) {
+          return console.warn('Filter ranges are missing!');
+        }
+
+        const { carousel } = buildCarouselGrid(
+          xRanges,
+          yRanges,
+          carouselData,
+          xAxisFilter,
+          yAxisFilter
+        );
+
+        set({
+          columnRanges: xRanges,
+          rowRanges: yRanges,
+          dataPerCell: carousel,
+        });
+      },
+
+      setCellSize: (width: number, height: number) =>
+        set({
+          cellWidth: width,
+          cellHeight: height,
+        }),
+
+      updateCarouselSize: (rows, cols) =>
+        set({
+          totalRows: rows,
+          totalColumns: cols,
+        }),
+
+      updateVisibleCarouselSize: (rows, cols) =>
+        set({
+          visibleRows: rows,
+          visibleColumns: cols,
+        }),
+
+      // Returns a list of unique filtered accommodations after applying carousel and decision chip filters
+      getFilteredAccommodations: () => {
+        const allAccommodations = get()
+          .dataPerCell.flat()
+          .map((cell) => cell.accommodations)
+          .flat();
+
+        const uniqueAccommodations = allAccommodations.reduce((acc, curr) => {
+          if (!acc.has(curr.id)) {
+            acc.set(curr.id, curr);
+          }
+          return acc;
+        }, new Map());
+
+        return Array.from(uniqueAccommodations.values());
+      },
+
+      // Reapply decision chip filters to the carousel grid when selection changes
+      applyDecisionChipsToCarousel: () => {
+        const { columnRanges, rowRanges, carouselData } = get();
+        const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+
+        if (
+          !xAxisFilter ||
+          !yAxisFilter ||
+          !columnRanges.length ||
+          !rowRanges.length
+        )
+          return;
+
+        const { carousel } = buildCarouselGrid(
+          columnRanges,
+          rowRanges,
+          carouselData,
+          xAxisFilter,
+          yAxisFilter
+        );
+
+        set({
+          dataPerCell: carousel,
+        });
+      },
+
+      drillDownColumn,
+      drillDownRow,
+      drillDownCell,
+
+      setHoveredRow: (row) =>
+        set({ hoveredRow: row, hoveredColumn: null, hoveredCell: null }),
+
+      setHoveredColumn: (col) =>
+        set({ hoveredColumn: col, hoveredRow: null, hoveredCell: null }),
+
+      setHoveredCell: (row, col) =>
+        set({
+          hoveredCell: { row, col },
+          hoveredRow: null,
+          hoveredColumn: null,
+        }),
+
+      resetHover: () =>
+        set(() => ({
+          hoveredRow: null,
+          hoveredColumn: null,
+          hoveredCell: null,
+        })),
+    }),
+    {
+      name: 'carousel-store',
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);
