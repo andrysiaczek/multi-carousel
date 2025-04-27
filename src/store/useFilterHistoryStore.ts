@@ -39,13 +39,18 @@ interface FilterHistoryState {
   setHoveredStep: (columnRange: Subrange, rowRange: Subrange) => void;
   setHoveredStepForAxis: (axis: Axis, range: Subrange) => void;
   resetHoveredStep: () => void;
+  resetState: () => void;
 }
+
+const initialFilterHistoryState = {
+  steps: [initialStep],
+  hoveredStepLabel: null,
+};
 
 export const useFilterHistoryStore = create<FilterHistoryState>()(
   persist(
     (set, get) => ({
-      steps: [initialStep],
-      hoveredStepLabel: null,
+      ...initialFilterHistoryState,
 
       getLastStep: () => {
         const steps = get().steps;
@@ -103,6 +108,8 @@ export const useFilterHistoryStore = create<FilterHistoryState>()(
       },
 
       resetHoveredStep: () => set({ hoveredStepLabel: null }),
+
+      resetState: () => set(initialFilterHistoryState),
     }),
     {
       name: 'filter-history-store',

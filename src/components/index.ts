@@ -1,4 +1,5 @@
 export { FilterSidebar } from './Benchmark';
+export { BookingModal } from './BookingModal';
 export { DecisionChipsPanel } from './DecisionChipsPanel';
 export {
   FilterHistoryPanel,
@@ -15,3 +16,13 @@ export {
 } from './MultiAxisCarousel';
 export { ArrowButton, MapLibreMap, ResultItem, ResultsHeader } from './Results';
 export { CarouselItem, CarouselRow } from './SingleAxisCarousel';
+export {
+  FinalSurveyStep,
+  IntroStep,
+  ProgressBar,
+  ProgressTrigger,
+  Survey,
+  SurveyStep,
+  TaskStep,
+  ThankYouStep,
+} from './Study';

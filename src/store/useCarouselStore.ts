@@ -67,28 +67,37 @@ interface CarouselState {
   setHoveredRow: (row: number) => void;
   setHoveredCell: (row: number, col: number) => void;
   resetHover: () => void;
+
+  resetState: () => void;
 }
+
+export const initialCarouselState = {
+  // Carousel Layout
+  cellWidth: 0, // Width of a single cell [px]
+  cellHeight: 0, // Height of a single cell [px]
+  totalColumns: 0, // Dynamically updated in the component
+  totalRows: 0, // Dynamically updated in the component
+  visibleColumns: 3, // Default number of visible columns
+  visibleRows: 2, // Default number of visible rows
+  columnOffset: 0,
+  rowOffset: 0,
+
+  // Hover State
+  hoveredColumn: null,
+  hoveredRow: null,
+  hoveredCell: null,
+
+  // Carousel Content
+  columnRanges: [],
+  rowRanges: [],
+  carouselData: accommodationDataset,
+  dataPerCell: [],
+};
 
 export const useCarouselStore = create<CarouselState>()(
   persist(
     (set, get) => ({
-      cellWidth: 0, // Width of a single cell [px]
-      cellHeight: 0, // Height of a single cell [px]
-      totalColumns: 0, // Dynamically updated in the component
-      totalRows: 0, // Dynamically updated in the component
-      visibleColumns: 3, // Default number of visible columns
-      visibleRows: 2, // Default number of visible rows
-      columnOffset: 0,
-      rowOffset: 0,
-
-      hoveredColumn: null,
-      hoveredRow: null,
-      hoveredCell: null,
-
-      columnRanges: [],
-      rowRanges: [],
-      carouselData: accommodationDataset,
-      dataPerCell: [], // Dynamically populated in the component
+      ...initialCarouselState,
 
       scrollLeft,
       scrollRight,
@@ -215,10 +224,25 @@ export const useCarouselStore = create<CarouselState>()(
           hoveredColumn: null,
           hoveredCell: null,
         })),
+
+      resetState: () => set(initialCarouselState),
     }),
     {
       name: 'carousel-store',
       storage: createJSONStorage(() => sessionStorage),
+      partialize: (state) => ({
+        cellWidth: state.cellWidth,
+        cellHeight: state.cellHeight,
+        totalColumns: state.totalColumns,
+        totalRows: state.totalRows,
+        visibleColumns: state.visibleColumns,
+        visibleRows: state.visibleRows,
+        columnOffset: state.columnOffset,
+        rowOffset: state.rowOffset,
+        columnRanges: state.columnRanges,
+        rowRanges: state.rowRanges,
+        carouselData: state.carouselData,
+      }),
     }
   )
 );

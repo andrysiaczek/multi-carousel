@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import { ChevronLeft } from 'lucide-react';
 import { ResultItem, ResultsHeader } from '../components';
-import { useSortStore } from '../store';
+import { useSortStore, useStudyStore } from '../store';
 import { InterfaceOption, SortOption } from '../types';
 
 interface ResultsPageProps {
@@ -9,7 +8,6 @@ interface ResultsPageProps {
 }
 
 export const ResultsPage = ({ interfaceOption }: ResultsPageProps) => {
-  const navigate = useNavigate();
   const {
     sortField,
     sortAscending,
@@ -17,6 +15,7 @@ export const ResultsPage = ({ interfaceOption }: ResultsPageProps) => {
     setSortField,
     setSortDirection,
   } = useSortStore();
+  const { closeResultsModal } = useStudyStore();
 
   const handleSortChange = (field: SortOption) => setSortField(field);
   const handleSortDirection = (ascending: boolean) =>
@@ -28,7 +27,7 @@ export const ResultsPage = ({ interfaceOption }: ResultsPageProps) => {
       <button
         type="button"
         aria-label="Go back to filtering page"
-        onClick={() => navigate(-1)}
+        onClick={closeResultsModal}
         className="flex items-center text-darkOrange text-m font-normal hover:font-medium self-start mb-4 ml-4 transition-transform duration-300 hover:-translate-x-1"
       >
         <ChevronLeft

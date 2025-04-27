@@ -11,18 +11,23 @@ interface SortState {
   setSortField: (field: SortOption) => void;
   setSortDirection: (ascending: boolean) => void;
   setAccommodations: (accommodations: Accommodation[]) => void;
+  resetState: () => void;
 }
+
+const initialSortState = {
+  sortField: SortOption.Price,
+  sortAscending: true,
+  accommodations: sortAccommodations(
+    accommodationDataset,
+    SortOption.Price,
+    true
+  ),
+};
 
 export const useSortStore = create<SortState>()(
   persist(
     (set) => ({
-      sortField: SortOption.Price,
-      sortAscending: true,
-      accommodations: sortAccommodations(
-        accommodationDataset,
-        SortOption.Price,
-        true
-      ),
+      ...initialSortState,
 
       setSortField: (field) =>
         set((state) => {
@@ -58,6 +63,8 @@ export const useSortStore = create<SortState>()(
             state.sortAscending
           ),
         })),
+
+      resetState: () => set(initialSortState),
     }),
     {
       name: 'sort-store',

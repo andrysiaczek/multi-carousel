@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { useStudyStore } from '../../store';
 import { Accommodation, InterfaceOption } from '../../types';
-import { generateDetailPageUrl, getFeatureIcon } from '../../utils';
+import { getFeatureIcon } from '../../utils';
 
 interface CarouselItemProps {
   accommodation: Accommodation;
 }
 
 export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
-  const navigate = useNavigate();
+  const { openDetailModal } = useStudyStore();
 
   return (
     <div className="w-64 bg-white rounded-md overflow-hidden relative transition duration-300 hover:shadow-md hover:-translate-y-1">
@@ -18,12 +18,7 @@ export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
         aria-label={`View details about ${accommodation.versionSingleAxisCarousel.name}`}
         className="absolute top-3 right-2 z-10 flex items-center justify-center pl-4 pr-1 py-1.5 text-xs font-semibold text-antiflashWhite bg-darkGreen/60 rounded-md transition-transform duration-300 hover:scale-105 active:scale-95 hover:shadow-lg group hover:pr-3 hover:gap-1 hover:bg-darkGreen"
         onClick={() =>
-          navigate(
-            generateDetailPageUrl(
-              InterfaceOption.SingleAxisCarousel,
-              accommodation.id
-            )
-          )
+          openDetailModal(InterfaceOption.SingleAxisCarousel, accommodation.id)
         }
       >
         Show More

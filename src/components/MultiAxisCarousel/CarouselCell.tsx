@@ -1,19 +1,19 @@
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MoreHorizontal, Search } from 'lucide-react';
 import {
   useAxisFilterStore,
   useCarouselStore,
   useFilterHistoryStore,
   useSortStore,
+  useStudyStore,
 } from '../../store';
 import {
   Accommodation,
-  interfaceMap,
   InterfaceOption,
+  SortOption,
   Subrange,
 } from '../../types';
-import { capitalize, generateDetailPageUrl, getFeatureIcon } from '../../utils';
+import { capitalize, getFeatureIcon } from '../../utils';
 
 interface CarouselCellProps {
   col: number;
@@ -44,8 +44,8 @@ export const CarouselCell = ({
   } = useCarouselStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
-  const { setAccommodations } = useSortStore();
-  const navigate = useNavigate();
+  const { setAccommodations, setSortField } = useSortStore();
+  const { openDetailModal, openResultsModal } = useStudyStore();
 
   const isEmptyCell = accommodations.length === 0;
   const isActiveCell = !isEmptyCell && !isFillerCell;
@@ -90,16 +90,20 @@ export const CarouselCell = ({
     e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
 
     if (additionalCount === 0) {
-      navigate(
-        generateDetailPageUrl(
-          InterfaceOption.MultiAxisCarousel,
-          accommodations[0].id
-        )
+      return openDetailModal(
+        InterfaceOption.MultiAxisCarousel,
+        accommodations[0].id
       );
     }
 
     setAccommodations(accommodations);
-    navigate(interfaceMap[InterfaceOption.MultiAxisCarousel].resultsPagePath);
+
+    if (
+      Object.values(SortOption).includes(xAxisFilter as unknown as SortOption)
+    ) {
+      setSortField(xAxisFilter as unknown as SortOption);
+    }
+    openResultsModal(InterfaceOption.MultiAxisCarousel);
   };
 
   const getAccommodationScore = (acc: Accommodation) =>
@@ -107,12 +111,18 @@ export const CarouselCell = ({
 
   const bestAccommodation = useMemo(() => {
     if (isEmptyCell) return null;
-    return accommodations.reduce((best, current) =>
-      getAccommodationScore(current) > getAccommodationScore(best)
-        ? current
-        : best
+
+    // Score and sort accommodations
+    const sorted = [...accommodations].sort(
+      (a, b) => getAccommodationScore(b) - getAccommodationScore(a)
     );
-  }, [accommodations, isEmptyCell]);
+
+    // Take top 5 and pick a random one from them
+    const topFive = sorted.slice(0, 5);
+    const indexSeed = (row * 31 + col * 17) % topFive.length;
+
+    return topFive[indexSeed];
+  }, [accommodations, col, isEmptyCell, row]);
 
   const getCellStyling = () => {
     if (isFillerCell) return 'bg-gray-50';

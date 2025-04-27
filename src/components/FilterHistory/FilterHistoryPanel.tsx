@@ -1,17 +1,19 @@
-import { useNavigate } from 'react-router-dom';
 import { ResetButtonFilterHistory as ResetButton } from '../../components';
 import { accommodationDataset } from '../../data';
 import {
+  useAxisFilterStore,
   useCarouselStore,
   useFilterHistoryStore,
   useSortStore,
+  useStudyStore,
 } from '../../store';
-import { InterfaceOption, interfaceMap } from '../../types';
+import { InterfaceOption, SortOption } from '../../types';
 
 export const FilterHistoryPanel = () => {
+  const { xAxisFilter } = useAxisFilterStore();
   const { steps, hoveredStepLabel, goToStep } = useFilterHistoryStore();
-  const { setAccommodations } = useSortStore();
-  const navigate = useNavigate();
+  const { setAccommodations, setSortField } = useSortStore();
+  const { openResultsModal } = useStudyStore();
 
   // Calculate the number of unique filtered accommodations from dataPerCell
   const filteredAccommodations = useCarouselStore().getFilteredAccommodations();
@@ -35,7 +37,12 @@ export const FilterHistoryPanel = () => {
 
   const handleShowResults = () => {
     setAccommodations(filteredAccommodations);
-    navigate(interfaceMap[InterfaceOption.MultiAxisCarousel].resultsPagePath);
+    if (
+      Object.values(SortOption).includes(xAxisFilter as unknown as SortOption)
+    ) {
+      setSortField(xAxisFilter as unknown as SortOption);
+    }
+    openResultsModal(InterfaceOption.MultiAxisCarousel);
   };
 
   return (

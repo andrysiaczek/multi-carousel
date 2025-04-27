@@ -1,14 +1,4 @@
-import { Accommodation, InterfaceOption, interfaceMap } from '../types';
-
-export const generateDetailPageUrl = (
-  interfaceOption: InterfaceOption,
-  accommodationId: string
-) => {
-  const basePath =
-    interfaceMap[interfaceOption].basePath ||
-    interfaceMap[InterfaceOption.Benchmark].basePath;
-  return `${basePath}/details/${accommodationId}`;
-};
+import { Accommodation, InterfaceOption } from '../types';
 
 export const resolveAccommodationVariant = (
   interfaceOption: InterfaceOption,
@@ -40,4 +30,19 @@ export const resolveAccommodationVariant = (
         images: accommodation.versionBenchmark.images,
       };
   }
+};
+
+/**
+ * Returns the values of the InterfaceOption enum in a random order.
+ */
+export const shuffleInterfaceOptions = () => {
+  const values = Object.values(InterfaceOption) as InterfaceOption[];
+
+  // Fisher–Yates shuffle in‐place
+  for (let i = values.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [values[i], values[j]] = [values[j], values[i]];
+  }
+
+  return values;
 };

@@ -4,38 +4,18 @@ import {
   BrowserRouter as Router,
   Routes,
 } from 'react-router-dom';
-import { DetailPage, MultiAxisCarouselPage, ResultsPage } from './pages';
-import { interfacesArray } from './types';
+import { StudyFlowManager } from './pages';
 import './App.css';
 
 const App = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<MultiAxisCarouselPage />} />
+      {/* Main study flow */}
+      <Route path="/study/*" element={<StudyFlowManager />} />
 
-      {interfacesArray.map(
-        ({
-          basePath,
-          resultsPagePath,
-          detailPagePath,
-          component: Component,
-          option,
-        }) => (
-          <Route key={option}>
-            <Route path={basePath} element={<Component />} />
-            <Route
-              path={resultsPagePath}
-              element={<ResultsPage interfaceOption={option} />}
-            />
-            <Route
-              path={detailPagePath}
-              element={<DetailPage interfaceOption={option} />}
-            />
-          </Route>
-        )
-      )}
-
-      <Route path="*" element={<Navigate to="/" replace />} />
+      {/* Redirect root or anything else back to /study */}
+      <Route path="/" element={<Navigate to="/study" replace />} />
+      <Route path="*" element={<Navigate to="/study" replace />} />
     </Routes>
   </Router>
 );

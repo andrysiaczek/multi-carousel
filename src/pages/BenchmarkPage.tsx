@@ -115,7 +115,7 @@ export const BenchmarkPage = () => {
                 Sorry, we couldn’t find any properties matching your criteria.
               </p>
               <p className="text-xs text-gray-400">
-                Try adjusting your useAxisFilterStore.
+                Try adjusting your filters.
               </p>
             </div>
           ) : (

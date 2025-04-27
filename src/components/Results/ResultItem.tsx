@@ -1,12 +1,8 @@
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import { useStudyStore } from '../../store';
 import { Accommodation, InterfaceOption } from '../../types';
-import {
-  generateDetailPageUrl,
-  getFeatureIcon,
-  resolveAccommodationVariant,
-} from '../../utils';
+import { getFeatureIcon, resolveAccommodationVariant } from '../../utils';
 
 const shuffleArray = (array: string[]) => {
   return array
@@ -26,7 +22,7 @@ export const ResultItem = ({
   interfaceOption,
   padding = false,
 }: ResultItemProps) => {
-  const navigate = useNavigate();
+  const { openDetailModal } = useStudyStore();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const { name, images } = resolveAccommodationVariant(
     interfaceOption,
@@ -127,9 +123,9 @@ export const ResultItem = ({
             type="button"
             aria-label="Show more"
             className="flex items-center justify-center pl-4 pr-1 py-1.5 text-xs font-semibold text-antiflashWhite bg-darkGreen rounded-md transition-transform duration-300 hover:scale-105 active:scale-95 hover:shadow-md group hover:pr-3 hover:gap-1"
-            onClick={() =>
-              navigate(generateDetailPageUrl(interfaceOption, accommodation.id))
-            }
+            onClick={() => {
+              openDetailModal(interfaceOption, accommodation.id);
+            }}
           >
             Show More
             <ChevronRight

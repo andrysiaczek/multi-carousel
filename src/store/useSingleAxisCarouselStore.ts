@@ -7,7 +7,7 @@ interface CarouselState {
   scrolls: Record<FilterOption, number>;
   setTitleIndex: (option: FilterOption, index: number) => void;
   setScrollPosition: (option: FilterOption, pos: number) => void;
-  resetCarouselState: () => void;
+  resetState: () => void;
 }
 
 const initialTitlesState = {
@@ -37,7 +37,7 @@ export const useSingleAxisCarouselStore = create<CarouselState>()(
         set((state) => ({
           scrolls: { ...state.scrolls, [option]: position },
         })),
-      resetCarouselState: () =>
+      resetState: () =>
         set({
           titles: initialTitlesState,
           scrolls: initialScrollsState,

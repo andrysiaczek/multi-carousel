@@ -19,7 +19,7 @@ interface AxisFilterState {
     yAxisFilter: FilterOption,
     chosenType: string | null
   ) => void;
-  resetAxisFiltersAndType: () => void;
+  resetState: () => void;
 }
 
 const initialAxisFilterState = {
@@ -59,7 +59,7 @@ export const useAxisFilterStore = create<AxisFilterState>()(
             chosenType,
           });
       },
-      resetAxisFiltersAndType: () => set(initialAxisFilterState),
+      resetState: () => set(initialAxisFilterState),
     }),
     {
       name: 'axis-filter-store',

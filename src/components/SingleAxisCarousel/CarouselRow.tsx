@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   ChevronDown,
   ChevronLeft,
@@ -12,8 +11,9 @@ import {
   useDecisionChipsStore,
   useSingleAxisCarouselStore,
   useSortStore,
+  useStudyStore,
 } from '../../store';
-import { FilterOption, InterfaceOption, interfaceMap } from '../../types';
+import { FilterOption, InterfaceOption, SortOption } from '../../types';
 import {
   capitalize,
   filterAccommodationsSingleAxisCarousel,
@@ -27,8 +27,8 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
   const { titles, scrolls, setTitleIndex, setScrollPosition } =
     useSingleAxisCarouselStore();
   const { selectedChips } = useDecisionChipsStore();
-  const { setAccommodations } = useSortStore();
-  const navigate = useNavigate();
+  const { setAccommodations, setSortField } = useSortStore();
+  const { openResultsModal } = useStudyStore();
 
   const titleIndex = titles[filterOption];
   const scrollPosition = scrolls[filterOption];
@@ -99,7 +99,12 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
 
   const handleShowList = () => {
     setAccommodations(accommodations);
-    navigate(interfaceMap[InterfaceOption.SingleAxisCarousel].resultsPagePath);
+    if (
+      Object.values(SortOption).includes(filterOption as unknown as SortOption)
+    ) {
+      setSortField(filterOption as unknown as SortOption);
+    }
+    openResultsModal(InterfaceOption.SingleAxisCarousel);
   };
 
   return (

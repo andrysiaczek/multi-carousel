@@ -1,17 +1,22 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { ArrowButton, LoadingMessage, MapLibreMap } from '../components';
+import {
+  ArrowButton,
+  BookingModal,
+  LoadingMessage,
+  MapLibreMap,
+} from '../components';
 import { accommodationDataset } from '../data';
+import { useStudyStore } from '../store';
 import { Accommodation, InterfaceOption } from '../types';
 import { resolveAccommodationVariant } from '../utils';
 
 interface DetailPageProps {
   interfaceOption: InterfaceOption;
+  id: string;
 }
 
-export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
-  const { id } = useParams<{ id: string }>();
+export const DetailPage = ({ interfaceOption, id }: DetailPageProps) => {
   const [accommodation, setAccommodation] = useState<Accommodation | null>(
     null
   );
@@ -24,7 +29,8 @@ export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [isGalleryHovered, setIsGalleryHovered] = useState(false);
-  const navigate = useNavigate();
+  const { nextStep, closeDetailModal, closeResultsModal, closeInterface } =
+    useStudyStore();
 
   // Fetch accommodation data
   useEffect(() => {
@@ -63,11 +69,6 @@ export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
     const interval = setInterval(handleNextImage, 2000);
     return () => clearInterval(interval);
   }, [accommodation, handleNextImage]);
-
-  const handleBooking = () => {
-    setShowModal(true);
-    setTimeout(() => setShowModal(false), 5000);
-  };
 
   if (!accommodation)
     return <LoadingMessage message="Loading accommodation details..." />;
@@ -119,7 +120,7 @@ export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
             {/* Back Button */}
             <button
               type="button"
-              onClick={() => navigate(-1)}
+              onClick={closeDetailModal}
               className="absolute top-4 left-4 flex items-center gap-2 text-antiflashWhite bg-darkGreen/70 pl-3 pr-4 py-2 rounded-full shadow-lg transition-transform duration-300 hover:bg-darkGreen/95 hover:scale-105 active:scale-95"
             >
               <ChevronLeft
@@ -196,7 +197,7 @@ export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
             {/* Book Button */}
             <button
               type="button"
-              onClick={handleBooking}
+              onClick={() => setShowModal(true)}
               className="flex items-center justify-between pl-4 pr-3 w-full bg-darkGreen text-white py-2 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-lg group"
             >
               <span className="flex-1 text-center">Book Now</span>
@@ -211,17 +212,16 @@ export const DetailPage = ({ interfaceOption }: DetailPageProps) => {
 
       {/* Booking Confirmation Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white px-10 py-8 rounded-2xl shadow-2xl text-center max-w-sm w-full animate-fadeIn">
-            <h3 className="text-2xl font-bold text-darkGreen mb-1">
-              Booking Confirmed!
-            </h3>
-            <p className="text-gray-600 mb-4">
-              Enjoy your stay at <span className="font-semibold">{name}</span>!
-            </p>
-            <div className="text-4xl mt-4 animate-bounce">🎉</div>
-          </div>
-        </div>
+        <BookingModal
+          name={name}
+          onClose={() => {
+            setShowModal(false);
+            closeResultsModal();
+            closeDetailModal();
+            closeInterface();
+            nextStep();
+          }}
+        />
       )}
     </div>
   );

@@ -26,7 +26,7 @@ interface FilterSidebarState {
     value: string
   ) => void;
   resetFilter: (key: FilterOptionWithFeature) => void;
-  resetFilters: () => void;
+  resetState: () => void;
 }
 
 export const initialFilterSidebarState: FilterSidebarState['filters'] = {
@@ -82,7 +82,7 @@ export const useFilterSidebarStore = create<FilterSidebarState>()(
           };
         }),
 
-      resetFilters: () => set({ filters: initialFilterSidebarState }),
+      resetState: () => set({ filters: initialFilterSidebarState }),
     }),
     {
       name: 'filter-sidebar-store',

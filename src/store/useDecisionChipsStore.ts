@@ -8,13 +8,18 @@ interface DecisionChipsState {
   setAvailableChips: (chips: string[]) => void;
   toggleChip: (chip: string) => void;
   resetChips: () => void;
+  resetState: () => void;
 }
+
+const initialDecisionChipsState = {
+  availableChips: decisionChips,
+  selectedChips: [],
+};
 
 export const useDecisionChipsStore = create<DecisionChipsState>()(
   persist(
     (set) => ({
-      availableChips: decisionChips,
-      selectedChips: [],
+      ...initialDecisionChipsState,
 
       setAvailableChips: (chips) => set({ availableChips: chips }),
 
@@ -26,6 +31,8 @@ export const useDecisionChipsStore = create<DecisionChipsState>()(
         })),
 
       resetChips: () => set({ selectedChips: [] }),
+
+      resetState: () => set(initialDecisionChipsState),
     }),
     {
       name: 'decision-chips-store',
