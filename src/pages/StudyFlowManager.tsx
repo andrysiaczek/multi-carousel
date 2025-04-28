@@ -32,15 +32,15 @@ const componentMap: Record<
 > = {
   [InterfaceOption.MultiAxisCarousel]: {
     Component: MultiAxisCarouselPage,
-    name: 'Multi-Axis Carousel',
+    name: 'Multi-directional Interface',
   },
   [InterfaceOption.SingleAxisCarousel]: {
     Component: SingleAxisCarouselPage,
-    name: 'Single-Axis Carousel',
+    name: 'Netflix-style Interface',
   },
   [InterfaceOption.Benchmark]: {
     Component: BenchmarkPage,
-    name: 'Benchmark Interface',
+    name: 'Booking-style Interface',
   },
 };
 

@@ -37,7 +37,7 @@ export const useResponsiveCarousel = ({
       const ARROW_OFFSET = 72; // 2 arrows * 26px + 20px buffer
 
       const offsetWidth = container.offsetWidth - ARROW_OFFSET;
-      const offsetHeight = container.offsetHeight - ARROW_OFFSET;
+      const offsetHeight = container.offsetHeight - ARROW_OFFSET * 1.2;
 
       // Determine how many columns and rows we can fit
       const possibleCols = Math.min(
@@ -63,5 +63,5 @@ export const useResponsiveCarousel = ({
 
     observer.observe(container);
     return () => observer.disconnect();
-  }, [gap, maxCols, maxRows, minCellHeight, minCellWidth, onResize, ref]);
+  }, []);
 };

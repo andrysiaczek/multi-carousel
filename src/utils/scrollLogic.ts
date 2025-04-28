@@ -36,6 +36,58 @@ export const scrollDown = () => {
   });
 };
 
+export const scrollUpLeft = () => {
+  const {
+    rowOffset,
+    totalRows,
+    visibleRows,
+    columnOffset,
+    totalColumns,
+    visibleColumns,
+  } = useCarouselStore.getState();
+
+  useCarouselStore.setState({
+    rowOffset: rowOffset === 0 ? totalRows - (visibleRows - 1) : rowOffset - 1,
+    columnOffset:
+      columnOffset === 0
+        ? totalColumns - (visibleColumns - 1)
+        : columnOffset - 1,
+  });
+};
+
+export const scrollUpRight = () => {
+  const { rowOffset, totalRows, visibleRows, columnOffset, totalColumns } =
+    useCarouselStore.getState();
+
+  useCarouselStore.setState({
+    rowOffset: rowOffset === 0 ? totalRows - (visibleRows - 1) : rowOffset - 1,
+    columnOffset: (columnOffset + 1) % totalColumns,
+  });
+};
+
+export const scrollDownLeft = () => {
+  const { rowOffset, totalRows, columnOffset, totalColumns, visibleColumns } =
+    useCarouselStore.getState();
+
+  useCarouselStore.setState({
+    rowOffset: (rowOffset + 1) % totalRows,
+    columnOffset:
+      columnOffset === 0
+        ? totalColumns - (visibleColumns - 1)
+        : columnOffset - 1,
+  });
+};
+
+export const scrollDownRight = () => {
+  const { rowOffset, totalRows, columnOffset, totalColumns } =
+    useCarouselStore.getState();
+
+  useCarouselStore.setState({
+    rowOffset: (rowOffset + 1) % totalRows,
+    columnOffset: (columnOffset + 1) % totalColumns,
+  });
+};
+
 export const resetColumnOffset = () =>
   useCarouselStore.setState({ columnOffset: 0 });
 

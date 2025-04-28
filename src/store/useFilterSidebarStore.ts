@@ -31,7 +31,7 @@ interface FilterSidebarState {
 
 export const initialFilterSidebarState: FilterSidebarState['filters'] = {
   [FilterOptionWithFeature.Distance]: [0, 10],
-  [FilterOptionWithFeature.Price]: [18, 600],
+  [FilterOptionWithFeature.Price]: [15, 600],
   [FilterOptionWithFeature.Rating]: [1.0, 5.0],
   [FilterOptionWithFeature.Type]: [],
   [FilterOptionWithFeature.Feature]: [],
@@ -43,34 +43,27 @@ export const useFilterSidebarStore = create<FilterSidebarState>()(
       filters: initialFilterSidebarState,
 
       setNumericalFilter: (key, value) =>
-        set((state) => ({
-          filters: {
-            ...state.filters,
-            [key]: value,
-          },
-        })),
+        set((state) => {
+          state.filters[key] = value;
+          return state;
+        }),
 
       addStringFilter: (key, value) =>
         set((state) => {
           const currentFeatures = state.filters[key];
           if (!currentFeatures.includes(value)) {
-            return {
-              filters: {
-                ...state.filters,
-                [key]: [...currentFeatures, value],
-              },
-            };
+            state.filters[key] = [...currentFeatures, value];
           }
           return state;
         }),
 
       removeStringFilter: (key, value) =>
-        set((state) => ({
-          filters: {
-            ...state.filters,
-            [key]: state.filters[key].filter((feature) => feature !== value),
-          },
-        })),
+        set((state) => {
+          state.filters[key] = state.filters[key].filter(
+            (feature) => feature !== value
+          );
+          return state;
+        }),
 
       resetFilter: (key) =>
         set((state) => {

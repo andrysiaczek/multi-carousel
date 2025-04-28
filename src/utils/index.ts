@@ -27,9 +27,13 @@ export {
   resetPosition,
   resetRowOffset,
   scrollDown,
+  scrollDownLeft,
+  scrollDownRight,
   scrollLeft,
   scrollRight,
   scrollUp,
+  scrollUpLeft,
+  scrollUpRight,
 } from './scrollLogic';
 export { sortAccommodations } from './sortUtils';
 export { capitalize, clean } from './stringUtils';

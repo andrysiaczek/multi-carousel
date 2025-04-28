@@ -116,7 +116,7 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
           aria-label="Scroll title up"
           onClick={scrollTitleUp}
           className={`p-1 rounded-full text-gray-500 hover:bg-gray-100 ${
-            titleIndex === 0 ? 'text-gray-300 cursor-not-allowed' : ''
+            titleIndex === 0 ? 'opacity-0 pointer-events-none' : ''
           }`}
           disabled={titleIndex === 0}
         >
@@ -143,7 +143,7 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
           onClick={scrollTitleDown}
           className={`p-1 rounded-full text-gray-500 hover:bg-gray-100 ${
             titleIndex === filterRanges.length - 1
-              ? 'text-gray-300 cursor-not-allowed'
+              ? 'opacity-0 pointer-events-none'
               : ''
           }`}
           disabled={titleIndex === filterRanges.length - 1}

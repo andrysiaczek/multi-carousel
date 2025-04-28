@@ -16,7 +16,7 @@ export const FilterSidebar = ({
     setNumericalFilter,
     addStringFilter,
     removeStringFilter,
-    resetFilters,
+    resetState,
   } = useFilterSidebarStore();
 
   // State for temporary filter values before applying
@@ -74,7 +74,7 @@ export const FilterSidebar = ({
     setPrice(initialFilterSidebarState[FilterOptionWithFeature.Price]);
     setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
     setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);
-    resetFilters();
+    resetState();
     applyFilters(true);
   };
 
@@ -86,7 +86,7 @@ export const FilterSidebar = ({
         <div className="px-2">
           <Slider
             range
-            min={18}
+            min={15}
             max={600}
             value={price}
             onChange={(value) => setPrice(value as [number, number])}

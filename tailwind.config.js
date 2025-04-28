@@ -26,6 +26,9 @@ export default {
       fontSize: {
         xxs: '0.625rem', // 10px
       },
+      zIndex: {
+        70: '70',
+      },
     },
   },
   plugins: [],

@@ -54,7 +54,9 @@ export const BenchmarkPage = () => {
               const selectedTypes = value as string[];
               // Check if accommodation type is in the selected types
               if (
-                !(!selectedTypes.length || selectedTypes.includes(acc.type))
+                !(
+                  selectedTypes.length === 0 || selectedTypes.includes(acc.type)
+                )
               ) {
                 return false;
               }

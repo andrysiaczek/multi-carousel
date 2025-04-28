@@ -13,7 +13,7 @@ import {
   SortOption,
   Subrange,
 } from '../../types';
-import { capitalize, getFeatureIcon } from '../../utils';
+import { getFeatureIcon } from '../../utils';
 
 interface CarouselCellProps {
   col: number;
@@ -42,7 +42,7 @@ export const CarouselCell = ({
     resetHover,
     drillDownCell,
   } = useCarouselStore();
-  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
+  const { xAxisFilter } = useAxisFilterStore();
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
   const { setAccommodations, setSortField } = useSortStore();
   const { openDetailModal, openResultsModal } = useStudyStore();
@@ -149,7 +149,7 @@ export const CarouselCell = ({
   return (
     <div
       style={{ width: `${cellWidth}px`, height: `${cellHeight}px` }}
-      className={`px-4 py-3 transition rounded flex flex-col ${getCellStyling()}`}
+      className={`px-5 py-4 transition rounded flex flex-col overflow-hidden relative ${getCellStyling()}`}
       onMouseEnter={handleFilterMouseEnter}
       onMouseLeave={handleFilterMouseLeave}
       onClick={() => isActiveCell && drillDownCell(col, row)}
@@ -165,145 +165,133 @@ export const CarouselCell = ({
               <span className="text-xs">Try adjusting your filters</span>
             </div>
           ) : (
-            <>
-              {/* Top-left: Cell Title */}
-              <div className="text-xs font-medium text-gray-400 mb-2">
-                {capitalize(xAxisFilter)}: {columnRange.label} /{' '}
-                {capitalize(yAxisFilter)}: {rowRange.label}
-              </div>
-
-              {/* Best Accommodation & more */}
-              <div
-                className={cardClass}
-                onMouseEnter={handleResultsMouseEnter}
-                onMouseLeave={handleResultsMouseLeave}
-                onClick={handleRedirectClick}
-                title={
-                  additionalCount === 0
-                    ? 'View details for this accommodation'
-                    : 'Explore accommodations for this category'
-                }
-              >
-                {/* Best Accommodation */}
-                {bestAccommodation && (
-                  <div className="flex flex-grow gap-2 overflow-hidden">
-                    {/* Image */}
-                    <div
-                      className={`${
-                        cellWidth > 400 ? 'w-36' : 'w-28'
-                      } flex-shrink-0 flex flex-col gap-1 h-full`}
-                    >
-                      {cellHeight > 250 ? (
-                        <>
-                          <img
-                            src={
-                              bestAccommodation.versionMultiAxisCarousel
-                                .images[0]
-                            }
-                            alt={
-                              bestAccommodation.versionMultiAxisCarousel.name
-                            }
-                            className="w-full h-1/2 object-cover rounded"
-                          />
-                          <img
-                            src={
-                              bestAccommodation.versionMultiAxisCarousel
-                                .images[1] ||
-                              bestAccommodation.versionMultiAxisCarousel
-                                .images[0]
-                            }
-                            alt={
-                              bestAccommodation.versionMultiAxisCarousel.name
-                            }
-                            className="w-full h-1/2 object-cover rounded"
-                          />
-                        </>
-                      ) : (
+            <div
+              className={cardClass}
+              onMouseEnter={handleResultsMouseEnter}
+              onMouseLeave={handleResultsMouseLeave}
+              onClick={handleRedirectClick}
+              title={
+                additionalCount === 0
+                  ? 'View details for this accommodation'
+                  : 'Explore accommodations for this category'
+              }
+            >
+              {/* Best Accommodation */}
+              {bestAccommodation && (
+                <div className="flex flex-grow gap-2 overflow-hidden">
+                  {/* Image */}
+                  <div
+                    className={`${
+                      cellWidth > 400 ? 'w-36' : 'w-28'
+                    } flex-shrink-0 flex flex-col gap-1`}
+                  >
+                    {cellHeight > 250 ? (
+                      <>
                         <img
                           src={
                             bestAccommodation.versionMultiAxisCarousel.images[0]
                           }
                           alt={bestAccommodation.versionMultiAxisCarousel.name}
-                          className="w-full h-full object-cover rounded"
+                          className="w-full h-1/2 object-cover rounded"
                         />
-                      )}
-                    </div>
+                        <img
+                          src={
+                            bestAccommodation.versionMultiAxisCarousel
+                              .images[1] ||
+                            bestAccommodation.versionMultiAxisCarousel.images[0]
+                          }
+                          alt={bestAccommodation.versionMultiAxisCarousel.name}
+                          className="w-full h-1/2 object-cover rounded"
+                        />
+                      </>
+                    ) : (
+                      <img
+                        style={{
+                          height: cellHeight * 0.6 + 'px',
+                        }}
+                        src={
+                          bestAccommodation.versionMultiAxisCarousel.images[0]
+                        }
+                        alt={bestAccommodation.versionMultiAxisCarousel.name}
+                        className="w-full object-cover rounded"
+                      />
+                    )}
+                  </div>
 
-                    {/* Info */}
-                    <div className="flex flex-col justify-around flex-1">
-                      <div className="flex flex-col gap-2">
-                        {/* Name */}
-                        <h2
-                          className={`${
-                            cellHeight > 300 ? 'text-lg' : 'text-md'
-                          } text-center font-semibold text-darkGreen w-full group-hover:text-darkOrange`}
-                        >
-                          {truncateName(
-                            bestAccommodation.versionMultiAxisCarousel.name
-                          )}
-                        </h2>
+                  {/* Info */}
+                  <div className="flex flex-col justify-around flex-1">
+                    <div className="flex flex-col gap-2">
+                      {/* Name */}
+                      <h2
+                        className={`${
+                          cellHeight > 300 ? 'text-lg' : 'text-md'
+                        } text-center font-semibold text-darkGreen w-full group-hover:text-darkOrange`}
+                      >
+                        {truncateName(
+                          bestAccommodation.versionMultiAxisCarousel.name
+                        )}
+                      </h2>
 
-                        {/* Price, Rating & Distance */}
-                        <div className="flex gap-2 items-center text-xs font-normal text-gray-500">
-                          {/* Labels Column */}
-                          <div className="flex flex-col w-full items-end gap-1">
-                            <span>Rating</span>
-                            <span>Price</span>
-                            <span>Distance</span>
-                          </div>
+                      {/* Price, Rating & Distance */}
+                      <div className="flex gap-2 items-center text-xs font-normal text-gray-500">
+                        {/* Labels Column */}
+                        <div className="flex flex-col w-full items-end gap-1">
+                          <span>Rating</span>
+                          <span>Price</span>
+                          <span>Distance</span>
+                        </div>
 
-                          {/* Vertical Divider */}
-                          <div className="h-full w-[1px] bg-gray-300" />
+                        {/* Vertical Divider */}
+                        <div className="h-full w-[1px] bg-gray-300" />
 
-                          {/* Values Column */}
-                          <div className="flex flex-col w-full items-start gap-1 ">
-                            <span>{bestAccommodation.rating.toFixed(1)} ★</span>
-                            <span>€{bestAccommodation.price}</span>
-                            <span>
-                              {bestAccommodation.distance < 0.1
-                                ? 'Central'
-                                : bestAccommodation.distance < 1
-                                ? `${bestAccommodation.distance * 1000} m`
-                                : `${bestAccommodation.distance} km`}
-                            </span>
-                          </div>
+                        {/* Values Column */}
+                        <div className="flex flex-col w-full items-start gap-1 ">
+                          <span>{bestAccommodation.rating.toFixed(1)} ★</span>
+                          <span>€{bestAccommodation.price}</span>
+                          <span>
+                            {bestAccommodation.distance < 0.1
+                              ? 'Central'
+                              : bestAccommodation.distance < 1
+                              ? `${bestAccommodation.distance * 1000} m`
+                              : `${bestAccommodation.distance} km`}
+                          </span>
                         </div>
                       </div>
+                    </div>
 
-                      {/* Features */}
-                      <div className="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-gray-400 text-xxs">
-                        {bestAccommodation.features
-                          .filter((f) => f.length < 15)
-                          .slice(0, featureLimit)
-                          .map((feature) => {
-                            const Icon = getFeatureIcon(feature);
-                            return (
-                              <div
-                                key={feature}
-                                className="flex items-center gap-1"
-                              >
-                                <Icon size={12} />
-                                {cellHeight > 280 && <span>{feature}</span>}
-                              </div>
-                            );
-                          })}
-                      </div>
+                    {/* Features */}
+                    <div className="flex flex-wrap justify-center gap-x-3 gap-y-1.5 text-gray-400 text-xxs">
+                      {bestAccommodation.features
+                        .filter((f) => f.length < 15)
+                        .slice(0, featureLimit)
+                        .map((feature) => {
+                          const Icon = getFeatureIcon(feature);
+                          return (
+                            <div
+                              key={feature}
+                              className="flex items-center gap-1"
+                            >
+                              <Icon size={12} />
+                              {cellHeight > 280 && <span>{feature}</span>}
+                            </div>
+                          );
+                        })}
                     </div>
                   </div>
-                )}
+                </div>
+              )}
 
-                {/* Bottom: Additional count */}
-                {additionalCount > 0 && (
-                  <div className="flex items-end self-end gap-1 text-xs text-darkGreen cursor-pointer group-hover:underline group-hover:text-darkOrange relative">
-                    <MoreHorizontal
-                      size={12}
-                      className="absolute bottom-[-2px] left-[-15px]"
-                    />
-                    and {additionalCount} more
-                  </div>
-                )}
-              </div>
-            </>
+              {/* Bottom: Additional count */}
+              {additionalCount > 0 && (
+                <div className="flex items-end self-end gap-1 text-xs text-darkGreen cursor-pointer group-hover:underline group-hover:text-darkOrange relative">
+                  <MoreHorizontal
+                    size={12}
+                    className="absolute bottom-[-2px] left-[-15px]"
+                  />
+                  and {additionalCount} more
+                </div>
+              )}
+            </div>
           )}
         </>
       )}

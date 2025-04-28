@@ -15,6 +15,10 @@ import {
   scrollLeft,
   scrollRight,
   scrollUp,
+  scrollUpLeft,
+  scrollUpRight,
+  scrollDownLeft,
+  scrollDownRight,
 } from '../utils';
 
 interface CarouselState {
@@ -44,6 +48,10 @@ interface CarouselState {
   scrollRight: () => void;
   scrollUp: () => void;
   scrollDown: () => void;
+  scrollUpLeft: () => void;
+  scrollUpRight: () => void;
+  scrollDownLeft: () => void;
+  scrollDownRight: () => void;
   resetPosition: () => void;
   resetColumnOffset: () => void;
   resetRowOffset: () => void;
@@ -103,6 +111,10 @@ export const useCarouselStore = create<CarouselState>()(
       scrollRight,
       scrollUp,
       scrollDown,
+      scrollUpLeft,
+      scrollUpRight,
+      scrollDownLeft,
+      scrollDownRight,
       resetPosition,
       resetColumnOffset,
       resetRowOffset,

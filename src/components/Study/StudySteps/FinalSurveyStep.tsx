@@ -1,12 +1,10 @@
-import { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { finalQuestions, InterfaceOption } from '../../../types';
-
-const interfaceLabels: Record<InterfaceOption, string> = {
-  [InterfaceOption.MultiAxisCarousel]: 'Multi-Axis Carousel',
-  [InterfaceOption.SingleAxisCarousel]: 'Single-Axis Carousel',
-  [InterfaceOption.Benchmark]: 'Benchmark Interface',
-};
+import { useEffect, useState } from 'react';
+import { RankingQuestion } from '../../../components';
+import {
+  finalQuestions,
+  interfaceLabels,
+  InterfaceOption,
+} from '../../../types';
 
 export type FinalAnswers = {
   favorite: InterfaceOption;
@@ -26,30 +24,18 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
   const [favoriteWhy, setFavoriteWhy] = useState('');
   const [useReal, setUseReal] = useState<InterfaceOption | ''>('');
   const [useRealWhy, setUseRealWhy] = useState('');
-  const [rankOrder, setRankOrder] = useState<InterfaceOption[]>([
-    InterfaceOption.MultiAxisCarousel,
-    InterfaceOption.SingleAxisCarousel,
-    InterfaceOption.Benchmark,
-  ]);
+  const [rankOrder, setRankOrder] = useState<InterfaceOption[]>([]);
   const [feedback, setFeedback] = useState('');
-
-  // Handlers for moving items up/down in the rank list
-  const moveUp = (idx: number) => {
-    if (idx === 0) return;
-    const next = [...rankOrder];
-    [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
-    setRankOrder(next);
-  };
-  const moveDown = (idx: number) => {
-    if (idx === rankOrder.length - 1) return;
-    const next = [...rankOrder];
-    [next[idx], next[idx + 1]] = [next[idx + 1], next[idx]];
-    setRankOrder(next);
-  };
 
   const handleSubmit = () => {
     if (!favorite || !useReal) {
       alert('Please answer all required questions.');
+      return;
+    }
+    if (rankOrder.length !== 3) {
+      alert(
+        'Please assign all three interfaces to a position before submitting.'
+      );
       return;
     }
     onSubmit({
@@ -62,9 +48,14 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
     });
   };
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   return (
     <div className="flex flex-col items-center p-6 bg-antiflashWhite min-h-screen">
-      <h3 className="text-2xl font-semibold mb-6 text-darkGreen">
+      <h3 className="text-3xl font-semibold mb-6 text-darkGreen">
         Final Comparative Survey
       </h3>
 
@@ -123,36 +114,10 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
       </div>
 
       {/* Q3: rank */}
+      {/* 2) The drag‐and‐drop ranking */}
       <div className="w-full max-w-xl mb-8">
-        <p className="font-medium mb-2">{finalQuestions[2].text}</p>
-        <ul className="space-y-2">
-          {rankOrder.map((opt, idx) => (
-            <li
-              key={opt}
-              className="flex items-center justify-between bg-white p-2 rounded shadow-sm"
-            >
-              <span>{interfaceLabels[opt]}</span>
-              <div className="flex space-x-1">
-                <button
-                  type="button"
-                  onClick={() => moveUp(idx)}
-                  disabled={idx === 0}
-                  className="p-1 disabled:opacity-50"
-                >
-                  <ChevronUp size={16} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => moveDown(idx)}
-                  disabled={idx === rankOrder.length - 1}
-                  className="p-1 disabled:opacity-50"
-                >
-                  <ChevronDown size={16} />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <p className="mb-2 font-medium">{finalQuestions[2].text}</p>
+        <RankingQuestion onChange={setRankOrder} />
       </div>
 
       {/* Q4: feedback */}

@@ -23,7 +23,7 @@ export const ProgressTrigger = ({
   <div
     className={`fixed top-4 ${
       renderOnTheRight ? 'right-4' : 'left-4'
-    } group z-100`}
+    } group hover:z-70 z-10`}
   >
     <div className="relative inline-block">
       {/* Icon */}
@@ -32,7 +32,7 @@ export const ProgressTrigger = ({
       </div>
       {/* Tooltip panel shown only when icon is hovered */}
       <div
-        className={`absolute ${
+        className={`absolute hidden group-hover:block ${
           renderOnTheRight ? 'right-full mr-2' : 'left-full ml-2'
         } top-0 w-56 p-3 bg-antiflashWhite border border-darkGreen rounded shadow-md transition-all duration-200 ease-out transform
           ${

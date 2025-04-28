@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import { Survey } from '../../../components';
 import {
   detailedQuestions,
+  interfaceLabels,
   InterfaceOption,
   interfaceQuestions,
 } from '../../../types';
@@ -14,7 +15,7 @@ type SurveyStepProps = {
 
 export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
   const detail = detailedQuestions[interfaceOption];
-  const [showImage, setShowImage] = useState(false);
+  const [showImage, setShowImage] = useState(true);
 
   // Highlight toggle for the first 2 seconds
   const [highlightToggle, setHighlightToggle] = useState(true);
@@ -22,13 +23,6 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
     const t = setTimeout(() => setHighlightToggle(false), 2000);
     return () => clearTimeout(t);
   }, []);
-
-  const displayName =
-    interfaceOption === InterfaceOption.Benchmark
-      ? 'Benchmark Interface'
-      : interfaceOption === InterfaceOption.SingleAxisCarousel
-      ? 'Single-Axis Carousel'
-      : 'Multi-Axis Carousel';
 
   return (
     <div className="flex min-h-screen bg-antiflashWhite">
@@ -44,20 +38,21 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
             type="button"
             onClick={() => setShowImage((v) => !v)}
             className="
-        relative flex items-center space-x-1
-        bg-white px-4 py-2 rounded-full shadow-md
-        hover:shadow-lg transition-shadow duration-200
-      "
+              relative flex items-center space-x-2
+              bg-darkGreen/90 hover:bg-darkGreen px-4 py-2 rounded-full
+              shadow-md hover:shadow-lg transition-all duration-200
+              text-antiflashWhite
+            "
           >
-            <span className="text-sm font-medium text-darkGreen hover:text-darkOrange transition-colors">
+            <span className="text-sm font-medium tracking-wide">
               {showImage ? 'Hide Preview' : 'Preview Interface'}
             </span>
             <ChevronDown
               size={16}
               className={`
-          transition-transform duration-200
-          ${showImage ? '-rotate-90 text-darkGreen' : 'text-gray-400'}
-        `}
+                transform transition-transform duration-200
+                ${showImage ? '-rotate-90' : 'rotate-0'}
+              `}
             />
           </button>
         </div>
@@ -65,11 +60,11 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
 
       {/* Interface preview */}
       {showImage && (
-        <aside className="w-[60%] p-4">
+        <aside className="w-[35%] p-4">
           <div className="sticky top-20 rounded-lg overflow-hidden shadow-md">
             <img
               src={detail.image}
-              alt={`${displayName} screenshot`}
+              alt={`${interfaceLabels[interfaceOption]} screenshot`}
               className="w-full block"
             />
           </div>
@@ -77,11 +72,15 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
       )}
 
       {/* Main survey content */}
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main
+        className={`flex-1 ${
+          showImage ? 'pl-4' : 'pl-8'
+        } pr-8 py-8 overflow-y-auto`}
+      >
         <div className="max-w-2xl mx-auto space-y-8">
           <h3 className="text-3xl font-bold text-darkGreen text-center mb-6">
             How was your experience with{' '}
-            <span className="italic">{displayName}</span>?
+            <span className="italic">{interfaceLabels[interfaceOption]}</span>?
           </h3>
 
           {/* Main questions */}

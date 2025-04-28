@@ -8,12 +8,12 @@ export const IntroStep = ({ onStart }: IntroStepProps) => (
 
     <p className="text-gray-800">
       In this study you’ll see <strong>three different interfaces</strong>{' '}
-      presenting travel accommodations:
+      presenting travel accommodations in a random order:
     </p>
     <ul className="list-disc list-inside text-gray-700">
-      <li>Multi-Axis Carousel</li>
-      <li>Single-Axis Carousel</li>
-      <li>Benchmark Interface</li>
+      <li>Booking-style Interface</li>
+      <li>Netflix-style Interface</li>
+      <li>Multi-directional Interface</li>
     </ul>
 
     <div className="text-gray-800">
@@ -21,14 +21,18 @@ export const IntroStep = ({ onStart }: IntroStepProps) => (
       <ul className="list-inside ml-4 mt-2 text-gray-700">
         <li>1. Exploratory task (browse freely)</li>
         <li>
-          2. Goal-oriented task (find a hotel under €100/night, &lt;2 km from
-          the city center, with a swimming pool)
+          2. Goal-oriented task (find a hotel that meets specific requirements)
         </li>
       </ul>
     </div>
 
+    <p className="text-gray-800">
+      Take your time to explore each interface. Play with the controls, scroll
+      through the items and get familiar with all the features before moving on.
+    </p>
+
     {/* Task completion hint */}
-    <p className="text-sm text-gray-600 italic">
+    <p className="text-gray-800">
       When you’re ready to finish a task, just click the{' '}
       <strong className="text-darkGreen">Book</strong> button.
     </p>

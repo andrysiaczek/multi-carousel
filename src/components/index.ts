@@ -21,6 +21,7 @@ export {
   IntroStep,
   ProgressBar,
   ProgressTrigger,
+  RankingQuestion,
   Survey,
   SurveyStep,
   TaskStep,

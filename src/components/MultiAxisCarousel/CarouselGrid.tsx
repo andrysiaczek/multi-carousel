@@ -1,5 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import {
+  ArrowDownLeft,
+  ArrowDownRight,
+  ArrowUpLeft,
+  ArrowUpRight,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -18,6 +22,12 @@ import {
   useFilterHistoryStore,
 } from '../../store';
 import { Axis, Subrange } from '../../types';
+import {
+  scrollDownLeft,
+  scrollDownRight,
+  scrollUpLeft,
+  scrollUpRight,
+} from '../../utils';
 
 export const CarouselGrid = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -94,6 +104,78 @@ export const CarouselGrid = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [scrollLeft, scrollRight, scrollUp, scrollDown]);
+
+  const accX = useRef(0);
+  const accY = useRef(0);
+  const lastScrollTime = useRef(0);
+
+  const handleWheel = useCallback(
+    (e: WheelEvent) => {
+      e.preventDefault();
+      const now = Date.now();
+      const dt = now - lastScrollTime.current;
+
+      accX.current += e.deltaX;
+      accY.current += e.deltaY;
+
+      const threshX = cellWidth * 0.5;
+      const threshY = cellHeight * 0.7;
+      const canScroll = dt > 200;
+
+      // Diagonal
+      if (
+        canScroll &&
+        Math.abs(accX.current) >= threshX &&
+        Math.abs(accY.current) >= threshY
+      ) {
+        // four possible diagonal directions:
+        if (accX.current > 0 && accY.current > 0) {
+          scrollDownRight();
+        } else if (accX.current < 0 && accY.current < 0) {
+          scrollUpLeft();
+        } else if (accX.current > 0 && accY.current < 0) {
+          scrollUpRight();
+        } else if (accX.current < 0 && accY.current > 0) {
+          scrollDownLeft();
+        }
+
+        lastScrollTime.current = now;
+        accX.current = 0;
+        accY.current = 0;
+        return;
+      }
+
+      // 2) Single-axis logic
+      if (Math.abs(accX.current) > Math.abs(accY.current)) {
+        if (canScroll && Math.abs(accX.current) >= threshX) {
+          if (accX.current) scrollRight();
+          else scrollLeft();
+          lastScrollTime.current = now;
+          accX.current = 0;
+        }
+        accY.current = 0;
+      } else {
+        if (canScroll && Math.abs(accY.current) >= threshY) {
+          if (accY.current) scrollDown();
+          else scrollUp();
+          lastScrollTime.current = now;
+          accY.current = 0;
+        }
+        accX.current = 0;
+      }
+    },
+    [cellWidth, cellHeight, scrollLeft, scrollRight, scrollUp, scrollDown]
+  );
+
+  // attach wheel listener
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      el.removeEventListener('wheel', handleWheel);
+    };
+  }, [handleWheel]);
 
   useEffect(() => {
     applyDecisionChipsToCarousel();
@@ -257,7 +339,7 @@ export const CarouselGrid = () => {
             )}
           </div>
 
-          {/* Arrows (subtle) */}
+          {/* Main arrows */}
           <CarouselArrow
             position="left-0 top-1/2 -translate-y-1/2"
             onClick={scrollLeft}
@@ -277,6 +359,28 @@ export const CarouselGrid = () => {
             position="bottom-[4px] left-1/2 -translate-x-1/2"
             onClick={scrollDown}
             icon={<ChevronDown size={18} />}
+          />
+
+          {/* Diagonal arrows */}
+          <CarouselArrow
+            position="absolute top-2 left-2"
+            onClick={scrollUpLeft}
+            icon={<ArrowUpLeft size={16} />}
+          />
+          <CarouselArrow
+            position="absolute top-2 right-2"
+            onClick={scrollUpRight}
+            icon={<ArrowUpRight size={16} />}
+          />
+          <CarouselArrow
+            position="absolute bottom-2 right-2"
+            onClick={scrollDownRight}
+            icon={<ArrowDownRight size={16} />}
+          />
+          <CarouselArrow
+            position="absolute bottom-2 left-2"
+            onClick={scrollDownLeft}
+            icon={<ArrowDownLeft size={16} />}
           />
         </div>
       </div>
