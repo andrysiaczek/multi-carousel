@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import { typeCategories } from '../../data';
-import { initialFilterSidebarState, useFilterSidebarStore } from '../../store';
+import { EventType } from '../../firebase';
+import {
+  initialFilterSidebarState,
+  useFilterSidebarStore,
+  useStudyStore,
+} from '../../store';
 import { FilterOptionWithFeature } from '../../types';
 import { decisionChips } from '../../utils';
-import 'rc-slider/assets/index.css';
 
 export const FilterSidebar = ({
   applyFilters,
@@ -18,6 +23,7 @@ export const FilterSidebar = ({
     removeStringFilter,
     resetState,
   } = useFilterSidebarStore();
+  const { logEvent } = useStudyStore();
 
   // State for temporary filter values before applying
   const [price, setPrice] = useState<[number, number]>(filters.price);
@@ -33,6 +39,10 @@ export const FilterSidebar = ({
 
   const handlePriceChange = () => {
     if (price !== filters[FilterOptionWithFeature.Price]) {
+      logEvent(EventType.FilterApply, {
+        filterType: 'price',
+        filterValue: price.toString(),
+      });
       setNumericalFilter(FilterOptionWithFeature.Price, price);
       applyFilters();
     }
@@ -40,6 +50,10 @@ export const FilterSidebar = ({
 
   const handleRatingChange = () => {
     if (rating !== filters[FilterOptionWithFeature.Rating]) {
+      logEvent(EventType.FilterApply, {
+        filterType: 'rating',
+        filterValue: rating.toString(),
+      });
       setNumericalFilter(FilterOptionWithFeature.Rating, rating);
       applyFilters();
     }
@@ -47,6 +61,10 @@ export const FilterSidebar = ({
 
   const handleDistanceChange = () => {
     if (distance !== filters[FilterOptionWithFeature.Distance]) {
+      logEvent(EventType.FilterApply, {
+        filterType: 'distance',
+        filterValue: distance.toString(),
+      });
       setNumericalFilter(FilterOptionWithFeature.Distance, distance);
       applyFilters();
     }
@@ -54,8 +72,16 @@ export const FilterSidebar = ({
 
   const handleToggleFeature = (feature: string) => {
     if (filters.feature.includes(feature)) {
+      logEvent(EventType.FilterReset, {
+        filterType: 'feature',
+        filterValue: feature,
+      });
       removeStringFilter(FilterOptionWithFeature.Feature, feature);
     } else {
+      logEvent(EventType.FilterApply, {
+        filterType: 'feature',
+        filterValue: feature,
+      });
       addStringFilter(FilterOptionWithFeature.Feature, feature);
     }
     applyFilters();
@@ -63,14 +89,25 @@ export const FilterSidebar = ({
 
   const handleToggleType = (type: string) => {
     if (filters.type.includes(type)) {
+      logEvent(EventType.FilterReset, {
+        filterType: 'type',
+        filterValue: type,
+      });
       removeStringFilter(FilterOptionWithFeature.Type, type);
     } else {
+      logEvent(EventType.FilterApply, {
+        filterType: 'type',
+        filterValue: type,
+      });
       addStringFilter(FilterOptionWithFeature.Type, type);
     }
     applyFilters();
   };
 
   const handleResetAll = () => {
+    logEvent(EventType.FilterResetAll, {
+      scope: 'allFilters',
+    });
     setPrice(initialFilterSidebarState[FilterOptionWithFeature.Price]);
     setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
     setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);

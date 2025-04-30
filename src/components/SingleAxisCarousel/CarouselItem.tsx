@@ -1,14 +1,21 @@
 import { ChevronRight } from 'lucide-react';
+import { EventType } from '../../firebase';
 import { useStudyStore } from '../../store';
-import { Accommodation, InterfaceOption } from '../../types';
+import { Accommodation, FilterOption, InterfaceOption } from '../../types';
 import { getFeatureIcon } from '../../utils';
 
 interface CarouselItemProps {
   accommodation: Accommodation;
+  filterOption: FilterOption;
+  filterValue: string;
 }
 
-export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
-  const { openDetailModal } = useStudyStore();
+export const CarouselItem = ({
+  accommodation,
+  filterOption,
+  filterValue,
+}: CarouselItemProps) => {
+  const { openDetailModal, logEvent } = useStudyStore();
 
   return (
     <div className="w-64 bg-white rounded-md overflow-hidden relative transition duration-300 hover:shadow-md hover:-translate-y-1">
@@ -20,6 +27,16 @@ export const CarouselItem = ({ accommodation }: CarouselItemProps) => {
         onClick={() =>
           openDetailModal(InterfaceOption.SingleAxisCarousel, accommodation.id)
         }
+        onMouseEnter={() => {
+          logEvent(EventType.Hover, {
+            targetType: 'carouselItemShowMoreButton',
+            accommodationId: accommodation.id,
+            filter: {
+              filterType: filterOption,
+              filterValue,
+            },
+          });
+        }}
       >
         Show More
         <ChevronRight

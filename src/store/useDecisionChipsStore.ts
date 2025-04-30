@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { EventType } from '../firebase';
+import { useStudyStore } from '../store';
 import { decisionChips } from '../utils';
 
 interface DecisionChipsState {
@@ -24,13 +26,33 @@ export const useDecisionChipsStore = create<DecisionChipsState>()(
       setAvailableChips: (chips) => set({ availableChips: chips }),
 
       toggleChip: (chip) =>
-        set((state) => ({
-          selectedChips: state.selectedChips.includes(chip)
-            ? state.selectedChips.filter((c) => c !== chip) // Remove if already selected
-            : [...state.selectedChips, chip], // Add if not selected
-        })),
+        set((state) => {
+          const alreadySelected = state.selectedChips.includes(chip);
 
-      resetChips: () => set({ selectedChips: [] }),
+          useStudyStore
+            .getState()
+            .logEvent(
+              alreadySelected ? EventType.FilterReset : EventType.FilterApply,
+              {
+                filterType: 'feature',
+                filterValue: chip,
+              }
+            );
+
+          return {
+            selectedChips: alreadySelected
+              ? state.selectedChips.filter((c) => c !== chip) // Remove if already selected
+              : [...state.selectedChips, chip], // Add if not selected
+          };
+        }),
+
+      resetChips: () => {
+        useStudyStore.getState().logEvent(EventType.FilterResetAll, {
+          scope: 'features',
+        });
+
+        return set({ selectedChips: [] });
+      },
 
       resetState: () => set(initialDecisionChipsState),
     }),

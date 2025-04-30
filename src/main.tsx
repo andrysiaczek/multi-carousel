@@ -1,4 +1,4 @@
-import App from './App.tsx';
+import { App } from './App.tsx';
 import { initAnonymousAuth } from './firebase';
 import { auth } from './firebase';
 import ReactDOM from 'react-dom/client';

@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { accommodationDataset } from '../data';
-import { useAxisFilterStore, useCarouselStore } from '../store';
+import { EventType } from '../firebase';
+import { useAxisFilterStore, useCarouselStore, useStudyStore } from '../store';
 import {
   Axis,
   DrillStep,
@@ -62,16 +63,28 @@ export const useFilterHistoryStore = create<FilterHistoryState>()(
       },
 
       addStep: (step) =>
-        set((state) => ({
-          steps: [
-            ...state.steps,
-            {
-              ...step,
-              stepNumber: state.steps.length + 1,
-            },
-          ],
-          hoveredStepLabel: null,
-        })),
+        set((state) => {
+          const stepNumber = state.steps.length + 1;
+
+          useStudyStore.getState().logEvent(EventType.FilterStep, {
+            stepNumber: stepNumber,
+            label: step.label,
+            xFilter: { filterType: step.xAxisFilter },
+            yFilter: { filterType: step.yAxisFilter },
+            accommodationIds: step.carouselDataSnapshot.map((acc) => acc.id),
+          });
+
+          return {
+            steps: [
+              ...state.steps,
+              {
+                ...step,
+                stepNumber,
+              },
+            ],
+            hoveredStepLabel: null,
+          };
+        }),
 
       goToStep: (stepNumber) => {
         const { setCarouselData } = useCarouselStore.getState();
@@ -79,6 +92,14 @@ export const useFilterHistoryStore = create<FilterHistoryState>()(
         const lastStep = steps[steps.length - 1];
 
         if (!lastStep) return;
+
+        useStudyStore.getState().logEvent(EventType.FilterStep, {
+          stepNumber: stepNumber,
+          label: lastStep.label,
+          xFilter: { filterType: lastStep.xAxisFilter },
+          yFilter: { filterType: lastStep.yAxisFilter },
+          accommodationIds: lastStep.carouselDataSnapshot.map((acc) => acc.id),
+        });
 
         set({ steps, hoveredStepLabel: null });
         setCarouselData(lastStep.carouselDataSnapshot);

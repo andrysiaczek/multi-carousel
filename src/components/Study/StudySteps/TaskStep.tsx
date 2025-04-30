@@ -1,3 +1,5 @@
+import { EventType } from '../../../firebase';
+import { useStudyStore } from '../../../store';
 import {
   InterfaceOption,
   StudyStep,
@@ -60,7 +62,12 @@ export const TaskStep = ({
           </p>
           <button
             type="button"
-            onClick={onBegin}
+            onClick={() => {
+              useStudyStore
+                .getState()
+                .logEvent(EventType.TaskStart, { taskType: step.subtype });
+              onBegin();
+            }}
             className={`w-full py-3 rounded-lg text-white text-lg font-medium transition ${
               isExploratory
                 ? 'bg-darkGreen hover:bg-darkGreen/90'

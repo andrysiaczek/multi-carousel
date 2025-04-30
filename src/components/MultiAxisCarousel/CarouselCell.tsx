@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { MoreHorizontal, Search } from 'lucide-react';
+import { EventType } from '../../firebase';
 import {
   useAxisFilterStore,
   useCarouselStore,
@@ -42,10 +43,10 @@ export const CarouselCell = ({
     resetHover,
     drillDownCell,
   } = useCarouselStore();
-  const { xAxisFilter } = useAxisFilterStore();
+  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();
   const { setAccommodations, setSortField } = useSortStore();
-  const { openDetailModal, openResultsModal } = useStudyStore();
+  const { openDetailModal, openResultsModal, logEvent } = useStudyStore();
 
   const isEmptyCell = accommodations.length === 0;
   const isActiveCell = !isEmptyCell && !isFillerCell;
@@ -68,6 +69,20 @@ export const CarouselCell = ({
 
   const handleResultsMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isActiveCell) {
+      logEvent(EventType.Hover, {
+        targetType: 'cellShowResults',
+        xAxis: {
+          filterType: xAxisFilter,
+          filterValue: columnRange.label,
+        },
+        yAxis: {
+          filterType: yAxisFilter,
+          filterValue: rowRange.label,
+        },
+        accommodationId: bestAccommodation?.id,
+        accommodationIds: accommodations.map((acc) => acc.id),
+      });
+
       resetHover();
       resetHoveredStep();
       e.currentTarget.classList.add('bg-lightOrange', 'text-darkOrange');
@@ -88,6 +103,20 @@ export const CarouselCell = ({
     e.stopPropagation();
     handleFilterMouseLeave();
     e.currentTarget.classList.remove('bg-lightOrange', 'text-darkOrange');
+
+    logEvent(EventType.Click, {
+      targetType: 'cellShowResults',
+      xAxis: {
+        filterType: xAxisFilter,
+        filterValue: columnRange.label,
+      },
+      yAxis: {
+        filterType: yAxisFilter,
+        filterValue: rowRange.label,
+      },
+      accommodation: bestAccommodation ?? null,
+      accommodationIds: accommodations.map((acc) => acc.id),
+    });
 
     if (additionalCount === 0) {
       return openDetailModal(
@@ -152,7 +181,22 @@ export const CarouselCell = ({
       className={`px-5 py-4 transition rounded flex flex-col overflow-hidden relative ${getCellStyling()}`}
       onMouseEnter={handleFilterMouseEnter}
       onMouseLeave={handleFilterMouseLeave}
-      onClick={() => isActiveCell && drillDownCell(col, row)}
+      onClick={() => {
+        if (isActiveCell) {
+          logEvent(EventType.Click, {
+            targetType: 'cell',
+            xAxis: {
+              filterType: xAxisFilter,
+              filterValue: columnRange.label,
+            },
+            yAxis: {
+              filterType: yAxisFilter,
+              filterValue: rowRange.label,
+            },
+          });
+          drillDownCell(col, row);
+        }
+      }}
     >
       {!isFillerCell && (
         <>

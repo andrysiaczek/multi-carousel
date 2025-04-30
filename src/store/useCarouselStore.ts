@@ -1,7 +1,12 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { accommodationDataset, filters } from '../data';
-import { useAxisFilterStore, useFilterHistoryStore } from '../store';
+import { EventType } from '../firebase';
+import {
+  useAxisFilterStore,
+  useFilterHistoryStore,
+  useStudyStore,
+} from '../store';
 import { Accommodation, CarouselCell, Subrange } from '../types';
 import {
   buildCarouselGrid,
@@ -12,13 +17,13 @@ import {
   resetPosition,
   resetRowOffset,
   scrollDown,
+  scrollDownLeft,
+  scrollDownRight,
   scrollLeft,
   scrollRight,
   scrollUp,
   scrollUpLeft,
   scrollUpRight,
-  scrollDownLeft,
-  scrollDownRight,
 } from '../utils';
 
 interface CarouselState {
@@ -217,18 +222,50 @@ export const useCarouselStore = create<CarouselState>()(
       drillDownRow,
       drillDownCell,
 
-      setHoveredRow: (row) =>
-        set({ hoveredRow: row, hoveredColumn: null, hoveredCell: null }),
+      setHoveredRow: (row) => {
+        useStudyStore.getState().logEvent(EventType.Hover, {
+          targetType: 'row',
+          yAxis: {
+            filterType: useAxisFilterStore.getState().yAxisFilter,
+            filterValue: get().rowRanges[row].label,
+          },
+        });
 
-      setHoveredColumn: (col) =>
-        set({ hoveredColumn: col, hoveredRow: null, hoveredCell: null }),
+        set({ hoveredRow: row, hoveredColumn: null, hoveredCell: null });
+      },
 
-      setHoveredCell: (row, col) =>
+      setHoveredColumn: (col) => {
+        useStudyStore.getState().logEvent(EventType.Hover, {
+          targetType: 'column',
+          xAxis: {
+            filterType: useAxisFilterStore.getState().xAxisFilter,
+            filterValue: get().columnRanges[col].label,
+          },
+        });
+
+        set({ hoveredColumn: col, hoveredRow: null, hoveredCell: null });
+      },
+
+      setHoveredCell: (row, col) => {
+        const { xAxisFilter, yAxisFilter } = useAxisFilterStore.getState();
+        useStudyStore.getState().logEvent(EventType.Hover, {
+          targetType: 'cell',
+          xAxis: {
+            filterType: xAxisFilter,
+            filterValue: get().columnRanges[col].label,
+          },
+          yAxis: {
+            filterType: yAxisFilter,
+            filterValue: get().rowRanges[row].label,
+          },
+        });
+
         set({
           hoveredCell: { row, col },
           hoveredRow: null,
           hoveredColumn: null,
-        }),
+        });
+      },
 
       resetHover: () =>
         set(() => ({

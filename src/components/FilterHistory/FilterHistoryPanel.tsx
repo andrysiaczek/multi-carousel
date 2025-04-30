@@ -1,8 +1,10 @@
 import { ResetButtonFilterHistory as ResetButton } from '../../components';
 import { accommodationDataset } from '../../data';
+import { EventType } from '../../firebase';
 import {
   useAxisFilterStore,
   useCarouselStore,
+  useDecisionChipsStore,
   useFilterHistoryStore,
   useSortStore,
   useStudyStore,
@@ -10,13 +12,15 @@ import {
 import { InterfaceOption, SortOption } from '../../types';
 
 export const FilterHistoryPanel = () => {
-  const { xAxisFilter } = useAxisFilterStore();
+  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
+  const { getFilteredAccommodations } = useCarouselStore();
+  const { selectedChips } = useDecisionChipsStore();
   const { steps, hoveredStepLabel, goToStep } = useFilterHistoryStore();
   const { setAccommodations, setSortField } = useSortStore();
-  const { openResultsModal } = useStudyStore();
+  const { openResultsModal, logEvent } = useStudyStore();
 
   // Calculate the number of unique filtered accommodations from dataPerCell
-  const filteredAccommodations = useCarouselStore().getFilteredAccommodations();
+  const filteredAccommodations = getFilteredAccommodations();
   const filteredAccommodationsCount = filteredAccommodations.length;
   const noFilteredResults = filteredAccommodationsCount === 0;
 
@@ -36,6 +40,23 @@ export const FilterHistoryPanel = () => {
   };
 
   const handleShowResults = () => {
+    if (isDataFiltered) {
+      logEvent(EventType.Click, {
+        targetType: 'showFilteredResults',
+        xAxis: { filterType: xAxisFilter },
+        yAxis: { filterType: yAxisFilter },
+        featuresApplied: selectedChips,
+        filterHistorySteps: steps.map((step) => step.label),
+        accommodationIds: getFilteredAccommodations().map((acc) => acc.id),
+      });
+    } else {
+      logEvent(EventType.Click, {
+        targetType: 'showAllResults',
+        xAxis: { filterType: xAxisFilter },
+        yAxis: { filterType: yAxisFilter },
+      });
+    }
+
     setAccommodations(filteredAccommodations);
     if (
       Object.values(SortOption).includes(xAxisFilter as unknown as SortOption)
@@ -51,7 +72,13 @@ export const FilterHistoryPanel = () => {
         {/* Initial step - Reset button */}
         {(steps.length > 1 || hoveredStepLabel) && (
           <ResetButton
-            onClick={() => goToStep(0)}
+            onClick={() => {
+              logEvent(EventType.FilterReset, {
+                filterType: 'filterHistory',
+                numberOfSteps: steps.length - 1,
+              });
+              goToStep(0);
+            }}
             isHighlighted={noFilteredResults}
             isPreviewing={steps.length === 1 && !!hoveredStepLabel}
           />
@@ -107,6 +134,26 @@ export const FilterHistoryPanel = () => {
           : 'bg-lightOrange text-darkOrange hover:bg-darkOrange hover:text-lightOrange cursor-pointer'
       }`}
         onClick={handleShowResults}
+        onMouseEnter={() => {
+          if (isDataFiltered) {
+            return logEvent(EventType.Hover, {
+              targetType: 'showFilteredResults',
+              xAxis: { filterType: xAxisFilter },
+              yAxis: { filterType: yAxisFilter },
+              featuresApplied: selectedChips,
+              filterHistorySteps: steps.map((step) => step.label),
+              accommodationIds: getFilteredAccommodations().map(
+                (acc) => acc.id
+              ),
+            });
+          }
+
+          logEvent(EventType.Hover, {
+            targetType: 'showAllResults',
+            xAxis: { filterType: xAxisFilter },
+            yAxis: { filterType: yAxisFilter },
+          });
+        }}
         disabled={noFilteredResults}
       >
         {showResultsText}

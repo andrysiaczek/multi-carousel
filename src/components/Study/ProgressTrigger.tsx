@@ -1,4 +1,6 @@
-import { ProgressBar } from './ProgressBar';
+import { ProgressBar } from '../../components';
+import { EventType } from '../../firebase';
+import { useStudyStore } from '../../store';
 
 type ProgressTriggerProps = {
   current: number;
@@ -27,7 +29,14 @@ export const ProgressTrigger = ({
   >
     <div className="relative inline-block">
       {/* Icon */}
-      <div className="peer w-8 h-8 flex items-center justify-center bg-darkGreen text-white rounded-full cursor-pointer transition-transform transform hover:scale-110 hover:bg-darkOrange">
+      <div
+        className="peer w-8 h-8 flex items-center justify-center bg-darkGreen text-white rounded-full cursor-pointer transition-transform transform hover:scale-110 hover:bg-darkOrange"
+        onMouseEnter={() =>
+          useStudyStore
+            .getState()
+            .logEvent(EventType.Hover, { targetType: 'infoButton' })
+        }
+      >
         i
       </div>
       {/* Tooltip panel shown only when icon is hovered */}
@@ -64,5 +73,3 @@ export const ProgressTrigger = ({
     </div>
   </div>
 );
-
-export default ProgressTrigger;

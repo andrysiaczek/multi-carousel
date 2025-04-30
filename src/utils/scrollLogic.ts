@@ -1,4 +1,5 @@
-import { useCarouselStore } from '../store';
+import { EventType } from '../firebase';
+import { useCarouselStore, useStudyStore } from '../store';
 
 export const scrollLeft = () => {
   const { columnOffset, totalColumns, visibleColumns } =
@@ -93,5 +94,11 @@ export const resetColumnOffset = () =>
 
 export const resetRowOffset = () => useCarouselStore.setState({ rowOffset: 0 });
 
-export const resetPosition = () =>
+export const resetPosition = () => {
+  useStudyStore.getState().logEvent(EventType.Scroll, {
+    targetType: 'carousel',
+    resetPosition: true,
+  });
+
   useCarouselStore.setState({ columnOffset: 0, rowOffset: 0 });
+};

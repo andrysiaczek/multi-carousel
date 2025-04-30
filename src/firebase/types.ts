@@ -1,5 +1,5 @@
 import { FieldValue } from 'firebase/firestore';
-import { InterfaceOption, QuestionId } from '../types';
+import { Accommodation, InterfaceOption, QuestionId } from '../types';
 
 /**
  * All the events which might be logged during a step.
@@ -32,10 +32,8 @@ export type NoDetails = Record<string, never>;
 export interface HoverDetails {
   targetType:
     | 'infoButton'
-    | 'resultItem'
     | 'resultItemShowMore'
     | 'bookNowButton'
-    | 'carouselItem'
     | 'carouselItemShowMoreButton'
     | 'carouselShowThisList'
     | 'showAllResults'
@@ -59,13 +57,9 @@ export interface HoverDetails {
  */
 export interface ClickDetails {
   targetType:
-    | 'resultsPage' // general e.g. images etc.
-    | 'resultItem'
     | 'detailViewBackButton'
-    | 'detailView'
     | 'bookNowButton'
-    | 'hideInterfacePreview'
-    | 'showInterfacePreview'
+    | 'previewToggleButton'
     | 'carouselShowThisList'
     | 'showAllResults'
     | 'showFilteredResults'
@@ -73,7 +67,7 @@ export interface ClickDetails {
     | 'column'
     | 'cell'
     | 'cellShowResults';
-  accommodationId?: string;
+  accommodation?: Accommodation | null;
   accommodationIds?: string[];
   filter?: FilterDetails;
   xAxis?: FilterDetails;
@@ -100,7 +94,7 @@ export interface ScrollDetails {
   filter?: FilterDetails;
   xAxis?: FilterDetails;
   yAxis?: FilterDetails;
-  previousPosition?: { row: number; col: number };
+  offset?: { row: number; col: number };
   filterHistorySteps?: string[];
   accommodationIds?: string[];
   resetPosition?: boolean;
@@ -115,13 +109,13 @@ export interface FilterDetails {
     | 'rating'
     | 'distance'
     | 'type'
-    | 'features'
+    | 'feature'
     | 'filterHistory';
   filterValue?: string; // or range
   ranges?: string[];
   axis?: 'x' | 'y';
   sortDirection?: 'ascending' | 'descending';
-  resetFilter?: boolean;
+  numberOfSteps?: number;
 }
 
 /**
@@ -153,9 +147,8 @@ export interface SurveyDetails {
  * Payload when navigating to another page.
  */
 export interface NavigationDetails {
-  to: 'resultsPage' | 'detailView';
+  to: 'resultsPage' | 'detailView' | 'pageRefresh';
   accommodationId?: string;
-  accommodationIds?: string[];
 }
 
 /**

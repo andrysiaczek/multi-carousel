@@ -87,6 +87,7 @@ export const StudyFlowManager = () => {
       <DetailPage
         interfaceOption={detailModal.interfaceOption}
         id={detailModal.itemId}
+        stepType={step.subtype}
         onBook={async () => flushStepLog(step.subtype, step.option)}
       />
     );

@@ -7,6 +7,7 @@ import {
   MapLibreMap,
 } from '../components';
 import { accommodationDataset } from '../data';
+import { EventType } from '../firebase';
 import { useStudyStore } from '../store';
 import { Accommodation, InterfaceOption } from '../types';
 import { resolveAccommodationVariant } from '../utils';
@@ -14,12 +15,14 @@ import { resolveAccommodationVariant } from '../utils';
 interface DetailPageProps {
   interfaceOption: InterfaceOption;
   id: string;
+  stepType: 'exploratory' | 'goal' | 'survey';
   onBook: () => Promise<void>;
 }
 
 export const DetailPage = ({
   interfaceOption,
   id,
+  stepType,
   onBook,
 }: DetailPageProps) => {
   const [accommodation, setAccommodation] = useState<Accommodation | null>(
@@ -34,8 +37,13 @@ export const DetailPage = ({
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [isGalleryHovered, setIsGalleryHovered] = useState(false);
-  const { nextStep, closeDetailModal, closeResultsModal, closeInterface } =
-    useStudyStore();
+  const {
+    nextStep,
+    closeDetailModal,
+    closeResultsModal,
+    closeInterface,
+    logEvent,
+  } = useStudyStore();
 
   // Fetch accommodation data
   useEffect(() => {
@@ -69,6 +77,11 @@ export const DetailPage = ({
   const handleDotClick = (index: number) => setActiveImageIndex(index);
 
   const handleBooking = async () => {
+    logEvent(EventType.Click, {
+      targetType: 'bookNowButton',
+      accommodation: accommodation ?? null,
+    });
+    logEvent(EventType.TaskEnd, { taskType: stepType });
     await onBook();
     setShowModal(true);
   };
@@ -138,7 +151,13 @@ export const DetailPage = ({
             {/* Back Button */}
             <button
               type="button"
-              onClick={closeDetailModal}
+              onClick={() => {
+                logEvent(EventType.Click, {
+                  targetType: 'detailViewBackButton',
+                  accommodation: accommodation,
+                });
+                closeDetailModal();
+              }}
               className="absolute top-4 left-4 flex items-center gap-2 text-antiflashWhite bg-darkGreen/70 pl-3 pr-4 py-2 rounded-full shadow-lg transition-transform duration-300 hover:bg-darkGreen/95 hover:scale-105 active:scale-95"
             >
               <ChevronLeft
@@ -216,6 +235,12 @@ export const DetailPage = ({
             <button
               type="button"
               onClick={handleBooking}
+              onMouseEnter={() =>
+                logEvent(EventType.Hover, {
+                  targetType: 'bookNowButton',
+                  accommodationId: accommodation?.id,
+                })
+              }
               className="flex items-center justify-between pl-4 pr-3 w-full bg-darkGreen text-white py-2 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-lg group"
             >
               <span className="flex-1 text-center">Book Now</span>

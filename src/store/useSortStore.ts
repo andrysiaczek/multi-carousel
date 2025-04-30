@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { accommodationDataset } from '../data';
+import { EventType } from '../firebase';
+import { useStudyStore } from '../store';
 import { Accommodation, SortOption } from '../types';
 import { sortAccommodations } from '../utils';
 
@@ -32,6 +34,12 @@ export const useSortStore = create<SortState>()(
       setSortField: (field) =>
         set((state) => {
           if (state.sortField === field) return state;
+
+          useStudyStore.getState().logEvent(EventType.FilterApply, {
+            filterType: state.sortField,
+            sortDirection: state.sortAscending ? 'ascending' : 'descending',
+          });
+
           return {
             sortField: field,
             accommodations: sortAccommodations(
@@ -45,6 +53,12 @@ export const useSortStore = create<SortState>()(
       setSortDirection: (ascending) =>
         set((state) => {
           if (state.sortAscending === ascending) return state;
+
+          useStudyStore.getState().logEvent(EventType.FilterApply, {
+            filterType: state.sortField,
+            sortDirection: state.sortAscending ? 'ascending' : 'descending',
+          });
+
           return {
             sortAscending: ascending,
             accommodations: sortAccommodations(

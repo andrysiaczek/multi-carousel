@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
+import { EventType } from '../../firebase';
 import { useStudyStore } from '../../store';
 import { Accommodation, InterfaceOption } from '../../types';
 import { getFeatureIcon, resolveAccommodationVariant } from '../../utils';
@@ -22,7 +23,7 @@ export const ResultItem = ({
   interfaceOption,
   padding = false,
 }: ResultItemProps) => {
-  const { openDetailModal } = useStudyStore();
+  const { openDetailModal, logEvent } = useStudyStore();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const { name, images } = resolveAccommodationVariant(
     interfaceOption,
@@ -123,9 +124,13 @@ export const ResultItem = ({
             type="button"
             aria-label="Show more"
             className="flex items-center justify-center pl-4 pr-1 py-1.5 text-xs font-semibold text-antiflashWhite bg-darkGreen rounded-md transition-transform duration-300 hover:scale-105 active:scale-95 hover:shadow-md group hover:pr-3 hover:gap-1"
-            onClick={() => {
-              openDetailModal(interfaceOption, accommodation.id);
-            }}
+            onClick={() => openDetailModal(interfaceOption, accommodation.id)}
+            onMouseEnter={() =>
+              logEvent(EventType.Hover, {
+                targetType: 'resultItemShowMore',
+                accommodationId: accommodation.id,
+              })
+            }
           >
             Show More
             <ChevronRight

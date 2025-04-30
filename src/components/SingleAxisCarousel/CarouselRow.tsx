@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { CarouselItem } from '../../components';
 import { accommodationDataset, filters } from '../../data';
+import { EventType } from '../../firebase';
 import {
   useDecisionChipsStore,
   useSingleAxisCarouselStore,
@@ -28,7 +29,7 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
     useSingleAxisCarouselStore();
   const { selectedChips } = useDecisionChipsStore();
   const { setAccommodations, setSortField } = useSortStore();
-  const { openResultsModal } = useStudyStore();
+  const { openResultsModal, logEvent } = useStudyStore();
 
   const titleIndex = titles[filterOption];
   const scrollPosition = scrolls[filterOption];
@@ -77,9 +78,27 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
   }, [filterOption, titleIndex, selectedChips, filterRanges]);
 
   // Scroll Handlers for Carousel
-  const scrollLeft = () =>
+  const scrollLeft = () => {
+    logEvent(EventType.ArrowClick, {
+      targetType: 'carousel',
+      direction: 'left',
+      filter: {
+        filterType: filterOption,
+        filterValue: filterRanges[titleIndex]?.label,
+      },
+    });
     setScrollPosition(filterOption, Math.max(scrollPosition - 1, 0));
-  const scrollRight = () =>
+  };
+
+  const scrollRight = () => {
+    logEvent(EventType.ArrowClick, {
+      targetType: 'carousel',
+      direction: 'right',
+      filter: {
+        filterType: filterOption,
+        filterValue: filterRanges[titleIndex]?.label,
+      },
+    });
     setScrollPosition(
       filterOption,
       Math.min(
@@ -87,17 +106,46 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
         Math.max(0, accommodations.length - visibleCount)
       )
     );
+  };
 
   // Scroll Handlers for Vertical Title
-  const scrollTitleUp = () =>
+  const scrollTitleUp = () => {
+    logEvent(EventType.ArrowClick, {
+      targetType: 'carouselTitle',
+      direction: 'up',
+      filter: {
+        filterType: filterOption,
+        filterValue: filterRanges[titleIndex]?.label,
+      },
+    });
     setTitleIndex(filterOption, Math.max(titleIndex - 1, 0));
-  const scrollTitleDown = () =>
+  };
+
+  const scrollTitleDown = () => {
+    logEvent(EventType.ArrowClick, {
+      targetType: 'carouselTitle',
+      direction: 'down',
+      filter: {
+        filterType: filterOption,
+        filterValue: filterRanges[titleIndex]?.label,
+      },
+    });
     setTitleIndex(
       filterOption,
       Math.min(titleIndex + 1, filterRanges.length - 1)
     );
+  };
 
   const handleShowList = () => {
+    logEvent(EventType.Click, {
+      targetType: 'carouselShowThisList',
+      filter: {
+        filterType: filterOption,
+        filterValue: filterRanges[titleIndex]?.label,
+      },
+      featuresApplied: selectedChips,
+      accommodationIds: accommodations.map((acc) => acc.id),
+    });
     setAccommodations(accommodations);
     if (
       Object.values(SortOption).includes(filterOption as unknown as SortOption)
@@ -173,7 +221,12 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
           {accommodations
             .slice(scrollPosition, scrollPosition + visibleCount)
             .map((item) => (
-              <CarouselItem key={item.id} accommodation={item} />
+              <CarouselItem
+                key={item.id}
+                accommodation={item}
+                filterOption={filterOption}
+                filterValue={filterRanges[titleIndex]?.label}
+              />
             ))}
           {/* Show List Button */}
           <button
@@ -184,6 +237,15 @@ export const CarouselRow = ({ filterOption }: CarouselRowProps) => {
               right: `${showListOffset}px`,
             }}
             onClick={handleShowList}
+            onMouseEnter={() => {
+              logEvent(EventType.Hover, {
+                targetType: 'carouselShowThisList',
+                filter: {
+                  filterType: filterOption,
+                  filterValue: filterRanges[titleIndex]?.label,
+                },
+              });
+            }}
           >
             Show this list
             <ChevronRight

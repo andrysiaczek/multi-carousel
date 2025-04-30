@@ -15,11 +15,14 @@ import {
   CarouselCell,
   ResetButtonCarousel as ResetButton,
 } from '../../components';
+import { EventType } from '../../firebase';
 import { useResponsiveCarousel } from '../../hooks';
 import {
+  useAxisFilterStore,
   useCarouselStore,
   useDecisionChipsStore,
   useFilterHistoryStore,
+  useStudyStore,
 } from '../../store';
 import { Axis, Subrange } from '../../types';
 import {
@@ -57,9 +60,11 @@ export const CarouselGrid = () => {
     setHoveredColumn,
     resetHover,
   } = useCarouselStore();
+  const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { selectedChips } = useDecisionChipsStore();
-  const { setHoveredStepForAxis, resetHoveredStep, goToStep } =
+  const { steps, setHoveredStepForAxis, resetHoveredStep, goToStep } =
     useFilterHistoryStore();
+  const { logEvent } = useStudyStore();
 
   useResponsiveCarousel({
     ref: carouselRef,
@@ -130,12 +135,64 @@ export const CarouselGrid = () => {
       ) {
         // four possible diagonal directions:
         if (accX.current > 0 && accY.current > 0) {
+          logEvent(EventType.Scroll, {
+            targetType: 'carousel',
+            direction: 'downRight',
+            offset: { row: rowOffset, col: columnOffset },
+            xAxis: {
+              filterType: xAxisFilter,
+              ranges: columnRanges.map((col) => col.label),
+            },
+            yAxis: {
+              filterType: yAxisFilter,
+              ranges: rowRanges.map((row) => row.label),
+            },
+          });
           scrollDownRight();
         } else if (accX.current < 0 && accY.current < 0) {
+          logEvent(EventType.Scroll, {
+            targetType: 'carousel',
+            direction: 'upLeft',
+            offset: { row: rowOffset, col: columnOffset },
+            xAxis: {
+              filterType: xAxisFilter,
+              ranges: columnRanges.map((col) => col.label),
+            },
+            yAxis: {
+              filterType: yAxisFilter,
+              ranges: rowRanges.map((row) => row.label),
+            },
+          });
           scrollUpLeft();
         } else if (accX.current > 0 && accY.current < 0) {
+          logEvent(EventType.Scroll, {
+            targetType: 'carousel',
+            direction: 'upRight',
+            offset: { row: rowOffset, col: columnOffset },
+            xAxis: {
+              filterType: xAxisFilter,
+              ranges: columnRanges.map((col) => col.label),
+            },
+            yAxis: {
+              filterType: yAxisFilter,
+              ranges: rowRanges.map((row) => row.label),
+            },
+          });
           scrollUpRight();
         } else if (accX.current < 0 && accY.current > 0) {
+          logEvent(EventType.Scroll, {
+            targetType: 'carousel',
+            direction: 'downLeft',
+            offset: { row: rowOffset, col: columnOffset },
+            xAxis: {
+              filterType: xAxisFilter,
+              ranges: columnRanges.map((col) => col.label),
+            },
+            yAxis: {
+              filterType: yAxisFilter,
+              ranges: rowRanges.map((row) => row.label),
+            },
+          });
           scrollDownLeft();
         }
 
@@ -148,16 +205,74 @@ export const CarouselGrid = () => {
       // 2) Single-axis logic
       if (Math.abs(accX.current) > Math.abs(accY.current)) {
         if (canScroll && Math.abs(accX.current) >= threshX) {
-          if (accX.current) scrollRight();
-          else scrollLeft();
+          if (accX.current) {
+            logEvent(EventType.Scroll, {
+              targetType: 'carousel',
+              direction: 'right',
+              offset: { row: rowOffset, col: columnOffset },
+              xAxis: {
+                filterType: xAxisFilter,
+                ranges: columnRanges.map((col) => col.label),
+              },
+              yAxis: {
+                filterType: yAxisFilter,
+                ranges: rowRanges.map((row) => row.label),
+              },
+            });
+            scrollRight();
+          } else {
+            logEvent(EventType.Scroll, {
+              targetType: 'carousel',
+              direction: 'left',
+              offset: { row: rowOffset, col: columnOffset },
+              xAxis: {
+                filterType: xAxisFilter,
+                ranges: columnRanges.map((col) => col.label),
+              },
+              yAxis: {
+                filterType: yAxisFilter,
+                ranges: rowRanges.map((row) => row.label),
+              },
+            });
+            scrollLeft();
+          }
           lastScrollTime.current = now;
           accX.current = 0;
         }
         accY.current = 0;
       } else {
         if (canScroll && Math.abs(accY.current) >= threshY) {
-          if (accY.current) scrollDown();
-          else scrollUp();
+          if (accY.current) {
+            logEvent(EventType.Scroll, {
+              targetType: 'carousel',
+              direction: 'down',
+              offset: { row: rowOffset, col: columnOffset },
+              xAxis: {
+                filterType: xAxisFilter,
+                ranges: columnRanges.map((col) => col.label),
+              },
+              yAxis: {
+                filterType: yAxisFilter,
+                ranges: rowRanges.map((row) => row.label),
+              },
+            });
+            scrollDown();
+          } else {
+            logEvent(EventType.Scroll, {
+              targetType: 'carousel',
+              direction: 'up',
+              offset: { row: rowOffset, col: columnOffset },
+              xAxis: {
+                filterType: xAxisFilter,
+                ranges: columnRanges.map((col) => col.label),
+              },
+              yAxis: {
+                filterType: yAxisFilter,
+                ranges: rowRanges.map((row) => row.label),
+              },
+            });
+            scrollUp();
+          }
           lastScrollTime.current = now;
           accY.current = 0;
         }
@@ -206,7 +321,16 @@ export const CarouselGrid = () => {
               }}
               onMouseEnter={() => handleMouseEnter(Axis.X, colIndex, colRange)}
               onMouseLeave={() => handleMouseLeave()}
-              onClick={() => drillDownColumn(columnOffset + colIndex)}
+              onClick={() => {
+                logEvent(EventType.Click, {
+                  targetType: 'column',
+                  xAxis: {
+                    filterType: xAxisFilter,
+                    filterValue: colRange.label,
+                  },
+                });
+                drillDownColumn(columnOffset + colIndex);
+              }}
             >
               {colRange.label}
               <br />
@@ -266,7 +390,16 @@ export const CarouselGrid = () => {
                   handleMouseEnter(Axis.Y, rowIndex, rowRange)
                 }
                 onMouseLeave={() => handleMouseLeave()}
-                onClick={() => drillDownRow(rowOffset + rowIndex)}
+                onClick={() => {
+                  logEvent(EventType.Click, {
+                    targetType: 'row',
+                    yAxis: {
+                      filterType: yAxisFilter,
+                      filterValue: rowRange.label,
+                    },
+                  });
+                  drillDownRow(rowOffset + rowIndex);
+                }}
               >
                 <span style={{ width: `${cellHeight}px` }}>
                   {rowRange.label}
@@ -301,7 +434,13 @@ export const CarouselGrid = () => {
                 </span>
                 <button
                   type="button"
-                  onClick={() => goToStep(0)}
+                  onClick={() => {
+                    logEvent(EventType.FilterReset, {
+                      filterType: 'filterHistory',
+                      numberOfSteps: steps.length - 1,
+                    });
+                    goToStep(0);
+                  }}
                   className="mt-4 px-4 py-2 text-sm text-white bg-darkOrange rounded-lg hover:bg-darkOrange/90 transition"
                 >
                   Reset all filters
@@ -342,44 +481,164 @@ export const CarouselGrid = () => {
           {/* Main arrows */}
           <CarouselArrow
             position="left-0 top-1/2 -translate-y-1/2"
-            onClick={scrollLeft}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'left',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollLeft();
+            }}
             icon={<ChevronLeft size={18} />}
           />
           <CarouselArrow
             position="right-0 top-1/2 -translate-y-1/2"
-            onClick={scrollRight}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'right',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollRight();
+            }}
             icon={<ChevronRight size={18} />}
           />
           <CarouselArrow
             position="top-0 left-1/2 -translate-x-1/2"
-            onClick={scrollUp}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'up',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollUp();
+            }}
             icon={<ChevronUp size={18} />}
           />
           <CarouselArrow
             position="bottom-[4px] left-1/2 -translate-x-1/2"
-            onClick={scrollDown}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'down',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollDown();
+            }}
             icon={<ChevronDown size={18} />}
           />
 
           {/* Diagonal arrows */}
           <CarouselArrow
             position="absolute top-2 left-2"
-            onClick={scrollUpLeft}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'upLeft',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollUpLeft();
+            }}
             icon={<ArrowUpLeft size={16} />}
           />
           <CarouselArrow
             position="absolute top-2 right-2"
-            onClick={scrollUpRight}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'upRight',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollUpRight();
+            }}
             icon={<ArrowUpRight size={16} />}
           />
           <CarouselArrow
             position="absolute bottom-2 right-2"
-            onClick={scrollDownRight}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'downRight',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollDownRight();
+            }}
             icon={<ArrowDownRight size={16} />}
           />
           <CarouselArrow
             position="absolute bottom-2 left-2"
-            onClick={scrollDownLeft}
+            onClick={() => {
+              logEvent(EventType.ArrowClick, {
+                targetType: 'carousel',
+                direction: 'downLeft',
+                offset: { row: rowOffset, col: columnOffset },
+                xAxis: {
+                  filterType: xAxisFilter,
+                  ranges: columnRanges.map((col) => col.label),
+                },
+                yAxis: {
+                  filterType: yAxisFilter,
+                  ranges: rowRanges.map((row) => row.label),
+                },
+              });
+              scrollDownLeft();
+            }}
             icon={<ArrowDownLeft size={16} />}
           />
         </div>

@@ -74,26 +74,48 @@ export const useStudyStore = create<StudyState>()(
       resultsModal: { open: false },
 
       openDetailModal: (interfaceOption, itemId) => {
+        useStudyStore.getState().logEvent(EventType.Navigation, {
+          to: 'detailView',
+          accommodationId: itemId,
+        });
         set({ detailModal: { open: true, interfaceOption, itemId } });
       },
+
       closeDetailModal: () => set({ detailModal: { open: false } }),
 
       openResultsModal: (interfaceOption) => {
+        useStudyStore.getState().logEvent(EventType.Navigation, {
+          to: 'resultsPage',
+        });
         set({ resultsModal: { open: true, interfaceOption } });
       },
+
       closeResultsModal: () => set({ resultsModal: { open: false } }),
 
-      logEvent: (type, details) =>
+      logEvent: (type, details) => {
+        const now = Date.now();
+        let detailsWithDuration = details;
+
+        if (type === EventType.TaskEnd) {
+          const { events } = get();
+          const startEvent = events.find((e) => e.type === EventType.TaskStart);
+          const durationMs = startEvent
+            ? now - startEvent.timestamp
+            : undefined;
+          detailsWithDuration = { ...details, durationMs };
+        }
+
         set((state) => ({
           events: [
             ...state.events,
             {
               timestamp: Date.now(),
               type,
-              details,
+              details: detailsWithDuration,
             } as FirebaseEvent,
           ],
-        })),
+        }));
+      },
 
       clearEvents: () => set({ events: [] }),
     }),

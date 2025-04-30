@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Survey } from '../../../components';
+import { EventType, SurveyDetails, SurveyQuestion } from '../../../firebase';
+import { useStudyStore } from '../../../store';
 import {
   detailedQuestions,
   interfaceLabels,
   InterfaceOption,
   interfaceQuestions,
 } from '../../../types';
-import { SurveyDetails, SurveyQuestion } from '../../../firebase';
 
 type SurveyStepProps = {
   interfaceOption: InterfaceOption;
@@ -60,7 +61,12 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
           {/* The button itself */}
           <button
             type="button"
-            onClick={() => setShowImage((v) => !v)}
+            onClick={() => {
+              useStudyStore.getState().logEvent(EventType.Click, {
+                targetType: 'previewToggleButton',
+              });
+              setShowImage((v) => !v);
+            }}
             className="
               relative flex items-center space-x-2
               bg-darkGreen/90 hover:bg-darkGreen px-4 py-2 rounded-full
