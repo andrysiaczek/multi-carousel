@@ -121,10 +121,9 @@ export const generateFilterLabel = (
  * If the initial (zero) step is provided, resets the filters.
  */
 export const restoreAxisFiltersFromStep = (step: DrillStep) => {
-  const { resetAxisFiltersAndType, setAxisFiltersAndType } =
-    useAxisFilterStore.getState();
+  const { resetState, setAxisFiltersAndType } = useAxisFilterStore.getState();
 
-  if (!step.stepNumber) return resetAxisFiltersAndType();
+  if (!step.stepNumber) return resetState();
 
   const chosenType = step.filterState[FilterOption.Type];
   const chosenTypeLabel = chosenType?.label ?? null;

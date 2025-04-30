@@ -120,7 +120,6 @@
           { "label": "Up to €118", "lowerBound": 100, "upperBound": 118 }
         ]
       },
-      { "label": "Up to \u20ac160", "lowerBound": 100, "upperBound": 160 },
       {
         "label": "Up to \u20ac150",
         "lowerBound": 100,

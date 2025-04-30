@@ -53,18 +53,28 @@ export const detailedQuestions: DetailedQuestions = {
   [InterfaceOption.MultiAxisCarousel]: {
     image: '/src/assets/study/multi.png',
     quantitative: [
-      // 1. Scrolling
-      {
-        id: 'multi_scroll_helpful',
-        text: 'Being able to scroll / navigate both horizontally ( ← → ) and vertically ( ↑ ↓ ) helped me discover more options.',
-      },
-      {
-        id: 'multi_scroll_confusing',
-        text: 'I found it confusing to scroll / navigate in more than one direction.',
-      },
+      // Scrolling
       {
         id: 'multi_scroll_notice',
-        text: 'It was easy to notice the option to scroll / navigate in multiple directions.',
+        text: 'It was easy to notice the option to scroll in multiple directions.',
+      },
+      // 1a. Horizontal & vertical
+      {
+        id: 'multi_scroll_axes_helpful',
+        text: 'Being able to scroll both horizontally (← →) and vertically (↑ ↓) helped me discover more options.',
+      },
+      {
+        id: 'multi_scroll_axes_confusing',
+        text: 'I found it confusing to scroll in both horizontal and vertical directions.',
+      },
+      // 1b. Diagonal
+      {
+        id: 'multi_scroll_diagonal_helpful',
+        text: 'Being able to scroll diagonally (↖ ↗ ↙ ↘) helped me explore combinations more quickly.',
+      },
+      {
+        id: 'multi_scroll_diagonal_confusing',
+        text: 'I found diagonal scrolling (↖ ↗ ↙ ↘) confusing or hard to control.',
       },
       // 2. Basic filtering
       {
