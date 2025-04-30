@@ -7,6 +7,7 @@ import {
   TaskStep,
   ThankYouStep,
 } from '../components';
+import { EventType, flushStepLog } from '../firebase';
 import {
   BenchmarkPage,
   DetailPage,
@@ -54,6 +55,7 @@ export const StudyFlowManager = () => {
     resultsModal,
     stepIndex,
     nextStep,
+    logEvent,
   } = useStudyStore();
 
   // Build the flat steps array whenever interfaceOrder changes
@@ -70,22 +72,28 @@ export const StudyFlowManager = () => {
     return seq;
   }, [interfaceOrder]);
 
+  const step = steps[stepIndex];
+
   if (isFinished) {
     return <ThankYouStep />;
   }
-  if (detailModal.open && detailModal.interfaceOption && detailModal.itemId) {
+  if (
+    detailModal.open &&
+    detailModal.interfaceOption &&
+    detailModal.itemId &&
+    step.type == 'task'
+  ) {
     return (
       <DetailPage
         interfaceOption={detailModal.interfaceOption}
         id={detailModal.itemId}
+        onBook={async () => flushStepLog(step.subtype, step.option)}
       />
     );
   }
   if (resultsModal.open && resultsModal.interfaceOption) {
     return <ResultsPage interfaceOption={resultsModal.interfaceOption} />;
   }
-
-  const step = steps[stepIndex];
 
   const taskDescription =
     step.type === 'task'
@@ -124,14 +132,26 @@ export const StudyFlowManager = () => {
       {step.type === 'survey' && (
         <SurveyStep
           interfaceOption={step.option}
-          onSubmit={() => {
+          onSubmit={async (answers) => {
+            logEvent(EventType.Survey, {
+              quantitative: answers.quantitative,
+              qualitative: answers.qualitative,
+            });
+
+            await flushStepLog('survey', step.option);
             nextStep();
           }}
         />
       )}
       {step.type === 'final' && (
         <FinalSurveyStep
-          onSubmit={() => {
+          onSubmit={async (answers) => {
+            logEvent(EventType.Survey, {
+              quantitative: answers.quantitative,
+              qualitative: answers.qualitative,
+            });
+
+            await flushStepLog('survey');
             nextStep();
           }}
         />

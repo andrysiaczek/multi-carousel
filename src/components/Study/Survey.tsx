@@ -1,8 +1,10 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { SurveyQuestion } from '../../types';
 
 export type SurveyProps = {
   questions: SurveyQuestion[];
+  answers?: Record<string, string>;
+  onAnswerChange?: (answers: Record<string, string>) => void;
   onSubmit: (answers: Record<string, string>) => void;
   showSubmit?: boolean;
   submitLabel?: string;
@@ -10,20 +12,29 @@ export type SurveyProps = {
 
 export const Survey = ({
   questions,
+  answers,
+  onAnswerChange,
   onSubmit,
   showSubmit = true,
   submitLabel = 'Submit',
 }: SurveyProps) => {
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [internal, setInternal] = useState<Record<string, string>>({});
+  const current = answers ?? internal;
+
+  useEffect(() => {
+    if (answers) setInternal(answers);
+  }, [answers]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setAnswers((prev) => ({ ...prev, [name]: value }));
+    const next = { ...current, [name]: value };
+    if (onAnswerChange) onAnswerChange(next);
+    else setInternal(next);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit(answers);
+    onSubmit(current);
   };
 
   return (
@@ -44,7 +55,7 @@ export const Survey = ({
                   type="radio"
                   name={id}
                   value={String(n)}
-                  checked={answers[id] === String(n)}
+                  checked={current[id] === String(n)}
                   onChange={handleChange}
                   required
                   className="sr-only"
@@ -53,7 +64,7 @@ export const Survey = ({
                   className={`w-10 h-10 flex items-center justify-center rounded-full 
                     transition transform hover:scale-110
                     ${
-                      answers[id] === String(n)
+                      current[id] === String(n)
                         ? 'bg-darkGreen text-white shadow-lg'
                         : 'bg-gray-200 text-gray-700'
                     }`}

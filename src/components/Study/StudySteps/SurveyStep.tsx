@@ -7,15 +7,20 @@ import {
   InterfaceOption,
   interfaceQuestions,
 } from '../../../types';
+import { SurveyDetails, SurveyQuestion } from '../../../firebase';
 
 type SurveyStepProps = {
   interfaceOption: InterfaceOption;
-  onSubmit: () => void;
+  onSubmit: (answers: SurveyDetails) => void;
 };
 
 export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
   const detail = detailedQuestions[interfaceOption];
   const [showImage, setShowImage] = useState(true);
+
+  const [mainAnswers, setMainAnswers] = useState<Record<string, string>>({});
+  const [detailQuant, setDetailQuant] = useState<Record<string, string>>({});
+  const [detailQual, setDetailQual] = useState<Record<string, string>>({});
 
   // Highlight toggle for the first 2 seconds
   const [highlightToggle, setHighlightToggle] = useState(true);
@@ -23,6 +28,25 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
     const t = setTimeout(() => setHighlightToggle(false), 2000);
     return () => clearTimeout(t);
   }, []);
+
+  const handleSubmit = () => {
+    const quantitative: SurveyQuestion[] = Object.entries({
+      ...mainAnswers,
+      ...detailQuant,
+    }).map(([questionId, answer]) => ({
+      questionId: questionId as keyof typeof mainAnswers,
+      answer: Number(answer),
+    }));
+
+    const qualitative: SurveyQuestion[] = Object.entries(detailQual).map(
+      ([questionId, answer]) => ({
+        questionId: questionId as keyof typeof detailQual,
+        answer,
+      })
+    );
+
+    onSubmit({ quantitative, qualitative });
+  };
 
   return (
     <div className="flex min-h-screen bg-antiflashWhite">
@@ -86,6 +110,8 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
           {/* Main questions */}
           <Survey
             questions={interfaceQuestions}
+            answers={mainAnswers}
+            onAnswerChange={setMainAnswers}
             onSubmit={() => {}}
             showSubmit={false}
           />
@@ -99,6 +125,8 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
             </h4>
             <Survey
               questions={detail.quantitative}
+              answers={detailQuant}
+              onAnswerChange={setDetailQuant}
               onSubmit={() => {}}
               showSubmit={false}
             />
@@ -106,7 +134,7 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
 
           <hr className="border-gray-200 my-6" />
 
-          {/* Free-text feedback */}
+          {/* Detailed qualitative */}
           <div className="space-y-6 mb-8">
             {detail.qualitative.map(({ id, text }) => (
               <div key={id}>
@@ -120,6 +148,10 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
                   id={id}
                   name={id}
                   rows={4}
+                  value={detailQual[id] || ''}
+                  onChange={(e) =>
+                    setDetailQual((prev) => ({ ...prev, [id]: e.target.value }))
+                  }
                   className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring focus:ring-darkGreen/50"
                   placeholder="Your thoughts…"
                 />
@@ -131,7 +163,7 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
           <div className="text-center">
             <button
               type="button"
-              onClick={onSubmit}
+              onClick={handleSubmit}
               className="bg-darkGreen hover:bg-darkOrange text-white px-8 py-3 rounded-lg font-medium transition"
             >
               Submit Feedback

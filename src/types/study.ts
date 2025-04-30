@@ -25,12 +25,12 @@ export const interfaceQuestions: SurveyQuestion[] = [
     id: 'useful',
     text: 'I would use an interface like this when booking travel.',
   },
-];
+] as const;
 
 export const finalQuestions: SurveyQuestion[] = [
   { id: 'favorite', text: 'Which interface did you enjoy the most and why?' },
   {
-    id: 'use_real',
+    id: 'real',
     text: 'Which interface would you use in a real booking scenario?',
   },
   {
@@ -38,7 +38,7 @@ export const finalQuestions: SurveyQuestion[] = [
     text: 'Please rank the three interfaces based on how effectively they helped you achieve your goal.',
   },
   { id: 'feedback', text: 'Do you have any feedback or feature ideas?' },
-];
+] as const;
 
 export type DetailedQuestions = Record<
   InterfaceOption,
@@ -55,63 +55,63 @@ export const detailedQuestions: DetailedQuestions = {
     quantitative: [
       // 1. Scrolling
       {
-        id: 'multiScrollHelpful',
+        id: 'multi_scroll_helpful',
         text: 'Being able to scroll / navigate both horizontally ( ← → ) and vertically ( ↑ ↓ ) helped me discover more options.',
       },
       {
-        id: 'multiScrollConfusing',
+        id: 'multi_scroll_confusing',
         text: 'I found it confusing to scroll / navigate in more than one direction.',
       },
       {
-        id: 'multiScrollNotice',
+        id: 'multi_scroll_notice',
         text: 'It was easy to notice the option to scroll / navigate in multiple directions.',
       },
       // 2. Basic filtering
       {
-        id: 'filterEasy',
+        id: 'multi_filter_easy',
         text: 'It was easy to use the filters to narrow down the list of places.',
       },
       {
-        id: 'filterHelpful',
+        id: 'multi_filter_helpful',
         text: 'Using the filters helped me find the right accommodations.',
       },
       // 3. Column-level / row-level clicks
       {
-        id: 'headerClickFilters',
+        id: 'multi_header_click_filters',
         text: 'I understood that clicking on a column header or a row header filters the results by the category or range that it represents.',
       },
       // 4. Cell‐level clicks
       {
-        id: 'cellActionCombined',
+        id: 'multi_cell_action_combined',
         text: 'I understood that clicking on a cell can simultaneously apply both its row and column filters.',
       },
       // 5. Direct item clicks
       {
-        id: 'itemClickShowsList',
+        id: 'multi_item_click_shows_list',
         text: 'It was clear that clicking an accommodation item would redirect me to a list of matching accommodations.',
       },
       // 6. “Show results” button
       {
-        id: 'showResultsButton',
+        id: 'multi_show_results_button',
         text: 'It was clear that the orange "Show Filtered Results (...)" button on the top right would take me to a result page with the current filters applied.',
       },
       // 7. History panel
       {
-        id: 'historySaved',
+        id: 'multi_history_saved',
         text: 'I understood that each filter action is recorded in the history panel at the top left.',
       },
       {
-        id: 'historyStepBack',
+        id: 'multi_history_step_back',
         text: 'I noticed I could go back to earlier filters by clicking previous steps in the history panel.',
       },
     ],
     qualitative: [
       {
-        id: 'whatWorks',
+        id: 'multi_what_works',
         text: 'What did you like the most about the Multi-directional Interface?',
       },
       {
-        id: 'improve',
+        id: 'multi_improve',
         text: 'How could this carousel be improved to make browsing easier?',
       },
     ],
@@ -120,41 +120,41 @@ export const detailedQuestions: DetailedQuestions = {
     image: '/src/assets/study/single.png',
     quantitative: [
       {
-        id: 'horizScrollEase',
+        id: 'single_horiz_scroll_ease',
         text: 'I found it easy to horizontally ( ← → ) scroll through the lists.',
       },
       {
-        id: 'titleFilterIntuitive',
+        id: 'single_title_filter_intuitive',
         text: 'It felt intuitive to vertically ( ↑ ↓ ) scroll a list title (e.g. “Price: Low → Medium → High) to update the list below.',
       },
       {
-        id: 'titleFilterClear',
+        id: 'single_title_filter_clear',
         text: 'It was clear that changing the list title would update its corresponding accommodations.',
       },
       {
-        id: 'infoDensity',
+        id: 'single_info_density',
         text: 'The amount of information shown in each list was just right.',
       },
       {
-        id: 'compareHelpful',
+        id: 'single_compare_helpful',
         text: 'Having separate lists for different categories (Price, Rating, etc.) helped me compare options quickly.',
       },
       {
-        id: 'independentLists',
+        id: 'single_independent_lists',
         text: 'I understood that filtering a list by its title did not affect the other lists.',
       },
     ],
     qualitative: [
       {
-        id: 'whatWorks',
+        id: 'single_what_works',
         text: 'What did you like the most about the Netflix-style Interface?',
       },
       {
-        id: 'titleFilterFeedback',
+        id: 'single_title_filter_feedback',
         text: 'What did you like the most about the title filtering feature?',
       },
       {
-        id: 'titleFilterImprove',
+        id: 'single_title_filter_improve',
         text: 'How could the title filtering be improved?',
       },
     ],
@@ -163,19 +163,33 @@ export const detailedQuestions: DetailedQuestions = {
     image: '/src/assets/study/benchmark.png',
     quantitative: [
       {
-        id: 'listScanEase',
+        id: 'benchmark_list_scan_ease',
         text: 'I found it easy to scan and locate accommodations in this list view.',
       },
       {
-        id: 'listEfficient',
+        id: 'benchmark_list_efficient',
         text: 'Finding items in this list view was efficient.',
       },
     ],
     qualitative: [
       {
-        id: 'featureIdeas',
+        id: 'benchmark_feature_ideas',
         text: 'What features would you add or improve in this list-based interface?',
       },
     ],
   },
-};
+} as const;
+
+type InterfaceQuestionId = (typeof interfaceQuestions)[number]['id'];
+type FinalQuestionId = (typeof finalQuestions)[number]['id'];
+
+type DetailedQuantId =
+  (typeof detailedQuestions)[keyof typeof detailedQuestions]['quantitative'][number]['id'];
+type DetailedQualId =
+  (typeof detailedQuestions)[keyof typeof detailedQuestions]['qualitative'][number]['id'];
+
+export type QuestionId =
+  | InterfaceQuestionId
+  | FinalQuestionId
+  | DetailedQuantId
+  | DetailedQualId;

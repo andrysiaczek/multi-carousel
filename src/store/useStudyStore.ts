@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { DetailsFor, EventType, FirebaseEvent } from '../firebase';
+import { resetAllStores } from '../store';
 import { InterfaceOption, StudyStep } from '../types';
 import { shuffleInterfaceOptions } from '../utils';
-import { resetAllStores } from './resetAllStores';
 
 export interface StudyState {
   sessionId: string;
@@ -22,6 +23,7 @@ export interface StudyState {
     open: boolean;
     interfaceOption?: InterfaceOption;
   };
+  events: FirebaseEvent[];
 
   nextStep: () => void;
   initOrder: (order: InterfaceOption[]) => void;
@@ -36,6 +38,9 @@ export interface StudyState {
 
   openResultsModal: (opt: InterfaceOption) => void;
   closeResultsModal: () => void;
+
+  logEvent: <T extends EventType>(type: T, details: DetailsFor<T>) => void;
+  clearEvents: () => void;
 }
 
 export const useStudyStore = create<StudyState>()(
@@ -48,6 +53,7 @@ export const useStudyStore = create<StudyState>()(
       steps: [],
       isFinished: false,
       showInterface: false,
+      events: [],
       nextStep: () => {
         const { stepIndex, stepsCount } = get();
         if (stepIndex < stepsCount - 1) {
@@ -76,6 +82,20 @@ export const useStudyStore = create<StudyState>()(
         set({ resultsModal: { open: true, interfaceOption } });
       },
       closeResultsModal: () => set({ resultsModal: { open: false } }),
+
+      logEvent: (type, details) =>
+        set((state) => ({
+          events: [
+            ...state.events,
+            {
+              timestamp: Date.now(),
+              type,
+              details,
+            } as FirebaseEvent,
+          ],
+        })),
+
+      clearEvents: () => set({ events: [] }),
     }),
     {
       name: 'study-store',

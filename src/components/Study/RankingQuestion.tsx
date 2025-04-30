@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   closestCorners,
   DndContext,
@@ -55,44 +55,45 @@ export const RankingQuestion = ({ onChange }: RankingQuestionProps) => {
     onChange([]);
   };
 
-  const handleDragEnd = useCallback(
-    (event: DragEndEvent) => {
-      const { active, over } = event;
-      if (!over) return;
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over) return;
 
-      const activeId = active.id as InterfaceOption;
-      const overId = String(over.id);
+    const activeId = active.id as InterfaceOption;
+    const overId = String(over.id);
 
-      // 1) Dropped into a slot
-      if (overId.startsWith('slot-')) {
-        const idx = Number(overId.split('-')[1]);
-        setSlots((prev) => {
-          const newSlots = [...prev];
-          // if slot had something, return it to pool
-          if (newSlots[idx]) {
-            setPool((p) => [...p, newSlots[idx]!]);
-          }
-          newSlots[idx] = activeId;
-          return newSlots;
-        });
-        // remove from pool
-        setPool((p) => p.filter((x) => x !== activeId));
-      }
-      // 2) Dropped back into pool
-      else {
-        setPool((p) => {
-          if (!p.includes(activeId)) return [...p, activeId];
-          return p;
-        });
-        // if it came from a slot, clear that slot
-        setSlots((prev) => prev.map((s) => (s === activeId ? null : s)));
-      }
+    // 1) Dropped into a slot
+    if (overId.startsWith('slot-')) {
+      const idx = Number(overId.split('-')[1]);
+      setSlots((prev) => {
+        const newSlots = [...prev];
+        // if slot had something, return it to pool
+        if (newSlots[idx]) {
+          setPool((p) => [...p, newSlots[idx]!]);
+        }
+        newSlots[idx] = activeId;
+        return newSlots;
+      });
+      // remove from pool
+      setPool((p) => p.filter((x) => x !== activeId));
+    }
+    // 2) Dropped back into pool
+    else {
+      setPool((p) => {
+        if (!p.includes(activeId)) return [...p, activeId];
+        return p;
+      });
+      // if it came from a slot, clear that slot
+      setSlots((prev) => prev.map((s) => (s === activeId ? null : s)));
+    }
+  };
 
-      // notify parent with the current ranking in order of slots
-      onChange(slots.map((s) => s!).filter(Boolean));
-    },
-    [onChange, slots]
-  );
+  useEffect(() => {
+    const currentRank = slots.map((s) => s!).filter(Boolean);
+    if (currentRank.length === 3) {
+      onChange(currentRank);
+    }
+  }, [slots, onChange]);
 
   return (
     <DndContext

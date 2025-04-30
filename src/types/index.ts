@@ -11,4 +11,4 @@ export {
   goalTask,
   interfaceQuestions,
 } from './study';
-export type { StudyStep, SurveyQuestion } from './study';
+export type { QuestionId, StudyStep, SurveyQuestion } from './study';

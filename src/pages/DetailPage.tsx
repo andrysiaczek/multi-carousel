@@ -14,9 +14,14 @@ import { resolveAccommodationVariant } from '../utils';
 interface DetailPageProps {
   interfaceOption: InterfaceOption;
   id: string;
+  onBook: () => Promise<void>;
 }
 
-export const DetailPage = ({ interfaceOption, id }: DetailPageProps) => {
+export const DetailPage = ({
+  interfaceOption,
+  id,
+  onBook,
+}: DetailPageProps) => {
   const [accommodation, setAccommodation] = useState<Accommodation | null>(
     null
   );
@@ -62,6 +67,19 @@ export const DetailPage = ({ interfaceOption, id }: DetailPageProps) => {
   }, [accommodation, images]);
 
   const handleDotClick = (index: number) => setActiveImageIndex(index);
+
+  const handleBooking = async () => {
+    await onBook();
+    setShowModal(true);
+  };
+
+  const handleModalClose = async () => {
+    setShowModal(false);
+    closeResultsModal();
+    closeDetailModal();
+    closeInterface();
+    nextStep();
+  };
 
   // Auto slide on gallery
   useEffect(() => {
@@ -197,7 +215,7 @@ export const DetailPage = ({ interfaceOption, id }: DetailPageProps) => {
             {/* Book Button */}
             <button
               type="button"
-              onClick={() => setShowModal(true)}
+              onClick={handleBooking}
               className="flex items-center justify-between pl-4 pr-3 w-full bg-darkGreen text-white py-2 rounded-lg transition-transform duration-300 ease-in-out hover:scale-105 active:scale-95 hover:shadow-lg group"
             >
               <span className="flex-1 text-center">Book Now</span>
@@ -211,18 +229,7 @@ export const DetailPage = ({ interfaceOption, id }: DetailPageProps) => {
       </div>
 
       {/* Booking Confirmation Modal */}
-      {showModal && (
-        <BookingModal
-          name={name}
-          onClose={() => {
-            setShowModal(false);
-            closeResultsModal();
-            closeDetailModal();
-            closeInterface();
-            nextStep();
-          }}
-        />
-      )}
+      {showModal && <BookingModal name={name} onClose={handleModalClose} />}
     </div>
   );
 };

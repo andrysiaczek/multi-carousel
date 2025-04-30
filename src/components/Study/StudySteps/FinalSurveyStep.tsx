@@ -1,35 +1,31 @@
 import { useEffect, useState } from 'react';
 import { RankingQuestion } from '../../../components';
+import { SurveyDetails, SurveyQuestion } from '../../../firebase';
 import {
   finalQuestions,
   interfaceLabels,
   InterfaceOption,
 } from '../../../types';
 
-export type FinalAnswers = {
-  favorite: InterfaceOption;
-  favoriteWhy: string;
-  use_real: InterfaceOption;
-  use_realWhy: string;
-  rank: InterfaceOption[];
-  feedback: string;
-};
-
 export type FinalSurveyStepProps = {
-  onSubmit: (answers: FinalAnswers) => void;
+  onSubmit: (answers: SurveyDetails) => void;
 };
 
 export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
   const [favorite, setFavorite] = useState<InterfaceOption | ''>('');
   const [favoriteWhy, setFavoriteWhy] = useState('');
-  const [useReal, setUseReal] = useState<InterfaceOption | ''>('');
-  const [useRealWhy, setUseRealWhy] = useState('');
+  const [real, setReal] = useState<InterfaceOption | ''>('');
+  const [realWhy, setRealWhy] = useState('');
   const [rankOrder, setRankOrder] = useState<InterfaceOption[]>([]);
   const [feedback, setFeedback] = useState('');
 
   const handleSubmit = () => {
-    if (!favorite || !useReal) {
-      alert('Please answer all required questions.');
+    if (!favorite) {
+      alert('Please pick your favorite interface.');
+      return;
+    }
+    if (!real) {
+      alert('Please pick which you would use in real life.');
       return;
     }
     if (rankOrder.length !== 3) {
@@ -38,14 +34,18 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
       );
       return;
     }
-    onSubmit({
-      favorite,
-      favoriteWhy,
-      use_real: useReal,
-      use_realWhy: useRealWhy,
-      rank: rankOrder,
-      feedback,
-    });
+
+    const quantitative: SurveyQuestion[] = [];
+    const qualitative: SurveyQuestion[] = [
+      { questionId: 'favorite', answer: favorite },
+      { questionId: 'favoriteWhy', answer: favoriteWhy },
+      { questionId: 'real', answer: real },
+      { questionId: 'realWhy', answer: realWhy },
+      { questionId: 'rank', answer: JSON.stringify(rankOrder) },
+      { questionId: 'feedback', answer: feedback },
+    ];
+
+    onSubmit({ quantitative, qualitative });
   };
 
   // Scroll to top when component mounts
@@ -96,8 +96,8 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
                 type="radio"
                 name="use_real"
                 value={key}
-                checked={useReal === key}
-                onChange={() => setUseReal(key as InterfaceOption)}
+                checked={real === key}
+                onChange={() => setReal(key as InterfaceOption)}
                 className="form-radio text-darkGreen"
               />
               <span>{label}</span>
@@ -106,15 +106,14 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
         </div>
         <textarea
           placeholder="Why?"
-          value={useRealWhy}
-          onChange={(e) => setUseRealWhy(e.target.value)}
+          value={realWhy}
+          onChange={(e) => setRealWhy(e.target.value)}
           className="w-full border border-gray-300 rounded p-2"
           rows={2}
         />
       </div>
 
       {/* Q3: rank */}
-      {/* 2) The drag‐and‐drop ranking */}
       <div className="w-full max-w-xl mb-8">
         <p className="mb-2 font-medium">{finalQuestions[2].text}</p>
         <RankingQuestion onChange={setRankOrder} />
