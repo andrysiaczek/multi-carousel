@@ -19,22 +19,30 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
   const [rankOrder, setRankOrder] = useState<InterfaceOption[]>([]);
   const [feedback, setFeedback] = useState('');
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
   const handleSubmit = () => {
+    const newErrors: Record<string, string> = {};
+
     if (!favorite) {
-      alert('Please pick your favorite interface.');
-      return;
+      newErrors.favorite = 'Please pick your favorite interface.';
     }
     if (!real) {
-      alert('Please pick which you would use in real life.');
-      return;
+      newErrors.real = 'Please pick which interface you would actually use.';
     }
     if (rankOrder.length !== 3) {
-      alert(
-        'Please assign all three interfaces to a position before submitting.'
-      );
-      return;
+      newErrors.rank = 'Please assign all three interfaces a rank.';
     }
 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+
+      // scroll to first invalid question
+      const firstKey = Object.keys(newErrors)[0];
+      const el = document.getElementById(`question-${firstKey}`);
+      el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
     const quantitative: SurveyQuestion[] = [];
     const qualitative: SurveyQuestion[] = [
       { questionId: 'favorite', answer: favorite },
@@ -60,7 +68,7 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
       </h3>
 
       {/* Q1: favorite */}
-      <div className="w-full max-w-xl mb-8">
+      <div id="question-favorite" className="w-full max-w-xl mb-8">
         <p className="font-medium mb-2">{finalQuestions[0].text}</p>
         <div className="flex gap-6 mb-4">
           {Object.entries(interfaceLabels).map(([key, label]) => (
@@ -70,13 +78,25 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
                 name="favorite"
                 value={key}
                 checked={favorite === key}
-                onChange={() => setFavorite(key as InterfaceOption)}
+                onChange={() => {
+                  setFavorite(key as InterfaceOption);
+                  setErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy['favorite'];
+                    return copy;
+                  });
+                }}
                 className="form-radio text-darkGreen"
               />
               <span>{label}</span>
             </label>
           ))}
         </div>
+        {errors.favorite && (
+          <p className="my-2 text-sm text-darkOrange text-center">
+            {errors.favorite}
+          </p>
+        )}
         <textarea
           placeholder="Why?"
           value={favoriteWhy}
@@ -86,8 +106,8 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
         />
       </div>
 
-      {/* Q2: use_real */}
-      <div className="w-full max-w-xl mb-8">
+      {/* Q2: real */}
+      <div id="question-real" className="w-full max-w-xl mb-8">
         <p className="font-medium mb-2">{finalQuestions[1].text}</p>
         <div className="flex gap-6 mb-4">
           {Object.entries(interfaceLabels).map(([key, label]) => (
@@ -97,13 +117,25 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
                 name="use_real"
                 value={key}
                 checked={real === key}
-                onChange={() => setReal(key as InterfaceOption)}
+                onChange={() => {
+                  setReal(key as InterfaceOption);
+                  setErrors((prev) => {
+                    const copy = { ...prev };
+                    delete copy['real'];
+                    return copy;
+                  });
+                }}
                 className="form-radio text-darkGreen"
               />
               <span>{label}</span>
             </label>
           ))}
         </div>
+        {errors.real && (
+          <p className="my-2 text-sm text-darkOrange text-center">
+            {errors.real}
+          </p>
+        )}
         <textarea
           placeholder="Why?"
           value={realWhy}
@@ -114,9 +146,23 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
       </div>
 
       {/* Q3: rank */}
-      <div className="w-full max-w-xl mb-8">
+      <div id="question-rank" className="w-full max-w-xl mb-8">
         <p className="mb-2 font-medium">{finalQuestions[2].text}</p>
-        <RankingQuestion onChange={setRankOrder} />
+        <RankingQuestion
+          onChange={(order) => {
+            setRankOrder(order);
+            setErrors((prev) => {
+              const copy = { ...prev };
+              delete copy['rank'];
+              return copy;
+            });
+          }}
+        />
+        {errors.rank && (
+          <p className="text-sm text-darkOrange text-center mt-1">
+            {errors.rank}
+          </p>
+        )}
       </div>
 
       {/* Q4: feedback */}

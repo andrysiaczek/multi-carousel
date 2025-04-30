@@ -4,6 +4,7 @@ import { SurveyQuestion } from '../../types';
 export type SurveyProps = {
   questions: SurveyQuestion[];
   answers?: Record<string, string>;
+  errors?: Record<string, string>;
   onAnswerChange?: (answers: Record<string, string>) => void;
   onSubmit: (answers: Record<string, string>) => void;
   showSubmit?: boolean;
@@ -13,6 +14,7 @@ export type SurveyProps = {
 export const Survey = ({
   questions,
   answers,
+  errors = {},
   onAnswerChange,
   onSubmit,
   showSubmit = true,
@@ -38,7 +40,7 @@ export const Survey = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8">
+    <form onSubmit={handleSubmit} className="space-y-8" noValidate>
       {questions.map(({ id, text }, idx) => (
         <div key={id} className="bg-antiflashWhite p-6 rounded-2xl shadow-md">
           <p className="text-lg font-semibold text-gray-800 mb-4">
@@ -57,7 +59,6 @@ export const Survey = ({
                   value={String(n)}
                   checked={current[id] === String(n)}
                   onChange={handleChange}
-                  required
                   className="sr-only"
                 />
                 <div
@@ -74,6 +75,15 @@ export const Survey = ({
               </label>
             ))}
           </div>
+
+          {/* error message */}
+          {errors[id] && (
+            <div className="mt-4 text-center">
+              <p className="text-sm font-medium text-darkOrange">
+                {errors[id]}
+              </p>
+            </div>
+          )}
         </div>
       ))}
 
@@ -88,5 +98,3 @@ export const Survey = ({
     </form>
   );
 };
-
-export default Survey;

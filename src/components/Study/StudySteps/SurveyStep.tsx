@@ -23,6 +23,11 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
   const [detailQuant, setDetailQuant] = useState<Record<string, string>>({});
   const [detailQual, setDetailQual] = useState<Record<string, string>>({});
 
+  const [mainErrors, setMainErrors] = useState<Record<string, string>>({});
+  const [detailQuantErrors, setDetailQuantErrors] = useState<
+    Record<string, string>
+  >({});
+
   // Highlight toggle for the first 2 seconds
   const [highlightToggle, setHighlightToggle] = useState(true);
   useEffect(() => {
@@ -30,7 +35,50 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
     return () => clearTimeout(t);
   }, []);
 
+  const handleMainAnswerChange = (answers: Record<string, string>) => {
+    setMainAnswers(answers);
+    const last = Object.keys(answers).slice(-1)[0];
+    setMainErrors((prev) => {
+      const copy = { ...prev };
+      delete copy[last];
+      return copy;
+    });
+  };
+
+  const handleDetailQuantChange = (answers: Record<string, string>) => {
+    setDetailQuant(answers);
+    const last = Object.keys(answers).slice(-1)[0];
+    setDetailQuantErrors((prev) => {
+      const copy = { ...prev };
+      delete copy[last];
+      return copy;
+    });
+  };
+
   const handleSubmit = () => {
+    const newMainErr: Record<string, string> = {};
+    interfaceQuestions.forEach(({ id }) => {
+      if (!mainAnswers[id]) newMainErr[id] = 'Please select a rating.';
+    });
+
+    const newDetailErr: Record<string, string> = {};
+    detail.quantitative.forEach(({ id }) => {
+      if (!detailQuant[id]) newDetailErr[id] = 'Please select a rating.';
+    });
+
+    // if any errors, show them and scroll to first
+    if (Object.keys(newMainErr).length || Object.keys(newDetailErr).length) {
+      setMainErrors(newMainErr);
+      setDetailQuantErrors(newDetailErr);
+      const firstBad =
+        Object.keys(newMainErr)[0] ?? Object.keys(newDetailErr)[0];
+      document.querySelector(`[name="${firstBad}"]`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+      return;
+    }
+
     const quantitative: SurveyQuestion[] = Object.entries({
       ...mainAnswers,
       ...detailQuant,
@@ -117,7 +165,8 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
           <Survey
             questions={interfaceQuestions}
             answers={mainAnswers}
-            onAnswerChange={setMainAnswers}
+            errors={mainErrors}
+            onAnswerChange={handleMainAnswerChange}
             onSubmit={() => {}}
             showSubmit={false}
           />
@@ -132,7 +181,8 @@ export const SurveyStep = ({ interfaceOption, onSubmit }: SurveyStepProps) => {
             <Survey
               questions={detail.quantitative}
               answers={detailQuant}
-              onAnswerChange={setDetailQuant}
+              errors={detailQuantErrors}
+              onAnswerChange={handleDetailQuantChange}
               onSubmit={() => {}}
               showSubmit={false}
             />
