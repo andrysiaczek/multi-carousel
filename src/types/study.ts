@@ -51,7 +51,7 @@ export type DetailedQuestions = Record<
 
 export const detailedQuestions: DetailedQuestions = {
   [InterfaceOption.MultiAxisCarousel]: {
-    image: '/src/assets/study/multi.png',
+    image: '/study/multi.png',
     quantitative: [
       // Scrolling
       {
@@ -127,7 +127,7 @@ export const detailedQuestions: DetailedQuestions = {
     ],
   },
   [InterfaceOption.SingleAxisCarousel]: {
-    image: '/src/assets/study/single.png',
+    image: '/study/single.png',
     quantitative: [
       {
         id: 'single_horiz_scroll_ease',
@@ -170,7 +170,7 @@ export const detailedQuestions: DetailedQuestions = {
     ],
   },
   [InterfaceOption.Benchmark]: {
-    image: '/src/assets/study/benchmark.png',
+    image: '/study/benchmark.png',
     quantitative: [
       {
         id: 'benchmark_list_scan_ease',

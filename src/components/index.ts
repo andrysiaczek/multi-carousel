@@ -6,7 +6,6 @@ export {
   ResetButton as ResetButtonFilterHistory,
 } from './FilterHistory';
 export { LoadingMessage } from './LoadingMessage';
-export { LogoHeader } from './LogoHeader';
 export {
   CarouselArrow,
   CarouselCell,
