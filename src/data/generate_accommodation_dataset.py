@@ -238,7 +238,7 @@ def generate_images(accom_type, features):
     }
 
     # Determine folder paths based on accommodation type
-    base_path = "/src/assets/images/"
+    base_path = "/images/"
     accom_folder = type_mapping.get(accom_type, "generic")
 
     # Accommodation image categories
@@ -268,7 +268,7 @@ def generate_images(accom_type, features):
 
 # Generate dataset
 dataset = []
-for i in range(1, 1001):  # 1000 accommodations
+for i in range(1, 201):  # 200 accommodations
     accom_type = random.choice(list(price_ranges.keys()))
     price_range = price_ranges[accom_type]
     distance = generate_skewed_distance()
