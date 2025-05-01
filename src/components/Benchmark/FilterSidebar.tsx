@@ -45,7 +45,13 @@ export const FilterSidebar = ({
       setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
       setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);
     }
-  }, [filters]);
+  }, [
+    filters.distance,
+    filters.feature.length,
+    filters.price,
+    filters.rating,
+    filters.type.length,
+  ]);
 
   const isResetAllDisabled =
     price == initialFilterSidebarState[FilterOptionWithFeature.Price] &&
