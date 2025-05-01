@@ -58,7 +58,7 @@ const featureIconMap: Record<string, React.ElementType> = {
   'Non-smoking rooms': CigaretteOff,
   Parking: ParkingCircle,
   'Pet-friendly': PawPrint,
-  Pool: WavesLadder,
+  'Swimming pool': WavesLadder,
   'Private bathroom': ShowerHead,
   'Private beach': Sunset,
   'Private room': Bed,

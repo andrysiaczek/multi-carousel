@@ -224,7 +224,7 @@ def generate_images(accom_type, features):
     # Feature mapping for images
     feature_mapping = {
         "Gym": "gym",
-        "Pool": "pool",
+        "Swimming pool": "pool",
         "Rooftop terrace": "rooftop_terrace",
         "Sauna": "sauna",
         "Sea view": "sea_view",

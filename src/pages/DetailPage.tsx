@@ -34,6 +34,7 @@ export const DetailPage = ({
     lng: 0,
   });
   const [images, setImages] = useState<string[]>([]);
+  const [features, setFeatures] = useState<string[]>([]);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [isGalleryHovered, setIsGalleryHovered] = useState(false);
@@ -44,6 +45,10 @@ export const DetailPage = ({
     closeInterface,
     logEvent,
   } = useStudyStore();
+
+  const shuffleArray = (array: string[]): string[] => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
 
   // Fetch accommodation data
   useEffect(() => {
@@ -58,6 +63,24 @@ export const DetailPage = ({
       setName(name);
       setLocation(location);
       setImages(images);
+
+      const features = accommodation.features;
+      const hasSwimmingPool = features.includes('Swimming pool');
+
+      let displayedFeatures;
+
+      if (hasSwimmingPool) {
+        // Exclude "swimming pool" and take 11 other features
+        const otherFeatures = features
+          .filter((f) => f !== 'Swimming pool')
+          .slice(0, 11);
+        // Combine "swimming pool" with the selected features
+        displayedFeatures = shuffleArray(['Swimming pool', ...otherFeatures]);
+      } else {
+        displayedFeatures = features.slice(0, 12);
+      }
+
+      setFeatures(displayedFeatures);
     }
   }, [id, interfaceOption]);
 
@@ -187,7 +210,7 @@ export const DetailPage = ({
               Features
             </h3>
             <div className="grid grid-cols-2 gap-x-3 gap-y-2 mb-2">
-              {accommodation.features.slice(0, 12).map((feature) => (
+              {features.map((feature) => (
                 <span
                   key={feature}
                   className="bg-lightGreen text-darkGreen text-center text-xs px-2 py-1 rounded-md transition-transform duration-400 ease-in-out transform hover:scale-105 hover:font-medium shadow hover:shadow-md"

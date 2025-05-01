@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { RankingQuestion } from '../../../components';
 import { SurveyDetails, SurveyQuestion } from '../../../firebase';
+import { useStudyStore } from '../../../store';
 import {
   finalQuestions,
   interfaceLabels,
@@ -12,6 +13,7 @@ export type FinalSurveyStepProps = {
 };
 
 export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
+  const { interfaceOrder } = useStudyStore.getState();
   const [favorite, setFavorite] = useState<InterfaceOption | ''>('');
   const [favoriteWhy, setFavoriteWhy] = useState('');
   const [real, setReal] = useState<InterfaceOption | ''>('');
@@ -71,7 +73,7 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
       <div id="question-favorite" className="w-full max-w-xl mb-8">
         <p className="font-medium mb-2">{finalQuestions[0].text}</p>
         <div className="flex gap-6 mb-4">
-          {Object.entries(interfaceLabels).map(([key, label]) => (
+          {Object.entries(interfaceOrder).map(([key, label]) => (
             <label key={key} className="flex items-center space-x-2">
               <input
                 type="radio"
@@ -88,7 +90,7 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
                 }}
                 className="form-radio text-darkGreen"
               />
-              <span>{label}</span>
+              <span>{interfaceLabels[label]}</span>
             </label>
           ))}
         </div>
@@ -110,7 +112,7 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
       <div id="question-real" className="w-full max-w-xl mb-8">
         <p className="font-medium mb-2">{finalQuestions[1].text}</p>
         <div className="flex gap-6 mb-4">
-          {Object.entries(interfaceLabels).map(([key, label]) => (
+          {Object.entries(interfaceOrder).map(([key, label]) => (
             <label key={key} className="flex items-center space-x-2">
               <input
                 type="radio"
@@ -127,7 +129,7 @@ export const FinalSurveyStep = ({ onSubmit }: FinalSurveyStepProps) => {
                 }}
                 className="form-radio text-darkGreen"
               />
-              <span>{label}</span>
+              <span>{interfaceLabels[label]}</span>
             </label>
           ))}
         </div>

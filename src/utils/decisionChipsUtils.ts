@@ -11,7 +11,7 @@ export const decisionChips = [
   '24h reception',
   'Fitness center',
   'Rooftop terrace',
-  'Pool',
+  'Swimming pool',
   'Gym',
   'Restaurant',
   'Bar',

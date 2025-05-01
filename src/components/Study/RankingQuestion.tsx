@@ -15,6 +15,7 @@ import {
   useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useStudyStore } from '../../store';
 import { interfaceLabels, InterfaceOption } from '../../types';
 
 const slotLabels = [
@@ -23,23 +24,18 @@ const slotLabels = [
   '3. Least effective',
 ];
 
-const initialPool: InterfaceOption[] = [
-  InterfaceOption.Benchmark,
-  InterfaceOption.SingleAxisCarousel,
-  InterfaceOption.MultiAxisCarousel,
-];
-
 type RankingQuestionProps = {
   onChange: (ranked: InterfaceOption[]) => void;
 };
 
 export const RankingQuestion = ({ onChange }: RankingQuestionProps) => {
+  const { interfaceOrder } = useStudyStore();
   const [slots, setSlots] = useState<(InterfaceOption | null)[]>([
     null,
     null,
     null,
   ]);
-  const [pool, setPool] = useState<InterfaceOption[]>(initialPool);
+  const [pool, setPool] = useState<InterfaceOption[]>(interfaceOrder);
 
   // sensors for mouse/touch & keyboard
   const sensors = useSensors(
@@ -51,7 +47,7 @@ export const RankingQuestion = ({ onChange }: RankingQuestionProps) => {
 
   const resetAll = () => {
     setSlots([null, null, null]);
-    setPool([...initialPool]);
+    setPool([...interfaceOrder]);
     onChange([]);
   };
 
@@ -103,7 +99,7 @@ export const RankingQuestion = ({ onChange }: RankingQuestionProps) => {
     >
       <SortableContext
         items={[
-          ...initialPool, // pool item IDs
+          ...interfaceOrder,
           ...slots.filter((s): s is InterfaceOption => !!s).map((s) => s),
         ]}
         strategy={rectSortingStrategy}
