@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { typeCategories } from '../../data';
@@ -29,6 +29,14 @@ export const FilterSidebar = ({
   const [price, setPrice] = useState<[number, number]>(filters.price);
   const [rating, setRating] = useState<[number, number]>(filters.rating);
   const [distance, setDistance] = useState<[number, number]>(filters.distance);
+
+  useEffect(() => {
+    if (filters === initialFilterSidebarState) {
+      setPrice(initialFilterSidebarState[FilterOptionWithFeature.Price]);
+      setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
+      setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);
+    }
+  }, [filters]);
 
   const isResetAllDisabled =
     price == initialFilterSidebarState[FilterOptionWithFeature.Price] &&
