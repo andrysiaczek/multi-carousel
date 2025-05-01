@@ -32,18 +32,19 @@ export const FilterSidebar = ({
 
   useEffect(() => {
     if (
-      filters.price ==
-        initialFilterSidebarState[FilterOptionWithFeature.Price] &&
-      filters.rating ==
-        initialFilterSidebarState[FilterOptionWithFeature.Rating] &&
-      filters.distance ==
-        initialFilterSidebarState[FilterOptionWithFeature.Distance] &&
+      filters.price[0] === initialFilterSidebarState.price[0] &&
+      filters.price[1] === initialFilterSidebarState.price[1] &&
+      filters.rating[0] === initialFilterSidebarState.rating[0] &&
+      filters.rating[1] === initialFilterSidebarState.rating[1] &&
+      filters.distance[0] === initialFilterSidebarState.distance[0] &&
+      filters.distance[1] === initialFilterSidebarState.distance[1] &&
       filters.type.length === 0 &&
       filters.feature.length === 0
     ) {
-      setPrice(initialFilterSidebarState[FilterOptionWithFeature.Price]);
-      setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
-      setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);
+      console.log('resetting the local state');
+      setPrice(initialFilterSidebarState.price);
+      setRating(initialFilterSidebarState.rating);
+      setDistance(initialFilterSidebarState.distance);
     }
   }, [
     filters.distance,
