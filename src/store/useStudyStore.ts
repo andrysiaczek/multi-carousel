@@ -6,6 +6,8 @@ import { resetAllStores } from '../store';
 import { InterfaceOption, StudyStep } from '../types';
 import { shuffleInterfaceOptions } from '../utils';
 
+const MAX_PAYLOAD_BYTES = 4000000;
+
 export interface StudyState {
   sessionId: string;
   interfaceOrder: InterfaceOption[];
@@ -105,16 +107,32 @@ export const useStudyStore = create<StudyState>()(
           detailsWithDuration = { ...details, durationMs };
         }
 
-        set((state) => ({
-          events: [
-            ...state.events,
-            {
-              timestamp: Date.now(),
-              type,
-              details: detailsWithDuration,
-            } as FirebaseEvent,
-          ],
-        }));
+        set((state) => {
+          const [first, ...rest] = state.events;
+          const newEvent: FirebaseEvent = {
+            timestamp: Date.now(),
+            type,
+            details: detailsWithDuration,
+          };
+
+          const updatedEvents = first
+            ? [first, ...rest, newEvent]
+            : [...rest, newEvent];
+
+          // Only check size every 10th event
+          if (updatedEvents.length % 10 === 0) {
+            while (
+              new Blob([JSON.stringify(updatedEvents)]).size >
+                MAX_PAYLOAD_BYTES &&
+              updatedEvents.length > 1
+            ) {
+              // Always preserve the first (start) event
+              updatedEvents.splice(1, 1); // remove second item
+            }
+          }
+
+          return { events: updatedEvents };
+        });
       },
 
       clearEvents: () => set({ events: [] }),

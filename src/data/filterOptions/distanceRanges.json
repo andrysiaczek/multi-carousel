@@ -132,7 +132,7 @@
     ]
   },
   {
-    "label": "Medium Distance",
+    "label": "Medium",
     "sublabel": "(3 – 6 km)",
     "lowerBound": 3,
     "upperBound": 6,

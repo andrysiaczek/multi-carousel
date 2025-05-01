@@ -101,10 +101,70 @@ export const CarouselGrid = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') scrollLeft();
-      if (e.key === 'ArrowRight') scrollRight();
-      if (e.key === 'ArrowUp') scrollUp();
-      if (e.key === 'ArrowDown') scrollDown();
+      if (e.key === 'ArrowLeft') {
+        logEvent(EventType.ArrowKeyDown, {
+          targetType: 'carousel',
+          direction: 'left',
+          offset: { row: rowOffset, col: columnOffset },
+          xAxis: {
+            filterType: xAxisFilter,
+            ranges: columnRanges.map((col) => col.label),
+          },
+          yAxis: {
+            filterType: yAxisFilter,
+            ranges: rowRanges.map((row) => row.label),
+          },
+        });
+        scrollLeft();
+      }
+      if (e.key === 'ArrowRight') {
+        logEvent(EventType.ArrowKeyDown, {
+          targetType: 'carousel',
+          direction: 'right',
+          offset: { row: rowOffset, col: columnOffset },
+          xAxis: {
+            filterType: xAxisFilter,
+            ranges: columnRanges.map((col) => col.label),
+          },
+          yAxis: {
+            filterType: yAxisFilter,
+            ranges: rowRanges.map((row) => row.label),
+          },
+        });
+        scrollRight();
+      }
+      if (e.key === 'ArrowUp') {
+        logEvent(EventType.ArrowKeyDown, {
+          targetType: 'carousel',
+          direction: 'up',
+          offset: { row: rowOffset, col: columnOffset },
+          xAxis: {
+            filterType: xAxisFilter,
+            ranges: columnRanges.map((col) => col.label),
+          },
+          yAxis: {
+            filterType: yAxisFilter,
+            ranges: rowRanges.map((row) => row.label),
+          },
+        });
+        scrollUp();
+      }
+      if (e.key === 'ArrowDown') {
+        logEvent(EventType.ArrowKeyDown, {
+          targetType: 'carousel',
+          direction: 'down',
+          offset: { row: rowOffset, col: columnOffset },
+          xAxis: {
+            filterType: xAxisFilter,
+            ranges: columnRanges.map((col) => col.label),
+          },
+          yAxis: {
+            filterType: yAxisFilter,
+            ranges: rowRanges.map((row) => row.label),
+          },
+        });
+        scrollDown();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);

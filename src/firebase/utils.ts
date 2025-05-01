@@ -40,7 +40,7 @@ export async function flushStepLog(
     useStudyStore.getState();
 
   // build a safe doc ID, e.g. "multi_exploratory"
-  const docId = `${interfaceOption ?? 'final'}_${taskType}`;
+  const docId = `${interfaceOption ?? 'final'}-${taskType}`;
 
   const stepLog: StudyStepLog = {
     sessionId,

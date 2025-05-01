@@ -5,21 +5,22 @@ import { Accommodation, InterfaceOption, QuestionId } from '../types';
  * All the events which might be logged during a step.
  */
 export enum EventType {
-  TaskStart = 'task_start',
-  TaskEnd = 'task_end',
+  TaskStart = 'taskStart',
+  TaskEnd = 'taskEnd',
 
   Hover = 'hover',
   Click = 'click',
 
   Scroll = 'scroll',
-  ArrowClick = 'arrow_click',
+  ArrowClick = 'arrowClick',
+  ArrowKeyDown = 'arrowKeyDown',
   Navigation = 'navigation',
 
-  FilterApply = 'filter_apply',
-  FilterReset = 'filter_reset',
-  FilterResetAll = 'filter_reset_all',
+  FilterApply = 'filterApply',
+  FilterReset = 'filterReset',
+  FilterResetAll = 'filterResetAll',
 
-  FilterStep = 'filter_step',
+  FilterStep = 'filterStep',
 
   Survey = 'survey',
 }
@@ -171,6 +172,7 @@ export interface DetailsMap {
 
   [EventType.Scroll]: ScrollDetails;
   [EventType.ArrowClick]: ScrollDetails;
+  [EventType.ArrowKeyDown]: ScrollDetails;
   [EventType.Navigation]: NavigationDetails;
 
   [EventType.FilterApply]: FilterDetails;
