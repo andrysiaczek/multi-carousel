@@ -31,7 +31,16 @@ export const FilterSidebar = ({
   const [distance, setDistance] = useState<[number, number]>(filters.distance);
 
   useEffect(() => {
-    if (filters === initialFilterSidebarState) {
+    if (
+      filters.price ==
+        initialFilterSidebarState[FilterOptionWithFeature.Price] &&
+      filters.rating ==
+        initialFilterSidebarState[FilterOptionWithFeature.Rating] &&
+      filters.distance ==
+        initialFilterSidebarState[FilterOptionWithFeature.Distance] &&
+      filters.type.length === 0 &&
+      filters.feature.length === 0
+    ) {
       setPrice(initialFilterSidebarState[FilterOptionWithFeature.Price]);
       setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
       setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);
