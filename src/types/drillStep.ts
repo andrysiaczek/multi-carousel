@@ -5,6 +5,8 @@ export type DrillStep = {
   label: string;
   xAxisFilter: FilterOption;
   yAxisFilter: FilterOption;
+  xAxisFilterAfter: FilterOption;
+  yAxisFilterAfter: FilterOption;
   filterState: {
     [FilterOption.Distance]: Subrange | null;
     [FilterOption.Price]: Subrange | null;

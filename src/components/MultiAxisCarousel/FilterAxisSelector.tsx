@@ -1,4 +1,4 @@
-import { useAxisFilterStore } from '../../store';
+import { useAxisFilterStore, useFilterHistoryStore } from '../../store';
 import { Axis, FilterOption } from '../../types';
 import { capitalize } from '../../utils';
 
@@ -14,6 +14,7 @@ export const FilterAxisSelector = ({ axis }: FilterAxisSelectorProps) => {
     setXAxisFilter,
     setYAxisFilter,
   } = useAxisFilterStore();
+  const getLastSubrange = useFilterHistoryStore.getState().getLastSubrange;
 
   const isXAxis = axis === Axis.X;
   const otherAxisFilter = isXAxis ? yAxisFilter : xAxisFilter;
@@ -27,9 +28,15 @@ export const FilterAxisSelector = ({ axis }: FilterAxisSelectorProps) => {
   return (
     <div className={`flex ${isXAxis ? 'gap-2 pb-2' : 'flex-col gap-3'}`}>
       {filterOptionsArray
-        .filter(
-          // Exclude Type filter option if already chosen
-          (filter) => !(filter === FilterOption.Type && chosenType)
+        .filter((filter) =>
+          // (1) Type only if not yet chosen
+          filter === FilterOption.Type
+            ? !chosenType
+            : // (2) Other axes only if never drilled OR still has subranges
+              (() => {
+                const last = getLastSubrange(filter);
+                return last === null || Boolean(last.subranges?.length);
+              })()
         )
         .map((filter) => (
           <button

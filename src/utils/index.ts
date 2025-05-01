@@ -11,7 +11,6 @@ export {
   addStandardAxisDrillStep,
   addTypeAxisDrillStep,
   generateFilterLabel,
-  restoreAxisFiltersFromStep,
 } from './filterHistoryUtils';
 export {
   filterAccommodationsMultiAxisCarousel,

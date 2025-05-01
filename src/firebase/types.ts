@@ -127,6 +127,8 @@ export interface FilterStepDetails {
   label: string;
   xFilter: FilterDetails;
   yFilter: FilterDetails;
+  xFilterAfter: FilterDetails;
+  yFilterAfter: FilterDetails;
   accommodationIds: string[];
   goTo?: boolean;
 }

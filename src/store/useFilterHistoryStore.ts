@@ -10,13 +10,15 @@ import {
   NewDrillStep,
   Subrange,
 } from '../types';
-import { generateFilterLabel, restoreAxisFiltersFromStep } from '../utils';
+import { generateFilterLabel } from '../utils';
 
 const initialStep: DrillStep = {
   stepNumber: 0,
   label: 'Reset',
   xAxisFilter: FilterOption.Price,
   yAxisFilter: FilterOption.Rating,
+  xAxisFilterAfter: FilterOption.Price,
+  yAxisFilterAfter: FilterOption.Rating,
   filterState: {
     [FilterOption.Distance]: null,
     [FilterOption.Price]: null,
@@ -71,6 +73,8 @@ export const useFilterHistoryStore = create<FilterHistoryState>()(
             label: step.label,
             xFilter: { filterType: step.xAxisFilter },
             yFilter: { filterType: step.yAxisFilter },
+            xFilterAfter: { filterType: step.xAxisFilterAfter },
+            yFilterAfter: { filterType: step.yAxisFilterAfter },
             accommodationIds: step.carouselDataSnapshot.map((acc) => acc.id),
           });
 
@@ -87,6 +91,7 @@ export const useFilterHistoryStore = create<FilterHistoryState>()(
         }),
 
       goToStep: (stepNumber) => {
+        const { setAxisFiltersAndType } = useAxisFilterStore.getState();
         const { setCarouselData } = useCarouselStore.getState();
         const steps = get().steps.slice(0, stepNumber + 1);
         const lastStep = steps[steps.length - 1];
@@ -98,12 +103,18 @@ export const useFilterHistoryStore = create<FilterHistoryState>()(
           label: lastStep.label,
           xFilter: { filterType: lastStep.xAxisFilter },
           yFilter: { filterType: lastStep.yAxisFilter },
+          xFilterAfter: { filterType: lastStep.xAxisFilterAfter },
+          yFilterAfter: { filterType: lastStep.yAxisFilterAfter },
           accommodationIds: lastStep.carouselDataSnapshot.map((acc) => acc.id),
         });
 
         set({ steps, hoveredStepLabel: null });
         setCarouselData(lastStep.carouselDataSnapshot);
-        restoreAxisFiltersFromStep(lastStep);
+        setAxisFiltersAndType(
+          lastStep.xAxisFilterAfter,
+          lastStep.yAxisFilterAfter,
+          lastStep.filterState[FilterOption.Type]?.label ?? null
+        );
       },
 
       resetHistory: () => set({ steps: [], hoveredStepLabel: null }),

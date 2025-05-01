@@ -1,17 +1,13 @@
-import { useAxisFilterStore, useFilterHistoryStore } from '../store';
-import {
-  Accommodation,
-  Axis,
-  DrillStep,
-  FilterOption,
-  Subrange,
-} from '../types';
-import { capitalize, getFallbackFilter } from '../utils';
+import { useFilterHistoryStore } from '../store';
+import { Accommodation, Axis, FilterOption, Subrange } from '../types';
+import { capitalize } from '../utils';
 
 export const addStandardAxisDrillStep = (
   axis: Axis,
   xAxisFilter: FilterOption,
   yAxisFilter: FilterOption,
+  xAxisFilterAfter: FilterOption,
+  yAxisFilterAfter: FilterOption,
   parentRange: Subrange,
   accommodations: Accommodation[]
 ) => {
@@ -22,6 +18,8 @@ export const addStandardAxisDrillStep = (
   filterHistoryStore.addStep({
     xAxisFilter,
     yAxisFilter,
+    xAxisFilterAfter,
+    yAxisFilterAfter,
     label: generateFilterLabel(filter, parentRange),
     filterState: {
       [FilterOption.Distance]:
@@ -45,6 +43,8 @@ export const addStandardAxisDrillStep = (
 export const addTypeAxisDrillStep = (
   xAxisFilter: FilterOption,
   yAxisFilter: FilterOption,
+  xAxisFilterAfter: FilterOption,
+  yAxisFilterAfter: FilterOption,
   parentRange: Subrange | null,
   accommodations: Accommodation[]
 ) => {
@@ -54,6 +54,8 @@ export const addTypeAxisDrillStep = (
   filterHistoryStore.addStep({
     xAxisFilter,
     yAxisFilter,
+    xAxisFilterAfter,
+    yAxisFilterAfter,
     label: generateFilterLabel(FilterOption.Type, parentRange),
     filterState: {
       [FilterOption.Distance]:
@@ -114,40 +116,4 @@ export const generateFilterLabel = (
   }
 
   return firstLabel;
-};
-
-/**
- * Restores axis filters and chosen type from the given drill step.
- * If the initial (zero) step is provided, resets the filters.
- */
-export const restoreAxisFiltersFromStep = (step: DrillStep) => {
-  const { resetState, setAxisFiltersAndType } = useAxisFilterStore.getState();
-
-  if (!step.stepNumber) return resetState();
-
-  const chosenType = step.filterState[FilterOption.Type];
-  const chosenTypeLabel = chosenType?.label ?? null;
-
-  // Type on X axis
-  if (step.xAxisFilter === FilterOption.Type && chosenType)
-    return setAxisFiltersAndType(
-      getFallbackFilter(Axis.X, step.yAxisFilter),
-      step.yAxisFilter,
-      chosenTypeLabel
-    );
-
-  // Type on Y axis
-  if (step.yAxisFilter === FilterOption.Type && chosenType)
-    return setAxisFiltersAndType(
-      step.xAxisFilter,
-      getFallbackFilter(Axis.Y, step.xAxisFilter),
-      chosenTypeLabel
-    );
-
-  // Default restoration
-  return setAxisFiltersAndType(
-    step.xAxisFilter,
-    step.yAxisFilter,
-    chosenTypeLabel
-  );
 };

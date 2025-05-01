@@ -58,6 +58,7 @@ export const FilterHistoryPanel = () => {
     }
 
     setAccommodations(filteredAccommodations);
+
     if (
       Object.values(SortOption).includes(xAxisFilter as unknown as SortOption)
     ) {
