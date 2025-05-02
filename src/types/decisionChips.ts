@@ -1,0 +1,15 @@
+export const decisionChips = [
+  'Free Wi-Fi',
+  'Air conditioning',
+  'Private room',
+  'Private bathroom',
+  'Parking',
+  'Breakfast included',
+  '24h reception',
+  'Fitness center',
+  'Rooftop terrace',
+  'Swimming pool',
+  'Gym',
+  'Restaurant',
+  'Bar',
+];

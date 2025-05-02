@@ -4,7 +4,22 @@ import { accommodationDataset } from '../data';
 import { EventType } from '../firebase';
 import { useStudyStore } from '../store';
 import { Accommodation, SortOption } from '../types';
-import { sortAccommodations } from '../utils';
+
+const sortAccommodations = (
+  accommodations: Accommodation[],
+  field: SortOption,
+  ascending: boolean
+) => {
+  return [...accommodations].sort((a, b) => {
+    const valueA = a[field];
+    const valueB = b[field];
+
+    if (typeof valueA === 'number' && typeof valueB === 'number') {
+      return ascending ? valueA - valueB : valueB - valueA;
+    }
+    return 0;
+  });
+};
 
 interface SortState {
   sortField: SortOption;

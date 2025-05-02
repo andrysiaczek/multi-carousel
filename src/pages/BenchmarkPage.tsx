@@ -1,10 +1,17 @@
+import { useEffect, useRef, useState } from 'react';
 import { FilterSidebar, ResultItem, ResultsHeader } from '../components';
 import { accommodationDataset } from '../data';
-import { useFilterSidebarStore, useSortStore } from '../store';
-import { FilterOptionWithFeature, InterfaceOption, SortOption } from '../types';
+import { useSortStore } from '../store';
+import { InterfaceOption } from '../types';
 
 export const BenchmarkPage = () => {
-  const { filters } = useFilterSidebarStore();
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const [justReset, setJustReset] = useState(false);
+  const [priceRange, setPriceRange] = useState<[number, number]>([15, 600]);
+  const [ratingRange, setRatingRange] = useState<[number, number]>([1, 5]);
+  const [distanceRange, setDistanceRange] = useState<[number, number]>([0, 10]);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
   const {
     sortField,
     sortAscending,
@@ -14,86 +21,88 @@ export const BenchmarkPage = () => {
     setAccommodations,
   } = useSortStore();
 
-  const handleSortChange = (field: SortOption) => setSortField(field);
-  const handleSortDirection = (ascending: boolean) =>
-    setSortDirection(ascending);
-
-  // Filter the accommodations based on the selected filters
-  const applyFilters = (resetAll = false) => {
-    if (resetAll) return setAccommodations(accommodationDataset);
-
+  useEffect(() => {
     const filtered = accommodationDataset.filter((acc) => {
-      // Check each filter condition
-      for (const [key, value] of Object.entries(filters)) {
-        switch (key) {
-          case FilterOptionWithFeature.Price:
-            if (Array.isArray(value)) {
-              const [minPrice, maxPrice] = value as [number, number];
-              if (acc.price < minPrice || acc.price > maxPrice) return false;
-            }
-            break;
+      const [minP, maxP] = priceRange;
+      if (acc.price < minP || acc.price > maxP) return false;
 
-          case FilterOptionWithFeature.Distance:
-            if (Array.isArray(value)) {
-              const [minDistance, maxDistance] = value as [number, number];
-              if (acc.distance < minDistance || acc.distance > maxDistance)
-                return false;
-            }
-            break;
+      const [minR, maxR] = ratingRange;
+      if (acc.rating < minR || acc.rating > maxR) return false;
 
-          case FilterOptionWithFeature.Rating:
-            if (Array.isArray(value)) {
-              const [minRating, maxRating] = value as [number, number];
-              if (acc.rating < minRating || acc.rating > maxRating)
-                return false;
-            }
-            break;
+      const [minD, maxD] = distanceRange;
+      if (acc.distance < minD || acc.distance > maxD) return false;
 
-          case FilterOptionWithFeature.Type:
-            if (Array.isArray(value)) {
-              const selectedTypes = value as string[];
-              // Check if accommodation type is in the selected types
-              if (
-                !(
-                  selectedTypes.length === 0 || selectedTypes.includes(acc.type)
-                )
-              ) {
-                return false;
-              }
-            }
-            break;
+      if (selectedTypes.length > 0 && !selectedTypes.includes(acc.type))
+        return false;
 
-          case FilterOptionWithFeature.Feature:
-            if (Array.isArray(value)) {
-              const selectedFeatures = value as string[];
-              // Check if all selected features are present in accommodation features
-              if (
-                !selectedFeatures.every((feature) =>
-                  acc.features.includes(feature)
-                )
-              ) {
-                return false;
-              }
-            }
-            break;
-
-          default:
-            break;
-        }
+      if (
+        selectedFeatures.length > 0 &&
+        !selectedFeatures.every((f: string) => acc.features.includes(f))
+      ) {
+        return false;
       }
+
       return true;
     });
 
     setAccommodations(filtered);
-  };
+  }, [
+    priceRange,
+    ratingRange,
+    distanceRange,
+    selectedTypes,
+    selectedFeatures,
+    setAccommodations,
+  ]);
+
+  useEffect(() => {
+    if (justReset && sidebarRef.current) {
+      sidebarRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+      setJustReset(false);
+    }
+  }, [justReset]);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Filter Sidebar */}
-      <div className="w-1/4 px-6 flex-shrink-0 h-screen sticky top-0 overflow-y-auto scrollbar-left py-6">
-        <div className="sticky">
+      <div
+        ref={sidebarRef}
+        className="w-1/4 px-6 flex-shrink-0 h-screen sticky top-0 overflow-y-auto scrollbar-left py-6"
+      >
+        <div className="sticky top-0">
           {/* Adjusted height */}
-          <FilterSidebar applyFilters={applyFilters} />
+          <FilterSidebar
+            // current values:
+            priceRange={priceRange}
+            ratingRange={ratingRange}
+            distanceRange={distanceRange}
+            selectedTypes={selectedTypes}
+            selectedFeatures={selectedFeatures}
+            // setters:
+            onPriceChange={setPriceRange}
+            onRatingChange={setRatingRange}
+            onDistanceChange={setDistanceRange}
+            onToggleType={(t) =>
+              setSelectedTypes((ts) =>
+                ts.includes(t) ? ts.filter((x) => x !== t) : [...ts, t]
+              )
+            }
+            onToggleFeature={(f) =>
+              setSelectedFeatures((fs) =>
+                fs.includes(f) ? fs.filter((x) => x !== f) : [...fs, f]
+              )
+            }
+            onResetAll={() => {
+              // reset all filter state
+              setPriceRange([15, 600]);
+              setRatingRange([1, 5]);
+              setDistanceRange([0, 10]);
+              setSelectedTypes([]);
+              setSelectedFeatures([]);
+              // then trigger the scroll effect
+              setJustReset(true);
+            }}
+          />
         </div>
       </div>
 
@@ -104,8 +113,8 @@ export const BenchmarkPage = () => {
           count={accommodations.length}
           sortField={sortField}
           sortAscending={sortAscending}
-          onSortChange={handleSortChange}
-          setSortDirection={handleSortDirection}
+          onSortChange={setSortField}
+          setSortDirection={setSortDirection}
         />
 
         {/* Results List */}

@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { EventType } from '../firebase';
 import { useStudyStore } from '../store';
-import { decisionChips } from '../utils';
+import { decisionChips } from '../types';
 
 interface DecisionChipsState {
   availableChips: string[];

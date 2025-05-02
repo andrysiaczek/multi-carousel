@@ -26,8 +26,15 @@ import {
 } from '../../store';
 import { Axis, Subrange } from '../../types';
 import {
+  drillDownColumn,
+  drillDownRow,
+  resetPosition,
+  scrollDown,
   scrollDownLeft,
   scrollDownRight,
+  scrollLeft,
+  scrollRight,
+  scrollUp,
   scrollUpLeft,
   scrollUpRight,
 } from '../../utils';
@@ -41,11 +48,6 @@ export const CarouselGrid = () => {
     cellWidth,
     visibleRows,
     visibleColumns,
-    scrollLeft,
-    scrollRight,
-    scrollUp,
-    scrollDown,
-    resetPosition,
     hoveredRow,
     hoveredColumn,
     columnRanges,
@@ -54,8 +56,6 @@ export const CarouselGrid = () => {
     applyDecisionChipsToCarousel,
     setCellSize,
     updateVisibleCarouselSize,
-    drillDownColumn,
-    drillDownRow,
     setHoveredRow,
     setHoveredColumn,
     resetHover,

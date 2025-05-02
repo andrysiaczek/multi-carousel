@@ -8,23 +8,7 @@ import {
   useStudyStore,
 } from '../store';
 import { Accommodation, CarouselCell, Subrange } from '../types';
-import {
-  buildCarouselGrid,
-  drillDownCell,
-  drillDownColumn,
-  drillDownRow,
-  resetColumnOffset,
-  resetPosition,
-  resetRowOffset,
-  scrollDown,
-  scrollDownLeft,
-  scrollDownRight,
-  scrollLeft,
-  scrollRight,
-  scrollUp,
-  scrollUpLeft,
-  scrollUpRight,
-} from '../utils';
+import { buildCarouselGrid } from '../utils';
 
 interface CarouselState {
   // Carousel Layout
@@ -48,19 +32,6 @@ interface CarouselState {
   carouselData: Accommodation[]; // Array of all filtered accommodations in current carousel
   dataPerCell: CarouselCell[][]; // 2D grid of accommodations grouped by cell
 
-  // Methods: Navigation
-  scrollLeft: () => void;
-  scrollRight: () => void;
-  scrollUp: () => void;
-  scrollDown: () => void;
-  scrollUpLeft: () => void;
-  scrollUpRight: () => void;
-  scrollDownLeft: () => void;
-  scrollDownRight: () => void;
-  resetPosition: () => void;
-  resetColumnOffset: () => void;
-  resetRowOffset: () => void;
-
   // Methods: Carousel Setup
   setCarouselData: (carouselData: Accommodation[]) => void;
   populateCarouselData: () => void;
@@ -71,9 +42,6 @@ interface CarouselState {
 
   // Methods: Filtering
   applyDecisionChipsToCarousel: () => void;
-  drillDownColumn: (colIndex: number) => void;
-  drillDownRow: (rowIndex: number) => void;
-  drillDownCell: (colIndex: number, rowIndex: number) => void;
 
   // Methods: Hover Interaction
   setHoveredColumn: (col: number) => void;
@@ -111,18 +79,6 @@ export const useCarouselStore = create<CarouselState>()(
   persist(
     (set, get) => ({
       ...initialCarouselState,
-
-      scrollLeft,
-      scrollRight,
-      scrollUp,
-      scrollDown,
-      scrollUpLeft,
-      scrollUpRight,
-      scrollDownLeft,
-      scrollDownRight,
-      resetPosition,
-      resetColumnOffset,
-      resetRowOffset,
 
       setCarouselData: (carouselData: Accommodation[]) => set({ carouselData }),
 
@@ -217,10 +173,6 @@ export const useCarouselStore = create<CarouselState>()(
           dataPerCell: carousel,
         });
       },
-
-      drillDownColumn,
-      drillDownRow,
-      drillDownCell,
 
       setHoveredRow: (row) => {
         useStudyStore.getState().logEvent(EventType.Hover, {

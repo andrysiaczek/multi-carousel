@@ -1,5 +1,5 @@
 export { buildCarouselGrid } from './carouselUtils';
-export { decisionChips, updateAvailableChips } from './decisionChipsUtils';
+export { updateAvailableChips } from './decisionChipsUtils';
 export {
   drillDownCell,
   drillDownColumn,
@@ -17,10 +17,7 @@ export {
   filterAccommodationsSingleAxisCarousel,
   findSubrangeByLabel,
 } from './filterUtils';
-export {
-  resolveAccommodationVariant,
-  shuffleInterfaceOptions,
-} from './interfaceUtils';
+export { resolveAccommodationVariant } from './interfaceUtils';
 export {
   resetColumnOffset,
   resetPosition,
@@ -34,5 +31,4 @@ export {
   scrollUpLeft,
   scrollUpRight,
 } from './scrollLogic';
-export { sortAccommodations } from './sortUtils';
 export { capitalize, clean } from './stringUtils';

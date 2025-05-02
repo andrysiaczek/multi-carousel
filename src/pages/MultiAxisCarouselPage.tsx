@@ -9,13 +9,13 @@ import { useAxisFilterStore, useCarouselStore } from '../store';
 import { Axis } from '../types';
 import {
   resetColumnOffset,
+  resetPosition,
   resetRowOffset,
   updateAvailableChips,
 } from '../utils';
 
 export const MultiAxisCarouselPage = () => {
   const {
-    resetPosition,
     totalRows,
     totalColumns,
     columnRanges,

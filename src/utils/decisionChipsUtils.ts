@@ -1,21 +1,5 @@
 import { useDecisionChipsStore } from '../store';
-import { Accommodation } from '../types';
-
-export const decisionChips = [
-  'Free Wi-Fi',
-  'Air conditioning',
-  'Private room',
-  'Private bathroom',
-  'Parking',
-  'Breakfast included',
-  '24h reception',
-  'Fitness center',
-  'Rooftop terrace',
-  'Swimming pool',
-  'Gym',
-  'Restaurant',
-  'Bar',
-];
+import { Accommodation, decisionChips } from '../types';
 
 const calculateFeatureFrequency = (accommodations: Accommodation[]) => {
   const { selectedChips } = useDecisionChipsStore.getState();

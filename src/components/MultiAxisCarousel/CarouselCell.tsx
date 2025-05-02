@@ -14,7 +14,7 @@ import {
   SortOption,
   Subrange,
 } from '../../types';
-import { getFeatureIcon } from '../../utils';
+import { drillDownCell, getFeatureIcon } from '../../utils';
 
 interface CarouselCellProps {
   col: number;
@@ -41,7 +41,6 @@ export const CarouselCell = ({
     hoveredCell,
     setHoveredCell,
     resetHover,
-    drillDownCell,
   } = useCarouselStore();
   const { xAxisFilter, yAxisFilter } = useAxisFilterStore();
   const { setHoveredStep, resetHoveredStep } = useFilterHistoryStore();

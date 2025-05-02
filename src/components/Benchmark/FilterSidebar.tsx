@@ -1,133 +1,49 @@
-import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { typeCategories } from '../../data';
-import { EventType } from '../../firebase';
-import {
-  initialFilterSidebarState,
-  useFilterSidebarStore,
-  useStudyStore,
-} from '../../store';
-import { FilterOptionWithFeature } from '../../types';
-import { decisionChips } from '../../utils';
+import { decisionChips } from '../../types';
+
+interface FilterSidebarProps {
+  priceRange: [number, number];
+  ratingRange: [number, number];
+  distanceRange: [number, number];
+  selectedTypes: string[];
+  selectedFeatures: string[];
+
+  onPriceChange: (r: [number, number]) => void;
+  onRatingChange: (r: [number, number]) => void;
+  onDistanceChange: (r: [number, number]) => void;
+  onToggleType: (t: string) => void;
+  onToggleFeature: (f: string) => void;
+  onResetAll: () => void;
+}
 
 export const FilterSidebar = ({
-  applyFilters,
-}: {
-  applyFilters: (resetAllFilters?: boolean) => void;
-}) => {
-  const {
-    filters,
-    setNumericalFilter,
-    addStringFilter,
-    removeStringFilter,
-    resetState,
-  } = useFilterSidebarStore();
-  const { logEvent } = useStudyStore();
+  priceRange,
+  ratingRange,
+  distanceRange,
+  selectedTypes,
+  selectedFeatures,
+  onPriceChange,
+  onRatingChange,
+  onDistanceChange,
+  onToggleType,
+  onToggleFeature,
+  onResetAll,
+}: FilterSidebarProps) => {
+  const [minP, maxP] = priceRange;
+  const [minR, maxR] = ratingRange;
+  const [minD, maxD] = distanceRange;
 
-  // State for temporary filter values before applying
-  const [price, setPrice] = useState<[number, number]>(filters.price);
-  const [rating, setRating] = useState<[number, number]>(filters.rating);
-  const [distance, setDistance] = useState<[number, number]>(filters.distance);
-
-  useEffect(() => {
-    if (
-      filters.price == initialFilterSidebarState.price &&
-      filters.rating == initialFilterSidebarState.rating &&
-      filters.distance == initialFilterSidebarState.distance &&
-      filters.type.length === 0 &&
-      filters.feature.length === 0
-    ) {
-      setPrice(initialFilterSidebarState.price);
-      setRating(initialFilterSidebarState.rating);
-      setDistance(initialFilterSidebarState.distance);
-    }
-  }, [filters]);
-
-  const isResetAllDisabled =
-    price == initialFilterSidebarState[FilterOptionWithFeature.Price] &&
-    rating == initialFilterSidebarState[FilterOptionWithFeature.Rating] &&
-    distance == initialFilterSidebarState[FilterOptionWithFeature.Distance] &&
-    filters.type.length === 0 &&
-    filters.feature.length === 0;
-
-  const handlePriceChange = () => {
-    if (price !== filters[FilterOptionWithFeature.Price]) {
-      logEvent(EventType.FilterApply, {
-        filterType: 'price',
-        filterValue: price.toString(),
-      });
-      setNumericalFilter(FilterOptionWithFeature.Price, price);
-      applyFilters();
-    }
-  };
-
-  const handleRatingChange = () => {
-    if (rating !== filters[FilterOptionWithFeature.Rating]) {
-      logEvent(EventType.FilterApply, {
-        filterType: 'rating',
-        filterValue: rating.toString(),
-      });
-      setNumericalFilter(FilterOptionWithFeature.Rating, rating);
-      applyFilters();
-    }
-  };
-
-  const handleDistanceChange = () => {
-    if (distance !== filters[FilterOptionWithFeature.Distance]) {
-      logEvent(EventType.FilterApply, {
-        filterType: 'distance',
-        filterValue: distance.toString(),
-      });
-      setNumericalFilter(FilterOptionWithFeature.Distance, distance);
-      applyFilters();
-    }
-  };
-
-  const handleToggleFeature = (feature: string) => {
-    if (filters.feature.includes(feature)) {
-      logEvent(EventType.FilterReset, {
-        filterType: 'feature',
-        filterValue: feature,
-      });
-      removeStringFilter(FilterOptionWithFeature.Feature, feature);
-    } else {
-      logEvent(EventType.FilterApply, {
-        filterType: 'feature',
-        filterValue: feature,
-      });
-      addStringFilter(FilterOptionWithFeature.Feature, feature);
-    }
-    applyFilters();
-  };
-
-  const handleToggleType = (type: string) => {
-    if (filters.type.includes(type)) {
-      logEvent(EventType.FilterReset, {
-        filterType: 'type',
-        filterValue: type,
-      });
-      removeStringFilter(FilterOptionWithFeature.Type, type);
-    } else {
-      logEvent(EventType.FilterApply, {
-        filterType: 'type',
-        filterValue: type,
-      });
-      addStringFilter(FilterOptionWithFeature.Type, type);
-    }
-    applyFilters();
-  };
-
-  const handleResetAll = () => {
-    logEvent(EventType.FilterResetAll, {
-      scope: 'allFilters',
-    });
-    setPrice(initialFilterSidebarState[FilterOptionWithFeature.Price]);
-    setRating(initialFilterSidebarState[FilterOptionWithFeature.Rating]);
-    setDistance(initialFilterSidebarState[FilterOptionWithFeature.Distance]);
-    resetState();
-    applyFilters(true);
-  };
+  const canReset =
+    minP !== 15 ||
+    maxP !== 600 ||
+    minR !== 1 ||
+    maxR !== 5 ||
+    minD !== 0 ||
+    maxD !== 10 ||
+    selectedTypes.length > 0 ||
+    selectedFeatures.length > 0;
 
   return (
     <div className="space-y-6 p-4 bg-white rounded-md shadow-md h-full flex flex-col">
@@ -139,9 +55,12 @@ export const FilterSidebar = ({
             range
             min={15}
             max={600}
-            value={price}
-            onChange={(value) => setPrice(value as [number, number])}
-            onChangeComplete={handlePriceChange}
+            value={[minP, maxP]}
+            onChange={(value) => {
+              if (Array.isArray(value)) {
+                onPriceChange(value as [number, number]);
+              }
+            }}
             styles={{
               track: { backgroundColor: '#006D77' },
               rail: { backgroundColor: '#ccc' },
@@ -154,8 +73,8 @@ export const FilterSidebar = ({
             className="w-full"
           />
           <div className="flex justify-between text-gray-600 text-sm">
-            <span>€{price[0]}</span>
-            <span>€{price[1]}</span>
+            <span>€{minP}</span>
+            <span>€{maxP}</span>
           </div>
         </div>
       </div>
@@ -169,9 +88,12 @@ export const FilterSidebar = ({
             min={1}
             max={5}
             step={0.1}
-            value={rating}
-            onChange={(value) => setRating(value as [number, number])}
-            onChangeComplete={handleRatingChange}
+            value={[minR, maxR]}
+            onChange={(value) => {
+              if (Array.isArray(value)) {
+                onRatingChange(value as [number, number]);
+              }
+            }}
             styles={{
               track: { backgroundColor: '#006D77' },
               rail: { backgroundColor: '#ccc' },
@@ -184,8 +106,8 @@ export const FilterSidebar = ({
             className="w-full"
           />
           <div className="flex justify-between text-gray-600 text-sm">
-            <span>{rating[0]}★</span>
-            <span>{rating[1]}★</span>
+            <span>{minR}★</span>
+            <span>{maxR}★</span>
           </div>
         </div>
       </div>
@@ -199,9 +121,12 @@ export const FilterSidebar = ({
             min={0}
             max={10}
             step={0.1}
-            value={distance}
-            onChange={(value) => setDistance(value as [number, number])}
-            onChangeComplete={handleDistanceChange}
+            value={[minD, maxD]}
+            onChange={(value) => {
+              if (Array.isArray(value)) {
+                onDistanceChange(value as [number, number]);
+              }
+            }}
             styles={{
               track: { backgroundColor: '#006D77' },
               rail: { backgroundColor: '#ccc' },
@@ -214,8 +139,8 @@ export const FilterSidebar = ({
             className="w-full"
           />
           <div className="flex justify-between text-gray-600 text-sm">
-            <span>{distance[0]} km</span>
-            <span>{distance[1]} km</span>
+            <span>{minD} km</span>
+            <span>{maxD} km</span>
           </div>
         </div>
       </div>
@@ -231,12 +156,10 @@ export const FilterSidebar = ({
             >
               <input
                 type="checkbox"
-                checked={filters.type.includes(type.label)}
-                onChange={() => handleToggleType(type.label)}
-                aria-label={type.label}
-                className="form-checkbox"
+                checked={selectedTypes.includes(type.label)}
+                onChange={() => onToggleType(type.label)}
               />
-              {type.label}
+              <span className="text-sm">{type.label}</span>
             </label>
           ))}
         </div>
@@ -250,10 +173,10 @@ export const FilterSidebar = ({
             <button
               type="button"
               key={chip}
-              onClick={() => handleToggleFeature(chip)}
+              onClick={() => onToggleFeature(chip)}
               aria-label={chip}
               className={`px-2 py-1 rounded-full border text-xs transition ${
-                filters.feature.includes(chip)
+                selectedFeatures.includes(chip)
                   ? 'bg-darkGreen text-white border-darkGreen'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
@@ -268,13 +191,13 @@ export const FilterSidebar = ({
       <div className="mt-auto mb-2">
         <button
           type="button"
-          onClick={handleResetAll}
-          disabled={isResetAllDisabled}
+          onClick={onResetAll}
+          disabled={!canReset}
           aria-label="Reset All Filters"
           className={`w-full px-4 py-2 text-sm font-semibold rounded-lg transition ${
-            isResetAllDisabled
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-gray-600 text-white hover:bg-darkGreen'
+            canReset
+              ? 'bg-gray-600 text-white hover:bg-darkGreen'
+              : 'bg-gray-200 text-gray-400 cursor-not-allowed'
           }`}
         >
           Reset All
