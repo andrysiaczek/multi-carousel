@@ -50,7 +50,7 @@
       ]
     },
     "price": 22.12,
-    "rating": 1.55,
+    "rating": 2.55,
     "distance": 1.6,
     "type": "Mid-Range Hotel",
     "features": [
@@ -116,7 +116,7 @@
         "/images/budget_hotel/reception/reception3.jpg"
       ]
     },
-    "price": 5.27,
+    "price": 15.27,
     "rating": 3.27,
     "distance": 1.2,
     "type": "Budget Hotel",
@@ -235,7 +235,7 @@
       ]
     },
     "price": 23.97,
-    "rating": 5.58,
+    "rating": 4.58,
     "distance": 3.3,
     "type": "Guesthouse / Bed & Breakfast (B&B)",
     "features": [
@@ -512,7 +512,7 @@
       ]
     },
     "price": 86.98,
-    "rating": 7.0,
+    "rating": 4.7,
     "distance": 0.41,
     "type": "Budget Hotel",
     "features": [
@@ -802,7 +802,7 @@
       ]
     },
     "price": 173.65,
-    "rating": 7.23,
+    "rating": 4.73,
     "distance": 2.0,
     "type": "Entire Apartment / House",
     "features": [
@@ -872,7 +872,7 @@
       ]
     },
     "price": 462.19,
-    "rating": 0.39,
+    "rating": 2.39,
     "distance": 2.2,
     "type": "Upper Mid-Range Hotel",
     "features": [
@@ -1083,7 +1083,7 @@
       ]
     },
     "price": 412.14,
-    "rating": 5.52,
+    "rating": 4.52,
     "distance": 0.25,
     "type": "Upper Mid-Range Hotel",
     "features": [
@@ -1235,7 +1235,7 @@
         "/images/features/sea_view/sea_view2.jpg"
       ]
     },
-    "price": 11.94,
+    "price": 15.94,
     "rating": 4.76,
     "distance": 1.73,
     "type": "Mid-Range Hotel",
@@ -1381,9 +1381,9 @@
         "/images/features/pool/pool4.jpg"
       ]
     },
-    "price": 14.15,
+    "price": 15.15,
     "rating": 3.83,
-    "distance": 11.64,
+    "distance": 9.64,
     "type": "Hostel (Dormitory Bed)",
     "features": [
       "Shared kitchen",
@@ -1890,7 +1890,7 @@
     },
     "price": 182.57,
     "rating": 4.08,
-    "distance": 10.56,
+    "distance": 9.56,
     "type": "Budget Hotel",
     "features": [
       "Luggage storage",
@@ -2149,7 +2149,7 @@
     },
     "price": 331.24,
     "rating": 4.61,
-    "distance": 11.87,
+    "distance": 9.87,
     "type": "Hostel (Private Room)",
     "features": [
       "Shared kitchen",
@@ -2202,7 +2202,7 @@
         "/images/hostel_dormitory_bed/reception/reception6.jpg"
       ]
     },
-    "price": 6.76,
+    "price": 16.76,
     "rating": 4.73,
     "distance": 1.4,
     "type": "Hostel (Dormitory Bed)",
@@ -2259,7 +2259,7 @@
         "/images/features/pool/pool5.jpg"
       ]
     },
-    "price": 10.7,
+    "price": 15.7,
     "rating": 4.57,
     "distance": 1.5,
     "type": "Hostel (Private Room)",
@@ -2316,7 +2316,7 @@
         "/images/budget_hotel/reception/reception4.jpg"
       ]
     },
-    "price": 10.77,
+    "price": 15.77,
     "rating": 4.05,
     "distance": 1.3,
     "type": "Budget Hotel",
@@ -2376,7 +2376,7 @@
         "/images/features/rooftop_terrace/rooftop_terrace1.jpg"
       ]
     },
-    "price": 6.74,
+    "price": 16.74,
     "rating": 4.61,
     "distance": 7.8,
     "type": "Guesthouse / Bed & Breakfast (B&B)",
@@ -4506,7 +4506,7 @@
       ]
     },
     "price": 101.89,
-    "rating": 0.03,
+    "rating": 2.73,
     "distance": 4.12,
     "type": "Luxury Hotel",
     "features": [
@@ -4584,7 +4584,7 @@
       ]
     },
     "price": 374.58,
-    "rating": 0.32,
+    "rating": 2.32,
     "distance": 9.53,
     "type": "Mid-Range Hotel",
     "features": [
@@ -5136,7 +5136,7 @@
     },
     "price": 21.68,
     "rating": 4.27,
-    "distance": 10.8,
+    "distance": 9.8,
     "type": "Mid-Range Hotel",
     "features": [
       "Private bathroom",
@@ -5215,7 +5215,7 @@
       ]
     },
     "price": 28.26,
-    "rating": 7.23,
+    "rating": 4.83,
     "distance": 0.94,
     "type": "Mid-Range Hotel",
     "features": [
@@ -5293,7 +5293,7 @@
       ]
     },
     "price": 31.46,
-    "rating": 7.59,
+    "rating": 4.59,
     "distance": 2.45,
     "type": "Mid-Range Hotel",
     "features": [
@@ -5369,7 +5369,7 @@
       ]
     },
     "price": 86.49,
-    "rating": 8.0,
+    "rating": 4.6,
     "distance": 4.17,
     "type": "Luxury Hotel",
     "features": [
@@ -5447,7 +5447,7 @@
       ]
     },
     "price": 255.96,
-    "rating": 5.23,
+    "rating": 4.83,
     "distance": 8.03,
     "type": "Entire Apartment / House",
     "features": [
@@ -5509,7 +5509,7 @@
       ]
     },
     "price": 131.82,
-    "rating": 0.23,
+    "rating": 2.73,
     "distance": 0.5,
     "type": "Hostel (Dormitory Bed)",
     "features": [
@@ -5628,7 +5628,7 @@
       ]
     },
     "price": 83.52,
-    "rating": 1.1,
+    "rating": 2.1,
     "distance": 1.3,
     "type": "Budget Hotel",
     "features": [
@@ -5689,7 +5689,7 @@
       ]
     },
     "price": 324.97,
-    "rating": 1.42,
+    "rating": 2.42,
     "distance": 2.6,
     "type": "Guesthouse / Bed & Breakfast (B&B)",
     "features": [
@@ -5758,7 +5758,7 @@
       ]
     },
     "price": 117.69,
-    "rating": 1.05,
+    "rating": 2.05,
     "distance": 2.7,
     "type": "Mid-Range Hotel",
     "features": [
@@ -5909,7 +5909,7 @@
       ]
     },
     "price": 75.71,
-    "rating": 1.57,
+    "rating": 2.57,
     "distance": 1.3,
     "type": "Luxury Hotel",
     "features": [
@@ -7126,7 +7126,7 @@
       ]
     },
     "price": 74.1,
-    "rating": 7.34,
+    "rating": 4.34,
     "distance": 0.05,
     "type": "Hostel (Dormitory Bed)",
     "features": [
@@ -7187,7 +7187,7 @@
       ]
     },
     "price": 22.74,
-    "rating": 6.36,
+    "rating": 4.76,
     "distance": 0.71,
     "type": "Hostel (Private Room)",
     "features": [
@@ -7241,7 +7241,7 @@
       ]
     },
     "price": 109.47,
-    "rating": 5.1,
+    "rating": 4.52,
     "distance": 3.4,
     "type": "Budget Hotel",
     "features": [
@@ -7299,7 +7299,7 @@
       ]
     },
     "price": 459.12,
-    "rating": 6.61,
+    "rating": 4.61,
     "distance": 0.49,
     "type": "Guesthouse / Bed & Breakfast (B&B)",
     "features": [
@@ -7367,7 +7367,7 @@
       ]
     },
     "price": 184.33,
-    "rating": 6.89,
+    "rating": 4.89,
     "distance": 0.27,
     "type": "Mid-Range Hotel",
     "features": [
@@ -7442,7 +7442,7 @@
       ]
     },
     "price": 298.76,
-    "rating": 5.56,
+    "rating": 4.56,
     "distance": 2.9,
     "type": "Upper Mid-Range Hotel",
     "features": [
@@ -7525,7 +7525,7 @@
       ]
     },
     "price": 159.26,
-    "rating": 5.13,
+    "rating": 4.63,
     "distance": 0.16,
     "type": "Luxury Hotel",
     "features": [
@@ -7604,7 +7604,7 @@
       ]
     },
     "price": 363.73,
-    "rating": 8.86,
+    "rating": 4.86,
     "distance": 2.5,
     "type": "Entire Apartment / House",
     "features": [
@@ -9372,7 +9372,7 @@
     },
     "price": 63.13,
     "rating": 3.7,
-    "distance": 10.89,
+    "distance": 9.89,
     "type": "Hostel (Private Room)",
     "features": [
       "Shared kitchen",
@@ -9429,7 +9429,7 @@
     },
     "price": 105.57,
     "rating": 4.28,
-    "distance": 11.24,
+    "distance": 9.24,
     "type": "Budget Hotel",
     "features": [
       "Luggage storage",
@@ -9488,7 +9488,7 @@
     },
     "price": 64.14,
     "rating": 3.86,
-    "distance": 10.97,
+    "distance": 9.97,
     "type": "Guesthouse / Bed & Breakfast (B&B)",
     "features": [
       "Luggage storage",
@@ -9785,7 +9785,7 @@
     },
     "price": 16.68,
     "rating": 4.71,
-    "distance": 10.06,
+    "distance": 9.06,
     "type": "Entire Apartment / House",
     "features": [
       "Luggage storage",
