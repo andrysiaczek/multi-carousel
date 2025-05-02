@@ -32,27 +32,17 @@ export const FilterSidebar = ({
 
   useEffect(() => {
     if (
-      filters.price[0] === initialFilterSidebarState.price[0] &&
-      filters.price[1] === initialFilterSidebarState.price[1] &&
-      filters.rating[0] === initialFilterSidebarState.rating[0] &&
-      filters.rating[1] === initialFilterSidebarState.rating[1] &&
-      filters.distance[0] === initialFilterSidebarState.distance[0] &&
-      filters.distance[1] === initialFilterSidebarState.distance[1] &&
+      filters.price == initialFilterSidebarState.price &&
+      filters.rating == initialFilterSidebarState.rating &&
+      filters.distance == initialFilterSidebarState.distance &&
       filters.type.length === 0 &&
       filters.feature.length === 0
     ) {
-      console.log('resetting the local state');
       setPrice(initialFilterSidebarState.price);
       setRating(initialFilterSidebarState.rating);
       setDistance(initialFilterSidebarState.distance);
     }
-  }, [
-    filters.distance,
-    filters.feature.length,
-    filters.price,
-    filters.rating,
-    filters.type.length,
-  ]);
+  }, [filters]);
 
   const isResetAllDisabled =
     price == initialFilterSidebarState[FilterOptionWithFeature.Price] &&

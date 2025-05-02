@@ -75,18 +75,10 @@ export const useFilterSidebarStore = create<FilterSidebarState>()(
           };
         }),
 
-      resetState: () =>
-        set((state) => {
-          state.filters[FilterOptionWithFeature.Distance] =
-            initialFilterSidebarState[FilterOptionWithFeature.Distance];
-          state.filters[FilterOptionWithFeature.Price] =
-            initialFilterSidebarState[FilterOptionWithFeature.Price];
-          state.filters[FilterOptionWithFeature.Rating] =
-            initialFilterSidebarState[FilterOptionWithFeature.Rating];
-          state.filters[FilterOptionWithFeature.Type] = [];
-          state.filters[FilterOptionWithFeature.Feature] = [];
-          return state;
-        }),
+      resetState: () => {
+        sessionStorage.removeItem('filter-sidebar-store');
+        set({ filters: initialFilterSidebarState });
+      },
     }),
     {
       name: 'filter-sidebar-store',
