@@ -1,10 +1,5 @@
 import { useEffect } from 'react';
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { EventType } from './firebase';
 import { StudyFlowManager } from './pages';
 import { useStudyStore } from './store';
@@ -27,12 +22,7 @@ export const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Main study flow */}
-        <Route path="/study/*" element={<StudyFlowManager />} />
-
-        {/* Redirect root or anything else back to /study */}
-        <Route path="/" element={<Navigate to="/study" replace />} />
-        <Route path="*" element={<Navigate to="/study" replace />} />
+        <Route path="/*" element={<StudyFlowManager />} />
       </Routes>
     </Router>
   );
