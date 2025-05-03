@@ -111,42 +111,34 @@ export const useStudyStore = create<StudyState>()(
       logEvent: (type, details) => {
         const now = Date.now();
         let detailsWithDuration = details;
+        const { events } = get();
+        const startEvent = events.find((e) => e.type === EventType.TaskStart);
+        const rest = events.filter((e) => e !== startEvent);
 
-        if (type === EventType.TaskEnd) {
-          const { events } = get();
-          const startEvent = events.find((e) => e.type === EventType.TaskStart);
-          const durationMs = startEvent
-            ? now - startEvent.timestamp
-            : undefined;
+        if (type === EventType.TaskEnd && startEvent) {
+          const durationMs = now - startEvent.timestamp;
           detailsWithDuration = { ...details, durationMs };
         }
 
-        set((state) => {
-          const [first, ...rest] = state.events;
-          const newEvent: FirebaseEvent = {
-            timestamp: Date.now(),
-            type,
-            details: detailsWithDuration,
-          };
+        const newEvent: FirebaseEvent = {
+          timestamp: now,
+          type,
+          details: detailsWithDuration,
+        };
+        const tail = [...rest, newEvent];
 
-          const updatedEvents = first
-            ? [first, ...rest, newEvent]
-            : [...rest, newEvent];
-
-          // Only check size every 10th event
-          if (updatedEvents.length % 10 === 0) {
-            while (
-              new Blob([JSON.stringify(updatedEvents)]).size >
-                MAX_PAYLOAD_BYTES &&
-              updatedEvents.length > 1
-            ) {
-              // Always preserve the first (start) event
-              updatedEvents.splice(1, 1); // remove second item
-            }
+        if (type !== EventType.TaskEnd && tail.length % 10 === 0) {
+          while (
+            new Blob([JSON.stringify(tail)]).size > MAX_PAYLOAD_BYTES &&
+            tail.length > 1
+          ) {
+            tail.shift(); // remove oldest in the tail
           }
+        }
 
-          return { events: updatedEvents };
-        });
+        const updatedEvents = startEvent ? [startEvent, ...tail] : tail;
+
+        set({ events: updatedEvents });
       },
 
       clearEvents: () => set({ events: [] }),
