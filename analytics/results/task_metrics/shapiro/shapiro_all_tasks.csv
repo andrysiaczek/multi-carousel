@@ -1,0 +1,22 @@
+task_type,metric,interface,W,p_value,normality
+all,task_completion_time_sec,benchmark,0.645,0.0,Reject normality
+all,task_completion_time_sec,single,0.516,0.0,Reject normality
+all,task_completion_time_sec,multi,0.6,0.0,Reject normality
+all,total_interactions,benchmark,0.502,0.0,Reject normality
+all,total_interactions,single,0.596,0.0,Reject normality
+all,total_interactions,multi,0.755,0.0,Reject normality
+all,total_navigations,benchmark,0.502,0.0,Reject normality
+all,total_navigations,single,0.618,0.0,Reject normality
+all,total_navigations,multi,0.653,0.0,Reject normality
+all,total_filters,benchmark,0.269,0.0,Reject normality
+all,total_filters,single,0.68,0.0,Reject normality
+all,total_filters,multi,0.669,0.0,Reject normality
+all,total_resets,benchmark,0.228,0.0,Reject normality
+all,total_resets,single,0.287,0.0,Reject normality
+all,total_resets,multi,0.393,0.0,Reject normality
+all,total_hovers,benchmark,0.729,0.0,Reject normality
+all,total_hovers,single,0.813,0.0,Reject normality
+all,total_hovers,multi,0.854,0.0,Reject normality
+all,total_scrolls,benchmark,1.0,1.0,Fail to reject
+all,total_scrolls,single,0.577,0.0,Reject normality
+all,total_scrolls,multi,0.709,0.0,Reject normality

@@ -1,0 +1,13 @@
+metric,interface,W_stat,p_value,verdict
+price,benchmark,0.422,0.0,Reject normality
+price,single,0.686,0.0,Reject normality
+price,multi,0.928,0.0,Reject normality
+rating,benchmark,0.754,0.0,Reject normality
+rating,single,0.807,0.0,Reject normality
+rating,multi,0.855,0.0,Reject normality
+distance,benchmark,0.548,0.0,Reject normality
+distance,single,0.835,0.0,Reject normality
+distance,multi,0.562,0.0,Reject normality
+rating_per_eur,benchmark,0.886,0.0,Reject normality
+rating_per_eur,single,0.746,0.0,Reject normality
+rating_per_eur,multi,0.779,0.0,Reject normality

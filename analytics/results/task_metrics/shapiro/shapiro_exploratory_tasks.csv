@@ -1,0 +1,22 @@
+task_type,metric,interface,W,p_value,normality
+exploratory,task_completion_time_sec,benchmark,0.739,0.0,Reject normality
+exploratory,task_completion_time_sec,single,0.565,0.0,Reject normality
+exploratory,task_completion_time_sec,multi,0.653,0.0,Reject normality
+exploratory,total_interactions,benchmark,0.657,0.0,Reject normality
+exploratory,total_interactions,single,0.618,0.0,Reject normality
+exploratory,total_interactions,multi,0.844,0.0,Reject normality
+exploratory,total_navigations,benchmark,0.657,0.0,Reject normality
+exploratory,total_navigations,single,0.663,0.0,Reject normality
+exploratory,total_navigations,multi,0.738,0.0,Reject normality
+exploratory,total_filters,benchmark,0.268,0.0,Reject normality
+exploratory,total_filters,single,0.732,0.0,Reject normality
+exploratory,total_filters,multi,0.732,0.0,Reject normality
+exploratory,total_resets,benchmark,0.239,0.0,Reject normality
+exploratory,total_resets,single,0.36,0.0,Reject normality
+exploratory,total_resets,multi,0.504,0.0,Reject normality
+exploratory,total_hovers,benchmark,0.733,0.0,Reject normality
+exploratory,total_hovers,single,0.808,0.0,Reject normality
+exploratory,total_hovers,multi,0.907,0.0,Reject normality
+exploratory,total_scrolls,benchmark,1.0,1.0,Fail to reject
+exploratory,total_scrolls,single,0.592,0.0,Reject normality
+exploratory,total_scrolls,multi,0.807,0.0,Reject normality

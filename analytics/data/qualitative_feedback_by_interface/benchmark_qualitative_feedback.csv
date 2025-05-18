@@ -1,0 +1,46 @@
+session_id,interface_option,question_id,answer
+01ea633e-0ac3-4fe1-ba28-95c5b7d16c4d,benchmark,benchmark_feature_ideas,An option to view the accommodations in two per row while scrolling.
+1925a64c-63bc-47f1-922b-05e1572b0ba3,benchmark,benchmark_feature_ideas,mapa
+343da180-8031-4b31-9e6e-333341a68929,benchmark,benchmark_feature_ideas,"Map view of all accommodations would be useful
+Search by name function was missing"
+4023dfff-6229-448f-af14-ae8372bdb209,benchmark,benchmark_feature_ideas,"add more features to choose like pet freindly, quiet neigborhood, familiy friendly, accessibility"
+55eda0b3-163d-49e2-8063-257d765a6847,benchmark,benchmark_feature_ideas,Custom filters
+6845ae9e-08f7-4642-860e-249139a5f885,benchmark,benchmark_feature_ideas,Other people's opinion of those places could be useful.
+70c25238-510a-4071-bd0c-8495ccca678b,benchmark,benchmark_feature_ideas,"I am not missing any features. Filters and especially its ranges can be set individually. This is a big advantage to the ""fixed"" filter ranges of the two other models (mentioning it here because I forgot before). Also I like the full database in the beginning displayed in one list and shrinking it by setting filters. "
+77f87ad4-ea54-49f0-8988-37946b76d636,benchmark,benchmark_feature_ideas,I know this type of interface and would always use it to book accommodation. I would have liked it if you could scroll through the pictures of the accommodations already in the preview.
+7a4e4f17-ba1d-4573-be9d-344a5e30bac5,benchmark,benchmark_feature_ideas,"It is hard to say as this is the most common interface. 
+MAYBE for a hardcore user I would add something I would call an index. It would work like this. Pick up to x conditions, let's say price, distance to city center, rating, Breakfest. Then assign importance values to those conditions. Where max price would be 0 and min price would be 10, max distance 0, min distance 10 ....
+Then when showing me the offers the site would calculate that index for me for every apartment and sort by my index. 
+Sounds complicated? It is! But maybe someone would use it (I would :D)"
+8d50a960-fef3-4721-bfe1-76c5cae9dae7,benchmark,benchmark_feature_ideas,Larger pictures gallery
+8f77b2d0-9f68-4e33-9133-eddc537c73e8,benchmark,benchmark_feature_ideas,Very clear and very easy to use view. I would not change anything in this one
+8f79f055-7919-41c7-911d-b3c7189bfacd,benchmark,benchmark_feature_ideas,After viewing a property the filters are reset which is undesirable. Having a map showing all selected properties would be nice. 
+92b0d168-2038-449a-8780-0a9dc07594fd,benchmark,benchmark_feature_ideas,"self ""check-in"""
+93d991fb-be62-482a-a443-9651dc0ed391,benchmark,benchmark_feature_ideas,No idea
+98ad7c12-53ba-4564-b93f-57f1f809f8cd,benchmark,benchmark_feature_ideas,"Nothing
+"
+a7fdc253-e41b-41d3-a603-d49b76e5d39f,benchmark,benchmark_feature_ideas,all ok
+aaece07b-b498-490d-a4a2-7c0c80782feb,benchmark,benchmark_feature_ideas,"The attached project lacked the ability to manually enter values in the filters, e.g. distance, prices or rating. In addition, a different way of presenting the type of property. Too long list deterred me from choosing anything. It should be as an additional row of filters above the results so that everyone can choose by looking and the horizontal selection is easier than a vertical list."
+aba196a9-b65f-4115-9f51-986d115d77f2,benchmark,benchmark_feature_ideas,Looking for the accommodation on the map
+aed5130a-5254-40ef-9130-ef62a8c984d7,benchmark,benchmark_feature_ideas,this way of presenting results is optimal for me
+af333a5b-e51b-441e-8191-c300e5ccf9f6,benchmark,benchmark_feature_ideas,I liked the 2D view display (previous one) and I would mixed that one with the this filter.
+afde493d-4d56-4f34-9266-9f461e76b6ab,benchmark,benchmark_feature_ideas,"Clear view over many offers, I got used to ""the booking"" type of searching, maybe that's why it was very intuitive"
+b83c0354-eacf-4173-93e1-74727e4ba6d6,benchmark,benchmark_feature_ideas,It's the default 08/15 booking list with filters. The only recommendation I got for this concrete implementation; Only update the result set when the input is done. Otherwise the list refreshes and that lags out the inputs which makes it more difficult to set the desired properties via slider.
+c12ff853-b429-47ad-8ce3-02b04ebc559a,benchmark,benchmark_feature_ideas,None. Very clear interface.
+c20c3aee-ab85-4dee-828b-547971984672,benchmark,benchmark_feature_ideas,seaview
+c22e9783-8fae-42aa-a3f8-ebc26d07cb3e,benchmark,benchmark_feature_ideas,"I'd add more filtering options, like a number of beds. A map showing the exact locations when I hover over an item would also be nice. I miss a better image switching experience from the listing view (clicking on the dots is tricky, right/left arrows and swipe controls could improve the experience)."
+c829072d-50a1-401d-9d8c-bab9c62cb632,benchmark,benchmark_feature_ideas,"Compared to Netflix-style interface, I immediately felt impatient and a bit frustrated with the vertical search. Horizontal layout is so much better."
+ca8eec1e-1827-4fb4-9468-8685d30968b1,benchmark,benchmark_feature_ideas,"I would move ""reset all"" button. I thought that It would be ""confirm"" so I pushed it three times after I chose all of the filtered options, so It was quite annoying. Rest if it was really nice and I would actually used that one to find vacation."
+d0a30739-2b23-46af-93d6-0f818cb62925,benchmark,benchmark_feature_ideas,"1.""show more"" not just linked to button but whole picture because clicking it has no interaction so far, why not make it easier to click the one thing there
+2. categories for type of food service missing, all inclusive and so on i would prefer seperated from other features to find it faster, even more important if more features are available overall"
+d47dda25-aae8-45af-9865-d3c316b462f2,benchmark,benchmark_feature_ideas,It would be great if the selected filters didn’t reset after opening the hotel details.
+d7e128a7-91fe-44bc-bf99-cd20c44085d0,benchmark,benchmark_feature_ideas,filter should stay set when going back from one option to the menu
+e00aa829-9211-4fbf-a351-e5e103933d28,benchmark,benchmark_feature_ideas,superduperbitteschön agatson
+e394db6e-6273-4010-9180-c54bbf05b1f4,benchmark,benchmark_feature_ideas,"In this kind of (classic) filtering setup, there's always a lack of flexibility to apply 'soft' conditions near the edges of the filtering criteria. It forces the user to set slightly broader parameters than intended - just to see if slightly relaxing their preferences might yield more interesting results."
+ef3f11c5-9736-4501-9017-68b08bff1c93,benchmark,benchmark_feature_ideas,"it is classic interface i just know from e.g. booking.com, everything is clear and standard, but i think that the netflix interface id interesting too, and the first matrix interface is very innovating "
+f162e491-7004-4271-98bc-21e296fc359c,benchmark,benchmark_feature_ideas,This was the easiest since conventional booking sites which I use also use this feature. The multidiagonal approach could be even better if you are more familiar with it.
+f5556548-2bbb-450f-a991-8bfb5a04b493,benchmark,benchmark_feature_ideas,pressing back from a listing reset the filters
+f65d982f-777a-4802-bdd6-eb0bb4f35965,benchmark,benchmark_feature_ideas,Adding number of beds/people shown in the preview
+f921b29c-061b-4ac9-8dd1-2634b97b7a0c,benchmark,benchmark_feature_ideas,"Drag scroll, list items have no drop shadow, better navigation for the preview images (arrows), next to the price also /per night + total price for my trip (but couldn't enter a trip length so dont know how relevant for this context). More informations about the room itselt, like bedsize
+
+The zone where i could grab the cursor of the price rating and distance felt a bit small. Visual Hirachrichy between list and filter bar"

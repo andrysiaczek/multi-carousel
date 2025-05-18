@@ -1,0 +1,4 @@
+Dataset,Session Count
+Raw JSON (all sessions),96
+Cleaned dataset (valid tasks),95
+Cleaned full participants (used in inferential stats),62

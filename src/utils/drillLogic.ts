@@ -738,7 +738,7 @@ export const getBothFallbackFilters = (
   const state = lastStep.filterState;
 
   const candidates = (Object.values(FilterOption) as FilterOption[])
-    // 1) remove the two you’re already on
+    // 1) remove the two that are currently chosen
     .filter((f) => !used.has(f))
     // 2) keep only those you can still drill
     .filter((f) => {

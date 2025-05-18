@@ -13,7 +13,7 @@ const MAX_PAYLOAD_BYTES = 4000000;
 const shuffleInterfaceOptions = () => {
   const values = Object.values(InterfaceOption) as InterfaceOption[];
 
-  // Fisher–Yates shuffle in‐place
+  // Fisher–Yates shuffle
   for (let i = values.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [values[i], values[j]] = [values[j], values[i]];
