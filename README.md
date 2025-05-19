@@ -1,8 +1,10 @@
 # Multi-Carousel: Interactive Travel Interface Exploration
 
-An interactive React + Zustand application designed to explore and evaluate various travel interface patterns. This project includes a comprehensive user study with all analytics, survey data and results.
+<p align="center">
+    <img src="public/favicon.png" alt="Favicon" width="150"/>
+</p>
 
-![Favicon](public/favicon.png)
+An interactive React + Zustand application designed to explore and evaluate various travel interface patterns. This project includes a comprehensive user study with all analytics, survey data and results.
 
 ---
 
@@ -118,9 +120,9 @@ multi-carousel/
 
 The `analytics/` directory contains:
 
-- **data/**: Raw (`finalData.json`) and processed data (metrics and survey responses, e.g. `survey_final_clean.csv`)
-- **scripts/**: Python scripts for statistical analysis and visualization
-- **results/**: Output plots, tables and CSV summaries
+- **data**: Raw (`finalData.json`) and processed data (metrics and survey responses, e.g. `survey_final_clean.csv`)
+- **scripts**: Python scripts for statistical analysis and visualization
+- **results**: Output plots, tables and CSV summaries
 
 ### Running Analytics
 
@@ -130,7 +132,7 @@ To run the analytics:
 2. Run the desired analysis script (ensure the data files are in place):
 
    ```bash
-   python 00_extract_clean_task_metrics.py
+   python 02_generate_interface_descriptive_stats.py
    ```
 
 Make sure you have the necessary Python packages installed:
