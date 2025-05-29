@@ -140,3 +140,15 @@ Make sure you have the necessary Python packages installed:
 ```bash
 pip install pandas matplotlib seaborn scipy numpy pingouin statsmodels
 ```
+
+## 📄 External Resources
+
+| Resource                            | Link                       |
+| ----------------------------------- | -------------------------- |
+| 🎥 List Interface Demo              | [Watch video][list-demo]   |
+| 🎥 Single-directional Carousel Demo | [Watch video][single-demo] |
+| 🎥 Multi-directional Carousel Demo  | [Watch video][multi-demo]  |
+
+[list-demo]: https://drive.google.com/file/d/19wBK57gB7JdROiuvoHi9jor6sMKyEPb3/view?usp=sharing
+[single-demo]: https://drive.google.com/file/d/1iYrYiEMZqYL3on67QhabQgIvjbjbVYAQ/view?usp=sharing
+[multi-demo]: https://drive.google.com/file/d/1xJxH-PmC5LlLNCY1WpZsMRrOUVTREAIo/view?usp=sharing
